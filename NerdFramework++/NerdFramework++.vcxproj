@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{be5711bd-3994-4138-937d-345254e01b96}</ProjectGuid>
+    <RootNamespace>NerdFramework</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>NerdFrameworkCPP</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Libraries\SDL2-2.26.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Libraries\SDL2-2.26.0\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="BinaryGrid2.h" />
+    <ClInclude Include="BoundingShape3.h" />
+    <ClInclude Include="Box3.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="CaesarCipher.h" />
+    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Collection2.h" />
+    <ClInclude Include="Collection3.h" />
+    <ClInclude Include="Color3.h" />
+    <ClInclude Include="ColorSequence.h" />
+    <ClInclude Include="Color4.h" />
+    <ClInclude Include="Grid2.h" />
+    <ClInclude Include="Image3.h" />
+    <ClInclude Include="CameraRay3.h" />
+    <ClInclude Include="Search.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="Tester.h" />
+    <ClInclude Include="DoublyLinkedList.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="Format.h" />
+    <ClInclude Include="Frame.h" />
+    <ClInclude Include="Image4.h" />
+    <ClInclude Include="ImageLabel.h" />
+    <ClInclude Include="Interface.h" />
+    <ClInclude Include="Line3.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="MaterialManager.h" />
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshParser.h" />
+    <ClInclude Include="MeshQuad3.h" />
+    <ClInclude Include="MeshTriangle3.h" />
+    <ClInclude Include="Parallel.h" />
+    <ClInclude Include="ParallelList.h" />
+    <ClInclude Include="PhysicsData3.h" />
+    <ClInclude Include="PhysicsData4.h" />
+    <ClInclude Include="Plane3.h" />
+    <ClInclude Include="ImageParser.h" />
+    <ClInclude Include="Quad3.h" />
+    <ClInclude Include="Quadratic2.h" />
+    <ClInclude Include="Quadratic3.h" />
+    <ClInclude Include="Renderer2.h" />
+    <ClInclude Include="Renderer3.h" />
+    <ClInclude Include="Ray3.h" />
+    <ClInclude Include="RayCaster.h" />
+    <ClInclude Include="RayRadial.h" />
+    <ClInclude Include="RayRectangular.h" />
+    <ClInclude Include="RaySpherical.h" />
+    <ClInclude Include="Rect2.h" />
+    <ClInclude Include="RenderData3.h" />
+    <ClInclude Include="RenderData4.h" />
+    <ClInclude Include="FontManager.h" />
+    <ClInclude Include="Sort.h" />
+    <ClInclude Include="UDimRect2.h" />
+    <ClInclude Include="ScrollFrame.h" />
+    <ClInclude Include="Sphere3.h" />
+    <ClInclude Include="TextBox.h" />
+    <ClInclude Include="TextLabel.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Triangle2.h" />
+    <ClInclude Include="Triangle3.h" />
+    <ClInclude Include="Tween.h" />
+    <ClInclude Include="UDim.h" />
+    <ClInclude Include="UDim2.h" />
+    <ClInclude Include="UIObject.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Vector2i.h" />
+    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector3s.h" />
+    <ClInclude Include="VigenereCipher.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BinaryGrid2.cpp" />
+    <ClCompile Include="BoundingShape3.cpp" />
+    <ClCompile Include="Box3.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CaesarCipher.cpp" />
+    <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Color3.cpp" />
+    <ClCompile Include="Color4.cpp" />
+    <ClCompile Include="Image3.cpp" />
+    <ClCompile Include="CameraRay3.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="Tester.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Format.cpp" />
+    <ClCompile Include="Frame.cpp" />
+    <ClCompile Include="Image4.cpp" />
+    <ClCompile Include="ImageLabel.cpp" />
+    <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="Line3.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MaterialManager.cpp" />
+    <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshParser.cpp" />
+    <ClCompile Include="MeshQuad3.cpp" />
+    <ClCompile Include="MeshTriangle3.cpp" />
+    <ClCompile Include="Parallel.cpp" />
+    <ClCompile Include="PhysicsData3.cpp" />
+    <ClCompile Include="PhysicsData4.cpp" />
+    <ClCompile Include="Plane3.cpp" />
+    <ClCompile Include="ImageParser.cpp" />
+    <ClCompile Include="Quad3.cpp" />
+    <ClCompile Include="Quadratic2.cpp" />
+    <ClCompile Include="Quadratic3.cpp" />
+    <ClCompile Include="Renderer2.cpp" />
+    <ClCompile Include="Renderer3.cpp" />
+    <ClCompile Include="Ray3.cpp" />
+    <ClCompile Include="RayCaster.cpp" />
+    <ClCompile Include="RayRadial.cpp" />
+    <ClCompile Include="RayRectangular.cpp" />
+    <ClCompile Include="RaySpherical.cpp" />
+    <ClCompile Include="RenderData3.cpp" />
+    <ClCompile Include="RenderData4.cpp" />
+    <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="Sort.cpp" />
+    <ClCompile Include="UDimRect2.cpp" />
+    <ClCompile Include="ScrollFrame.cpp" />
+    <ClCompile Include="Sphere3.cpp" />
+    <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="TextLabel.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Triangle2.cpp" />
+    <ClCompile Include="Triangle3.cpp" />
+    <ClCompile Include="Tween.cpp" />
+    <ClCompile Include="UDim.cpp" />
+    <ClCompile Include="UDim2.cpp" />
+    <ClCompile Include="UIObject.cpp" />
+    <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="Vector2i.cpp" />
+    <ClCompile Include="Vector3.cpp" />
+    <ClCompile Include="Vector3s.cpp" />
+    <ClCompile Include="VigenereCipher.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

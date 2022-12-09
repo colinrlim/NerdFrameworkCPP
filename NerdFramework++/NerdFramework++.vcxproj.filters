@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{6833093f-9d4a-4c6f-844e-133c148b76f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D">
+      <UniqueIdentifier>{1b5af2fa-d2e9-4caf-8be3-85fa196a8ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D">
+      <UniqueIdentifier>{8680dfaf-178d-4a5a-bef8-2422515f2cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Services">
+      <UniqueIdentifier>{79ba1bd0-353e-452b-9f99-8fe44e93d96a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Services\Math">
+      <UniqueIdentifier>{5a32b4e2-d27b-40ce-aaf5-bbb67dbb1d82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\Vector2">
+      <UniqueIdentifier>{ed7464a5-b584-4bec-a23e-8dc5cef99139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\Vector2i">
+      <UniqueIdentifier>{71ea1fc7-3bd4-4c56-a059-a190443c12a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Quadratic3">
+      <UniqueIdentifier>{f72cd6dd-6f1c-436e-8ed5-e464da908f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Services\Tween">
+      <UniqueIdentifier>{1bcad849-58b3-4e7f-a5a1-09c0e108b131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\Triangle2">
+      <UniqueIdentifier>{b818e845-0455-4a8c-b9cd-bfdaf2dc0074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\Quadratic2">
+      <UniqueIdentifier>{2a5ba3a3-ec82-4594-b7a9-ad5a0e9f0566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D">
+      <UniqueIdentifier>{4ea364c4-d49b-4201-924f-35df2c1d3524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\UDim">
+      <UniqueIdentifier>{264eb730-28c6-4495-a246-ebeb991e5807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\UDim2">
+      <UniqueIdentifier>{8e846424-7968-472f-857c-ef241b0f6c68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{561b1d90-88e5-4509-b7f5-69b530a38168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics">
+      <UniqueIdentifier>{1f1dae1f-9a9c-4095-8e1c-71b468375a76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures">
+      <UniqueIdentifier>{bc3e8f6c-fffd-495b-b700-e3f79e3bf50b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Linear">
+      <UniqueIdentifier>{2e56af45-3573-4045-9672-8d1359b961d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Nonlinear">
+      <UniqueIdentifier>{e17d3a1e-743d-453c-81cc-5b7709c50469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Nonlinear\Graph">
+      <UniqueIdentifier>{448fcd3b-af80-4e82-8d12-68c1aafdc32a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Nonlinear\Tree">
+      <UniqueIdentifier>{3cf8997d-6157-4ee4-b992-735d5406b392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Linear\DoublyLinkedList">
+      <UniqueIdentifier>{ec236d31-d6a4-4c46-a733-42a27c953d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Linear\LinkedList">
+      <UniqueIdentifier>{8621766e-5613-45d8-84a5-10b77e19b99a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Linear\Queue">
+      <UniqueIdentifier>{de67e570-659f-4bd1-8707-7f075a0948b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Linear\Stack">
+      <UniqueIdentifier>{0cfdc433-b5e9-48f2-b9b6-2cf91de0050e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Encryption">
+      <UniqueIdentifier>{084bbef0-b527-4ef3-b102-4e03c9051f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Encryption\CaesarCipher">
+      <UniqueIdentifier>{59090898-1f02-468d-a8e0-b2602101172f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Encryption\VigenereCipher">
+      <UniqueIdentifier>{5d865561-ad0f-4313-8b96-840c33759103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\UIObject">
+      <UniqueIdentifier>{f86e0090-b4b6-43a2-9cce-30d37aee0c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Frame">
+      <UniqueIdentifier>{3de2e71b-5683-4b0d-b3ed-d7213dcbbf6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Physics3D">
+      <UniqueIdentifier>{5bff88c3-ee80-422b-9b82-2cca395bb7ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Physics3D\BoundingShape3">
+      <UniqueIdentifier>{c69af96c-c069-400d-914f-47c48cf5e584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Physics3D\Box3">
+      <UniqueIdentifier>{989928ac-4196-4507-b1bc-fa5e89d660c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Physics3D\Sphere3">
+      <UniqueIdentifier>{6b62fde4-5310-4a6e-9870-8124ba19d0b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Material">
+      <UniqueIdentifier>{30f6d05c-7559-44a2-bcaf-a69e3a475129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parsers">
+      <UniqueIdentifier>{f12c8e93-03a2-4211-bc77-973b91079252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Collection3">
+      <UniqueIdentifier>{a5044079-64d4-4a26-8e76-41816b972219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\Collection2">
+      <UniqueIdentifier>{24658c4a-6bc7-4f50-8456-d1ea8ee98b0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Interface">
+      <UniqueIdentifier>{0fb156ff-eb10-471e-ba2e-12d271b251e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\UDimRect2">
+      <UniqueIdentifier>{ccd943c8-01ce-44f5-8c71-674689fc1e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\Rect2">
+      <UniqueIdentifier>{99322e6b-5df5-4174-97a7-4c9b6a69d66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Mesh">
+      <UniqueIdentifier>{2802cc14-079a-459b-af68-db26d51e3e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Mesh\MeshTriangle3">
+      <UniqueIdentifier>{b4e2ed5f-407f-422c-a54f-df4bab9a6a28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Mesh\RenderData3">
+      <UniqueIdentifier>{8e541948-1224-4e5c-af10-8aaf9a0e823a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Mesh\PhysicsData3">
+      <UniqueIdentifier>{cb8bc019-1d40-4065-aeba-0a995a7d83ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Mesh\RenderData4">
+      <UniqueIdentifier>{84e1aff2-58d9-4c04-91e7-cf6cb3cc5e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Mesh\PhysicsData4">
+      <UniqueIdentifier>{66e163a6-9174-4e3a-813d-d15ef8f201d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Mesh\MeshQuad3">
+      <UniqueIdentifier>{f517f50e-b9e1-491d-8e18-7252e0793583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DesignPatterns">
+      <UniqueIdentifier>{29a16463-8835-4934-b358-eab84c4b30b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parsers\MeshParser">
+      <UniqueIdentifier>{6a709dd7-7059-4c55-875d-ee64d409bfa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unflitered">
+      <UniqueIdentifier>{7503fd91-f620-44aa-a24f-912b10d72f79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unflitered\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Unflitered\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Parsers\MaterialManager">
+      <UniqueIdentifier>{ee69fb3a-76f5-4e7f-afe8-6929c6c44d63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parsers\ImageParser">
+      <UniqueIdentifier>{040703e4-47c9-4493-81d0-1a8cf8ecccfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parsers\FontManager">
+      <UniqueIdentifier>{eeb8d404-9993-444a-bbf5-654ef479b515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Services\Format">
+      <UniqueIdentifier>{46d4d643-21d0-48d6-847d-7d2e41324ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms">
+      <UniqueIdentifier>{a387718c-245c-47c4-8609-203ea8e25ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms\Sort">
+      <UniqueIdentifier>{53ded3d9-533a-4385-89ee-c629e010b5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms\Search">
+      <UniqueIdentifier>{eda9b319-197b-469e-8e20-17489435c99c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Linear\List">
+      <UniqueIdentifier>{ce3c1f37-e6bf-4be4-ae7a-89134a1fb771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Services\Parallel">
+      <UniqueIdentifier>{44977d95-62ed-4098-8ebc-5bb5427f0fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Linear\ParallelList">
+      <UniqueIdentifier>{ec86556d-f410-4c63-bd89-ddc306f369f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Services\Tester">
+      <UniqueIdentifier>{ed26ef11-04e5-480f-a1ee-546a0f1a4c8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\ColorSequence">
+      <UniqueIdentifier>{1b97ed2d-2cb7-4f5e-a5f9-f6ab02ff1f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Renderer">
+      <UniqueIdentifier>{590fd0f5-1dd8-4c08-8347-3dbfdccbbbb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Renderer\Renderer3">
+      <UniqueIdentifier>{37861624-154c-40f4-8109-00097f330af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\Renderer\Renderer2">
+      <UniqueIdentifier>{1c21759b-ed14-473d-8c98-fb49ae5553e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Primitives">
+      <UniqueIdentifier>{0d2037de-921c-4563-98e1-7afd85638a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Primitives\Line3">
+      <UniqueIdentifier>{4b7df234-11ea-4eb1-8c0c-43a64f9912cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Primitives\Plane3">
+      <UniqueIdentifier>{5204a441-2428-4922-ab42-56ead803ce7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Primitives\Ray3">
+      <UniqueIdentifier>{8995832f-18bf-4b31-95fa-74725b721840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Objects">
+      <UniqueIdentifier>{9fc022cf-18ed-4730-9593-e9a608fe1d1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Objects\Triangle3">
+      <UniqueIdentifier>{cc1f095d-7a94-41c3-92f9-3141b1696325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Objects\Quad3">
+      <UniqueIdentifier>{a35a871f-0be2-48ca-9abc-7af543894c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Objects\RayCaster">
+      <UniqueIdentifier>{b5ee71d3-5418-4ebd-9d3f-2bc096ea0663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Objects\RayCaster\RayRadial">
+      <UniqueIdentifier>{2670be4f-b20b-42eb-bb8d-13f764063f5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Objects\RayCaster\RayRectangular">
+      <UniqueIdentifier>{85a3027a-a8fe-4c27-955e-cb5a887d8446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Objects\RayCaster\RaySpherical">
+      <UniqueIdentifier>{e7c20c36-cbd0-42e0-a860-d1563ec97fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Primitives\Vector3s">
+      <UniqueIdentifier>{ebd1db18-f259-425c-b5d5-ae931c401954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Primitives\Vector3">
+      <UniqueIdentifier>{d3dfedb0-2d53-4860-bd65-f3615326c8c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\Objects\CameraRay3">
+      <UniqueIdentifier>{45b0449d-54d8-41a7-9040-8c2402d54cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\ImageLabel">
+      <UniqueIdentifier>{a90fdf48-13ad-4939-9d93-ff9e4155c33a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures\Linear\List\String">
+      <UniqueIdentifier>{b7fe2480-f3f0-44f9-9d79-bebdcfea90f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Canvas">
+      <UniqueIdentifier>{7aa62ec8-d095-430e-a93f-f81bbd97a9e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\Grid2">
+      <UniqueIdentifier>{a5ebea97-6698-4e7b-960a-5305d478b21d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\BinaryGrid2">
+      <UniqueIdentifier>{8c151ce1-6457-41b4-8244-454716364e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Color">
+      <UniqueIdentifier>{1171734f-a1dd-4c34-92ba-4fd785a68042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Color\Color3">
+      <UniqueIdentifier>{aa94f08b-c138-4a2e-9d99-a7f8a221f67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Color\Color4">
+      <UniqueIdentifier>{fd68b76e-f6b0-4fde-a2f1-557f453f86dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Image">
+      <UniqueIdentifier>{2e6c8a46-0261-46ab-899c-7d358ad82b41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Image\Image3">
+      <UniqueIdentifier>{34c2ff4e-e7a1-4468-acbf-f916e13b9988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Image\Image4">
+      <UniqueIdentifier>{5edb2076-714f-48f8-9984-063a4cb642b7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Math.h">
+      <Filter>Math\Services\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math\2D\Vector2</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3s.h">
+      <Filter>Math\3D\Primitives\Vector3s</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Math\3D\Primitives\Vector3</Filter>
+    </ClInclude>
+    <ClInclude Include="Line3.h">
+      <Filter>Math\3D\Primitives\Line3</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane3.h">
+      <Filter>Math\3D\Primitives\Plane3</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad3.h">
+      <Filter>Math\3D\Objects\Quad3</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle3.h">
+      <Filter>Math\3D\Objects\Triangle3</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray3.h">
+      <Filter>Math\3D\Primitives\Ray3</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2i.h">
+      <Filter>Math\2D\Vector2i</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadratic3.h">
+      <Filter>Math\3D\Quadratic3</Filter>
+    </ClInclude>
+    <ClInclude Include="RayCaster.h">
+      <Filter>Math\3D\Objects\RayCaster</Filter>
+    </ClInclude>
+    <ClInclude Include="RayRectangular.h">
+      <Filter>Math\3D\Objects\RayCaster\RayRectangular</Filter>
+    </ClInclude>
+    <ClInclude Include="RaySpherical.h">
+      <Filter>Math\3D\Objects\RayCaster\RaySpherical</Filter>
+    </ClInclude>
+    <ClInclude Include="RayRadial.h">
+      <Filter>Math\3D\Objects\RayCaster\RayRadial</Filter>
+    </ClInclude>
+    <ClInclude Include="Tween.h">
+      <Filter>Math\Services\Tween</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle2.h">
+      <Filter>Math\2D\Triangle2</Filter>
+    </ClInclude>
+    <ClInclude Include="UDimRect2.h">
+      <Filter>Math\2D\UDimRect2</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadratic2.h">
+      <Filter>Math\2D\Quadratic2</Filter>
+    </ClInclude>
+    <ClInclude Include="UDim.h">
+      <Filter>Interface2D\UDim</Filter>
+    </ClInclude>
+    <ClInclude Include="UDim2.h">
+      <Filter>Interface2D\UDim2</Filter>
+    </ClInclude>
+    <ClInclude Include="DoublyLinkedList.h">
+      <Filter>DataStructures\Linear\DoublyLinkedList</Filter>
+    </ClInclude>
+    <ClInclude Include="CaesarCipher.h">
+      <Filter>Encryption\CaesarCipher</Filter>
+    </ClInclude>
+    <ClInclude Include="VigenereCipher.h">
+      <Filter>Encryption\VigenereCipher</Filter>
+    </ClInclude>
+    <ClInclude Include="TextBox.h">
+      <Filter>Unflitered\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollFrame.h">
+      <Filter>Unflitered\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Unflitered\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Unflitered\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Color3.h">
+      <Filter>Interface2D\Color\Color3</Filter>
+    </ClInclude>
+    <ClInclude Include="Image4.h">
+      <Filter>Interface2D\Image\Image4</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>Interface2D\UIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>Interface2D\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingShape3.h">
+      <Filter>Game\Physics3D\BoundingShape3</Filter>
+    </ClInclude>
+    <ClInclude Include="Box3.h">
+      <Filter>Game\Physics3D\Box3</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere3.h">
+      <Filter>Game\Physics3D\Sphere3</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Game\Graphics\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorSequence.h">
+      <Filter>Game\Graphics\ColorSequence</Filter>
+    </ClInclude>
+    <ClInclude Include="Collection3.h">
+      <Filter>Math\3D\Collection3</Filter>
+    </ClInclude>
+    <ClInclude Include="Collection2.h">
+      <Filter>Math\2D\Collection2</Filter>
+    </ClInclude>
+    <ClInclude Include="TextLabel.h">
+      <Filter>Unflitered\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>Interface2D\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect2.h">
+      <Filter>Math\2D\Rect2</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer2.h">
+      <Filter>Game\Graphics\Renderer\Renderer2</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer3.h">
+      <Filter>Game\Graphics\Renderer\Renderer3</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshTriangle3.h">
+      <Filter>Game\Graphics\Mesh\MeshTriangle3</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderData3.h">
+      <Filter>Game\Graphics\Mesh\RenderData3</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsData4.h">
+      <Filter>Game\Graphics\Mesh\PhysicsData4</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderData4.h">
+      <Filter>Game\Graphics\Mesh\RenderData4</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsData3.h">
+      <Filter>Game\Graphics\Mesh\PhysicsData3</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshQuad3.h">
+      <Filter>Game\Graphics\Mesh\MeshQuad3</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Game\Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshParser.h">
+      <Filter>Parsers\MeshParser</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageParser.h">
+      <Filter>Parsers\ImageParser</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Unflitered\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>Parsers\MaterialManager</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Parsers\FontManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Format.h">
+      <Filter>Math\Services\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.h">
+      <Filter>Algorithms\Sort</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>DataStructures\Linear\List</Filter>
+    </ClInclude>
+    <ClInclude Include="Parallel.h">
+      <Filter>Math\Services\Parallel</Filter>
+    </ClInclude>
+    <ClInclude Include="ParallelList.h">
+      <Filter>DataStructures\Linear\ParallelList</Filter>
+    </ClInclude>
+    <ClInclude Include="Tester.h">
+      <Filter>Math\Services\Tester</Filter>
+    </ClInclude>
+    <ClInclude Include="Color4.h">
+      <Filter>Interface2D\Color\Color4</Filter>
+    </ClInclude>
+    <ClInclude Include="Image3.h">
+      <Filter>Interface2D\Image\Image3</Filter>
+    </ClInclude>
+    <ClInclude Include="Search.h">
+      <Filter>Algorithms\Search</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraRay3.h">
+      <Filter>Math\3D\Objects\CameraRay3</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLabel.h">
+      <Filter>Interface2D\ImageLabel</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>DataStructures\Linear\List\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Interface2D\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryGrid2.h">
+      <Filter>Math\2D\BinaryGrid2</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid2.h">
+      <Filter>Math\2D\Grid2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Math.cpp">
+      <Filter>Math\Services\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Math\2D\Vector2</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3s.cpp">
+      <Filter>Math\3D\Primitives\Vector3s</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Math\3D\Primitives\Vector3</Filter>
+    </ClCompile>
+    <ClCompile Include="Line3.cpp">
+      <Filter>Math\3D\Primitives\Line3</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane3.cpp">
+      <Filter>Math\3D\Primitives\Plane3</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad3.cpp">
+      <Filter>Math\3D\Objects\Quad3</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle3.cpp">
+      <Filter>Math\3D\Objects\Triangle3</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray3.cpp">
+      <Filter>Math\3D\Primitives\Ray3</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2i.cpp">
+      <Filter>Math\2D\Vector2i</Filter>
+    </ClCompile>
+    <ClCompile Include="Quadratic3.cpp">
+      <Filter>Math\3D\Quadratic3</Filter>
+    </ClCompile>
+    <ClCompile Include="RayRectangular.cpp">
+      <Filter>Math\3D\Objects\RayCaster\RayRectangular</Filter>
+    </ClCompile>
+    <ClCompile Include="RaySpherical.cpp">
+      <Filter>Math\3D\Objects\RayCaster\RaySpherical</Filter>
+    </ClCompile>
+    <ClCompile Include="RayRadial.cpp">
+      <Filter>Math\3D\Objects\RayCaster\RayRadial</Filter>
+    </ClCompile>
+    <ClCompile Include="Tween.cpp">
+      <Filter>Math\Services\Tween</Filter>
+    </ClCompile>
+    <ClCompile Include="RayCaster.cpp">
+      <Filter>Math\3D\Objects\RayCaster</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Unflitered\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle2.cpp">
+      <Filter>Math\2D\Triangle2</Filter>
+    </ClCompile>
+    <ClCompile Include="UDimRect2.cpp">
+      <Filter>Math\2D\UDimRect2</Filter>
+    </ClCompile>
+    <ClCompile Include="Quadratic2.cpp">
+      <Filter>Math\2D\Quadratic2</Filter>
+    </ClCompile>
+    <ClCompile Include="UDim.cpp">
+      <Filter>Interface2D\UDim</Filter>
+    </ClCompile>
+    <ClCompile Include="UDim2.cpp">
+      <Filter>Interface2D\UDim2</Filter>
+    </ClCompile>
+    <ClCompile Include="CaesarCipher.cpp">
+      <Filter>Encryption\CaesarCipher</Filter>
+    </ClCompile>
+    <ClCompile Include="VigenereCipher.cpp">
+      <Filter>Encryption\VigenereCipher</Filter>
+    </ClCompile>
+    <ClCompile Include="TextLabel.cpp">
+      <Filter>Unflitered\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBox.cpp">
+      <Filter>Unflitered\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollFrame.cpp">
+      <Filter>Unflitered\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Unflitered\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Unflitered\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Color3.cpp">
+      <Filter>Interface2D\Color\Color3</Filter>
+    </ClCompile>
+    <ClCompile Include="Image4.cpp">
+      <Filter>Interface2D\Image\Image4</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>Interface2D\UIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>Interface2D\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Box3.cpp">
+      <Filter>Game\Physics3D\Box3</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere3.cpp">
+      <Filter>Game\Physics3D\Sphere3</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingShape3.cpp">
+      <Filter>Game\Physics3D\BoundingShape3</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Game\Graphics\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>Interface2D\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer2.cpp">
+      <Filter>Game\Graphics\Renderer\Renderer2</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer3.cpp">
+      <Filter>Game\Graphics\Renderer\Renderer3</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshTriangle3.cpp">
+      <Filter>Game\Graphics\Mesh\MeshTriangle3</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsData3.cpp">
+      <Filter>Game\Graphics\Mesh\PhysicsData3</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderData4.cpp">
+      <Filter>Game\Graphics\Mesh\RenderData4</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsData4.cpp">
+      <Filter>Game\Graphics\Mesh\PhysicsData4</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderData3.cpp">
+      <Filter>Game\Graphics\Mesh\RenderData3</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshQuad3.cpp">
+      <Filter>Game\Graphics\Mesh\MeshQuad3</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Game\Graphics\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshParser.cpp">
+      <Filter>Parsers\MeshParser</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageParser.cpp">
+      <Filter>Parsers\ImageParser</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>Parsers\MaterialManager</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Parsers\FontManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Format.cpp">
+      <Filter>Math\Services\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="Sort.cpp">
+      <Filter>Algorithms\Sort</Filter>
+    </ClCompile>
+    <ClCompile Include="Parallel.cpp">
+      <Filter>Math\Services\Parallel</Filter>
+    </ClCompile>
+    <ClCompile Include="Tester.cpp">
+      <Filter>Math\Services\Tester</Filter>
+    </ClCompile>
+    <ClCompile Include="Color4.cpp">
+      <Filter>Interface2D\Color\Color4</Filter>
+    </ClCompile>
+    <ClCompile Include="Image3.cpp">
+      <Filter>Interface2D\Image\Image3</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraRay3.cpp">
+      <Filter>Math\3D\Objects\CameraRay3</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLabel.cpp">
+      <Filter>Interface2D\ImageLabel</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>DataStructures\Linear\List\String</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Interface2D\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryGrid2.cpp">
+      <Filter>Math\2D\BinaryGrid2</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

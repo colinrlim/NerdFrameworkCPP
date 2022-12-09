@@ -1,0 +1,29 @@
+﻿  Color3.cpp
+  Image.cpp
+C:\Users\harry\source\repos\NerdFramework++\NerdFramework++\Image.cpp(35,23): warning C4018: '<': signed/unsigned mismatch
+  Line3.cpp
+  main.cpp
+  Math.cpp
+  Plane3.cpp
+  Quad3.cpp
+  Quadratic2.cpp
+  Quadratic3.cpp
+  Ray3.cpp
+  RayCaster.cpp
+  RayRadial.cpp
+  RayRectangular.cpp
+  RaySpherical.cpp
+  Rectangle2.cpp
+  Triangle2.cpp
+  Triangle3.cpp
+  Tween.cpp
+  UDim.cpp
+  UDim2.cpp
+  Generating Code...
+  Compiling...
+  Vector2.cpp
+  Vector2i.cpp
+  Vector3.cpp
+  Vector3s.cpp
+  Generating Code...
+  NerdFramework++.vcxproj -> C:\Users\harry\source\repos\NerdFramework++\Debug\NerdFramework++.exe
