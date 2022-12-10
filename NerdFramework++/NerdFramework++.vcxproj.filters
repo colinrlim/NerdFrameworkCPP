@@ -286,6 +286,12 @@
     <Filter Include="Interface2D\Image\Image4">
       <UniqueIdentifier>{5edb2076-714f-48f8-9984-063a4cb642b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Graphics\ColorSequence\ColorSequence3">
+      <UniqueIdentifier>{92517692-37e0-4962-b291-2625a1cc3ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\ColorSequence\ColorSequence4">
+      <UniqueIdentifier>{b7bf179c-fd50-4e2a-b555-eacb9d68f329}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -500,6 +506,12 @@
     </ClInclude>
     <ClInclude Include="Grid2.h">
       <Filter>Math\2D\Grid2</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorSequence3.h">
+      <Filter>Game\Graphics\ColorSequence\ColorSequence3</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorSequence4.h">
+      <Filter>Game\Graphics\ColorSequence\ColorSequence4</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -154,6 +154,8 @@
     <ClInclude Include="Color3.h" />
     <ClInclude Include="ColorSequence.h" />
     <ClInclude Include="Color4.h" />
+    <ClInclude Include="ColorSequence3.h" />
+    <ClInclude Include="ColorSequence4.h" />
     <ClInclude Include="Grid2.h" />
     <ClInclude Include="Image3.h" />
     <ClInclude Include="CameraRay3.h" />
