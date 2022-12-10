@@ -6,6 +6,16 @@ BinaryGrid2::BinaryGrid2(size_t width, size_t height) :
 	_height(height),
 	_data(new uint8_t[size()])
 { }
+BinaryGrid2::BinaryGrid2(size_t width, size_t height, bool value) :
+	_width(width),
+	_height(height),
+	_data(!value ? new uint8_t[size()]() : new uint8_t[size()])
+{
+	if (!value) return;
+	size_t size = this->size();
+	for (size_t i = 0; i < size; i++)
+		*(_data + i) = 255;
+}
 BinaryGrid2::BinaryGrid2(const BinaryGrid2& rhs) :
 	_width(rhs._width),
 	_height(rhs._height)

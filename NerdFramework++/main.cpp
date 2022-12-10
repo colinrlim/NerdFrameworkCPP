@@ -5,6 +5,7 @@
 #include "VigenereCipher.h"
 #include "Interface.h"
 #include "String.h"
+#include "BinaryGrid2.h"
 
 int main() {
 	std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;

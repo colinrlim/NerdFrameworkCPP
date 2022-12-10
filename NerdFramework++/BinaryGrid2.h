@@ -9,6 +9,7 @@ private:
 	uint8_t* _data;
 public:
 	BinaryGrid2(size_t width, size_t height);
+	BinaryGrid2(size_t width, size_t height, bool value);
 	BinaryGrid2(const BinaryGrid2& rhs);
 	BinaryGrid2& operator=(const BinaryGrid2& rhs);
 	~BinaryGrid2();
