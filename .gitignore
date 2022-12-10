@@ -7,3 +7,5 @@
 *.lastbuildstate
 *.ilk
 *.exe
+*.ipch
+*.db

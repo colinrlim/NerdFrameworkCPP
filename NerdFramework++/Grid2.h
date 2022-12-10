@@ -17,9 +17,7 @@ public:
 		_height(height),
 		_data(new T[size()])
 	{
-		size_t size = this->size();
-		for (size_t i = 0; i < size; i++)
-			*(_data + i) = defaultValue;
+		std::fill(_data, _data + size(), defaultValue);
 	}
 	Grid2(const Grid2& rhs) :
 		_width(rhs._width),
