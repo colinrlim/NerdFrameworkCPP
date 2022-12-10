@@ -4,17 +4,20 @@
 Image4::Image4() :
 	_width(1),
 	_height(1),
-	data(new uint8_t[4])
+	_size(4),
+	data(new uint8_t[_size])
 { }
 Image4::Image4(int width, int height) :
 	_width(width),
 	_height(height),
-	data(new uint8_t[(uint64_t)width * (uint64_t)height * 4])
+	_size((size_t)_width * _height * 4),
+	data(new uint8_t[_size])
 { }
 Image4::Image4(int width, int height, const Color4& color) :
 	_width(width),
 	_height(height),
-	data(new uint8_t[(uint64_t)width * (uint64_t)height * 4])
+	_size((size_t)_width* _height * 4),
+	data(new uint8_t[_size])
 {
 	this->modify([&color](size_t x, size_t y, void* pixel) -> void {
 		color.writeToPixel(pixel);
@@ -41,6 +44,9 @@ int Image4::getWidth() const {
 }
 int Image4::getHeight() const {
 	return this->_height;
+}
+size_t Image4::size() const {
+	return this->_size;
 }
 
 void* Image4::pixelAt(size_t x, size_t y) const {

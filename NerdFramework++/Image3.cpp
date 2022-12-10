@@ -4,17 +4,20 @@
 Image3::Image3() :
 	_width(1),
 	_height(1),
-	data(new uint8_t[3])
+	_size(3),
+	data(new uint8_t[_size])
 { }
 Image3::Image3(int width, int height) :
 	_width(width),
 	_height(height),
-	data(new uint8_t[(uint64_t)width * (uint64_t)height * 3])
+	_size((size_t)_width* _height * 3),
+	data(new uint8_t[_size])
 { }
 Image3::Image3(int width, int height, const Color3& color) :
 	_width(width),
 	_height(height),
-	data(new uint8_t[(uint64_t)width * (uint64_t)height * 3])
+	_size((size_t)_width* _height * 3),
+	data(new uint8_t[_size])
 {
 	this->modify([&color](size_t x, size_t y, void* pixel) -> void {
 		color.writeToPixel(pixel);
@@ -41,6 +44,9 @@ int Image3::getWidth() const {
 }
 int Image3::getHeight() const {
 	return this->_height;
+}
+size_t Image3::size() const {
+	return this->_size;
 }
 
 void* Image3::pixelAt(size_t x, size_t y) const {

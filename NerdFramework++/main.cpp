@@ -6,6 +6,7 @@
 #include "Interface.h"
 #include "String.h"
 #include "BinaryGrid2.h"
+#include "ImageLabel.h"
 
 int main() {
 	std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;
@@ -31,6 +32,8 @@ int main() {
         frame2.setBorderColor(Color3::green);
         frame2.borderWidth = 2;
         frame.children.push_back(&frame2);
+        ImageLabel imageLabel({ 400, 400 }, { 0, 300, 0, 150 }, { 0, 400, 0, 400 });
+        interface.frame.children.push_back(&imageLabel);
         if (interface.window == nullptr)
         {
             printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -40,6 +43,8 @@ int main() {
         else
         {
             bool running = true;
+            int x = 0;
+            int y = 0;
             while (running) {
                 SDL_Event ev;
                 while (SDL_PollEvent(&ev))
@@ -53,6 +58,11 @@ int main() {
                 }
 
                 interface.draw();
+                SDL_GetMouseState(&x, &y);
+                if (x >= 400 || y >= 400)continue;
+                std::cout << x << " " << y << std::endl;
+                Color4 color = imageLabel.getImage().pixelAt(x, y);
+                std::cout << (int)color.r << " " << (int)color.g << " " << (int)color.b << " " << (int)color.alpha << std::endl;
             }
         }
     }

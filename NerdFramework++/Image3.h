@@ -15,6 +15,7 @@ struct Image3
 
 	int getWidth() const;
 	int getHeight() const;
+	size_t size() const;
 
 	static const Image3 none;
 	static const Image3 white;
@@ -28,6 +29,7 @@ struct Image3
 private:
 	int _width;
 	int _height;
+	size_t _size;
 
 	void copy(const Image3& obj);
 };
