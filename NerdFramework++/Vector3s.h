@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ostream>
 #include "Vector3.h"
 struct Vector3;
 
@@ -22,4 +23,6 @@ struct Vector3s
 
 	static Vector3s min(const Vector3s& a, const Vector3s& b);
 };
+
+std::ostream& operator<<(std::ostream& stream, const Vector3s& rhs);
 

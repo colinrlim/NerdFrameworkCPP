@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <ostream>
 
 struct BinaryGrid2 {
 private:
@@ -23,4 +24,6 @@ public:
 	bool getTile(size_t x, size_t y) const;
 	void setTile(size_t x, size_t y, bool value);
 };
+
+std::ostream& operator<<(std::ostream& stream, const BinaryGrid2& rhs);
 

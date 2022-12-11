@@ -41,3 +41,8 @@ struct Rect2
 	}
 };
 
+template <typename T>
+std::ostream& operator<<(std::ostream& stream, const Rect2<T>& rhs) {
+	return stream << "{ x: " << rhs.x << ", y: " << rhs.y << ", width: " << rhs.width << ", height: " << rhs.height << " }";
+}
+

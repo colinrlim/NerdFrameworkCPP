@@ -34,3 +34,7 @@ void CameraRay3::rotate(double r1, double r2, double r3) {
 void CameraRay3::rotateAbout(const Vector3& rotand, double radians) {
     v.rotateAbout(rotand, radians);
 }
+
+std::ostream& operator<<(std::ostream& stream, const CameraRay3& rhs) {
+    return stream << "{ p: " << rhs.p << ", v: " << rhs.v << " }";
+}

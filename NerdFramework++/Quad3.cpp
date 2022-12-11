@@ -22,3 +22,7 @@ Triangle3 Quad3::getTriangle1() {
 Triangle3 Quad3::getTriangle2() {
     return Triangle3(&a, &c, &d);
 }
+
+std::ostream& operator<<(std::ostream& stream, const Quad3& rhs) {
+    return stream << "{ a: " << rhs.a << ", b: " << rhs.b << ", c: " << rhs.c << ", d: " << rhs.d << " }";
+}

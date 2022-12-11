@@ -16,3 +16,5 @@ struct UDimRect2
     bool overlaps(const UDimRect2& rectangle, int windowWidth = 0, int windowHeight = 0) const;
 };
 
+std::ostream& operator<<(std::ostream& stream, const UDimRect2& rhs);
+

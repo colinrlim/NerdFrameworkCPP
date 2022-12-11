@@ -75,3 +75,7 @@ Vector3s Vector3s::min(const Vector3s& a, const Vector3s& b) {
     Vector3s newVec(1.0, phiDiff, thetaDiff);
     return newVec;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Vector3s& rhs) {
+    return stream << "{ ρ: " << rhs.rho << ", ϕ: " << rhs.phi << ", θ: " << rhs.theta << " }";
+}

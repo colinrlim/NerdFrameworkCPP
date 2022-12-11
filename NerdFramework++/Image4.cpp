@@ -10,23 +10,23 @@ Image4::Image4() :
 Image4::Image4(int width, int height) :
 	_width(width),
 	_height(height),
-	_size(width* height * 4),
+	_size(width * height * 4),
 	data(new uint8_t[_size])
 { }
 Image4::Image4(int width, int height, const Color4& color) :
 	_width(width),
 	_height(height),
-	_size(width* height * 4),
+	_size(width * height * 4),
 	data(new uint8_t[_size])
 {
 	this->modify([&color](size_t x, size_t y, void* pixel) -> void {
 		color.writeToPixel(pixel);
-		});
+	});
 }
 Image4::Image4(int width, int height, uint8_t* data) :
 	_width(width),
 	_height(height),
-	_size(width* height * 4),
+	_size(width * height * 4),
 	data(data)
 { }
 Image4::Image4(const Image4& image) {

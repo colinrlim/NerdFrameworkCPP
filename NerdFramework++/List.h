@@ -1,14 +1,15 @@
 #pragma once
 
 #include <functional>
+#include <ostream>
 #include <vector>
 
 template <typename T>
 class List {
 private:
-	T* _data;
 	size_t _capacity;
 	size_t _size;
+	T* _data;
 
 	void setCapacity(size_t amount) {
 		_capacity = amount;
@@ -24,8 +25,6 @@ private:
 			*i = *(i + 1);
 		_size--;
 	}
-
-	friend class Iterator;
 public:
 	struct Iterator {
 	private:
@@ -33,11 +32,14 @@ public:
 		Iterator(T* element_ptr) :
 			_element_ptr(element_ptr)
 		{ }
+
+		friend class List;
 	public:
 		T operator*() { return *_element_ptr; }
-		void operator+() { _element_ptr++; }
-		void operator-() { _element_ptr--; }
-		void operator==(const Iterator& rhs) { return _element_ptr == rhs._element_ptr; }
+		void operator++() { _element_ptr++; }
+		void operator--() { _element_ptr--; }
+		bool operator==(const Iterator& rhs) const { return _element_ptr == rhs._element_ptr; }
+		bool operator!=(const Iterator& rhs) const { return _element_ptr != rhs._element_ptr; }
 	};
 
 	List() :
@@ -59,12 +61,14 @@ public:
 			*(_data + i) = initialElementValue;
 	}
 	List(const std::vector<T>& vector) :
-		_data(vector.data()),
+		_data(new T[_size]()),
 		_capacity(vector.capacity()),
 		_size(vector.size())
-	{}
+	{
+		std::move(vector.data(), vector.data() + _size, _data);
+	}
 	List(const List& rhs) :
-		_data(rhs._size),
+		_data(rhs._data),
 		_capacity(rhs._capacity),
 		_size(rhs._size)
 	{ }
@@ -97,7 +101,10 @@ public:
 	bool empty() const {
 		return _size == 0;
 	}
-	T* data() const {
+	T* data() {
+		return _data;
+	}
+	const T* data() const {
 		return _data;
 	}
 	size_t size() const {
@@ -173,4 +180,14 @@ public:
 		return *(_data + index);
 	}
 };
+
+template <typename T>
+std::ostream& operator<<(std::ostream& stream, const List<T>& rhs) {
+	const T* data = rhs.data();
+	size_t size = rhs.size();
+	stream << "[ ";
+	for (size_t i = 0; i < size - 1; i++)
+		stream << *(data + i) << ", ";
+	return stream << *(data + size - 1) << " ]";
+}
 

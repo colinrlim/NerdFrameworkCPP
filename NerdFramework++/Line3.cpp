@@ -191,3 +191,7 @@ double Line3::min(const Line3& line) const {
     Vector3 n = Vector3::cross(v, line.v);
     return Plane3(p, n).min(line.p);
 }
+
+std::ostream& operator<<(std::ostream& stream, const Line3& rhs) {
+    return stream << "{ p: " << rhs.p << ", v: " << rhs.v << " }";
+}

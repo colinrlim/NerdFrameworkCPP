@@ -64,3 +64,7 @@ bool Ray3::operator==(const Ray3& rhs) const {
 bool Ray3::operator!=(const Ray3& rhs) const {
     return this->p != rhs.p || this->v != rhs.v;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Ray3& rhs) {
+    return stream << "{ p: " << rhs.p << ", v: " << rhs.v << " }";
+}

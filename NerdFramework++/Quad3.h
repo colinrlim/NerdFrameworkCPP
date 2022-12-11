@@ -18,3 +18,5 @@ struct Quad3
     Triangle3 getTriangle2();
 };
 
+std::ostream& operator<<(std::ostream& stream, const Quad3& rhs);
+

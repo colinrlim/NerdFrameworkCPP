@@ -194,3 +194,7 @@ void Quadratic3::rotate(double r1, double r2, double r3) {
     rotateY(r2);
     rotateZ(r3);
 }
+
+std::ostream& operator<<(std::ostream& stream, const Quadratic3& rhs) {
+    return stream << rhs.a << "x^2 + " << rhs.b << "y^2 + " << rhs.c << "z^2 + " << rhs.d << "xy + " << rhs.e << "xz + " << rhs.f << "yz + " << rhs.g << "x + " << rhs.h << "y + " << rhs.i << "z + " << rhs.j;
+}

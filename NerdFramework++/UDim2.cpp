@@ -24,3 +24,7 @@ UDim2 UDim2::fromOffset(double xOffset, double yOffset) {
 Vector2 UDim2::absolute(double width, double height) const {
 	return Vector2(x.absolute(width), y.absolute(height));
 }
+
+std::ostream& operator<<(std::ostream& stream, const UDim2& rhs) {
+	return stream << "{ x: " << rhs.x << ", y: " << rhs.y << " }";
+}

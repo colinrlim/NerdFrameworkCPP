@@ -338,3 +338,7 @@ bool Vector3::operator==(const Vector3& rhs) const {
 bool Vector3::operator!=(const Vector3& rhs) const {
     return (*this - rhs).magnitude() > 0.00001;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Vector3& rhs) {
+    return stream << "{ " << rhs.x << ", " << rhs.y << ", " << rhs.z << " }";
+}

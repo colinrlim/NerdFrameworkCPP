@@ -32,6 +32,8 @@ public:
 	std::vector<String&> split(const std::string& string);
 	std::vector<String&> split(const String& string);
 
+	char* data();
+	const char* data() const;
 	size_t length() const;
 
 	char operator[](size_t index) const;
@@ -51,4 +53,6 @@ public:
 	bool operator!=(const std::string& string);
 	bool operator!=(const String& string);
 };
+
+std::ostream& operator<<(std::ostream& stream, const String& rhs);
 

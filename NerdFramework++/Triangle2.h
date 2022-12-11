@@ -20,3 +20,5 @@ public:
     bool meets(const Vector2& point);
 };
 
+std::ostream& operator<<(std::ostream& stream, const Triangle2& rhs);
+

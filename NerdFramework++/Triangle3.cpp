@@ -377,3 +377,7 @@ Vector3 Triangle3::intersection(const Ray3& ray) const {
 
     return plane.intersection(line);
 }
+
+std::ostream& operator<<(std::ostream& stream, const Triangle3& rhs) {
+    return stream << "{ a: " << rhs.a << ", b: " << rhs.b << ", c: " << rhs.c << " }";
+}

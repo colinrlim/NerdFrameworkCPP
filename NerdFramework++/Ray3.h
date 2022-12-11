@@ -34,3 +34,5 @@ struct Ray3
     bool operator!=(const Ray3& rhs) const;
 };
 
+std::ostream& operator<<(std::ostream& stream, const Ray3& rhs);
+

@@ -104,3 +104,7 @@ bool Vector2i::operator==(const Vector2i& rhs) const {
 bool Vector2i::operator!=(const Vector2i& rhs) const {
 	return (*this - rhs).magnitude() > 0;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Vector2i& rhs) {
+	return stream << "{ " << rhs.x << ", " << rhs.y << " }";
+}

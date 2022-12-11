@@ -40,3 +40,5 @@ public:
     /*double min(Triangle3 triangle);*/
 };
 
+std::ostream& operator<<(std::ostream& stream, const Triangle3& rhs);
+

@@ -19,3 +19,5 @@ struct Line3
     double min(const Line3& line) const;
 };
 
+std::ostream& operator<<(std::ostream& stream, const Line3& rhs);
+

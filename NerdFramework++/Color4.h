@@ -61,3 +61,5 @@ public:
 	void writeToPixel(void* pixel) const;
 };
 
+std::ostream& operator<<(std::ostream& stream, const Color4& rhs);
+

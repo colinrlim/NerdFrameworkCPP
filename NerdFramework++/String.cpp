@@ -133,6 +133,12 @@ bool String::endsWith(const String& string) {
 	return true;
 }
 
+char* String::data() {
+	return _data.data();
+}
+const char* String::data() const {
+	return _data.data();
+}
 size_t String::length() const {
 	return _data.size();
 }
@@ -208,4 +214,12 @@ bool String::operator!=(const std::string& string) {
 }
 bool String::operator!=(const String& string) {
 	return !(*this == string);
+}
+
+std::ostream& operator<<(std::ostream& stream, const String& rhs) {
+	const char* data = rhs.data();
+	size_t length = rhs.length();
+	for (size_t i = 0; i < length; i++)
+		stream << *(data + i);
+	return stream;
 }

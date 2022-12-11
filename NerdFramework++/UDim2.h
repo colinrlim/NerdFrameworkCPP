@@ -22,3 +22,5 @@ struct UDim2
     Vector2 absolute(double width, double height) const;
 };
 
+std::ostream& operator<<(std::ostream& stream, const UDim2& rhs);
+

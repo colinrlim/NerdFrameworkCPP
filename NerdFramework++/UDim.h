@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 struct UDim
 {
     double scale;
@@ -10,4 +12,6 @@ struct UDim
 
     double absolute(double max) const;
 };
+
+std::ostream& operator<<(std::ostream& stream, const UDim& rhs);
 

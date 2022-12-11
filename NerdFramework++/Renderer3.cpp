@@ -78,7 +78,7 @@ Renderer3::Renderer3(const UDim2& position, const UDim2& size, RayCaster& camera
 }
 
 void Renderer3::addMesh(Mesh* mesh) {
-    for (auto iterator = mesh->faces.objects.begin(); iterator != mesh->faces.objects.end(); ++iterator) {
+    for (auto iterator = mesh->faces.begin(); iterator != mesh->faces.end(); ++iterator) {
 		_meshFaces.push_back(*iterator);
 	}
     for (auto iterator = mesh->vertices.begin(); iterator != mesh->vertices.end(); ++iterator) {
@@ -86,10 +86,10 @@ void Renderer3::addMesh(Mesh* mesh) {
     }
 }
 void Renderer3::removeMesh(const Mesh* mesh) {
-	for (auto iterator = _meshFaces.begin(); iterator != _meshFaces.end(); ++iterator) {
-		for (size_t x = 0; x < mesh->faces.objects.size(); x++) {
-			if (*iterator == mesh->faces.objects[x])
-				_meshFaces.erase(iterator);
+	for (auto cachedFaceIterator = _meshFaces.begin(); cachedFaceIterator != _meshFaces.end(); ++cachedFaceIterator) {
+        for (auto specifiedMeshFaceIterator = mesh->faces.begin(); specifiedMeshFaceIterator != mesh->faces.end(); ++specifiedMeshFaceIterator) {
+			if (*cachedFaceIterator == *specifiedMeshFaceIterator)
+				_meshFaces.erase(cachedFaceIterator);
 		}
 	}
     for (size_t x = 0; x < mesh->vertices.size(); x++) {

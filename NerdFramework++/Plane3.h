@@ -25,3 +25,5 @@ struct Plane3
     double min(const Plane3& plane) const;
 };
 
+std::ostream& operator<<(std::ostream& stream, const Plane3& rhs);
+

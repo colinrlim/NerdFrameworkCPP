@@ -22,6 +22,7 @@ BinaryGrid2::BinaryGrid2(const BinaryGrid2& rhs) :
 	std::copy(rhs._data, rhs._data + size, _data);
 }
 BinaryGrid2& BinaryGrid2::operator=(const BinaryGrid2& rhs) {
+	delete[] _data;
 	size_t size = this->size();
 	if (_width != rhs._width || _height != rhs._height) {
 		_width = rhs._width;
@@ -64,4 +65,15 @@ void BinaryGrid2::setTile(size_t x, size_t y, bool value) {
 		*(_data + chunkIndex) |= (1 << tileIndex);
 	else
 		*(_data + chunkIndex) &= ~(1 << tileIndex);
+}
+
+std::ostream& operator<<(std::ostream& stream, const BinaryGrid2& rhs) {
+	size_t width = rhs.getWidth();
+	size_t height = rhs.getHeight();
+	for (size_t y = 0; y < height; y++) {
+		for (size_t x = 0; x < width; x++)
+			stream << rhs.getTile(x, y) << " ";
+		stream << std::endl;
+	}
+	return stream;
 }

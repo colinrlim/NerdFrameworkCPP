@@ -42,3 +42,5 @@ struct Vector2i
     bool operator!=(const Vector2i& rhs) const;
 };
 
+std::ostream& operator<<(std::ostream& stream, const Vector2i& rhs);
+

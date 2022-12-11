@@ -56,3 +56,7 @@ void Quadratic2::rotate(double radians) {
     this->e = E;
     this->f = F;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Quadratic2& rhs) {
+    return stream << rhs.a << "x^2 + " << rhs.b << "y^2 + " << rhs.c << "xy + " << rhs.d << "x + " << rhs.e << "y + " << rhs.f;
+}

@@ -13,8 +13,8 @@ Mesh* MeshParser::fromMesh(const Mesh& mesh) {
 	Collection3<MeshTriangle3> faces;
 	for (size_t i = 0; i < mesh.vertices.size(); i++)
 		vertices.push_back(new Vector3(*mesh.vertices[i]));
-	for (size_t i = 0; i < mesh.faces.objects.size(); i++) {
-		const MeshTriangle3 triangle = *mesh.faces.objects[i];
+    for (auto iterator = mesh.faces.begin(); iterator != mesh.faces.end(); ++iterator) {
+        const MeshTriangle3 triangle = **iterator;
 		Vector3* a = nullptr;
 		Vector3* b = nullptr;
 		Vector3* c = nullptr;
@@ -27,7 +27,7 @@ Mesh* MeshParser::fromMesh(const Mesh& mesh) {
 				c = vertices[i];
 		}
 		if (a != nullptr && b != nullptr && c != nullptr)
-			faces.objects.push_back(new MeshTriangle3(a, b, c));
+			faces.push_back(new MeshTriangle3(a, b, c));
 	}
 	return new Mesh(vertices, faces);
 }

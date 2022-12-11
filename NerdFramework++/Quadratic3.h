@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 struct Quadratic3
 {
     double a;
@@ -22,4 +24,6 @@ struct Quadratic3
     void rotateZ(double radians);
     void rotate(double r1, double r2, double r3);
 };
+
+std::ostream& operator<<(std::ostream& stream, const Quadratic3& rhs);
 

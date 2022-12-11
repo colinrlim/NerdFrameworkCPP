@@ -21,3 +21,5 @@ public:
     void rotateAbout(const Vector3& rotand, double radians);
 };
 
+std::ostream& operator<<(std::ostream& stream, const CameraRay3& rhs);
+

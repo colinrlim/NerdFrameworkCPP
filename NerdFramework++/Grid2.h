@@ -58,3 +58,15 @@ public:
 	}
 };
 
+template <typename T>
+std::ostream& operator<<(std::ostream& stream, const Grid2<T>& rhs) {
+	size_t width = rhs.getWidth();
+	size_t height = rhs.getHeight();
+	for (size_t y = 0; y < height; y++) {
+		for (size_t x = 0; x < width; x++)
+			stream << rhs.at(x, y) << " ";
+		stream << std::endl;
+	}
+	return stream;
+}
+

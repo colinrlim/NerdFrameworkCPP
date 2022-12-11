@@ -81,3 +81,7 @@ void Color3::writeToPixel(void* pixel) const {
 	castedPixel[1] = this->g;
 	castedPixel[2] = this->b;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Color3& rhs) {
+	return stream << "{ r: " << rhs.r << ", g: " << rhs.g << ", b: " << rhs.b << " }";
+}

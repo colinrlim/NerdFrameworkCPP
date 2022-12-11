@@ -18,3 +18,7 @@ bool UDimRect2::overlaps(const UDimRect2& rectangle, int windowWidth, int window
     Vector2 sAbsolute = rectangle.s.absolute(windowWidth, windowHeight);
     return this->overlaps(pAbsolute) || this->overlaps(pAbsolute + sAbsolute);
 }
+
+std::ostream& operator<<(std::ostream& stream, const UDimRect2& rhs) {
+    return stream << "{ p: " << rhs.p << ", s: " << rhs.s << " }";
+}

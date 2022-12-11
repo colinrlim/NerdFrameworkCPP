@@ -7,9 +7,9 @@ Mesh::Mesh(const std::vector<Vector3*>& vertices, const Collection3<MeshTriangle
 
 Mesh::Mesh(const Mesh& rhs) : vertices(), faces() { }
 Mesh::~Mesh() {
-	for (size_t i = 0; i < vertices.size(); i++)
-		delete vertices[i];
-	for (size_t i = 0; i < faces.objects.size(); i++)
-		delete faces.objects[i];
+	for (auto iterator = vertices.begin(); iterator != vertices.end(); ++iterator)
+		delete* iterator;
+	for (auto iterator = faces.begin(); iterator != faces.end(); ++iterator)
+		delete *iterator;
 }
 Mesh& Mesh::operator=(const Mesh& rhs) { return *this; }

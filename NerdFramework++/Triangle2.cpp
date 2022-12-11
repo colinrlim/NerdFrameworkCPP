@@ -163,3 +163,7 @@ bool Triangle2::meets(const Vector2& point) {
 
     return t >= 0.0 && s >= 0.0 && t + s <= 1.0;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Triangle2& rhs) {
+    return stream << "{ a: " << rhs.a << ", b: " << rhs.b << ", c: " << rhs.c << " }";
+}

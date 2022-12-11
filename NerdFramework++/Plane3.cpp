@@ -197,3 +197,7 @@ double Plane3::min(const Plane3& plane) const {
 
     return 0.0;
 }
+
+std::ostream& operator<<(std::ostream& stream, const Plane3& rhs) {
+    return stream << "{ p: " << rhs.p << ", n: " << rhs.n << " }";
+}
