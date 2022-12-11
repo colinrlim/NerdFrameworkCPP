@@ -1,8 +1,8 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<Vector3*>& vertices, const Collection3<MeshTriangle3>& faces) :
-	vertices(vertices),
-	faces(faces)
+Mesh::Mesh(std::vector<Vector3*>&& vertices, Collection3<MeshTriangle3>&& faces) :
+	vertices(std::move(vertices)),
+	faces(std::move(faces))
 { }
 
 Mesh::Mesh(const Mesh& rhs) : vertices(), faces() { }

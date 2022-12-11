@@ -29,7 +29,7 @@ Mesh* MeshParser::fromMesh(const Mesh& mesh) {
 		if (a != nullptr && b != nullptr && c != nullptr)
 			faces.push_back(new MeshTriangle3(a, b, c));
 	}
-	return new Mesh(vertices, faces);
+	return new Mesh(std::move(vertices), std::move(faces));
 }
 Mesh* MeshParser::fromFile(const char* filename, bool overrideNormalInterpolation, Material* material) {
 	std::vector<Vector3*> vertices;
@@ -117,7 +117,7 @@ Mesh* MeshParser::fromFile(const char* filename, bool overrideNormalInterpolatio
         }
 
         Collection3<MeshTriangle3> faces(tris);
-	    return new Mesh(vertices, faces);
+        return new Mesh(std::move(vertices), std::move(faces));
     }
     return nullptr;
 }
@@ -151,13 +151,13 @@ Mesh* MeshParser::fromCube(const Vector3& origin, double sideLength) {
 	std::vector<Vector3*> vertices{ a, b, c, d, e, f, g, h };
 	Collection3<MeshTriangle3> faces(tris);
 	faces.setOrigin(origin);
-	
-	return new Mesh(vertices, faces);
+
+    return new Mesh(std::move(vertices), std::move(faces));
 }
 Mesh* MeshParser::fromUVSphere(const Vector3& origin, double radius, int segments, int rings) {
 	std::vector<Vector3*> vertices;
 	Collection3<MeshTriangle3> faces;
-	return new Mesh(vertices, faces);
+    return new Mesh(std::move(vertices), std::move(faces));
 }
 Mesh* MeshParser::fromIcoSphere(const Vector3& origin, double radius, int iterations, RenderData3::NormalType normalType) {
     double goldenRatio = (1.0 + Math::sqrt(5)) / 2.0;
@@ -257,7 +257,7 @@ Mesh* MeshParser::fromIcoSphere(const Vector3& origin, double radius, int iterat
     Collection3<MeshTriangle3> faces(tris);
     faces.setOrigin(origin);
 
-	return new Mesh(vertices, faces);
+    return new Mesh(std::move(vertices), std::move(faces));
 }
 Mesh* MeshParser::fromQuadSphere(const Vector3& origin, double radius, int iterations, RenderData3::NormalType normalType) {
     Vector3* a = new Vector3(Vector3(1, 1, -1).normalized());
@@ -349,7 +349,7 @@ Mesh* MeshParser::fromQuadSphere(const Vector3& origin, double radius, int itera
 	Collection3<MeshTriangle3> faces(tris);
     faces.setOrigin(origin);
 
-	return new Mesh(vertices, faces);
+    return new Mesh(std::move(vertices), std::move(faces));
 }
 
 void MeshParser::destroyMesh(Mesh* mesh) {

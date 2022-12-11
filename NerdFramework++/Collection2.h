@@ -16,8 +16,8 @@ private:
     List<T*> _data;
 public:
     Collection2() : _data(), _origin(Vector2::zero) { }
-    Collection2(const List<T*>& objects) : _data(objects), _origin(Vector2::zero) { }
-    Collection2(const std::vector<T*>& objects) : _data(objects), _origin(Vector2::zero) { }
+    Collection2(List<T*>&& objects) : _data(std::move(objects)), _origin(Vector2::zero) { }
+    Collection2(std::vector<T*>&& objects) : _data(std::move(objects)), _origin(Vector2::zero) { }
 
     const Vector2& getOrigin() const { return _origin; }
     void setOrigin(const Vector2& value) {

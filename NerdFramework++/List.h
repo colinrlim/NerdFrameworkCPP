@@ -62,19 +62,43 @@ public:
 		_capacity(vector.capacity()),
 		_size(vector.size())
 	{
-		std::move(vector.data(), vector.data() + _size, _data);
+		std::copy(vector.data(), vector.data() + _size, _data);
 	}
 	List(const List& rhs) :
+		_data(new T[size]),
+		_capacity(rhs._capacity),
+		_size(rhs._size)
+	{
+		std::copy(rhs._data, rhs._data + _size, _data);
+	}
+	List(std::vector<T>&& vector) :
+		_data(new T[_size]),
+		_capacity(vector.capacity()),
+		_size(vector.size())
+	{
+		std::move(vector.data(), vector.data() + _size, _data);
+	}
+	List(List&& rhs) :
 		_data(rhs._data),
 		_capacity(rhs._capacity),
 		_size(rhs._size)
-	{ }
+	{
+		rhs._data = nullptr;
+	}
 	List& operator=(const List& rhs) {
 		delete[] _data;
 		_size = rhs._size;
 		_capacity = rhs._capacity;
 		_data = new T[rhs._size];
 		std::copy(rhs._data, rhs._data + rhs._size, _data);
+		return *this;
+	}
+	List& operator=(List&& rhs) {
+		delete[] _data;
+		_size = rhs._size;
+		_capacity = rhs._capacity;
+		_data = rhs._data;
+		rhs._data = nullptr;
 		return *this;
 	}
 	~List() { delete[] _data; }

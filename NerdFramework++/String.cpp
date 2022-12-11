@@ -1,4 +1,5 @@
 #include "String.h"
+#include <iostream>
 
 String::String(char character) :
 	_data(1)
@@ -10,22 +11,26 @@ String::String(const char* string) {
 	while (string[size] != '\0')
 		size++;
 	_data.reserve(size);
-	for (size_t i = 0; i < size; i++)
-		_data.push_back(*(string + i));
+	std::copy(string, string + size, _data.data());
 }
 String::String(const std::string& string) :
 	_data(string.length())
 {
 	const char* data = string.data();
-	for (size_t i = 0; i < string.length(); i++)
-		_data.push_back(*(data + i));
+	std::copy(data, data + string.length(), _data.data());
 }
-String::String(const String& string) :
-	_data(string._data.size())
+String::String(char*&& string) {
+	size_t size = 0;
+	while (string[size] != '\0')
+		size++;
+	_data.reserve(size);
+	std::move(string, string + size, _data.data());
+}
+String::String(std::string&& string) :
+	_data(string.length())
 {
-	const char* data = string._data.data();
-	for (size_t i = 0; i < string._data.size(); i++)
-		_data.push_back(*(data + i));
+	const char* data = string.data();
+	std::move(data, data + string.length(), _data.data());
 }
 String& String::operator=(char character) {
 	_data.clear();
@@ -38,8 +43,7 @@ String& String::operator=(const char* string) {
 	while (string[size] != '\0')
 		size++;
 	_data.reserve(size);
-	for (size_t i = 0; i < size; i++)
-		_data.push_back(*(string + i));
+	std::copy(string, string + size, _data.data());
 	return *this;
 }
 String& String::operator=(const std::string& string) {
@@ -47,17 +51,24 @@ String& String::operator=(const std::string& string) {
 	size_t size = string.length();
 	_data.reserve(size);
 	const char* data = string.data();
-	for (size_t i = 0; i < size; i++)
-		_data.push_back(*(data + i));
+	std::copy(data, data + size, _data.data());
 	return *this;
 }
-String& String::operator=(const String& string) {
+String& String::operator=(char*&& string) {
 	_data.clear();
-	size_t size = string._data.size();
+	size_t size = 0;
+	while (string[size] != '\0')
+		size++;
 	_data.reserve(size);
-	const char* data = string._data.data();
-	for (size_t i = 0; i < size; i++)
-		_data.push_back(*(data + i));
+	std::move(string, string + size, _data.data());
+	return *this;
+}
+String& String::operator=(std::string&& string) {
+	_data.clear();
+	size_t size = string.length();
+	_data.reserve(size);
+	const char* data = string.data();
+	std::move(data, data + size, _data.data());
 	return *this;
 }
 

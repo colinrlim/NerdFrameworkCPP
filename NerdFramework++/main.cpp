@@ -15,8 +15,7 @@ int main() {
     grid.setTile(2, 5, true);
     std::cout << grid;
 
-    String test = "Once upon a time, this was a string. Now it is a String. The End.";
-    std::cout << test << std::endl;
+    String test = std::string("Once upon a time, this was a string. Now it is a String. The End.");
 
     //Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)

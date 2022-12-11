@@ -6,7 +6,7 @@
 class Mesh
 {
 private:
-	Mesh(const std::vector<Vector3*>& vertices, const Collection3<MeshTriangle3>& faces);
+	Mesh(std::vector<Vector3*>&& vertices, Collection3<MeshTriangle3>&& faces);
 
 	Mesh(const Mesh& rhs);
 	~Mesh();

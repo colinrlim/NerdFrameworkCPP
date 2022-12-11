@@ -11,11 +11,13 @@ public:
 	String(char character);
 	String(const char* string);
 	String(const std::string& string);
-	String(const String& string);
+	String(char*&& string);
+	String(std::string&& string);
 	String& operator=(char character);
 	String& operator=(const char* string);
 	String& operator=(const std::string& string);
-	String& operator=(const String& string);
+	String& operator=(char*&& string);
+	String& operator=(std::string&& string);
 
 	bool startsWith(char character);
 	bool startsWith(const char* string);
