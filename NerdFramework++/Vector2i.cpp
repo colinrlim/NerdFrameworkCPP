@@ -9,13 +9,13 @@ Vector2i::Vector2i(const Vector3& threedim) : x((int)threedim.x), y((int)threedi
 const Vector2i Vector2i::zero(0, 0);
 const Vector2i Vector2i::one(1, 1);
 
-double Vector2i::magnitude() {
+inline double Vector2i::magnitude() {
 	return Math::sqrt(this->x * this->x + this->y * this->y);
 }
-Vector2i Vector2i::normalized() {
+inline Vector2i Vector2i::normalized() {
 	return *this / (int)this->magnitude();
 }
-Vector2i Vector2i::fromParameterization3(double t, double s, const Vector2i& a, const Vector2i& b, const Vector2i& c) {
+inline Vector2i Vector2i::fromParameterization3(double t, double s, const Vector2i& a, const Vector2i& b, const Vector2i& c) {
 	double u = 1.0 - t - s;
 	Vector2i newVec((int)(a.x * u + b.x * t + c.x * s), (int)(a.y * u + b.y * t + c.y * s));
 	return newVec;

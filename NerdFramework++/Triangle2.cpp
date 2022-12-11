@@ -12,7 +12,7 @@ Triangle2::Triangle2(Vector2& a, Vector2& b, Vector2& c) :
      */
 }
 
-double Triangle2::area() {
+inline double Triangle2::area() {
 
     /* |a×b| = |A||B|sin(theta) = Area of Parallelogram
      * Parallelogram is two triangles
@@ -21,7 +21,7 @@ double Triangle2::area() {
     return Vector3::cross(Vector3(b.x - a.x, b.y - a.y, 0.0), Vector3(c.x - a.x, c.y - a.y, 0.0)).magnitude() / 2.0;
 }
 
-Vector2 Triangle2::parameterization(const Vector2& a, const Vector2& b, const Vector2& c, const Vector2& point) {
+inline Vector2 Triangle2::parameterization(const Vector2& a, const Vector2& b, const Vector2& c, const Vector2& point) {
 
     // Repackages the Parameterization(Point) method for single use
 
@@ -35,7 +35,7 @@ Vector2 Triangle2::parameterization(const Vector2& a, const Vector2& b, const Ve
 
     return Vector2(t, s);
 }
-Vector2 Triangle2::parameterization(const Vector2& point) {
+inline Vector2 Triangle2::parameterization(const Vector2& point) {
 
     // Repackages the Meets(Point) method to spit out t and s
     // Useful for any operations that involve finding a vector
@@ -99,7 +99,7 @@ Vector2 Triangle2::parameterization(const Vector2& point) {
     return Vector2(t, s);
 }
 
-bool Triangle2::meets(const Vector2& point) {
+inline bool Triangle2::meets(const Vector2& point) {
 
     /* A, B, and C are COPLANAR, and vertices of the triangle
      * P is any point that lies within the triangle

@@ -8,12 +8,12 @@ UDimRect2::UDimRect2(const Vector2& position, const Vector2& size) :
 
 const UDimRect2 UDimRect2::one(Vector2::zero, Vector2::one);
 
-bool UDimRect2::overlaps(const Vector2& point, int windowWidth, int windowHeight) const {
+inline bool UDimRect2::overlaps(const Vector2& point, int windowWidth, int windowHeight) const {
     Vector2 pAbsolute = p.absolute(windowWidth, windowHeight);
     Vector2 sAbsolute = s.absolute(windowWidth, windowHeight);
     return (point.x >= pAbsolute.x && point.y >= pAbsolute.y && point.x <= pAbsolute.x + sAbsolute.x && point.y <= pAbsolute.y + sAbsolute.y);
 }
-bool UDimRect2::overlaps(const UDimRect2& rectangle, int windowWidth, int windowHeight) const {
+inline bool UDimRect2::overlaps(const UDimRect2& rectangle, int windowWidth, int windowHeight) const {
     Vector2 pAbsolute = rectangle.p.absolute(windowWidth, windowHeight);
     Vector2 sAbsolute = rectangle.s.absolute(windowWidth, windowHeight);
     return this->overlaps(pAbsolute) || this->overlaps(pAbsolute + sAbsolute);

@@ -16,7 +16,7 @@ Triangle3::Triangle3(Vector3* a, Vector3* b, Vector3* c) :
      */
 }
 
-Vector3 Triangle3::normal() const {
+inline Vector3 Triangle3::normal() const {
 
     /* A, B, and C are COPLANAR, all are solutions of Plane in which triangle resides
      * n ⊥ Plane
@@ -30,7 +30,7 @@ Vector3 Triangle3::normal() const {
 
     return Vector3::cross(Vector3(a, b), Vector3(a, c));
 }
-double Triangle3::area() const {
+inline double Triangle3::area() const {
 
     /* |a×b| = |A||B|sin(theta) = Area of Parallelogram
      * Parallelogram is two triangles
@@ -39,12 +39,12 @@ double Triangle3::area() const {
     return Vector3::cross(b - a, c - a).magnitude() / 2.0;
 }
 
-void Triangle3::move(const Vector3& offset) {
+inline void Triangle3::move(const Vector3& offset) {
     a += offset;
     b += offset;
     c += offset;
 }
-void Triangle3::scale(const Vector3& scale, const Vector3& origin) {
+inline void Triangle3::scale(const Vector3& scale, const Vector3& origin) {
     a -= origin;
     b -= origin;
     c -= origin;
@@ -58,7 +58,7 @@ void Triangle3::scale(const Vector3& scale, const Vector3& origin) {
     c += origin;
 }
 
-void Triangle3::rotateX(double radians, const Vector3& origin) const {
+inline void Triangle3::rotateX(double radians, const Vector3& origin) const {
     a -= origin;
     b -= origin;
     c -= origin;
@@ -71,7 +71,7 @@ void Triangle3::rotateX(double radians, const Vector3& origin) const {
     b += origin;
     c += origin;
 }
-void Triangle3::rotateY(double radians, const Vector3& origin) const {
+inline void Triangle3::rotateY(double radians, const Vector3& origin) const {
     a -= origin;
     b -= origin;
     c -= origin;
@@ -84,7 +84,7 @@ void Triangle3::rotateY(double radians, const Vector3& origin) const {
     b += origin;
     c += origin;
 }
-void Triangle3::rotateZ(double radians, const Vector3& origin) const {
+inline void Triangle3::rotateZ(double radians, const Vector3& origin) const {
     a -= origin;
     b -= origin;
     c -= origin;
@@ -97,7 +97,7 @@ void Triangle3::rotateZ(double radians, const Vector3& origin) const {
     b += origin;
     c += origin;
 }
-void Triangle3::rotate(double r1, double r2, double r3, const Vector3& origin) const {
+inline void Triangle3::rotate(double r1, double r2, double r3, const Vector3& origin) const {
     a -= origin;
     b -= origin;
     c -= origin;
@@ -111,7 +111,7 @@ void Triangle3::rotate(double r1, double r2, double r3, const Vector3& origin) c
     c += origin;
 }
 
-Vector2 Triangle3::parameterization(const Vector3& a, const Vector3& b, const Vector3& c, const Vector3& point) {
+inline Vector2 Triangle3::parameterization(const Vector3& a, const Vector3& b, const Vector3& c, const Vector3& point) {
 
     // Repackages the Parameterization(Point) method for single use
 
@@ -126,7 +126,7 @@ Vector2 Triangle3::parameterization(const Vector3& a, const Vector3& b, const Ve
     Vector2 params(t, s);
     return params;
 }
-Vector2 Triangle3::parameterization(const Vector3& point) const {
+inline Vector2 Triangle3::parameterization(const Vector3& point) const {
 
     // Repackages the Meets(Point) method to spit out t and s
     // Useful for any operations that involve finding a vector
@@ -192,7 +192,7 @@ Vector2 Triangle3::parameterization(const Vector3& point) const {
     return params;
 }
 
-bool Triangle3::meets(const Vector3& point) const {
+inline bool Triangle3::meets(const Vector3& point) const {
 
     /* A, B, and C are COPLANAR, and vertices of the triangle
      * P is any point that lies within the triangle
@@ -294,7 +294,7 @@ bool Triangle3::meets(const Vector3& point) const {
          Math.Abs(Math.Acos(Vector3.Dot(AB, AC) / (ABm * ACm)) - (Math.Acos(ABAP / (ABm * APm)) + Math.Acos(ACAP / (ACm * APm)))) <= 0.0001 &&
          ABAP <= ABm * ABm && ACAP <= ACm * ACm;*/
 }
-bool Triangle3::meets(const Ray3& ray) const {
+inline bool Triangle3::meets(const Ray3& ray) const {
 
     /* 1st Check:
      * Would the ray collide on the triangle's front face?
@@ -352,7 +352,7 @@ bool Triangle3::meets(const Ray3& ray) const {
 }
 /*bool meets(Triangle3 triangle);*/
 
-Vector3* Triangle3::ifMeetsGetIntersection(const Ray3& ray) const {
+inline Vector3* Triangle3::ifMeetsGetIntersection(const Ray3& ray) const {
 
     /* Repackages the Meets(Ray) method to return the intersection
      * for optimization purposes where you'd need the intersection for a secondary operation.
@@ -366,7 +366,7 @@ Vector3* Triangle3::ifMeetsGetIntersection(const Ray3& ray) const {
         return pointOfIntersection;
     return nullptr;
 }
-Vector3 Triangle3::intersection(const Ray3& ray) const {
+inline Vector3 Triangle3::intersection(const Ray3& ray) const {
 
     // In order to maximize performance, this code assumes you will only
     //   use this function if you already know the triangle and ray intersect at a point.

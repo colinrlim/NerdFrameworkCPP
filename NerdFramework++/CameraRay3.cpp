@@ -19,19 +19,19 @@ CameraRay3::CameraRay3(Vector3* position, const Vector3s& vector) :
     v(vector.asRectangular())
 { }
 
-void CameraRay3::rotateX(double radians) {
+inline void CameraRay3::rotateX(double radians) {
     v.rotateX(radians);
 }
-void CameraRay3::rotateY(double radians) {
+inline void CameraRay3::rotateY(double radians) {
     v.rotateY(radians);
 }
-void CameraRay3::rotateZ(double radians) {
+inline void CameraRay3::rotateZ(double radians) {
     v.rotateZ(radians);
 }
-void CameraRay3::rotate(double r1, double r2, double r3) {
+inline void CameraRay3::rotate(double r1, double r2, double r3) {
     v.rotate(r1, r2, r3);
 }
-void CameraRay3::rotateAbout(const Vector3& rotand, double radians) {
+inline void CameraRay3::rotateAbout(const Vector3& rotand, double radians) {
     v.rotateAbout(rotand, radians);
 }
 
