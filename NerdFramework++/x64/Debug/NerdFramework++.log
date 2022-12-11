@@ -1,8 +1,8 @@
-﻿  ImageParser.cpp
+﻿  String.cpp
+  main.cpp
   Mesh.cpp
   MeshParser.cpp
+  ImageParser.cpp
   Renderer3.cpp
-  String.cpp
-  main.cpp
   Generating Code...
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe

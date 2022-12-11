@@ -17,8 +17,8 @@ private:
 public:
 
     Collection3() : _data(), _origin(Vector3::zero), _scale(Vector3::one) { }
-    Collection3(List<T*>& objects) : _data(objects), _origin(Vector3::zero), _scale(Vector3::one) { }
-    Collection3(std::vector<T*>& objects) : _data(objects), _origin(Vector3::zero), _scale(Vector3::one) { }
+    Collection3(const List<T*>& objects) : _data(objects), _origin(Vector3::zero), _scale(Vector3::one) { }
+    Collection3(const std::vector<T*>& objects) : _data(objects), _origin(Vector3::zero), _scale(Vector3::one) { }
 
     const Vector3& getOrigin() const { return _origin; }
     void setOrigin(const Vector3& value) {

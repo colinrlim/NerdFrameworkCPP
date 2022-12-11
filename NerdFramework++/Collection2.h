@@ -4,6 +4,7 @@
 #include "Rect2.h"
 #include "Vector3.h"
 #include "Vector2.h"
+#include "List.h"
 #include "Ray3.h"
 #include "Box3.h"
 
@@ -12,9 +13,10 @@ class Collection2
 {
 private:
     Vector2 _origin = Vector2::zero;
-    std::vector<T*> _data;
+    List<T*> _data;
 public:
     Collection2() : _data(), _origin(Vector2::zero) { }
+    Collection2(const List<T*>& objects) : _data(objects), _origin(Vector2::zero) { }
     Collection2(const std::vector<T*>& objects) : _data(objects), _origin(Vector2::zero) { }
 
     const Vector2& getOrigin() const { return _origin; }

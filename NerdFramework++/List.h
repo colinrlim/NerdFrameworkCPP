@@ -14,9 +14,7 @@ private:
 	void setCapacity(size_t amount) {
 		_capacity = amount;
 		T* newData = new T[_capacity];
-		for (size_t i = 0; i < _size; i++) {
-			*(newData + i) = *(_data + i);
-		}
+		std::copy(_data, _data + _size, newData);
 		delete[] _data;
 		_data = newData;
 	}
@@ -47,21 +45,20 @@ public:
 		_capacity(1),
 		_size(0)
 	{ }
-	List(size_t size) :
-		_data(new T[size]()),
-		_capacity(size),
-		_size(size)
+	List(size_t reserve) :
+		_data(new T[reserve]),
+		_capacity(reserve),
+		_size(0)
 	{ }
-	List(size_t size, T initialElementValue) :
+	List(size_t size, const T& initialElementValue) :
 		_data(new T[size]),
 		_capacity(size),
 		_size(size)
 	{
-		for (size_t i = 0; i < size; i++)
-			*(_data + i) = initialElementValue;
+		std::fill(_data, _data + size, initialElementValue);
 	}
 	List(const std::vector<T>& vector) :
-		_data(new T[_size]()),
+		_data(new T[_size]),
 		_capacity(vector.capacity()),
 		_size(vector.size())
 	{
@@ -74,11 +71,10 @@ public:
 	{ }
 	List& operator=(const List& rhs) {
 		delete[] _data;
-		_data = new T[rhs._size];
-		for (size_t i = 0; i < rhs._size; i++)
-			*(_data + i) = *(rhs._data + i);
 		_size = rhs._size;
 		_capacity = rhs._capacity;
+		_data = new T[rhs._size];
+		std::copy(rhs._data, rhs._data + rhs._size, _data);
 		return *this;
 	}
 	~List() { delete[] _data; }
@@ -134,9 +130,7 @@ public:
 		_capacity = newSize;
 		_size = newSize;
 		T* newData = new T[_capacity]();
-		for (size_t i = 0; i < _size; i++) {
-			*(newData + i) = *(_data + i);
-		}
+		std::copy(_data, _data + _size, newData);
 		delete[] _data;
 		_data = newData;
 	}

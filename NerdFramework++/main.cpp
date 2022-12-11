@@ -11,6 +11,13 @@ int main() {
 	std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;
 	std::cout << VigenereCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", "cryptii") << std::endl;
 
+    BinaryGrid2 grid(10, 10, false);
+    grid.setTile(2, 5, true);
+    std::cout << grid;
+
+    String test = "Once upon a time, this was a string. Now it is a String. The End.";
+    std::cout << test << std::endl;
+
     //Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
