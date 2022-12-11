@@ -1,3 +1,23 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (NerdFramework++.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Canvas.cpp
+  Frame.cpp
+  Image3.cpp
+  Image4.cpp
+  ImageLabel.cpp
+  ImageParser.cpp
+  Interface.cpp
+  Material.cpp
+  MaterialManager.cpp
+  Mesh.cpp
+  MeshParser.cpp
+  MeshQuad3.cpp
+  MeshTriangle3.cpp
+  RenderData3.cpp
+  RenderData4.cpp
+  Renderer2.cpp
+  Renderer3.cpp
+  Triangle2.cpp
+  UIObject.cpp
   main.cpp
+  Generating Code...
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe

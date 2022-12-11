@@ -4,6 +4,13 @@
 
 struct Image3
 {
+private:
+	int _width;
+	int _height;
+	uint32_t _size;
+
+	void copy(const Image3& obj);
+public:
 	uint8_t* data;
 
 	Image3();
@@ -15,7 +22,7 @@ struct Image3
 
 	int getWidth() const;
 	int getHeight() const;
-	size_t size() const;
+	uint32_t size() const;
 
 	static const Image3 none;
 	static const Image3 white;
@@ -26,11 +33,5 @@ struct Image3
 	void modify(const std::function<void(size_t, size_t, void*)>& func);
 
 	Image3& operator=(const Image3& rhs);
-private:
-	int _width;
-	int _height;
-	size_t _size;
-
-	void copy(const Image3& obj);
 };
 

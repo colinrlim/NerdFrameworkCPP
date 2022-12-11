@@ -10,22 +10,23 @@ Image3::Image3() :
 Image3::Image3(int width, int height) :
 	_width(width),
 	_height(height),
-	_size((size_t)_width* _height * 3),
+	_size(width* height * 3),
 	data(new uint8_t[_size])
 { }
 Image3::Image3(int width, int height, const Color3& color) :
 	_width(width),
 	_height(height),
-	_size((size_t)_width* _height * 3),
+	_size(width* height * 3),
 	data(new uint8_t[_size])
 {
 	this->modify([&color](size_t x, size_t y, void* pixel) -> void {
 		color.writeToPixel(pixel);
-	});
+		});
 }
 Image3::Image3(int width, int height, uint8_t* data) :
 	_width(width),
 	_height(height),
+	_size(width* height * 3),
 	data(data)
 { }
 Image3::Image3(const Image3& image) {
@@ -45,7 +46,7 @@ int Image3::getWidth() const {
 int Image3::getHeight() const {
 	return this->_height;
 }
-size_t Image3::size() const {
+uint32_t Image3::size() const {
 	return this->_size;
 }
 

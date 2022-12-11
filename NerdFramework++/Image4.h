@@ -4,6 +4,13 @@
 
 struct Image4
 {
+private:
+	int _width;
+	int _height;
+	uint32_t _size;
+
+	void copy(const Image4& obj);
+public:
 	uint8_t* data;
 
 	Image4();
@@ -15,7 +22,7 @@ struct Image4
 
 	int getWidth() const;
 	int getHeight() const;
-	size_t size() const;
+	uint32_t size() const;
 
 	static const Image4 none;
 	static const Image4 white;
@@ -26,11 +33,5 @@ struct Image4
 	void modify(const std::function<void(size_t, size_t, void*)>& func);
 
 	Image4& operator=(const Image4& rhs);
-private:
-	int _width;
-	int _height;
-	size_t _size;
-
-	void copy(const Image4& obj);
 };
 
