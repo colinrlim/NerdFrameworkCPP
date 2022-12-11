@@ -2,7 +2,7 @@
 #include "Plane3.h"
 #include "Math.h"
 
-void RaySpherical::setAxes() {
+inline void RaySpherical::setAxes() {
     this->w = Vector3(_spherical.rotatedPolar(-Math::HalfPI));
     this->h = Vector3(_spherical.rotatedZenith(-Math::HalfPI));
 

@@ -14,8 +14,8 @@ struct Quad3
 
     Quad3(Vector3* a, Vector3* b, Vector3* c, Vector3* d);
 
-    Triangle3 getTriangle1();
-    Triangle3 getTriangle2();
+    Triangle3 getTriangle1() const;
+    Triangle3 getTriangle2() const;
 };
 
 std::ostream& operator<<(std::ostream& stream, const Quad3& rhs);

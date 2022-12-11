@@ -13,7 +13,7 @@ private:
 
 	friend class MeshParser;
 public:
-	MeshTriangle3* getMeshTriangle1();
-	MeshTriangle3* getMeshTriangle2();
+	MeshTriangle3* getMeshTriangle1() const;
+	MeshTriangle3* getMeshTriangle2() const;
 };
 

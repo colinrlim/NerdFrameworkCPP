@@ -44,71 +44,56 @@ inline void Triangle3::move(const Vector3& offset) {
     b += offset;
     c += offset;
 }
+inline void Triangle3::unmove(const Vector3& offset) {
+    a -= offset;
+    b -= offset;
+    c -= offset;
+}
 inline void Triangle3::scale(const Vector3& scale, const Vector3& origin) {
-    a -= origin;
-    b -= origin;
-    c -= origin;
+    unmove(origin);
 
     a *= scale;
     b *= scale;
     c *= scale;
 
-    a += origin;
-    b += origin;
-    c += origin;
+    move(origin);
 }
 
-inline void Triangle3::rotateX(double radians, const Vector3& origin) const {
-    a -= origin;
-    b -= origin;
-    c -= origin;
+inline void Triangle3::rotateX(double radians, const Vector3& origin) {
+    unmove(origin);
 
     a.rotateX(radians);
     b.rotateX(radians);
     c.rotateX(radians);
 
-    a += origin;
-    b += origin;
-    c += origin;
+    move(origin);
 }
-inline void Triangle3::rotateY(double radians, const Vector3& origin) const {
-    a -= origin;
-    b -= origin;
-    c -= origin;
+inline void Triangle3::rotateY(double radians, const Vector3& origin) {
+    unmove(origin);
 
     a.rotateY(radians);
     b.rotateY(radians);
     c.rotateY(radians);
 
-    a += origin;
-    b += origin;
-    c += origin;
+    move(origin);
 }
-inline void Triangle3::rotateZ(double radians, const Vector3& origin) const {
-    a -= origin;
-    b -= origin;
-    c -= origin;
+inline void Triangle3::rotateZ(double radians, const Vector3& origin) {
+    unmove(origin);
 
     a.rotateZ(radians);
     b.rotateZ(radians);
     c.rotateZ(radians);
 
-    a += origin;
-    b += origin;
-    c += origin;
+    move(origin);
 }
-inline void Triangle3::rotate(double r1, double r2, double r3, const Vector3& origin) const {
-    a -= origin;
-    b -= origin;
-    c -= origin;
+inline void Triangle3::rotate(double r1, double r2, double r3, const Vector3& origin) {
+    unmove(origin);
 
     a.rotate(r1, r2, r3);
     b.rotate(r1, r2, r3);
     c.rotate(r1, r2, r3);
 
-    a += origin;
-    b += origin;
-    c += origin;
+    move(origin);
 }
 
 inline Vector2 Triangle3::parameterization(const Vector3& a, const Vector3& b, const Vector3& c, const Vector3& point) {

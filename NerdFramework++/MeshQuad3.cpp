@@ -20,9 +20,9 @@ MeshQuad3::MeshQuad3(Vector3* a, Vector3* b, Vector3* c, Vector3* d, const Vecto
     PhysicsData4()
 { }
 
-MeshTriangle3* MeshQuad3::getMeshTriangle1() {
+inline MeshTriangle3* MeshQuad3::getMeshTriangle1() const {
     return new MeshTriangle3(&a, &b, &c, textureU, textureV, textureW, normalA, normalB, normalC, normalType, material);
 }
-MeshTriangle3* MeshQuad3::getMeshTriangle2() {
+inline MeshTriangle3* MeshQuad3::getMeshTriangle2() const {
     return new MeshTriangle3(&a, &c, &d, textureU, textureW, textureX, normalA, normalC, normalD, normalType, material);
 }

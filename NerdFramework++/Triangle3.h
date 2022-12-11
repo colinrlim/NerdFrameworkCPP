@@ -18,12 +18,13 @@ public:
     double area() const;
 
     void move(const Vector3& offset);
+    void unmove(const Vector3& offset);
     void scale(const Vector3& scale, const Vector3& origin);
 
-    virtual void rotateX(double radians, const Vector3& origin) const;
-    virtual void rotateY(double radians, const Vector3& origin) const;
-    virtual void rotateZ(double radians, const Vector3& origin) const;
-    virtual void rotate(double r1, double r2, double r3, const Vector3& origin) const;
+    virtual void rotateX(double radians, const Vector3& origin);
+    virtual void rotateY(double radians, const Vector3& origin);
+    virtual void rotateZ(double radians, const Vector3& origin);
+    virtual void rotate(double r1, double r2, double r3, const Vector3& origin);
 
     static Vector2 parameterization(const Vector3& a, const Vector3& b, const Vector3& c, const Vector3& point);
     Vector2 parameterization(const Vector3& point) const;
