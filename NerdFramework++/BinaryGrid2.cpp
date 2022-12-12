@@ -51,13 +51,13 @@ size_t BinaryGrid2::size() const {
 	return (size_t)Math::ceil(_width * _height / 8.0);
 }
 
-bool BinaryGrid2::getTile(size_t x, size_t y) const {
+inline bool BinaryGrid2::getTile(size_t x, size_t y) const {
 	size_t tileIndex = x + y * _width;
 	size_t chunkIndex = tileIndex / 8;
 	tileIndex -= chunkIndex * 8;
 	return (bool)((*(_data + chunkIndex) & (1 << tileIndex)) >> tileIndex);
 }
-void BinaryGrid2::setTile(size_t x, size_t y, bool value) {
+inline void BinaryGrid2::setTile(size_t x, size_t y, bool value) {
 	size_t tileIndex = x + y * _width;
 	size_t chunkIndex = tileIndex / 8;
 	tileIndex -= chunkIndex * 8;

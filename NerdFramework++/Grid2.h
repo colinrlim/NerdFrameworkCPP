@@ -53,7 +53,7 @@ public:
 		return _width * _height;
 	}
 
-	T& at(size_t x, size_t y) {
+	inline T& at(size_t x, size_t y) {
 		return *(_data + x + y * _width);
 	}
 };
