@@ -17,7 +17,7 @@ Line3::Line3(const Vector3& position, const Vector3& vector) :
      */
 }
 
-inline bool Line3::meets(const Vector3& point) const {
+bool Line3::meets(const Vector3& point) const {
 
     /* Line:
      * x = p.x + v.xt
@@ -40,11 +40,11 @@ inline bool Line3::meets(const Vector3& point) const {
     return v0 == v1 || v0 == -v1;
 
 }
-inline bool Line3::meets(const Line3& line) const {
+bool Line3::meets(const Line3& line) const {
     return this->min(line) == 0.0;
 }
 
-inline Vector3 Line3::intersection(const Line3 & line) const {
+Vector3 Line3::intersection(const Line3 & line) const {
 
     // In order to maximize performance, this code assumes you will only
     //   use this function if you already know the two lines intersect at a single point.
@@ -118,7 +118,7 @@ inline Vector3 Line3::intersection(const Line3 & line) const {
      return planeOfLines.Intersection(lineOfIntersection);*/
 }
 
-inline double Line3::min(const Vector3& point) const {
+double Line3::min(const Vector3& point) const {
 
     /* d = p0 - p = Path between any point of Plane and specified point
      * v ∥ Line
@@ -139,7 +139,7 @@ inline double Line3::min(const Vector3& point) const {
 
     return Vector3::cross(point - p, v).magnitude() / v.magnitude();
 }
-inline double Line3::min(const Line3& line) const {
+double Line3::min(const Line3& line) const {
 
     /* Different types of Line solutions:
      * Parallel intersecting        (All solutions of Line0 are all solutions of Line1 and vice versa)

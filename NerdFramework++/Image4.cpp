@@ -40,10 +40,10 @@ const Image4 Image4::none(1, 1, Color4::none);
 const Image4 Image4::white(1, 1, Color4::white);
 const Image4 Image4::black(1, 1, Color4::black);
 
-int Image4::getWidth() const {
+int Image4::width() const {
 	return this->_width;
 }
-int Image4::getHeight() const {
+int Image4::height() const {
 	return this->_height;
 }
 uint32_t Image4::size() const {
@@ -88,8 +88,8 @@ Image4& Image4::operator=(const Image4& rhs) {
 }
 
 void Image4::copy(const Image4& obj) {
-	this->_width = obj.getWidth();
-	this->_height = obj.getHeight();
+	this->_width = obj.width();
+	this->_height = obj.height();
 	int size = this->_width * this->_height * 4;
 	this->data = new uint8_t[size];
 	std::copy(obj.data, obj.data + size, data);

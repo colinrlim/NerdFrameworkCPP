@@ -9,28 +9,28 @@ RayRadial::RayRadial(const CameraRay3& direction, double angle) :
     this->rotateTo(direction.v);
 }
 
-inline Ray3 RayRadial::rayAt(double wAlpha, double hAlpha) {
+Ray3 RayRadial::rayAt(double wAlpha, double hAlpha) {
     throw "myFunction is not implemented yet.";
 }
-inline Vector3 RayRadial::vectorAt(double wAlpha, double hAlpha) {
+Vector3 RayRadial::vectorAt(double wAlpha, double hAlpha) {
     throw "myFunction is not implemented yet.";
 }
-inline Vector2 RayRadial::projection(const Vector3& point) {
+Vector2 RayRadial::projection(const Vector3& point) {
     throw "myFunction is not implemented yet.";
 }
-inline bool RayRadial::meets(const Vector3& point) {
+bool RayRadial::meets(const Vector3& point) {
     return Vector3::angle(d.v, point - d.p) <= _angle / 2.0;
 }
-inline bool RayRadial::meets(const Triangle3& triangle) {
+bool RayRadial::meets(const Triangle3& triangle) {
     throw "myFunction is not implemented yet.";
 }
-inline double RayRadial::distance(const Vector3& point) {
+double RayRadial::distance(const Vector3& point) {
     return (point - d.p).magnitude();
 }
 
-inline void RayRadial::rotateZenith(double radians) {
+void RayRadial::rotateZenith(double radians) {
     throw "myFunction is not implemented yet.";
 }
-inline void RayRadial::rotatePolar(double radians) {
+void RayRadial::rotatePolar(double radians) {
     throw "myFunction is not implemented yet.";
 }

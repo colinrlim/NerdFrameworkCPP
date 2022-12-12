@@ -14,14 +14,14 @@ UDim2::UDim2(const UDim& x, const UDim& y) : x(x), y(y) {}
 const UDim2 UDim2::zero(UDim(0.0, 0.0), UDim(0.0, 0.0));
 const UDim2 UDim2::one(UDim(1.0, 0.0), UDim(1.0, 0.0));
 
-inline UDim2 UDim2::fromScale(double xScale, double yScale) {
+UDim2 UDim2::fromScale(double xScale, double yScale) {
 	return UDim2(UDim(xScale, 0.0), UDim(yScale, 0.0));
 }
-inline UDim2 UDim2::fromOffset(double xOffset, double yOffset) {
+UDim2 UDim2::fromOffset(double xOffset, double yOffset) {
 	return UDim2(UDim(0.0, xOffset), UDim(0.0, yOffset));
 }
 
-inline Vector2 UDim2::absolute(double width, double height) const {
+Vector2 UDim2::absolute(double width, double height) const {
 	return Vector2(x.absolute(width), y.absolute(height));
 }
 

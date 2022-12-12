@@ -24,6 +24,7 @@ c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\rayrectangula
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\rayradial.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\raycaster.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\ray3.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\renderer3.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\renderer2.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\quadratic3.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\quadratic2.obj
@@ -35,6 +36,8 @@ c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\physicsdata3.
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\parallel.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\meshtriangle3.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\meshquad3.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\meshparser.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\mesh.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\math.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\materialmanager.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\vector3.obj
@@ -59,15 +62,14 @@ c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\renderdata3.o
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\rayspherical.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\vigenerecipher.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\vector3s.obj
-c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\renderer3.obj
-c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\mesh.obj
-c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\meshparser.obj
-c:\users\harry\documents\nerdframework++\x64\debug\nerdframeworkcpp.exe
-c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.ilk
 c:\users\harry\documents\nerdframework++\x64\debug\nerdframeworkcpp.pdb
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\cl.command.1.tlog
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\cl.read.1.tlog
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\cl.write.1.tlog
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\link-cvtres.read.1.tlog
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\link-cvtres.write.1.tlog
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\link-rc.read.1.tlog
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\link-rc.write.1.tlog
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\link.command.1.tlog
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\link.read.1.tlog
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.tlog\link.write.1.tlog

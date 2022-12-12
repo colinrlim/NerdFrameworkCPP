@@ -9,14 +9,14 @@ RayRectangular::RayRectangular(const CameraRay3& direction, double width, double
 	this->rotateTo(direction.v);
 }
 
-inline Ray3 RayRectangular::rayAt(double wAlpha, double hAlpha) {
+Ray3 RayRectangular::rayAt(double wAlpha, double hAlpha) {
 	Vector3 position = d.p + w * (wAlpha - 0.5) + h * (hAlpha - 0.5);
 	return Ray3(position, d.v);
 }
-inline Vector3 RayRectangular::vectorAt(double wAlpha, double hAlpha) {
+Vector3 RayRectangular::vectorAt(double wAlpha, double hAlpha) {
 	return d.v;
 }
-inline Vector2 RayRectangular::projection(const Vector3& point) {
+Vector2 RayRectangular::projection(const Vector3& point) {
     return Vector2(point.x / w.x + 0.5, point.y / h.y + 0.5);
 
     /* Get projection of point onto camera as intersection of shortest path from point to camera's plane
@@ -76,20 +76,20 @@ inline Vector2 RayRectangular::projection(const Vector3& point) {
          (intersection.x + d.p.y * wSlope - d.p.x - intersection.y * wSlope) / (h.x - h.y * wSlope) + 0.5
      );*/
 }
-inline bool RayRectangular::meets(const Vector3& point) {
+bool RayRectangular::meets(const Vector3& point) {
     throw "myFunction is not implemented yet.";
 }
-inline bool RayRectangular::meets(const Triangle3& triangle) {
+bool RayRectangular::meets(const Triangle3& triangle) {
     throw "myFunction is not implemented yet.";
 }
-inline double RayRectangular::distance(const Vector3& point) {
+double RayRectangular::distance(const Vector3& point) {
     Plane3 plane(d.p, d.v);
     return plane.min(point);
 }
 
-inline void RayRectangular::rotateZenith(double radians) {
+void RayRectangular::rotateZenith(double radians) {
     throw "myFunction is not implemented yet.";
 }
-inline void RayRectangular::rotatePolar(double radians) {
+void RayRectangular::rotatePolar(double radians) {
     throw "myFunction is not implemented yet.";
 }

@@ -28,7 +28,7 @@ Plane3::Plane3(const Vector3& a, const Vector3& b, const Vector3& c) :
      */
 }
 
-inline bool Plane3::meets(const Vector3& point) const {
+bool Plane3::meets(const Vector3& point) const {
 
     /* n ⊥ Plane
      * v1 ⊥ v2 <=> v1⋅v2 = 0
@@ -42,14 +42,14 @@ inline bool Plane3::meets(const Vector3& point) const {
 
     return Vector3::dot(n, Vector3(p, point)) == 0.0;
 }
-inline bool Plane3::meets(const Line3& line) const {
+bool Plane3::meets(const Line3& line) const {
     return this->min(line) == 0.0;
 }
-inline bool Plane3::meets(const Plane3& plane) const {
+bool Plane3::meets(const Plane3& plane) const {
     return this->min(plane) == 0.0;
 }
 
-inline Vector3 Plane3::intersection(const Line3& line) const {
+Vector3 Plane3::intersection(const Line3& line) const {
 
     // In order to maximize performance, this code assumes you will only
     //   use this function if you already know the plane and line intersect at a point.
@@ -74,7 +74,7 @@ inline Vector3 Plane3::intersection(const Line3& line) const {
     double t = Vector3::dot(n, p - line.p) / Vector3::dot(n, line.v);
     return line.p + (line.v * t);
 }
-inline Line3 Plane3::intersection(const Plane3& plane) const {
+Line3 Plane3::intersection(const Plane3& plane) const {
 
     // In order to maximize performance, this code assumes you will only
     //   use this function if you already know the two planes intersect at a Line.
@@ -115,7 +115,7 @@ inline Line3 Plane3::intersection(const Plane3& plane) const {
     return Line3(position, vector);
 }
 
-inline double Plane3::min(const Vector3& point) const {
+double Plane3::min(const Vector3& point) const {
 
     /* d = p0 - p = Path between any point of Plane and specified point
      * n ⊥ Plane
@@ -135,7 +135,7 @@ inline double Plane3::min(const Vector3& point) const {
 
     return Math::abs(Vector3::dot(n, point - p) / n.magnitude());
 }
-inline double Plane3::min(const Line3& line) const {
+double Plane3::min(const Line3& line) const {
 
     /* v ∥ Line
      * n ⊥ Plane
@@ -164,7 +164,7 @@ inline double Plane3::min(const Line3& line) const {
 
     return 0.0;
 }
-inline double Plane3::min(const Plane3& plane) const {
+double Plane3::min(const Plane3& plane) const {
 
     /* n0 ⊥ Plane0
      * n1 ⊥ Plane1

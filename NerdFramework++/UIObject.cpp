@@ -93,8 +93,8 @@ void UIObject::draw(Image4& screen, const Rect2<double>& scope) {
     double yMax = yMin + _size.y.absolute(scope.height);
 
     // Fit to screen bounds
-    const double maxWidth = screen.getWidth();
-    const double maxHeight = screen.getHeight();
+    const double maxWidth = screen.width();
+    const double maxHeight = screen.height();
     xMin = Math::max(0.0, xMin);
     yMin = Math::max(0.0, yMin);
     xMax = Math::min(xMax, maxWidth - 1.0);

@@ -3,7 +3,7 @@
 UDim::UDim() : scale(0.0), offset(0.0) { }
 UDim::UDim(double scale, double offset) : scale(scale), offset(offset) { }
 
-inline double UDim::absolute(double max) const {
+double UDim::absolute(double max) const {
 	return max * this->scale + this->offset;
 }
 

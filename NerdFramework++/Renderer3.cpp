@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iterator>
 
-inline Color4 Renderer3::totalColorAt(const MeshTriangle3& triangle, const Color4& colorA, const Color4& colorB, const Color4& colorC, double t, double s) const {
+Color4 Renderer3::totalColorAt(const MeshTriangle3& triangle, const Color4& colorA, const Color4& colorB, const Color4& colorC, double t, double s) const {
     Vector2 textureCoords = Vector2::fromParameterization3(t, s, triangle.textureU, triangle.textureV, triangle.textureW);
 
     Material material = *triangle.material;
@@ -21,14 +21,14 @@ inline Color4 Renderer3::totalColorAt(const MeshTriangle3& triangle, const Color
         (uint8_t)(((1.0 - lightValue / 255.0) + (flattened.alpha / 255.0 * lightValue / 255.0)) * material.alpha)
     );
 }
-inline Color4 Renderer3::calculateLighting(const Vector3& point, const Vector3& normal) const {
+Color4 Renderer3::calculateLighting(const Vector3& point, const Vector3& normal) const {
     return Color4::white;
     /*Vector3 displacement = cameraLight.rayCaster.d.p - point;
     double angle = Vector3::angle(normal, displacement);
     double distance = displacement.magnitude();
     return cameraLight.LightAt(distance, angle);*/
 }
-inline Color4 Renderer3::renderFog(const Color4& original, double distance) const {
+Color4 Renderer3::renderFog(const Color4& original, double distance) const {
     /* Uses alpha as intensity of fog per unit distance
      */
 

@@ -30,13 +30,13 @@ struct Rect2
 		height(size.y.absolute(scope.height))
 	{ }
 
-	inline bool overlaps(const Vector2& point) const {
+	bool overlaps(const Vector2& point) const {
 		return (point.x >= x && point.y >= y && point.x <= x + width && point.y <= y + height);
 	}
-	inline bool overlaps(const Vector2i& point) const {
+	bool overlaps(const Vector2i& point) const {
 		return (point.x >= x && point.y >= y && point.x <= x + width && point.y <= y + height);
 	}
-	inline bool overlaps(const Rect2<T>& rectangle) const {
+	bool overlaps(const Rect2<T>& rectangle) const {
 		return this->overlaps(Vector2i(rectangle.x, rectangle.y)) || this->overlaps(Vector2i(rectangle.x + rectangle.width, rectangle.y + rectangle.height));
 	}
 };

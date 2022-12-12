@@ -49,22 +49,22 @@ Vector3s::Vector3s(const Vector3& rectangular) :
      */
 }
 
-inline Vector3 Vector3s::asRectangular() const {
+Vector3 Vector3s::asRectangular() const {
     Vector3 newVec(*this);
     return newVec;
 }
 
 
-inline Vector3s Vector3s::rotatedZenith(double radians) const {
+Vector3s Vector3s::rotatedZenith(double radians) const {
     Vector3s newVec(rho, phi + radians, theta);
     return newVec;
 }
-inline Vector3s Vector3s::rotatedPolar(double radians) const {
+Vector3s Vector3s::rotatedPolar(double radians) const {
     Vector3s newVec(rho, phi, theta + radians);
     return newVec;
 }
 
-inline Vector3s Vector3s::min(const Vector3s& a, const Vector3s& b) {
+Vector3s Vector3s::min(const Vector3s& a, const Vector3s& b) {
     double phiDiff = Math::abs(a.phi - b.phi);
     double thetaDiff = Math::abs(a.theta - b.theta);
     if (phiDiff > Math::HalfPI)

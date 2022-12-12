@@ -15,8 +15,8 @@ public:
 	BinaryGrid2& operator=(const BinaryGrid2& rhs);
 	~BinaryGrid2();
 
-	size_t getWidth() const;
-	size_t getHeight() const;
+	size_t width() const;
+	size_t height() const;
 
 	uint8_t* data() const;
 	size_t size() const;

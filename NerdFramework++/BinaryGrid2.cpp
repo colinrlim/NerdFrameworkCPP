@@ -37,10 +37,10 @@ BinaryGrid2::~BinaryGrid2() {
 	delete[] _data;
 }
 
-size_t BinaryGrid2::getWidth() const {
+size_t BinaryGrid2::width() const {
 	return _width;
 }
-size_t BinaryGrid2::getHeight() const {
+size_t BinaryGrid2::height() const {
 	return _height;
 }
 
@@ -51,13 +51,13 @@ size_t BinaryGrid2::size() const {
 	return (size_t)Math::ceil(_width * _height / 8.0);
 }
 
-inline bool BinaryGrid2::getTile(size_t x, size_t y) const {
+bool BinaryGrid2::getTile(size_t x, size_t y) const {
 	size_t tileIndex = x + y * _width;
 	size_t chunkIndex = tileIndex / 8;
 	tileIndex -= chunkIndex * 8;
 	return (bool)((*(_data + chunkIndex) & (1 << tileIndex)) >> tileIndex);
 }
-inline void BinaryGrid2::setTile(size_t x, size_t y, bool value) {
+void BinaryGrid2::setTile(size_t x, size_t y, bool value) {
 	size_t tileIndex = x + y * _width;
 	size_t chunkIndex = tileIndex / 8;
 	tileIndex -= chunkIndex * 8;
@@ -68,8 +68,8 @@ inline void BinaryGrid2::setTile(size_t x, size_t y, bool value) {
 }
 
 std::ostream& operator<<(std::ostream& stream, const BinaryGrid2& rhs) {
-	size_t width = rhs.getWidth();
-	size_t height = rhs.getHeight();
+	const size_t width = rhs.width();
+	const size_t height = rhs.height();
 	for (size_t y = 0; y < height; y++) {
 		for (size_t x = 0; x < width; x++)
 			stream << rhs.getTile(x, y) << " ";

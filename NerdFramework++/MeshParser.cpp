@@ -110,8 +110,8 @@ Mesh* MeshParser::fromFile(const char* filename, bool overrideNormalInterpolatio
                         quad->normalType = RenderData3::NormalType::INTERPOLATED;
                     }
                     quad->material = currentMaterial;
-                    tris.push_back(quad->getMeshTriangle1());
-                    tris.push_back(quad->getMeshTriangle2());
+                    tris.push_back(quad->meshTriangle1());
+                    tris.push_back(quad->meshTriangle2());
                 }
             }
         }
@@ -342,8 +342,8 @@ Mesh* MeshParser::fromQuadSphere(const Vector3& origin, double radius, int itera
         quad.b *= radius;
         quad.c *= radius;
         quad.d *= radius;
-        tris.push_back(quad.getMeshTriangle1());
-        tris.push_back(quad.getMeshTriangle2());
+        tris.push_back(quad.meshTriangle1());
+        tris.push_back(quad.meshTriangle2());
     }
 
 	Collection3<MeshTriangle3> faces(tris);

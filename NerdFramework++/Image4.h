@@ -20,8 +20,8 @@ public:
 	Image4(const Image4& image);
 	~Image4();
 
-	int getWidth() const;
-	int getHeight() const;
+	int width() const;
+	int height() const;
 	uint32_t size() const;
 
 	static const Image4 none;

@@ -9,16 +9,16 @@ Vector2::Vector2(const Vector3& threedim) : x(threedim.x), y(threedim.y) { }
 const Vector2 Vector2::zero(0.0, 0.0);
 const Vector2 Vector2::one(1.0, 1.0);
 
-inline double Vector2::magnitude() {
+double Vector2::magnitude() {
 	return Math::sqrt(this->x * this->x + this->y * this->y);
 }
-inline Vector2 Vector2::normalized() {
+Vector2 Vector2::normalized() {
 	return *this / this->magnitude();
 }
-inline Vector2 Vector2::lerp(const Vector2& a, const Vector2& b, double alpha) {
+Vector2 Vector2::lerp(const Vector2& a, const Vector2& b, double alpha) {
 	return a * (1 - alpha) + b * alpha;
 }
-inline Vector2 Vector2::fromParameterization3(double t, double s, const Vector2& a, const Vector2& b, const Vector2& c) {
+Vector2 Vector2::fromParameterization3(double t, double s, const Vector2& a, const Vector2& b, const Vector2& c) {
 	double u = 1.0 - t - s;
 	Vector2 newVec(a.x * u + b.x * t + c.x * s, a.y * u + b.y * t + c.y * s);
 	return newVec;

@@ -16,10 +16,10 @@ Quad3::Quad3(Vector3* a, Vector3* b, Vector3* c, Vector3* d) :
      */
 }
 
-inline Triangle3 Quad3::getTriangle1() const {
+Triangle3 Quad3::triangle1() const {
     return Triangle3(&a, &b, &c);
 }
-inline Triangle3 Quad3::getTriangle2() const {
+Triangle3 Quad3::triangle2() const {
     return Triangle3(&a, &c, &d);
 }
 

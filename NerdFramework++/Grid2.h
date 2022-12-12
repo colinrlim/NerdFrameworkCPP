@@ -39,10 +39,10 @@ public:
 		delete[] _data;
 	}
 
-	size_t getWidth() const {
+	size_t width() const {
 		return _width;
 	}
-	size_t getHeight() const {
+	size_t height() const {
 		return _height;
 	}
 
@@ -53,15 +53,15 @@ public:
 		return _width * _height;
 	}
 
-	inline T& at(size_t x, size_t y) {
+	T& at(size_t x, size_t y) {
 		return *(_data + x + y * _width);
 	}
 };
 
 template <typename T>
 std::ostream& operator<<(std::ostream& stream, const Grid2<T>& rhs) {
-	size_t width = rhs.getWidth();
-	size_t height = rhs.getHeight();
+	size_t width = rhs.width();
+	size_t height = rhs.height();
 	for (size_t y = 0; y < height; y++) {
 		for (size_t x = 0; x < width; x++)
 			stream << rhs.at(x, y) << " ";

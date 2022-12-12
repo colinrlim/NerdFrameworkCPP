@@ -32,7 +32,7 @@ void ImageLabel::setImage(Image4&& image) {
     _image = std::move(image);
     if (_renderer != nullptr) {
         SDL_DestroyTexture(_texture);
-        _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.getWidth(), _image.getHeight());
+        _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height());
     }
 }
 
@@ -52,8 +52,8 @@ void ImageLabel::draw(Image4& screen, const Rect2<double>& scope) {
     double yMax = yMin + childScope.height;
 
     // Fit to screen bounds
-    const double maxWidth = screen.getWidth();
-    const double maxHeight = screen.getHeight();
+    const double maxWidth = screen.width();
+    const double maxHeight = screen.height();
     xMin = Math::max(0.0, xMin);
     yMin = Math::max(0.0, yMin);
     xMax = Math::min(xMax, maxWidth - 1.0);
@@ -77,9 +77,9 @@ void ImageLabel::draw(SDL_Renderer* renderer, const Rect2<double>& scope) {
 
     if (_texture == nullptr) {
         _renderer = renderer;
-        _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.getWidth(), _image.getHeight());
+        _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height());
     }
 
-    SDL_Rect destination{ childScope.x, childScope.y, childScope.width, childScope.height };
+    SDL_Rect destination{ (int)childScope.x, (int)childScope.y, (int)childScope.width, (int)childScope.height };
     SDL_RenderCopy(_renderer, _texture, nullptr, &destination);
 }

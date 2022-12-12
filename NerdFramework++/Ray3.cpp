@@ -19,23 +19,23 @@ Ray3::Ray3(const Vector3& position, const Vector3s& vector) :
     v(vector.asRectangular())
 { }
 
-inline Ray3 Ray3::lerp(const Ray3& a, const Ray3& b, double alpha) {
+Ray3 Ray3::lerp(const Ray3& a, const Ray3& b, double alpha) {
     return a * (1 - alpha) + b * alpha;
 }
 
-inline void Ray3::rotateX(double radians) {
+void Ray3::rotateX(double radians) {
     v.rotateX(radians);
 }
-inline void Ray3::rotateY(double radians) {
+void Ray3::rotateY(double radians) {
     v.rotateY(radians);
 }
-inline void Ray3::rotateZ(double radians) {
+void Ray3::rotateZ(double radians) {
     v.rotateZ(radians);
 }
-inline void Ray3::rotate(double r1, double r2, double r3) {
+void Ray3::rotate(double r1, double r2, double r3) {
     v.rotate(r1, r2, r3);
 }
-inline void Ray3::rotateAbout(const Vector3& rotand, double radians) {
+void Ray3::rotateAbout(const Vector3& rotand, double radians) {
     v.rotateAbout(rotand, radians);
 }
 
