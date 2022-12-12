@@ -29,7 +29,7 @@ const Image4& ImageLabel::getImage() const {
     return _image;
 }
 void ImageLabel::setImage(Image4&& image) {
-    _image = image;
+    _image = std::move(image);
     if (_renderer != nullptr) {
         SDL_DestroyTexture(_texture);
         _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.getWidth(), _image.getHeight());
@@ -79,4 +79,7 @@ void ImageLabel::draw(SDL_Renderer* renderer, const Rect2<double>& scope) {
         _renderer = renderer;
         _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.getWidth(), _image.getHeight());
     }
+
+    SDL_Rect destination{ childScope.x, childScope.y, childScope.width, childScope.height };
+    SDL_RenderCopy(_renderer, _texture, nullptr, &destination);
 }

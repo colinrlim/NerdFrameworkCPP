@@ -1,6 +1,169 @@
-﻿  ImageParser.cpp
-  MeshParser.cpp
+﻿  BinaryGrid2.cpp
+  BoundingShape3.cpp
+  Box3.cpp
+  Button.cpp
+  CaesarCipher.cpp
+  Canvas.cpp
+  Color3.cpp
+  Color4.cpp
+  Image3.cpp
+  CameraRay3.cpp
   String.cpp
+  Tester.cpp
+  Font.cpp
+  Format.cpp
+  Frame.cpp
+  Image4.cpp
+  ImageLabel.cpp
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\ImageLabel.cpp(83,37): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=double
+          ]
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\ImageLabel.cpp(83,37): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=double
+          ]
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\ImageLabel.cpp(83,51): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=double
+          ]
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\ImageLabel.cpp(83,51): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=double
+          ]
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\ImageLabel.cpp(83,65): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=double
+          ]
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\ImageLabel.cpp(83,65): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=double
+          ]
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\ImageLabel.cpp(83,83): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=double
+          ]
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\ImageLabel.cpp(83,83): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=double
+          ]
+  Interface.cpp
+  Line3.cpp
   main.cpp
   Generating Code...
-  NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe
+  Compiling...
+  MaterialManager.cpp
+  Math.cpp
+  Mesh.cpp
+  MeshParser.cpp
+  MeshQuad3.cpp
+  MeshTriangle3.cpp
+  Parallel.cpp
+  PhysicsData3.cpp
+  PhysicsData4.cpp
+  Plane3.cpp
+  ImageParser.cpp
+  Quad3.cpp
+  Quadratic2.cpp
+  Quadratic3.cpp
+  Renderer2.cpp
+  Renderer3.cpp
+  Ray3.cpp
+  RayCaster.cpp
+  RayRadial.cpp
+  RayRectangular.cpp
+  Generating Code...
+  Compiling...
+  RaySpherical.cpp
+  RenderData3.cpp
+  RenderData4.cpp
+  FontManager.cpp
+  Sort.cpp
+  UDimRect2.cpp
+  ScrollFrame.cpp
+  Sphere3.cpp
+  TextBox.cpp
+  TextLabel.cpp
+  Material.cpp
+  Triangle2.cpp
+  Triangle3.cpp
+  Tween.cpp
+  UDim.cpp
+  UDim2.cpp
+  UIObject.cpp
+  Vector2.cpp
+  Vector2i.cpp
+  Vector3.cpp
+  Generating Code...
+  Compiling...
+  Vector3s.cpp
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,22): warning C4566: character represented by universal-character-name '\u03C1' cannot be represented in the current code page (1252)
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,45): warning C4566: character represented by universal-character-name '\u03D5' cannot be represented in the current code page (1252)
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,68): warning C4566: character represented by universal-character-name '\u03B8' cannot be represented in the current code page (1252)
+  VigenereCipher.cpp
+  Generating Code...
+CameraRay3.obj : error LNK2019: unresolved external symbol "public: struct Vector3 __cdecl Vector3s::asRectangular(void)const " (?asRectangular@Vector3s@@QEBA?AUVector3@@XZ) referenced in function "public: __cdecl CameraRay3::CameraRay3(struct Vector3 *,struct Vector3s const &)" (??0CameraRay3@@QEAA@PEAUVector3@@AEBUVector3s@@@Z)
+Ray3.obj : error LNK2001: unresolved external symbol "public: struct Vector3 __cdecl Vector3s::asRectangular(void)const " (?asRectangular@Vector3s@@QEBA?AUVector3@@XZ)
+Frame.obj : error LNK2019: unresolved external symbol "public: double __cdecl UDim::absolute(double)const " (?absolute@UDim@@QEBANN@Z) referenced in function "public: __cdecl Rect2<double>::Rect2<double>(struct UDim2 const &,struct UDim2 const &,struct Rect2<double> const &)" (??0?$Rect2@N@@QEAA@AEBUUDim2@@0AEBU0@@Z)
+ImageLabel.obj : error LNK2001: unresolved external symbol "public: double __cdecl UDim::absolute(double)const " (?absolute@UDim@@QEBANN@Z)
+UIObject.obj : error LNK2001: unresolved external symbol "public: double __cdecl UDim::absolute(double)const " (?absolute@UDim@@QEBANN@Z)
+MeshParser.obj : error LNK2019: unresolved external symbol "public: struct Vector3 __cdecl Vector3::normalized(void)const " (?normalized@Vector3@@QEBA?AU1@XZ) referenced in function "public: static class Mesh * __cdecl MeshParser::fromIcoSphere(struct Vector3 const &,double,int,enum RenderData3::NormalType)" (?fromIcoSphere@MeshParser@@SAPEAVMesh@@AEBUVector3@@NHW4NormalType@RenderData3@@@Z)
+MeshParser.obj : error LNK2019: unresolved external symbol "public: class MeshTriangle3 * __cdecl MeshQuad3::getMeshTriangle1(void)const " (?getMeshTriangle1@MeshQuad3@@QEBAPEAVMeshTriangle3@@XZ) referenced in function "public: static class Mesh * __cdecl MeshParser::fromFile(char const *,bool,struct Material *)" (?fromFile@MeshParser@@SAPEAVMesh@@PEBD_NPEAUMaterial@@@Z)
+MeshParser.obj : error LNK2019: unresolved external symbol "public: class MeshTriangle3 * __cdecl MeshQuad3::getMeshTriangle2(void)const " (?getMeshTriangle2@MeshQuad3@@QEBAPEAVMeshTriangle3@@XZ) referenced in function "public: static class Mesh * __cdecl MeshParser::fromFile(char const *,bool,struct Material *)" (?fromFile@MeshParser@@SAPEAVMesh@@PEBD_NPEAUMaterial@@@Z)
+Plane3.obj : error LNK2019: unresolved external symbol "public: static struct Vector3 __cdecl Vector3::cross(struct Vector3 const &,struct Vector3 const &)" (?cross@Vector3@@SA?AU1@AEBU1@0@Z) referenced in function "public: __cdecl Plane3::Plane3(struct Vector3 const &,struct Vector3 const &,struct Vector3 const &)" (??0Plane3@@QEAA@AEBUVector3@@00@Z)
+Renderer3.obj : error LNK2019: unresolved external symbol "public: static struct Vector2 __cdecl Vector2::fromParameterization3(double,double,struct Vector2 const &,struct Vector2 const &,struct Vector2 const &)" (?fromParameterization3@Vector2@@SA?AU1@NNAEBU1@00@Z) referenced in function "private: struct Color4 __cdecl Renderer3::totalColorAt(class MeshTriangle3 const &,struct Color4 const &,struct Color4 const &,struct Color4 const &,double,double)const " (?totalColorAt@Renderer3@@AEBA?AUColor4@@AEBVMeshTriangle3@@AEBU2@11NN@Z)
+Renderer3.obj : error LNK2019: unresolved external symbol "public: struct Vector3 __cdecl Triangle3::normal(void)const " (?normal@Triangle3@@QEBA?AUVector3@@XZ) referenced in function "public: void __cdecl Renderer3::renderBatchRasterized(struct SDL_Renderer *,struct Rect2<double> const &,double,double)" (?renderBatchRasterized@Renderer3@@QEAAXPEAUSDL_Renderer@@AEBU?$Rect2@N@@NN@Z)
+RaySpherical.obj : error LNK2001: unresolved external symbol "public: struct Vector3 __cdecl Triangle3::normal(void)const " (?normal@Triangle3@@QEBA?AUVector3@@XZ)
+RayRadial.obj : error LNK2019: unresolved external symbol "public: static double __cdecl Vector3::angle(struct Vector3 const &,struct Vector3 const &)" (?angle@Vector3@@SANAEBU1@0@Z) referenced in function "public: virtual bool __cdecl RayRadial::meets(struct Vector3 const &)" (?meets@RayRadial@@UEAA_NAEBUVector3@@@Z)
+RayRadial.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateX(double)" (?rotateX@RayCaster@@UEAAXN@Z)
+RayRectangular.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateX(double)" (?rotateX@RayCaster@@UEAAXN@Z)
+RaySpherical.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateX(double)" (?rotateX@RayCaster@@UEAAXN@Z)
+RayRadial.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateY(double)" (?rotateY@RayCaster@@UEAAXN@Z)
+RayRectangular.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateY(double)" (?rotateY@RayCaster@@UEAAXN@Z)
+RaySpherical.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateY(double)" (?rotateY@RayCaster@@UEAAXN@Z)
+RayRadial.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateZ(double)" (?rotateZ@RayCaster@@UEAAXN@Z)
+RayRectangular.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateZ(double)" (?rotateZ@RayCaster@@UEAAXN@Z)
+RaySpherical.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateZ(double)" (?rotateZ@RayCaster@@UEAAXN@Z)
+RayRadial.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotate(double,double,double)" (?rotate@RayCaster@@UEAAXNNN@Z)
+RayRectangular.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotate(double,double,double)" (?rotate@RayCaster@@UEAAXNNN@Z)
+RaySpherical.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotate(double,double,double)" (?rotate@RayCaster@@UEAAXNNN@Z)
+RayRadial.obj : error LNK2019: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateTo(struct Vector3 const &)" (?rotateTo@RayCaster@@UEAAXAEBUVector3@@@Z) referenced in function "public: __cdecl RayRadial::RayRadial(class CameraRay3 const &,double)" (??0RayRadial@@QEAA@AEBVCameraRay3@@N@Z)
+RayRectangular.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateTo(struct Vector3 const &)" (?rotateTo@RayCaster@@UEAAXAEBUVector3@@@Z)
+RaySpherical.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateTo(struct Vector3 const &)" (?rotateTo@RayCaster@@UEAAXAEBUVector3@@@Z)
+RayRadial.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateAbout(struct Vector3 const &,double)" (?rotateAbout@RayCaster@@UEAAXAEBUVector3@@N@Z)
+RayRectangular.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateAbout(struct Vector3 const &,double)" (?rotateAbout@RayCaster@@UEAAXAEBUVector3@@N@Z)
+RaySpherical.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl RayCaster::rotateAbout(struct Vector3 const &,double)" (?rotateAbout@RayCaster@@UEAAXAEBUVector3@@N@Z)
+RayRectangular.obj : error LNK2019: unresolved external symbol "public: double __cdecl Plane3::min(struct Vector3 const &)const " (?min@Plane3@@QEBANAEBUVector3@@@Z) referenced in function "public: virtual double __cdecl RayRectangular::distance(struct Vector3 const &)" (?distance@RayRectangular@@UEAANAEBUVector3@@@Z)
+RaySpherical.obj : error LNK2001: unresolved external symbol "public: double __cdecl Plane3::min(struct Vector3 const &)const " (?min@Plane3@@QEBANAEBUVector3@@@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: struct Vector3s __cdecl Vector3s::rotatedZenith(double)const " (?rotatedZenith@Vector3s@@QEBA?AU1@N@Z) referenced in function "public: virtual void __cdecl RaySpherical::rotateZenith(double)" (?rotateZenith@RaySpherical@@UEAAXN@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: struct Vector3s __cdecl Vector3s::rotatedPolar(double)const " (?rotatedPolar@Vector3s@@QEBA?AU1@N@Z) referenced in function "public: virtual void __cdecl RaySpherical::rotatePolar(double)" (?rotatePolar@RaySpherical@@UEAAXN@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: static struct Vector3s __cdecl Vector3s::min(struct Vector3s const &,struct Vector3s const &)" (?min@Vector3s@@SA?AU1@AEBU1@0@Z) referenced in function "public: virtual bool __cdecl RaySpherical::meets(struct Vector3 const &)" (?meets@RaySpherical@@UEAA_NAEBUVector3@@@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: static struct Vector3 __cdecl Vector3::angle3(struct Vector3 const &,struct Vector3 const &)" (?angle3@Vector3@@SA?AU1@AEBU1@0@Z) referenced in function "public: virtual void __cdecl RaySpherical::rotateTo(struct Vector3 const &)" (?rotateTo@RaySpherical@@UEAAXAEBUVector3@@@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: void __cdecl CameraRay3::rotateX(double)" (?rotateX@CameraRay3@@QEAAXN@Z) referenced in function "public: virtual void __cdecl RaySpherical::rotateX(double)" (?rotateX@RaySpherical@@UEAAXN@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: void __cdecl CameraRay3::rotateY(double)" (?rotateY@CameraRay3@@QEAAXN@Z) referenced in function "public: virtual void __cdecl RaySpherical::rotateY(double)" (?rotateY@RaySpherical@@UEAAXN@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: void __cdecl CameraRay3::rotateZ(double)" (?rotateZ@CameraRay3@@QEAAXN@Z) referenced in function "public: virtual void __cdecl RaySpherical::rotateZ(double)" (?rotateZ@RaySpherical@@UEAAXN@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: void __cdecl CameraRay3::rotate(double,double,double)" (?rotate@CameraRay3@@QEAAXNNN@Z) referenced in function "public: virtual void __cdecl RaySpherical::rotate(double,double,double)" (?rotate@RaySpherical@@UEAAXNNN@Z)
+RaySpherical.obj : error LNK2019: unresolved external symbol "public: void __cdecl CameraRay3::rotateAbout(struct Vector3 const &,double)" (?rotateAbout@CameraRay3@@QEAAXAEBUVector3@@N@Z) referenced in function "public: virtual void __cdecl RaySpherical::rotateAbout(struct Vector3 const &,double)" (?rotateAbout@RaySpherical@@UEAAXAEBUVector3@@N@Z)
+RenderData3.obj : error LNK2019: unresolved external symbol "public: struct Vector3 __cdecl Vector3::rotatedX(double)const " (?rotatedX@Vector3@@QEBA?AU1@N@Z) referenced in function "public: void __cdecl RenderData3::rotateX(double)" (?rotateX@RenderData3@@QEAAXN@Z)
+RenderData4.obj : error LNK2001: unresolved external symbol "public: struct Vector3 __cdecl Vector3::rotatedX(double)const " (?rotatedX@Vector3@@QEBA?AU1@N@Z)
+RenderData3.obj : error LNK2019: unresolved external symbol "public: struct Vector3 __cdecl Vector3::rotatedY(double)const " (?rotatedY@Vector3@@QEBA?AU1@N@Z) referenced in function "public: void __cdecl RenderData3::rotateY(double)" (?rotateY@RenderData3@@QEAAXN@Z)
+RenderData4.obj : error LNK2001: unresolved external symbol "public: struct Vector3 __cdecl Vector3::rotatedY(double)const " (?rotatedY@Vector3@@QEBA?AU1@N@Z)
+RenderData3.obj : error LNK2019: unresolved external symbol "public: struct Vector3 __cdecl Vector3::rotatedZ(double)const " (?rotatedZ@Vector3@@QEBA?AU1@N@Z) referenced in function "public: void __cdecl RenderData3::rotateZ(double)" (?rotateZ@RenderData3@@QEAAXN@Z)
+RenderData4.obj : error LNK2001: unresolved external symbol "public: struct Vector3 __cdecl Vector3::rotatedZ(double)const " (?rotatedZ@Vector3@@QEBA?AU1@N@Z)
+RenderData3.obj : error LNK2019: unresolved external symbol "public: struct Vector3 __cdecl Vector3::rotated(double,double,double)const " (?rotated@Vector3@@QEBA?AU1@NNN@Z) referenced in function "public: void __cdecl RenderData3::rotate(double,double,double)" (?rotate@RenderData3@@QEAAXNNN@Z)
+RenderData4.obj : error LNK2001: unresolved external symbol "public: struct Vector3 __cdecl Vector3::rotated(double,double,double)const " (?rotated@Vector3@@QEBA?AU1@NNN@Z)
+RenderData4.obj : error LNK2019: unresolved external symbol "public: static struct Vector2 __cdecl Vector2::lerp(struct Vector2 const &,struct Vector2 const &,double)" (?lerp@Vector2@@SA?AU1@AEBU1@0N@Z) referenced in function "public: struct Vector2 __cdecl RenderData4::textureCoordsAt(double,double)" (?textureCoordsAt@RenderData4@@QEAA?AUVector2@@NN@Z)
+RenderData4.obj : error LNK2019: unresolved external symbol "public: static struct Vector3 __cdecl Vector3::lerp(struct Vector3 const &,struct Vector3 const &,double)" (?lerp@Vector3@@SA?AU1@AEBU1@0N@Z) referenced in function "public: struct Vector3 __cdecl RenderData4::normalAt(double,double)" (?normalAt@RenderData4@@QEAA?AUVector3@@NN@Z)
+Triangle3.obj : error LNK2019: unresolved external symbol "public: void __cdecl Vector3::rotateX(double)" (?rotateX@Vector3@@QEAAXN@Z) referenced in function "public: virtual void __cdecl Triangle3::rotateX(double,struct Vector3 const &)" (?rotateX@Triangle3@@UEAAXNAEBUVector3@@@Z)
+Triangle3.obj : error LNK2019: unresolved external symbol "public: void __cdecl Vector3::rotateY(double)" (?rotateY@Vector3@@QEAAXN@Z) referenced in function "public: virtual void __cdecl Triangle3::rotateY(double,struct Vector3 const &)" (?rotateY@Triangle3@@UEAAXNAEBUVector3@@@Z)
+Triangle3.obj : error LNK2019: unresolved external symbol "public: void __cdecl Vector3::rotateZ(double)" (?rotateZ@Vector3@@QEAAXN@Z) referenced in function "public: virtual void __cdecl Triangle3::rotateZ(double,struct Vector3 const &)" (?rotateZ@Triangle3@@UEAAXNAEBUVector3@@@Z)
+Triangle3.obj : error LNK2019: unresolved external symbol "public: void __cdecl Vector3::rotate(double,double,double)" (?rotate@Vector3@@QEAAXNNN@Z) referenced in function "public: virtual void __cdecl Triangle3::rotate(double,double,double,struct Vector3 const &)" (?rotate@Triangle3@@UEAAXNNNAEBUVector3@@@Z)
+C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe : fatal error LNK1120: 35 unresolved externals
