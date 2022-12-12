@@ -11,9 +11,11 @@ class ImageLabel : public UIObject
 
     ImageLabel(const ImageLabel& rhs);
     ImageLabel& operator=(const ImageLabel& rhs);
+    ImageLabel& operator=(ImageLabel&& rhs);
 public:
     ImageLabel(const UDim2& position, const UDim2& size);
     ImageLabel(Image4&& image, const UDim2& position, const UDim2& size);
+    ImageLabel(ImageLabel&& rhs);
     ~ImageLabel();
 
     const Image4& getImage() const;

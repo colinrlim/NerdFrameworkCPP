@@ -8,6 +8,7 @@ ImageLabel::ImageLabel(const ImageLabel& rhs) :
     _renderer(nullptr)
 { }
 ImageLabel& ImageLabel::operator=(const ImageLabel& rhs) { return *this; }
+ImageLabel& ImageLabel::operator=(ImageLabel&& rhs) { return *this; }
 
 ImageLabel::ImageLabel(const UDim2& position, const UDim2& size) :
     UIObject(position, size),
@@ -21,8 +22,18 @@ ImageLabel::ImageLabel(Image4&& image, const UDim2& position, const UDim2& size)
     _texture(nullptr),
     _renderer(nullptr)
 { }
+ImageLabel::ImageLabel(ImageLabel&& rhs) :
+    UIObject(std::move(rhs)),
+    _image(std::move(rhs._image)),
+    _texture(rhs._texture),
+    _renderer(rhs._renderer)
+{
+    rhs._texture = nullptr;
+    rhs._renderer = nullptr;
+}
 ImageLabel::~ImageLabel() {
-    SDL_DestroyTexture(_texture);
+    if (_texture != nullptr)
+        SDL_DestroyTexture(_texture);
 }
 
 const Image4& ImageLabel::getImage() const {

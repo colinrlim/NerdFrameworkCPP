@@ -6,6 +6,7 @@
 #include "Interface.h"
 #include "String.h"
 #include "BinaryGrid2.h"
+#include "ImageLabel.h"
 
 int main() {
 	std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;
@@ -37,6 +38,9 @@ int main() {
         frame2.setBorderColor(Color3::green);
         frame2.borderWidth = 2;
         frame.children.push_back(&frame2);
+        Image4 image(100, 100, Color4::red);
+        ImageLabel imageLabel(std::move(image), { 0.5, 0.5 }, { 0, 100, 0, 100 });
+        interface.frame.children.push_back(&imageLabel);
         if (interface.window == nullptr)
         {
             printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());

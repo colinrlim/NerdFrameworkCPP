@@ -1,35 +1,10 @@
-﻿  BinaryGrid2.cpp
-  CameraRay3.cpp
-  Canvas.cpp
+﻿  Canvas.cpp
   Frame.cpp
   ImageLabel.cpp
   Interface.cpp
-  Line3.cpp
-  MeshQuad3.cpp
-  Plane3.cpp
-  Quad3.cpp
-  Ray3.cpp
-  RayCaster.cpp
-  RayRadial.cpp
-  RayRectangular.cpp
-  RaySpherical.cpp
   Renderer2.cpp
   Renderer3.cpp
-  Triangle2.cpp
-  Triangle3.cpp
-  UDim.cpp
-  Generating Code...
-  Compiling...
-  UDim2.cpp
-  UDimRect2.cpp
   UIObject.cpp
-  Vector2.cpp
-  Vector2i.cpp
-  Vector3.cpp
-  Vector3s.cpp
-C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,22): warning C4566: character represented by universal-character-name '\u03C1' cannot be represented in the current code page (1252)
-C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,45): warning C4566: character represented by universal-character-name '\u03D5' cannot be represented in the current code page (1252)
-C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,68): warning C4566: character represented by universal-character-name '\u03B8' cannot be represented in the current code page (1252)
   main.cpp
   Generating Code...
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe

@@ -19,7 +19,7 @@ Image3::Image3(int width, int height, const Color3& color) :
 	_size(width * height * 3),
 	data(new uint8_t[_size])
 {
-	this->modify([&color](size_t x, size_t y, void* pixel) -> void {
+	this->modify([&color](void* pixel) -> void {
 		color.writeToPixel(pixel);
 	});
 }
@@ -29,8 +29,39 @@ Image3::Image3(int width, int height, uint8_t* data) :
 	_size(width * height * 3),
 	data(data)
 { }
-Image3::Image3(const Image3& image) {
-	copy(image);
+Image3::Image3(const Image3& rhs) :
+	_width(rhs._width),
+	_height(rhs._height),
+	_size(rhs._size),
+	data(new uint8_t[_size])
+{
+	std::copy(rhs.data, rhs.data + _size, data);
+}
+Image3& Image3::operator=(const Image3& rhs) {
+	delete[] data;
+	_width = rhs._width;
+	_height = rhs._height;
+	int size = _width * _height * 3;
+	data = new uint8_t[size];
+	std::copy(rhs.data, rhs.data + size, data);
+	return *this;
+}
+Image3::Image3(Image3&& rhs) :
+	_width(rhs._width),
+	_height(rhs._height),
+	_size(rhs._size),
+	data(rhs.data)
+{
+	rhs.data = nullptr;
+}
+Image3& Image3::operator=(Image3&& rhs) {
+	delete[] data;
+	_width = rhs._width;
+	_height = rhs._height;
+	_size = rhs._size;
+	data = rhs.data;
+	rhs.data = nullptr;
+	return *this;
 }
 Image3::~Image3() {
 	delete[] this->data;
@@ -53,7 +84,7 @@ uint32_t Image3::size() const {
 void* Image3::pixelAt(size_t x, size_t y) const {
 	if (x >= this->_width) return nullptr;
 	else if (y >= this->_height) return nullptr;
-	return (void*)(this->data + (x + y * this->_width) * 3);
+	return this->data + (x + y * this->_width) * 3;
 }
 Color3 Image3::colorAt(double t, double s) const {
 	t -= Math::floor(t);
@@ -65,32 +96,23 @@ Color3 Image3::colorAt(double t, double s) const {
 	uint8_t* pixel = this->data + ((uint64_t)x + (uint64_t)y * this->_width) * 3;
 	return Color3(pixel[0], pixel[1], pixel[2]);
 }
+void Image3::modify(const std::function<void(void*)>& func) {
+	const uint32_t size = this->size();
+	for (uint32_t i = 0; i < size; i++)
+		func(data + i);
+}
 void Image3::modify(const std::function<void(size_t, size_t, void*)>& func) {
-	auto pixel = (uint8_t*)this->pixelAt(0, 0);
+	auto pixel = this->pixelAt(0, 0);
 	size_t y = 0;
 	while (pixel != nullptr) {
 		size_t x = 0;
 		while (pixel != nullptr) {
 			func(x, y, pixel);
 			x++;
-			pixel = (uint8_t*)this->pixelAt(x, y);
+			pixel = this->pixelAt(x, y);
 		}
 		x = 0;
 		y++;
-		pixel = (uint8_t*)this->pixelAt(x, y);
+		pixel = this->pixelAt(x, y);
 	}
-}
-
-Image3& Image3::operator=(const Image3& rhs) {
-	delete[] this->data;
-	copy(rhs);
-	return *this;
-}
-
-void Image3::copy(const Image3& obj) {
-	this->_width = obj.width();
-	this->_height = obj.height();
-	int size = this->_width * this->_height * 3;
-	this->data = new uint8_t[size];
-	std::copy(obj.data, obj.data + size, data);
 }
