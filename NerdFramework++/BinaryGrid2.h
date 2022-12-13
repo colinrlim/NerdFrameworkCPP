@@ -7,6 +7,7 @@ struct BinaryGrid2 {
 private:
 	size_t _width;
 	size_t _height;
+	size_t _size;
 	uint8_t* _data;
 public:
 	BinaryGrid2(size_t width, size_t height);

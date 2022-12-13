@@ -4,33 +4,36 @@
 BinaryGrid2::BinaryGrid2(size_t width, size_t height) :
 	_width(width),
 	_height(height),
-	_data(new uint8_t[size()])
+	_size((size_t)Math::ceil(_width* _height / 8.0)),
+	_data(new uint8_t[_size])
 { }
 BinaryGrid2::BinaryGrid2(size_t width, size_t height, bool value) :
 	_width(width),
 	_height(height),
-	_data(new uint8_t[size()])
+	_size((size_t)Math::ceil(_width* _height / 8.0)),
+	_data(new uint8_t[_size])
 {
-	std::fill(_data, _data + size(), value ? 255 : 0);
+	std::fill(_data, _data + _size, value ? 255 : 0);
 }
 BinaryGrid2::BinaryGrid2(const BinaryGrid2& rhs) :
 	_width(rhs._width),
-	_height(rhs._height)
+	_height(rhs._height),
+	_size((size_t)Math::ceil(_width* _height / 8.0)),
+	_data(new uint8_t[_size])
 {
-	size_t size = this->size();
-	_data = new uint8_t[size];
-	std::copy(rhs._data, rhs._data + size, _data);
+	std::copy(rhs._data, rhs._data + _size, _data);
 }
 BinaryGrid2& BinaryGrid2::operator=(const BinaryGrid2& rhs) {
-	delete[] _data;
-	size_t size = this->size();
 	if (_width != rhs._width || _height != rhs._height) {
+		delete[] _data;
 		_width = rhs._width;
 		_height = rhs._height;
+		_size = rhs._size;
 		delete[] _data;
-		_data = new uint8_t[size];
+		_data = new uint8_t[_size];
 	}
-	std::copy(rhs._data, rhs._data + size, _data);
+
+	std::copy(rhs._data, rhs._data + _size, _data);
 	return *this;
 }
 BinaryGrid2::~BinaryGrid2() {
@@ -48,7 +51,7 @@ uint8_t* BinaryGrid2::data() const {
 	return _data;
 }
 size_t BinaryGrid2::size() const {
-	return (size_t)Math::ceil(_width * _height / 8.0);
+	return _size;
 }
 
 bool BinaryGrid2::getTile(size_t x, size_t y) const {

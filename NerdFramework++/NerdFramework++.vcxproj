@@ -162,6 +162,7 @@
     <ClInclude Include="Grid2.h" />
     <ClInclude Include="Image3.h" />
     <ClInclude Include="CameraRay3.h" />
+    <ClInclude Include="QuickGrid2.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="Tester.h" />
