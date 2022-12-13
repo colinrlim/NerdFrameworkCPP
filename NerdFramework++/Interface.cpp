@@ -25,7 +25,7 @@ Interface::Interface(SDL_Window* window) :
 	_lastFrame(std::chrono::steady_clock::now())
 {
 	SDL_GetWindowSize(window, &_width, &_height);
-	screen = Image4(_width, _height);
+	screen = std::move(Image4(_width, _height));
 	if (window != nullptr)
 	{
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -40,7 +40,7 @@ Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene) :
 	_lastFrame(std::chrono::steady_clock::now())
 {
 	SDL_GetWindowSize(window, &_width, &_height);
-	screen = Image4(_width, _height);
+	screen = std::move(Image4(_width, _height));
 	frame.children = scene;
 	if (window != nullptr)
 	{

@@ -3,7 +3,7 @@
 
 ImageLabel::ImageLabel(const ImageLabel& rhs) :
     UIObject(rhs.getPosition(), rhs.getSize()),
-    _image(rhs._image),
+    _image(std::move(rhs._image)),
     _texture(nullptr),
     _renderer(nullptr)
 { }
@@ -18,7 +18,7 @@ ImageLabel::ImageLabel(const UDim2& position, const UDim2& size) :
 { }
 ImageLabel::ImageLabel(Image4&& image, const UDim2& position, const UDim2& size) :
     UIObject(position, size),
-    _image(image),
+    _image(std::move(image)),
     _texture(nullptr),
     _renderer(nullptr)
 { }

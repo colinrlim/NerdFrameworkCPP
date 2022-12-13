@@ -41,9 +41,9 @@ Image3& Image3::operator=(const Image3& rhs) {
 	delete[] data;
 	_width = rhs._width;
 	_height = rhs._height;
-	int size = _width * _height * 3;
-	data = new uint8_t[size];
-	std::copy(rhs.data, rhs.data + size, data);
+	_size = rhs._size;
+	data = new uint8_t[_size];
+	std::copy(rhs.data, rhs.data + _size, data);
 	return *this;
 }
 Image3::Image3(Image3&& rhs) :
@@ -64,7 +64,7 @@ Image3& Image3::operator=(Image3&& rhs) {
 	return *this;
 }
 Image3::~Image3() {
-	delete[] this->data;
+	delete[] data;
 }
 
 const Image3 Image3::none(1, 1, Color3::none);

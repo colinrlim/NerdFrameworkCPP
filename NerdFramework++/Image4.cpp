@@ -1,5 +1,6 @@
 #include "Image4.h"
 #include "Math.h"
+#include <iostream>
 
 Image4::Image4() :
 	_width(1),
@@ -41,9 +42,9 @@ Image4& Image4::operator=(const Image4& rhs) {
 	delete[] data;
 	_width = rhs._width;
 	_height = rhs._height;
-	int size = _width * _height * 3;
-	data = new uint8_t[size];
-	std::copy(rhs.data, rhs.data + size, data);
+	_size = rhs._size;
+	data = new uint8_t[_size];
+	std::copy(rhs.data, rhs.data + _size, data);
 	return *this;
 }
 Image4::Image4(Image4&& rhs) :
@@ -64,7 +65,7 @@ Image4& Image4::operator=(Image4&& rhs) {
 	return *this;
 }
 Image4::~Image4() {
-	delete[] this->data;
+	delete[] data;
 }
 
 const Image4 Image4::none(1, 1, Color4::none);

@@ -1,10 +1,2 @@
-﻿  Canvas.cpp
-  Frame.cpp
-  ImageLabel.cpp
-  Interface.cpp
-  Renderer2.cpp
-  Renderer3.cpp
-  UIObject.cpp
-  main.cpp
-  Generating Code...
+﻿  main.cpp
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe
