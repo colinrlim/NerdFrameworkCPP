@@ -97,8 +97,7 @@ Color3 Image3::colorAt(double t, double s) const {
 	return Color3(pixel[0], pixel[1], pixel[2]);
 }
 void Image3::modify(const std::function<void(void*)>& func) {
-	const uint32_t size = this->size();
-	for (uint32_t i = 0; i < size; i++)
+	for (uint32_t i = 0; i < _size; i += 3)
 		func(data + i);
 }
 void Image3::modify(const std::function<void(size_t, size_t, void*)>& func) {
