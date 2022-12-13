@@ -141,5 +141,5 @@ void Color4::writeToPixel(void* pixel) const {
 }
 
 std::ostream& operator<<(std::ostream& stream, const Color4& rhs) {
-	return stream << "{ r: " << rhs.r << ", g: " << rhs.g << ", b: " << rhs.b << " | alpha: " << rhs.alpha << " }";
+	return stream << "{ r: " << (short)rhs.r << ", g: " << (short)rhs.g << ", b: " << (short)rhs.b << " | alpha: " << (short)rhs.alpha << " }";
 }

@@ -101,8 +101,7 @@ void UIObject::draw(Image4& screen, const Rect2<double>& scope) {
     yMax = Math::min(yMax, maxHeight - 1.0);
 
     // Render object border color on top of pre-existing
-    if (borderWidth > 0 && _borderOpacity > 0.0)
-    {
+    if (borderWidth > 0 && _borderOpacity > 0.0) {
         for (size_t y = (int)Math::max(0.0, yMin - borderWidth); y < (int)Math::min(yMin, maxHeight); y++)
             for (size_t x = (int)Math::max(0.0, xMin - borderWidth); x <= (int)Math::min(xMax + borderWidth, maxHeight); x++) {
                 void* pixel = screen.pixelAt(x, y);
@@ -145,8 +144,7 @@ void UIObject::draw(SDL_Renderer* renderer, const Rect2<double>& scope) {
     double ySize = _size.y.absolute(scope.height);
 
     // Render object border color on top of pre-existing
-    if (borderWidth > 0 && _borderOpacity > 0.0)
-    {
+    if (borderWidth > 0 && _borderOpacity > 0.0) {
         SDL_SetRenderDrawColor(renderer, _borderColorBaked.r, _borderColorBaked.g, _borderColorBaked.b, _borderColorBaked.alpha);
         SDL_Rect borderTop{ (int)(xPos - borderWidth), (int)(yPos - borderWidth), (int)(xSize) + borderWidth * 2, (int)(borderWidth) };
         SDL_Rect borderBottom{ (int)(xPos - borderWidth), (int)(yPos + ySize), (int)(xSize) + borderWidth * 2, (int)(borderWidth)};
@@ -159,7 +157,7 @@ void UIObject::draw(SDL_Renderer* renderer, const Rect2<double>& scope) {
     }
 
     // Render object fill color on top of pre-existing
-    if (_opacity < 1.0) {
+    if (_opacity > 0.0) {
         SDL_SetRenderDrawColor(renderer, _colorBaked.r, _colorBaked.g, _colorBaked.b, _colorBaked.alpha);
         SDL_Rect fillRect{ (int)xPos, (int)yPos, (int)xSize, (int)ySize };
         SDL_RenderFillRect(renderer, &fillRect);
