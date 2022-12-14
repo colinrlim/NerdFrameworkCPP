@@ -50,6 +50,26 @@ public:
 		std::copy(rhs._data, rhs._data + _size, _data);
 		return *this;
 	}
+	QuickGrid2(QuickGrid2&& rhs) :
+		_width(rhs._width),
+		_height(rhs._height),
+		_size(rhs._size),
+		_defaultValue(std::move(rhs._defaultValue)),
+		_data(rhs._data)
+	{
+		rhs._data = nullptr;
+	}
+	QuickGrid2& operator=(QuickGrid2&& rhs) {
+		delete[] _data;
+		_width = rhs._width;
+		_height = rhs._height;
+		_size = rhs._size;
+		_defaultValue = std::move(rhs._defaultValue);
+		_data = rhs._data;
+
+		rhs._data = nullptr;
+		return *this;
+	}
 	~QuickGrid2() {
 		delete[] _data;
 	}
@@ -81,6 +101,9 @@ public:
 	void set(size_t x, size_t y, T&& value) {
 		T* ptr = *(_data + x + y * _width);
 		ptr = new T(std::move(value));
+	}
+	void reset() {
+		std::fill(_data, _data + _size, nullptr);
 	}
 };
 

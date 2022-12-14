@@ -6,7 +6,6 @@ Interface::Interface() :
 	frame(UDim2::zero, UDim2::one),
 	_width(640),
 	_height(480),
-	onUpdate([](Interface& obj, double delta) -> void {}),
 	screen(_width, _height),
 	_created(std::chrono::steady_clock::now()),
 	_lastFrame(std::chrono::steady_clock::now())
@@ -20,7 +19,6 @@ Interface::Interface() :
 Interface::Interface(SDL_Window* window) :
 	window(window),
 	frame(UDim2::zero, UDim2::one),
-	onUpdate([](Interface& obj, double delta) -> void {}),
 	_created(std::chrono::steady_clock::now()),
 	_lastFrame(std::chrono::steady_clock::now())
 {
@@ -35,7 +33,6 @@ Interface::Interface(SDL_Window* window) :
 Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene) :
 	window(window),
 	frame(UDim2::zero, UDim2::one),
-	onUpdate([](Interface& obj, double delta) -> void {}),
 	_created(std::chrono::steady_clock::now()),
 	_lastFrame(std::chrono::steady_clock::now())
 {
@@ -51,7 +48,6 @@ Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene) :
 Interface::Interface(const std::vector<UIObject*>& scene) :
 	window(SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN)),
 	frame(UDim2::zero, UDim2::one),
-	onUpdate([](Interface& obj, double delta) -> void {}),
 	_width(640),
 	_height(480),
 	screen(_width, _height),

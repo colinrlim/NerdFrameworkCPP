@@ -1,9 +1,9 @@
 #pragma once
 
 #include <SDL.h>
+#include "QuickGrid2.h"
 #include "Renderer2.h"
 #include "RayCaster.h"
-#include "Grid2.h"
 #include "Mesh.h"
 
 class Renderer3 : public Renderer2
@@ -26,8 +26,8 @@ public:
 	//Light3Caster cameraLight;
 
 	Image4 cachedSkybox;
-	Grid2<uint32_t> depthBuffer;
-	Grid2<Vector3> normalBuffer;
+	QuickGrid2<uint32_t> depthBuffer;
+	QuickGrid2<Vector3> normalBuffer;
 
 	Color4 fog;
 

@@ -18,7 +18,7 @@ BinaryGrid2::BinaryGrid2(size_t width, size_t height, bool value) :
 BinaryGrid2::BinaryGrid2(const BinaryGrid2& rhs) :
 	_width(rhs._width),
 	_height(rhs._height),
-	_size((size_t)Math::ceil(_width* _height / 8.0)),
+	_size(rhs._size),
 	_data(new uint8_t[_size])
 {
 	std::copy(rhs._data, rhs._data + _size, _data);
@@ -29,11 +29,28 @@ BinaryGrid2& BinaryGrid2::operator=(const BinaryGrid2& rhs) {
 		_width = rhs._width;
 		_height = rhs._height;
 		_size = rhs._size;
-		delete[] _data;
 		_data = new uint8_t[_size];
 	}
 
 	std::copy(rhs._data, rhs._data + _size, _data);
+	return *this;
+}
+BinaryGrid2::BinaryGrid2(BinaryGrid2&& rhs) :
+	_width(rhs._width),
+	_height(rhs._height),
+	_size(rhs._size),
+	_data(rhs._data)
+{
+	rhs._data = nullptr;
+}
+BinaryGrid2& BinaryGrid2::operator=(BinaryGrid2&& rhs) {
+	delete[] _data;
+	_width = rhs._width;
+	_height = rhs._height;
+	_size = rhs._size;
+	_data = rhs._data;
+
+	rhs._data = nullptr;
 	return *this;
 }
 BinaryGrid2::~BinaryGrid2() {

@@ -103,8 +103,14 @@ void Renderer3::removeMesh(const Mesh* mesh) {
 }
 
 void Renderer3::renderBatchRasterized(Image4& screen, const Rect2<double>& scope, double minDist, double maxDist) {
-    depthBuffer = Grid2<uint32_t>((size_t)scope.width, (size_t)scope.height, (uint32_t)UINT32_MAX);
-    normalBuffer = Grid2<Vector3>((size_t)scope.width, (size_t)scope.height, Vector3::zero);
+    Vector2 size = getSize().absolute(scope.width, scope.height);
+    if (depthBuffer.width() != size.x || depthBuffer.height() != size.y) {
+        depthBuffer = std::move(QuickGrid2<uint32_t>((size_t)scope.width, (size_t)scope.height, (uint32_t)UINT32_MAX));
+        normalBuffer = std::move(QuickGrid2<Vector3>((size_t)scope.width, (size_t)scope.height, Vector3::zero));
+    } else {
+        depthBuffer.reset();
+        normalBuffer.reset();
+    }
     processFaces(scope);
     for (auto iterator = _processedFaces.begin(); iterator != _processedFaces.end(); ++iterator)
     {
@@ -152,8 +158,14 @@ void Renderer3::renderBatchRasterized(SDL_Renderer* renderer, const Rect2<double
     }
 }
 void Renderer3::renderBatchRaytraced(Image4& screen, const Rect2<double>& scope, double minDist, double maxDist) {
-    depthBuffer = Grid2<uint32_t>((size_t)scope.width, (size_t)scope.height, (uint32_t)UINT32_MAX);
-    normalBuffer = Grid2<Vector3>((size_t)scope.width, (size_t)scope.height, Vector3::zero);
+    Vector2 size = getSize().absolute(scope.width, scope.height);
+    if (depthBuffer.width() != size.x || depthBuffer.height() != size.y) {
+        depthBuffer = std::move(QuickGrid2<uint32_t>((size_t)scope.width, (size_t)scope.height, (uint32_t)UINT32_MAX));
+        normalBuffer = std::move(QuickGrid2<Vector3>((size_t)scope.width, (size_t)scope.height, Vector3::zero));
+    } else {
+        depthBuffer.reset();
+        normalBuffer.reset();
+    }
     processFaces(scope);
     for (auto iterator = _processedFaces.begin(); iterator != _processedFaces.end(); ++iterator)
     {

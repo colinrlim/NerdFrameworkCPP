@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 template <typename T>
 struct Grid2 {
 private:
@@ -38,6 +40,24 @@ public:
 		_data = new T[_size];
 
 		std::copy(rhs._data, rhs._data + _size, _data);
+		return *this;
+	}
+	Grid2(Grid2&& rhs) :
+		_width(rhs._width),
+		_height(rhs._height),
+		_size(rhs._size),
+		_data(rhs._data)
+	{
+		rhs._data = nullptr;
+	}
+	Grid2& operator=(Grid2&& rhs) {
+		delete[] _data;
+		_width = rhs._width;
+		_height = rhs._height;
+		_size = rhs._size;
+		_data = rhs._data;
+
+		rhs._data = nullptr;
 		return *this;
 	}
 	~Grid2() {
