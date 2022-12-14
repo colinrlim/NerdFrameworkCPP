@@ -92,8 +92,6 @@ public:
 
 	const T& get(size_t x, size_t y) const {
 		T* ptr = *(_data + x + y * _width);
-		if (ptr == nullptr)
-			return _defaultValue;
 		return *ptr;
 	}
 	void set(size_t x, size_t y, const T& value) {
@@ -105,7 +103,7 @@ public:
 		ptr = new T(std::move(value));
 	}
 	void reset() {
-		std::fill(_data, _data + _size, nullptr);
+		std::fill(_data, _data + _size, &_defaultValue);
 	}
 };
 
