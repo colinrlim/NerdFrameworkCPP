@@ -26,22 +26,24 @@ int main() {
     }
     else
     {
-        Interface interface;
-        interface.frame.setColor(Color3::blue);
-        interface.frame.setBorderColor(Color3::blue);
         Frame frame({ 0, 100, 0, 100 }, { 0, 200, 0, 100 });
         frame.setColor(Color3::black);
         frame.setBorderColor(Color3::red);
         frame.borderWidth = 2;
-        interface.frame.children.push_back(&frame);
-        Frame frame2( { 0.5, 10, 0.5, 10 }, { 0.5, -20, 0.5, -20 } );
+        Frame frame2({ 0.5, 10, 0.5, 10 }, { 0.5, -20, 0.5, -20 });
         frame2.setColor(Color3::lightRed);
         frame2.setBorderColor(Color3::green);
         frame2.borderWidth = 2;
         frame.children.push_back(&frame2);
         Image4 image(100, 100, Color4::red);
         ImageLabel imageLabel(std::move(image), { 0.5, 0.5 }, { 0, 100, 0, 100 });
-        interface.frame.children.push_back(&imageLabel);
+        Interface interface([&](Interface& interface, SDL_Renderer* renderer)-> void{
+            interface.frame.setColor(Color3::blue);
+            interface.frame.setBorderColor(Color3::blue);
+
+            interface.frame.children.push_back(&frame);
+            interface.frame.children.push_back(&imageLabel);
+        });
         if (interface.window == nullptr)
         {
             printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());

@@ -1,7 +1,7 @@
 #include "Interface.h"
 #include <iostream>
 
-Interface::Interface() :
+Interface::Interface(std::function<void(Interface&, SDL_Renderer*)> onInit) :
 	window(SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN)),
 	frame(UDim2::zero, UDim2::one),
 	_width(640),
@@ -15,8 +15,10 @@ Interface::Interface() :
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _width, _height);
 	}
+
+	onInit(*this, _renderer);
 }
-Interface::Interface(SDL_Window* window) :
+Interface::Interface(SDL_Window* window, std::function<void(Interface&, SDL_Renderer*)> onInit) :
 	window(window),
 	frame(UDim2::zero, UDim2::one),
 	_created(std::chrono::steady_clock::now()),
@@ -29,8 +31,10 @@ Interface::Interface(SDL_Window* window) :
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _width, _height);
 	}
+
+	onInit(*this, _renderer);
 }
-Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene) :
+Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene, std::function<void(Interface&, SDL_Renderer*)> onInit) :
 	window(window),
 	frame(UDim2::zero, UDim2::one),
 	_created(std::chrono::steady_clock::now()),
@@ -44,8 +48,10 @@ Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene) :
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _width, _height);
 	}
+
+	onInit(*this, _renderer);
 }
-Interface::Interface(const std::vector<UIObject*>& scene) :
+Interface::Interface(const std::vector<UIObject*>& scene, std::function<void(Interface&, SDL_Renderer*)> onInit) :
 	window(SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN)),
 	frame(UDim2::zero, UDim2::one),
 	_width(640),
@@ -60,6 +66,8 @@ Interface::Interface(const std::vector<UIObject*>& scene) :
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _width, _height);
 	}
+
+	onInit(*this, _renderer);
 }
 Interface::~Interface() {
 	if (window != NULL)

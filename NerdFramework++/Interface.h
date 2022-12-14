@@ -23,10 +23,10 @@ public:
 
 	std::function<void(Interface&, double)> onUpdate;
 
-	Interface();
-	Interface(SDL_Window* window);
-	Interface(SDL_Window* window, const std::vector<UIObject*>& scene);
-	Interface(const std::vector<UIObject*>& scene);
+	Interface(std::function<void(Interface&, SDL_Renderer*)> onInit = [](Interface& interface, SDL_Renderer* renderer) -> void {});
+	Interface(SDL_Window* window, std::function<void(Interface&, SDL_Renderer*)> onInit = [](Interface& interface, SDL_Renderer* renderer) -> void {});
+	Interface(SDL_Window* window, const std::vector<UIObject*>& scene, std::function<void(Interface&, SDL_Renderer*)> onInit = [](Interface& interface, SDL_Renderer* renderer) -> void {});
+	Interface(const std::vector<UIObject*>& scene, std::function<void(Interface&, SDL_Renderer*)> onInit = [](Interface& interface, SDL_Renderer* renderer) -> void {});
 	~Interface();
 
 	double secondsElapsed() const;

@@ -5,15 +5,14 @@
 
 class ImageLabel : public UIObject
 {
+    Image4 _image;
     SDL_Renderer* _renderer;
     SDL_Texture* _texture;
-    Image4 _image;
 
     ImageLabel(const ImageLabel& rhs);
     ImageLabel& operator=(const ImageLabel& rhs);
     ImageLabel& operator=(ImageLabel&& rhs);
 public:
-    ImageLabel(const UDim2& position, const UDim2& size);
     ImageLabel(Image4&& image, const UDim2& position, const UDim2& size);
     ImageLabel(ImageLabel&& rhs);
     ~ImageLabel();

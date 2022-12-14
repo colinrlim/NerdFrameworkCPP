@@ -4,29 +4,23 @@
 ImageLabel::ImageLabel(const ImageLabel& rhs) :
     UIObject(rhs.getPosition(), rhs.getSize()),
     _image(std::move(rhs._image)),
-    _texture(nullptr),
-    _renderer(nullptr)
+    _renderer(nullptr),
+    _texture(nullptr)
 { }
 ImageLabel& ImageLabel::operator=(const ImageLabel& rhs) { return *this; }
 ImageLabel& ImageLabel::operator=(ImageLabel&& rhs) { return *this; }
 
-ImageLabel::ImageLabel(const UDim2& position, const UDim2& size) :
-    UIObject(position, size),
-    _image(Image4::none),
-    _texture(nullptr),
-    _renderer(nullptr)
-{ }
 ImageLabel::ImageLabel(Image4&& image, const UDim2& position, const UDim2& size) :
     UIObject(position, size),
     _image(std::move(image)),
-    _texture(nullptr),
-    _renderer(nullptr)
+    _renderer(nullptr),
+    _texture(nullptr)
 { }
 ImageLabel::ImageLabel(ImageLabel&& rhs) :
     UIObject(std::move(rhs)),
     _image(std::move(rhs._image)),
-    _texture(rhs._texture),
-    _renderer(rhs._renderer)
+    _renderer(rhs._renderer),
+    _texture(rhs._texture)
 {
     rhs._texture = nullptr;
     rhs._renderer = nullptr;
@@ -56,27 +50,19 @@ void ImageLabel::draw(Image4& screen, const Rect2<double>& scope) {
 
     Rect2<double> childScope(getPosition(), getSize(), scope);
 
-    // Object bounds; Doesn't use AbsolutePosition() and AbsoluteSize() for optimization purposes
-    double xMin = childScope.x;
-    double yMin = childScope.y;
-    double xMax = xMin + childScope.width;
-    double yMax = yMin + childScope.height;
-
     // Fit to screen bounds
     const double maxWidth = screen.width();
     const double maxHeight = screen.height();
-    xMin = Math::max(0.0, xMin);
-    yMin = Math::max(0.0, yMin);
-    xMax = Math::min(xMax, maxWidth - 1.0);
-    yMax = Math::min(yMax, maxHeight - 1.0);
+    double xMinConstrained = Math::max(0.0, childScope.x);
+    double yMinConstrained = Math::max(0.0, childScope.y);
+    double xMaxConstrained = Math::min(childScope.x + childScope.width, maxWidth - 1.0);
+    double yMaxConstrained = Math::min(childScope.y + childScope.height, maxHeight - 1.0);
 
     // Render object fill color (image) on top of pre-existing
-    double xLength = xMax - xMin;
-    double yLength = yMax - yMin;
-    for (size_t y = (int)yMin; y <= (int)yMax; y++) {
-        double s = (y - yMin) / yLength;
-        for (size_t x = (int)xMin; x <= (int)xMax; x++) {
-            double t = (x - xMin) / xLength;
+    for (size_t y = (int)yMinConstrained; y <= (int)yMaxConstrained; y++) {
+        double s = (y - childScope.y) / childScope.height;
+        for (size_t x = (int)xMinConstrained; x <= (int)xMaxConstrained; x++) {
+            double t = (x - childScope.x) / childScope.width;
             void* pixel = screen.pixelAt(x, y);
             Color4::flatten(pixel, _image.colorAt(t, s));
         }
