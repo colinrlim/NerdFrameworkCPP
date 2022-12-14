@@ -12,6 +12,7 @@ struct UDim2
     UDim2(double xScale, double xOffset, double yScale, double yOffset);
     UDim2(double xOffset, double yOffset);
     UDim2(const UDim& x, const UDim& y);
+    UDim2(UDim&& x, UDim&& y);
 
     static const UDim2 zero;
     static const UDim2 one;

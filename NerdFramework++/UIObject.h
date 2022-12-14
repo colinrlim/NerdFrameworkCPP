@@ -24,6 +24,7 @@ private:
     Color4 _borderColorBaked;
 protected:
     UIObject(const UDim2& position = UDim2::zero, const UDim2& size = UDim2::one);
+    UIObject(UDim2&& position, UDim2&& size);
 public:
     int borderWidth;
     int zindex;
@@ -37,6 +38,8 @@ public:
     const Color3& getBorderColor() const;
     void setColor(const Color3& color);
     void setBorderColor(const Color3& color);
+    void setColor(Color3&& color);
+    void setBorderColor(Color3&& color);
 
     double getOpacity() const;
     double getBorderOpacity() const;

@@ -23,6 +23,27 @@ UIObject::UIObject(const UDim2& position, const UDim2& size) :
     onDraw([](UIObject& obj, Image4& screen, const Rect2<double>& scope) -> void {}),
     onDrawSDL([](UIObject& obj, SDL_Renderer* renderer, const Rect2<double>& scope) -> void {})
 { }
+UIObject::UIObject(UDim2&& position, UDim2&& size) :
+    _color(Color3::white),
+    _borderColor(Color3::black),
+
+    _opacity(1.0),
+    _borderOpacity(1.0),
+
+    _colorBaked(Color4::white),
+    _borderColorBaked(Color4::black),
+
+    _position(std::move(position)),
+    _size(std::move(size)),
+
+    borderWidth(0),
+    zindex(1),
+    visible(true),
+
+    onUpdate([](UIObject& obj, double delta) -> void {}),
+    onDraw([](UIObject& obj, Image4& screen, const Rect2<double>& scope) -> void {}),
+    onDrawSDL([](UIObject& obj, SDL_Renderer* renderer, const Rect2<double>& scope) -> void {})
+{ }
 
 const Color3& UIObject::getColor() const {
     return _color;
@@ -36,6 +57,14 @@ void UIObject::setColor(const Color3& color) {
 }
 void UIObject::setBorderColor(const Color3& color) {
     _borderColor = color;
+    _borderColorBaked = _borderColor.asColor4((uint8_t)(_borderOpacity * 255));
+}
+void UIObject::setColor(Color3&& color) {
+    _color = std::move(color);
+    _colorBaked = _color.asColor4((uint8_t)(_opacity * 255));
+}
+void UIObject::setBorderColor(Color3&& color) {
+    _borderColor = std::move(color);
     _borderColorBaked = _borderColor.asColor4((uint8_t)(_borderOpacity * 255));
 }
 

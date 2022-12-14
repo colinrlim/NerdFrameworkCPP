@@ -9,7 +9,8 @@ UDim2::UDim2(double xOffset, double yOffset) :
 	x(0.0, xOffset),
 	y(0.0, yOffset)
 { }
-UDim2::UDim2(const UDim& x, const UDim& y) : x(x), y(y) {}
+UDim2::UDim2(const UDim& x, const UDim& y) : x(x), y(y) { }
+UDim2::UDim2(UDim&& x, UDim&& y) : x(std::move(x)), y(std::move(y)) { }
 
 const UDim2 UDim2::zero(UDim(0.0, 0.0), UDim(0.0, 0.0));
 const UDim2 UDim2::one(UDim(1.0, 0.0), UDim(1.0, 0.0));
