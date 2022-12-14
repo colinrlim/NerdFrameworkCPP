@@ -4,13 +4,13 @@
 BinaryGrid2::BinaryGrid2(size_t width, size_t height) :
 	_width(width),
 	_height(height),
-	_size((size_t)Math::ceil(_width* _height / 8.0)),
+	_size((size_t)Math::ceil(_width * _height / 8.0)),
 	_data(new uint8_t[_size])
 { }
 BinaryGrid2::BinaryGrid2(size_t width, size_t height, bool value) :
 	_width(width),
 	_height(height),
-	_size((size_t)Math::ceil(_width* _height / 8.0)),
+	_size((size_t)Math::ceil(_width * _height / 8.0)),
 	_data(new uint8_t[_size])
 {
 	std::fill(_data, _data + _size, value ? 255 : 0);
