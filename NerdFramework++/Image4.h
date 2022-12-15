@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Color4.h"
+#include "Rect2.h"
 
 struct Image4
 {
@@ -23,6 +24,8 @@ public:
 	Image4& operator=(const Image4& rhs);
 	Image4(Image4&& rhs);
 	Image4& operator=(Image4&& rhs);
+	Image4(const Image4& rhs, const Rect2<size_t>& clipBounds);
+	Image4(Image4&& rhs, const Rect2<size_t>& clipBounds);
 	~Image4();
 
 	int width() const;

@@ -111,6 +111,32 @@ Image3& Image3::operator=(Image3&& rhs) {
 	rhs.data = nullptr;
 	return *this;
 }
+Image3::Image3(const Image3& rhs, const Rect2<size_t>& clipBounds) :
+	_width(clipBounds.width),
+	_height(clipBounds.height),
+	_size(_width * _height * 3),
+	data(new uint8_t[_size])
+{
+	for (size_t y = clipBounds.y; y < clipBounds.height; y++) {
+		size_t begin = y * rhs._width * 3;
+		size_t beginOffset = begin + clipBounds.x * 3;
+		size_t endOffset = beginOffset + clipBounds.width * 3;
+		std::copy(rhs.data + beginOffset, rhs.data + endOffset, data + begin);
+	}
+}
+Image3::Image3(Image3&& rhs, const Rect2<size_t>& clipBounds) :
+	_width(clipBounds.width),
+	_height(clipBounds.height),
+	_size(_width * _height * 3),
+	data(new uint8_t[_size])
+{
+	for (size_t y = clipBounds.y; y < clipBounds.height; y++) {
+		size_t begin = y * rhs._width * 3;
+		size_t beginOffset = begin + clipBounds.x * 3;
+		size_t endOffset = beginOffset + clipBounds.width * 3;
+		std::move(rhs.data + beginOffset, rhs.data + endOffset, data + begin);
+	}
+}
 Image3::~Image3() {
 	delete[] data;
 }
