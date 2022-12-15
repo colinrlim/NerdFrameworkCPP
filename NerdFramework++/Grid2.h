@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ostream>
+#include <vector>
 
 template <typename T>
 struct Grid2 {
@@ -23,6 +24,28 @@ public:
 		_data(new T[_size])
 	{
 		std::fill(_data, _data + _size, defaultValue);
+	}
+	Grid2(size_t width, size_t height, const std::vector<std::vector<T>>& map) :
+		_width(width),
+		_height(height),
+		_size(_width * _height),
+		_data(new T[_size])
+	{
+		for (size_t y = 0; y < height; y++) {
+			const T* rowData = map[y].data();
+			std::copy(rowData, rowData + width, _data + y * width);
+		}
+	}
+	Grid2(size_t width, size_t height, std::vector<std::vector<T>>&& map) :
+		_width(width),
+		_height(height),
+		_size(_width * _height),
+		_data(new T[_size])
+	{
+		for (size_t y = 0; y < height; y++) {
+			T* rowData = map[y].data();
+			std::move(rowData, rowData + width, _data + y * width);
+		}
 	}
 	Grid2(const Grid2& rhs) :
 		_width(rhs._width),

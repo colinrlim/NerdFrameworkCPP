@@ -38,6 +38,7 @@ void ImageLabel::setImage(Image4&& image) {
     if (_renderer != nullptr) {
         SDL_DestroyTexture(_texture);
         _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height());
+        SDL_UpdateTexture(_texture, nullptr, image.data, image.width() * 4);
     }
 }
 
@@ -75,6 +76,7 @@ void ImageLabel::draw(SDL_Renderer* renderer, const Rect2<double>& scope) {
     if (_texture == nullptr) {
         _renderer = renderer;
         _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height());
+        SDL_UpdateTexture(_texture, nullptr, _image.data, _image.width() * 4);
     }
 
     SDL_Rect destination{ (int)childScope.x, (int)childScope.y, (int)childScope.width, (int)childScope.height };

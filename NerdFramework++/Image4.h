@@ -15,6 +15,10 @@ public:
 	Image4(int width, int height);
 	Image4(int width, int height, const Color4& color);
 	Image4(int width, int height, uint8_t* data);
+	Image4(int width, int height, const std::vector<std::vector<uint8_t>>& map);
+	Image4(int width, int height, std::vector<std::vector<uint8_t>>&& map);
+	Image4(int width, int height, const std::vector<std::vector<uint32_t>>& map);
+	Image4(int width, int height, std::vector<std::vector<uint32_t>>&& map);
 	Image4(const Image4& rhs);
 	Image4& operator=(const Image4& rhs);
 	Image4(Image4&& rhs);

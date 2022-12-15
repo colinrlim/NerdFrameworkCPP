@@ -22,6 +22,8 @@ public:
 	Frame frame;
 
 	std::function<void(Interface&, double)> onUpdate;
+	std::function<void(Interface&, Image4&, const Rect2<double>&)> onDraw;
+	std::function<void(Interface&, SDL_Renderer*, const Rect2<double>&)> onDrawSDL;
 
 	Interface(std::function<void(Interface&, SDL_Renderer*)> onInit = [](Interface& interface, SDL_Renderer* renderer) -> void {});
 	Interface(SDL_Window* window, std::function<void(Interface&, SDL_Renderer*)> onInit = [](Interface& interface, SDL_Renderer* renderer) -> void {});

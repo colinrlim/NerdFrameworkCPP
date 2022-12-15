@@ -29,6 +29,54 @@ Image3::Image3(int width, int height, uint8_t* data) :
 	_size(width * height * 3),
 	data(data)
 { }
+Image3::Image3(int width, int height, const std::vector<std::vector<uint8_t>>& map) :
+	_width(width),
+	_height(height),
+	_size(width * height * 3),
+	data(new uint8_t[_size])
+{
+	size_t rowSize = (size_t)(width * 3.0);
+	for (size_t y = 0; y < height; y++) {
+		const uint8_t* rowData = map[y].data();
+		std::copy(rowData, rowData + rowSize, data + y * rowSize);
+	}
+}
+Image3::Image3(int width, int height, std::vector<std::vector<uint8_t>>&& map) :
+	_width(width),
+	_height(height),
+	_size(width * height * 3),
+	data(new uint8_t[_size])
+{
+	size_t rowSize = (size_t)(width * 3.0);
+	for (size_t y = 0; y < height; y++) {
+		uint8_t* rowData = map[y].data();
+		std::move(rowData, rowData + rowSize, data + y * rowSize);
+	}
+}
+Image3::Image3(int width, int height, const std::vector<std::vector<uint32_t>>& map) :
+	_width(width),
+	_height(height),
+	_size(width * height * 3),
+	data(new uint8_t[_size])
+{
+	size_t rowSize = (size_t)(width * 3.0);
+	for (size_t y = 0; y < height; y++) {
+		const uint8_t* rowData = (uint8_t*)map[y].data();
+		std::copy(rowData, rowData + rowSize, data + y * rowSize);
+	}
+}
+Image3::Image3(int width, int height, std::vector<std::vector<uint32_t>>&& map) :
+	_width(width),
+	_height(height),
+	_size(width * height * 3),
+	data(new uint8_t[_size])
+{
+	size_t rowSize = (size_t)(width * 3.0);
+	for (size_t y = 0; y < height; y++) {
+		uint8_t* rowData = (uint8_t*)map[y].data();
+		std::move(rowData, rowData + rowSize, data + y * rowSize);
+	}
+}
 Image3::Image3(const Image3& rhs) :
 	_width(rhs._width),
 	_height(rhs._height),

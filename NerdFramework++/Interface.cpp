@@ -90,7 +90,10 @@ void Interface::update() {
 	_lastFrame = now;
 }
 void Interface::draw() {
-	frame.draw(screen, Rect2<double>(0, 0, _width, _height));
+	Rect2<double> bounds(0, 0, _width, _height);
+
+	frame.draw(screen, bounds);
+	onDraw(*this, screen, bounds);
 	SDL_UpdateTexture(_texture, nullptr, screen.data, _width * 4);
 
 	SDL_RenderClear(_renderer);
@@ -98,7 +101,10 @@ void Interface::draw() {
 	SDL_RenderPresent(_renderer);
 }
 void Interface::drawSDL() {
+	Rect2<double> bounds(0, 0, _width, _height);
+
 	SDL_RenderClear(_renderer);
-	frame.draw(_renderer, Rect2<double>(0, 0, _width, _height));
+	frame.draw(_renderer, bounds);
+	onDrawSDL(*this, _renderer, bounds);
 	SDL_RenderPresent(_renderer);
 }
