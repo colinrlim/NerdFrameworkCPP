@@ -24,6 +24,7 @@ public:
 
 	static const Color4 none;
 	static const Color4 white;
+	static const Color4 gray;
 	static const Color4 black;
 
 	static const Color4 red;
@@ -33,6 +34,14 @@ public:
 	static const Color4 lightRed;
 	static const Color4 lightGreen;
 	static const Color4 lightBlue;
+
+	static const Color4 yellow;
+	static const Color4 magenta;
+	static const Color4 cyan;
+
+	static const Color4 lightYellow;
+	static const Color4 lightMagenta;
+	static const Color4 lightCyan;
 
 	static Color4 fromVector3(const Vector3& v);
 	static Color4 lerp(const Color4& a, const Color4& b, double alpha);
@@ -54,6 +63,7 @@ public:
 	Color4 modified(const Color4& rhs, std::function<Color4(const Color4&, const Color4&)> func) const;
 	Color4 withAlpha(char alpha) const;
 	Color3 asColor3() const;
+	uint32_t toInteger() const;
 	Color4 grayscaled() const;
 	Color4 opaque() const;
 	Color4 invisible() const;

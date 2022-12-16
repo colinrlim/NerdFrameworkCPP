@@ -30,6 +30,14 @@ public:
 	static const Color3 lightGreen;
 	static const Color3 lightBlue;
 
+	static const Color3 yellow;
+	static const Color3 magenta;
+	static const Color3 cyan;
+
+	static const Color3 lightYellow;
+	static const Color3 lightMagenta;
+	static const Color3 lightCyan;
+
 	static Color3 fromVector3(const Vector3& v);
 	static Color3 lerp(const Color3& a, const Color3& b, double alpha);
 	static Color3 average(const Color3& color1, const Color3& color2);

@@ -10,6 +10,7 @@ Color4::Color4(void* pixel) : r(((uint8_t*)pixel)[0]), g(((uint8_t*)pixel)[1]), 
 
 const Color4 Color4::none(0, 0, 0, 0);
 const Color4 Color4::white(255, 255, 255);
+const Color4 Color4::gray(127, 127, 127);
 const Color4 Color4::black(0, 0, 0);
 
 const Color4 Color4::red(255, 0, 0);
@@ -19,6 +20,14 @@ const Color4 Color4::blue(0, 0, 255);
 const Color4 Color4::lightRed(255, 127, 127);
 const Color4 Color4::lightGreen(127, 255, 127);
 const Color4 Color4::lightBlue(127, 127, 255);
+
+const Color4 Color4::yellow(255, 255, 0);
+const Color4 Color4::magenta(255, 0, 255);
+const Color4 Color4::cyan(0, 255, 255);
+
+const Color4 Color4::lightYellow(255, 255, 127);
+const Color4 Color4::lightMagenta(255, 127, 255);
+const Color4 Color4::lightCyan(127, 255, 255);
 
 Color4 Color4::fromVector3(const Vector3& v) {
 	return Color4((uint8_t)(v.x * 255), (uint8_t)(v.y * 255), (uint8_t)(v.z * 255));
@@ -120,6 +129,11 @@ Color4 Color4::withAlpha(char alpha) const {
 }
 Color3 Color4::asColor3() const {
 	return Color3((uint8_t)((int)r * alpha / 255), (uint8_t)((int)g * alpha / 255), (uint8_t)((int)b * alpha / 255));
+}
+uint32_t Color4::toInteger() const {
+	uint32_t newDec;
+	writeToPixel(&newDec);
+	return newDec;
 }
 Color4 Color4::grayscaled() const {
 	int avg = this->value();

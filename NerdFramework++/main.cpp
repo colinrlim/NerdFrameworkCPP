@@ -36,7 +36,25 @@ int main() {
         frame2.setBorderColor(Color3::green);
         frame2.borderWidth = 2;
         frame.children.push_back(&frame2);
-        Image4 image(100, 100, Color4::red);
+    
+        uint32_t r = Color4::red.toInteger();
+        uint32_t g = Color4::green.toInteger();
+        uint32_t b = Color4::blue.toInteger();
+        uint32_t y = Color4::yellow.toInteger();
+        uint32_t m = Color4::magenta.toInteger();
+        uint32_t c = Color4::cyan.toInteger();
+        Image4 image(10, 10, std::vector<std::vector<uint32_t>>{
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, r, r, r, r, r, r, r, r, 0 },
+            { 0, g, g, g, g, g, g, g, g, 0 },
+            { 0, b, b, b, b, b, b, b, b, 0 },
+            { 0, r, g, r, g, r, g, r, g, 0 },
+            { 0, b, r, b, r, b, r, b, r, 0 },
+            { 0, g, g, r, g, g, r, g, g, 0 },
+            { 0, y, y, y, y, y, y, y, y, 0 },
+            { 0, m, m, m, m, m, m, m, m, 0 },
+            { 0, c, c, c, c, c, c, c, c, 0 },
+        });
         ImageLabel imageLabel(std::move(image), { 0.5, 0.5 }, { 0, 100, 0, 100 });
 
         Image4 image2(1, 1, Color4::lightGreen);
@@ -70,6 +88,8 @@ int main() {
             interface.frame.children.push_back(&imageLabel);
 
             batcher = new TileBatch(renderer, std::move(grid), std::move(map));
+
+
         });
         interface.onDrawSDL = [&](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
             batcher->draw(renderer, Rect2<double>{200.0, 200.0, 20.0, 20.0});

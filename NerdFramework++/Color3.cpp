@@ -20,6 +20,15 @@ const Color3 Color3::lightRed(255, 127, 127);
 const Color3 Color3::lightGreen(127, 255, 127);
 const Color3 Color3::lightBlue(127, 127, 255);
 
+const Color3 Color3::yellow(255, 255, 0);
+const Color3 Color3::magenta(255, 0, 255);
+const Color3 Color3::cyan(0, 255, 255);
+
+const Color3 Color3::lightYellow(255, 255, 127);
+const Color3 Color3::lightMagenta(255, 127, 255);
+const Color3 Color3::lightCyan(127, 255, 255);
+
+
 Color3 Color3::fromVector3(const Vector3& v) {
 	return Color3((uint8_t)(v.x * 255), (uint8_t)(v.y * 255), (uint8_t)(v.z * 255));
 }
