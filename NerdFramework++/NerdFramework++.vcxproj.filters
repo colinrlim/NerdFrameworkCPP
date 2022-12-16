@@ -295,10 +295,10 @@
     <Filter Include="Math\2D\QuickGrid2">
       <UniqueIdentifier>{1ffb7eec-29d3-4bd8-8021-7d90934e442d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\ImageBatcher">
+    <Filter Include="Interface2D\ImageMaster">
       <UniqueIdentifier>{878a0551-603e-43a3-93df-2c0f13bc8ae6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\TileBatcher">
+    <Filter Include="Interface2D\TileBatch">
       <UniqueIdentifier>{53784795-161b-4841-93ff-11c60a2f21e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -525,11 +525,11 @@
     <ClInclude Include="QuickGrid2.h">
       <Filter>Math\2D\QuickGrid2</Filter>
     </ClInclude>
-    <ClInclude Include="ImageBatcher.h">
-      <Filter>Interface2D\ImageBatcher</Filter>
+    <ClInclude Include="ImageMaster.h">
+      <Filter>Interface2D\ImageMaster</Filter>
     </ClInclude>
-    <ClInclude Include="TileBatcher.h">
-      <Filter>Interface2D\TileBatcher</Filter>
+    <ClInclude Include="TileBatch.h">
+      <Filter>Interface2D\TileBatch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -719,11 +719,11 @@
     <ClCompile Include="BinaryGrid2.cpp">
       <Filter>Math\2D\BinaryGrid2</Filter>
     </ClCompile>
-    <ClCompile Include="ImageBatcher.cpp">
-      <Filter>Interface2D\ImageBatcher</Filter>
+    <ClCompile Include="ImageMaster.cpp">
+      <Filter>Interface2D\ImageMaster</Filter>
     </ClCompile>
-    <ClCompile Include="TileBatcher.cpp">
-      <Filter>Interface2D\TileBatcher</Filter>
+    <ClCompile Include="TileBatch.cpp">
+      <Filter>Interface2D\TileBatch</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

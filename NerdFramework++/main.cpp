@@ -8,7 +8,7 @@
 #include "BinaryGrid2.h"
 #include "ImageLabel.h"
 #include "Tester.h"
-#include "TileBatcher.h"
+#include "TileBatch.h"
 
 int main() {
 	std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;
@@ -43,7 +43,7 @@ int main() {
         Image4 image3(1, 1, Color4::lightBlue);
         Image4 image4(1, 1, Color4::lightRed);
 
-        TileBatcher* batcher;
+        TileBatch* batcher;
         Grid2<uint8_t> grid(10, 10, {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
@@ -69,7 +69,7 @@ int main() {
             interface.frame.children.push_back(&frame);
             interface.frame.children.push_back(&imageLabel);
 
-            batcher = new TileBatcher(renderer, std::move(grid), std::move(map));
+            batcher = new TileBatch(renderer, std::move(grid), std::move(map));
         });
         interface.onDrawSDL = [&](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
             batcher->draw(renderer, Rect2<double>{200.0, 200.0, 20.0, 20.0});

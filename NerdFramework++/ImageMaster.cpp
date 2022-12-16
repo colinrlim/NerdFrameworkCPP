@@ -1,21 +1,21 @@
-#include "ImageBatcher.h"
+#include "ImageMaster.h"
 #include "Math.h"
 
-ImageBatcher::ImageBatcher(const ImageBatcher& rhs) :
+ImageMaster::ImageMaster(const ImageMaster& rhs) :
     _image(std::move(rhs._image)),
     _renderer(nullptr),
     _texture(nullptr)
 { }
-ImageBatcher& ImageBatcher::operator=(const ImageBatcher& rhs) { return *this; }
-ImageBatcher& ImageBatcher::operator=(ImageBatcher&& rhs) { return *this; }
+ImageMaster& ImageMaster::operator=(const ImageMaster& rhs) { return *this; }
+ImageMaster& ImageMaster::operator=(ImageMaster&& rhs) { return *this; }
 
-ImageBatcher::ImageBatcher(SDL_Renderer* renderer, Image4&& image) :
+ImageMaster::ImageMaster(SDL_Renderer* renderer, Image4&& image) :
     _image(std::move(image)),
     _renderer(renderer),
     _texture(SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height()))
 {
 }
-ImageBatcher::ImageBatcher(ImageBatcher&& rhs) :
+ImageMaster::ImageMaster(ImageMaster&& rhs) :
     _image(std::move(rhs._image)),
     _renderer(rhs._renderer),
     _texture(rhs._texture)
@@ -23,21 +23,21 @@ ImageBatcher::ImageBatcher(ImageBatcher&& rhs) :
     rhs._texture = nullptr;
     rhs._renderer = nullptr;
 }
-ImageBatcher::~ImageBatcher() {
+ImageMaster::~ImageMaster() {
     if (_texture != nullptr)
         SDL_DestroyTexture(_texture);
 }
 
-const Image4& ImageBatcher::getImage() const {
+const Image4& ImageMaster::getImage() const {
     return _image;
 }
-void ImageBatcher::setImage(Image4&& image) {
+void ImageMaster::setImage(Image4&& image) {
     _image = std::move(image);
     SDL_DestroyTexture(_texture);
     _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height());
 }
 
-void ImageBatcher::draw(Image4& screen, const Rect2<double>& bounds) {
+void ImageMaster::draw(Image4& screen, const Rect2<double>& bounds) {
     // Fit to screen bounds
     const double maxWidth = screen.width();
     const double maxHeight = screen.height();
@@ -56,7 +56,7 @@ void ImageBatcher::draw(Image4& screen, const Rect2<double>& bounds) {
         }
     }
 }
-void ImageBatcher::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
+void ImageMaster::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
     SDL_Rect destination{ (int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height };
     SDL_RenderCopy(renderer, _texture, nullptr, &destination);
 }

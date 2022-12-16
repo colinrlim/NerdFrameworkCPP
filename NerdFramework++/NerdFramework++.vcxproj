@@ -162,7 +162,7 @@
     <ClInclude Include="Grid2.h" />
     <ClInclude Include="Image3.h" />
     <ClInclude Include="CameraRay3.h" />
-    <ClInclude Include="ImageBatcher.h" />
+    <ClInclude Include="ImageMaster.h" />
     <ClInclude Include="QuickGrid2.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="String.h" />
@@ -203,7 +203,7 @@
     <ClInclude Include="RenderData4.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Sort.h" />
-    <ClInclude Include="TileBatcher.h" />
+    <ClInclude Include="TileBatch.h" />
     <ClInclude Include="UDimRect2.h" />
     <ClInclude Include="ScrollFrame.h" />
     <ClInclude Include="Sphere3.h" />
@@ -234,7 +234,7 @@
     <ClCompile Include="Color4.cpp" />
     <ClCompile Include="Image3.cpp" />
     <ClCompile Include="CameraRay3.cpp" />
-    <ClCompile Include="ImageBatcher.cpp" />
+    <ClCompile Include="ImageMaster.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Tester.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -270,7 +270,7 @@
     <ClCompile Include="RenderData4.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Sort.cpp" />
-    <ClCompile Include="TileBatcher.cpp" />
+    <ClCompile Include="TileBatch.cpp" />
     <ClCompile Include="UDimRect2.cpp" />
     <ClCompile Include="ScrollFrame.cpp" />
     <ClCompile Include="Sphere3.cpp" />
