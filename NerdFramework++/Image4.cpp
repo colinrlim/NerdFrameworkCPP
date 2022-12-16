@@ -112,7 +112,7 @@ Image4& Image4::operator=(Image4&& rhs) {
 	rhs.data = nullptr;
 	return *this;
 }
-Image4::Image4(const Image4& rhs, const Rect2<size_t>& clipBounds) :
+Image4::Image4(const Image4& rhs, const Rect2<int>& clipBounds) :
 	_width(clipBounds.width),
 	_height(clipBounds.height),
 	_size(_width * _height * 4),
@@ -125,7 +125,7 @@ Image4::Image4(const Image4& rhs, const Rect2<size_t>& clipBounds) :
 		std::copy(rhs.data + beginOffset, rhs.data + endOffset, data + begin);
 	}
 }
-Image4::Image4(Image4&& rhs, const Rect2<size_t>& clipBounds) :
+Image4::Image4(Image4&& rhs, const Rect2<int>& clipBounds) :
 	_width(clipBounds.width),
 	_height(clipBounds.height),
 	_size(_width * _height * 4),
@@ -152,7 +152,7 @@ int Image4::width() const {
 int Image4::height() const {
 	return this->_height;
 }
-uint32_t Image4::size() const {
+size_t Image4::size() const {
 	return this->_size;
 }
 

@@ -8,7 +8,7 @@ struct Image4
 private:
 	int _width;
 	int _height;
-	uint32_t _size;
+	size_t _size;
 public:
 	uint8_t* data;
 
@@ -24,13 +24,13 @@ public:
 	Image4& operator=(const Image4& rhs);
 	Image4(Image4&& rhs);
 	Image4& operator=(Image4&& rhs);
-	Image4(const Image4& rhs, const Rect2<size_t>& clipBounds);
-	Image4(Image4&& rhs, const Rect2<size_t>& clipBounds);
+	Image4(const Image4& rhs, const Rect2<int>& clipBounds);
+	Image4(Image4&& rhs, const Rect2<int>& clipBounds);
 	~Image4();
 
 	int width() const;
 	int height() const;
-	uint32_t size() const;
+	size_t size() const;
 
 	static const Image4 none;
 	static const Image4 white;

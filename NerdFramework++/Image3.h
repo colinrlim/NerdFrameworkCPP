@@ -8,7 +8,7 @@ struct Image3
 private:
 	int _width;
 	int _height;
-	uint32_t _size;
+	size_t _size;
 public:
 	uint8_t* data;
 
@@ -24,13 +24,13 @@ public:
 	Image3& operator=(const Image3& rhs);
 	Image3(Image3&& rhs);
 	Image3& operator=(Image3&& rhs);
-	Image3(const Image3& rhs, const Rect2<size_t>& clipBounds);
-	Image3(Image3&& rhs, const Rect2<size_t>& clipBounds);
+	Image3(const Image3& rhs, const Rect2<int>& clipBounds);
+	Image3(Image3&& rhs, const Rect2<int>& clipBounds);
 	~Image3();
 
 	int width() const;
 	int height() const;
-	uint32_t size() const;
+	size_t size() const;
 
 	static const Image3 none;
 	static const Image3 white;

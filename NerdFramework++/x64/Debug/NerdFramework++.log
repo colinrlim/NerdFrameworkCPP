@@ -1,2 +1,25 @@
-﻿  TileBatcher.cpp
+﻿  Canvas.cpp
+  Frame.cpp
+  Image3.cpp
+  Image4.cpp
+  ImageLabel.cpp
+  ImageMaster.cpp
+  ImageParser.cpp
+  Interface.cpp
+  Material.cpp
+  MaterialManager.cpp
+  Mesh.cpp
+  MeshParser.cpp
+  MeshQuad3.cpp
+  RenderData3.cpp
+  RenderData4.cpp
+  Renderer2.cpp
+  Renderer3.cpp
+  TileBatch.cpp
+  Triangle2.cpp
+  UIObject.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  Generating Code...
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe
