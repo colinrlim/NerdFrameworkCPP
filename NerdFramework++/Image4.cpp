@@ -118,7 +118,7 @@ Image4::Image4(const Image4& rhs, const Rect2<int>& clipBounds) :
 	_size(_width * _height * 4),
 	data(new uint8_t[_size])
 {
-	for (size_t y = clipBounds.y; y < clipBounds.height; y++) {
+	for (int y = clipBounds.y; y < clipBounds.height; y++) {
 		size_t begin = y * rhs._width * 4;
 		size_t beginOffset = begin + clipBounds.x * 4;
 		size_t endOffset = beginOffset + clipBounds.width * 4;
@@ -131,10 +131,38 @@ Image4::Image4(Image4&& rhs, const Rect2<int>& clipBounds) :
 	_size(_width * _height * 4),
 	data(new uint8_t[_size])
 {
-	for (size_t y = clipBounds.y; y < clipBounds.height; y++) {
+	for (int y = clipBounds.y; y < clipBounds.height; y++) {
 		size_t begin = y * rhs._width * 4;
 		size_t beginOffset = begin + clipBounds.x * 4;
 		size_t endOffset = beginOffset + clipBounds.width * 4;
+		std::move(rhs.data + beginOffset, rhs.data + endOffset, data + begin);
+	}
+}
+Image4::Image4(const Image4& rhs, const UDim2& clipPosition, const UDim2& clipSize) :
+	_width((int)clipSize.x.absolute(rhs.width())),
+	_height((int)clipSize.y.absolute(rhs.height())),
+	_size(_width * _height * 4),
+	data(new uint8_t[_size])
+{
+	const Rect2<int> absoluteClipBounds(clipPosition, clipSize, _width, _height);
+	for (int y = absoluteClipBounds.y; y < absoluteClipBounds.height; y++) {
+		size_t begin = y * rhs._width * 4;
+		size_t beginOffset = begin + absoluteClipBounds.x * 4;
+		size_t endOffset = beginOffset + absoluteClipBounds.width * 4;
+		std::copy(rhs.data + beginOffset, rhs.data + endOffset, data + begin);
+	}
+}
+Image4::Image4(Image4&& rhs, const UDim2& clipPosition, const UDim2& clipSize) :
+	_width((int)clipSize.x.absolute(rhs.width())),
+	_height((int)clipSize.y.absolute(rhs.height())),
+	_size(_width * _height * 4),
+	data(new uint8_t[_size])
+{
+	const Rect2<int> absoluteClipBounds(clipPosition, clipSize, _width, _height);
+	for (int y = absoluteClipBounds.y; y < absoluteClipBounds.height; y++) {
+		size_t begin = y * rhs._width * 4;
+		size_t beginOffset = begin + absoluteClipBounds.x * 4;
+		size_t endOffset = beginOffset + absoluteClipBounds.width * 4;
 		std::move(rhs.data + beginOffset, rhs.data + endOffset, data + begin);
 	}
 }

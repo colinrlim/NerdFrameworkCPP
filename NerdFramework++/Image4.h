@@ -2,6 +2,7 @@
 
 #include "Color4.h"
 #include "Rect2.h"
+#include "UDim2.h"
 
 struct Image4
 {
@@ -26,6 +27,8 @@ public:
 	Image4& operator=(Image4&& rhs);
 	Image4(const Image4& rhs, const Rect2<int>& clipBounds);
 	Image4(Image4&& rhs, const Rect2<int>& clipBounds);
+	Image4(const Image4& rhs, const UDim2& clipPosition, const UDim2& clipSize);
+	Image4(Image4&& rhs, const UDim2& clipPosition, const UDim2& clipSize);
 	~Image4();
 
 	int width() const;

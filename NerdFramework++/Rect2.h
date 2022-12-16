@@ -18,16 +18,16 @@ struct Rect2
 		height(height)
 	{ }
 	Rect2(const UDim2& position, const UDim2& size, int width, int height) :
-		x(position.x.absolute(width)),
-		y(position.y.absolute(height)),
-		width(size.x.absolute(width)),
-		height(size.y.absolute(height))
+		x((T)position.x.absolute(width)),
+		y((T)position.y.absolute(height)),
+		width((T)size.x.absolute(width)),
+		height((T)size.y.absolute(height))
 	{ }
 	Rect2(const UDim2& position, const UDim2& size, const Rect2<double>& scope) :
-		x(position.x.absolute(scope.width)),
-		y(position.y.absolute(scope.height)),
-		width(size.x.absolute(scope.width)),
-		height(size.y.absolute(scope.height))
+		x((T)position.x.absolute(scope.width)),
+		y((T)position.y.absolute(scope.height)),
+		width((T)size.x.absolute(scope.width)),
+		height((T)size.y.absolute(scope.height))
 	{ }
 
 	bool overlaps(const Vector2& point) const {
