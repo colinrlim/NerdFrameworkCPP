@@ -30,53 +30,39 @@ Image4::Image4(int width, int height, uint8_t* data) :
 	_size(width * height * 4),
 	data(data)
 { }
-Image4::Image4(int width, int height, const std::vector<std::vector<uint8_t>>& map) :
+Image4::Image4(int width, int height, const std::vector<uint8_t>& map) :
 	_width(width),
 	_height(height),
 	_size(width * height * 4),
 	data(new uint8_t[_size])
 {
-	size_t rowSize = (size_t)(width * 4.0);
-	for (size_t y = 0; y < height; y++) {
-		const uint8_t* rowData = map[y].data();
-		std::copy(rowData, rowData + rowSize, data + y * rowSize);
-	}
+	std::copy(map.data(), map.data() + _size, data);
 }
-Image4::Image4(int width, int height, std::vector<std::vector<uint8_t>>&& map) :
+Image4::Image4(int width, int height, std::vector<uint8_t>&& map) :
 	_width(width),
 	_height(height),
 	_size(width * height * 4),
 	data(new uint8_t[_size])
 {
-	size_t rowSize = (size_t)(width * 4.0);
-	for (size_t y = 0; y < height; y++) {
-		uint8_t* rowData = map[y].data();
-		std::move(rowData, rowData + rowSize, data + y * rowSize);
-	}
+	std::move(map.data(), map.data() + _size, data);
 }
-Image4::Image4(int width, int height, const std::vector<std::vector<uint32_t>>& map) :
+Image4::Image4(int width, int height, const std::vector<uint32_t>& map) :
 	_width(width),
 	_height(height),
 	_size(width * height * 4),
 	data(new uint8_t[_size])
 {
-	size_t rowSize = (size_t)(width * 4.0);
-	for (size_t y = 0; y < height; y++) {
-		const uint8_t* rowData = (uint8_t*)map[y].data();
-		std::copy(rowData, rowData + rowSize, data + y * rowSize);
-	}
+	uint8_t* castedMapData = (uint8_t*)map.data();
+	std::copy(castedMapData, castedMapData + _size, data);
 }
-Image4::Image4(int width, int height, std::vector<std::vector<uint32_t>>&& map) :
+Image4::Image4(int width, int height, std::vector<uint32_t>&& map) :
 	_width(width),
 	_height(height),
 	_size(width * height * 4),
 	data(new uint8_t[_size])
 {
-	size_t rowSize = (size_t)(width * 4.0);
-	for (size_t y = 0; y < height; y++) {
-		uint8_t* rowData = (uint8_t*)map[y].data();
-		std::move(rowData, rowData + rowSize, data + y * rowSize);
-	}
+	uint8_t* castedMapData = (uint8_t*)map.data();
+	std::move(castedMapData, castedMapData + _size, data);
 }
 Image4::Image4(const Image4& rhs) :
 	_width(rhs._width),
