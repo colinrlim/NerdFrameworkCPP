@@ -4,8 +4,7 @@
 PaletteTileBatch::PaletteTileBatch(const PaletteTileBatch& rhs) :
     _renderer(nullptr),
     _grid(1, 1),
-    _paletteGrid(1, 1),
-    _cachedBakes()
+    _paletteGrid(1, 1)
 { }
 PaletteTileBatch& PaletteTileBatch::operator=(const PaletteTileBatch& rhs) { return *this; }
 PaletteTileBatch& PaletteTileBatch::operator=(PaletteTileBatch&& rhs) { return *this; }
@@ -24,8 +23,7 @@ void PaletteTileBatch::updateTileTypeTextures() {
 PaletteTileBatch::PaletteTileBatch(SDL_Renderer* renderer) :
     _renderer(renderer),
     _grid(1, 1),
-    _paletteGrid(1, 1),
-    _cachedBakes()
+    _paletteGrid(1, 1)
 { }
 PaletteTileBatch::PaletteTileBatch(PaletteTileBatch&& rhs) :
     _renderer(rhs._renderer),
@@ -33,8 +31,7 @@ PaletteTileBatch::PaletteTileBatch(PaletteTileBatch&& rhs) :
     _tileTypesTextures(std::move(rhs._tileTypesTextures)),
     _paletteTypes(std::move(rhs._paletteTypes)),
     _grid(std::move(rhs._grid)),
-    _paletteGrid(std::move(rhs._paletteGrid)),
-    _cachedBakes(std::move(rhs._cachedBakes))
+    _paletteGrid(std::move(rhs._paletteGrid))
 { }
 PaletteTileBatch::~PaletteTileBatch() {
     for (auto pair = _tileTypesTextures.begin(); pair != _tileTypesTextures.end(); ++pair)
