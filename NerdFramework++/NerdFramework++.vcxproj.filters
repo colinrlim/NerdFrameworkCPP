@@ -301,6 +301,33 @@
     <Filter Include="Interface2D\TileBatch">
       <UniqueIdentifier>{53784795-161b-4841-93ff-11c60a2f21e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface2D\Image\Palette">
+      <UniqueIdentifier>{e6367d38-f158-4141-a252-b545a00125db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos">
+      <UniqueIdentifier>{e0b97af5-2804-4f57-87c9-1d2473678a2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\Pac-Man">
+      <UniqueIdentifier>{5d489edd-71b7-4e35-96db-1f22f6c4e904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\Pac-Man\GameState">
+      <UniqueIdentifier>{ffe7eb4b-694d-43c4-8271-1525cfcb379b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\Pac-Man\Entity">
+      <UniqueIdentifier>{1cb561f2-23e0-4c7c-8ce4-089f2cd8b05b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Image\PaletteImage">
+      <UniqueIdentifier>{3ac1fc6a-27fe-45af-afd4-9dccacfe3d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteTileBatch">
+      <UniqueIdentifier>{06f1e6b4-c5e0-4499-8ca2-1b40e66e6dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\Pac-Man\Entity\Player">
+      <UniqueIdentifier>{3f6528f6-4343-40e6-a9c5-0c87f5d2873c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\Pac-Man\Entity\Enemy">
+      <UniqueIdentifier>{e0c0fb4b-2e6c-4cc2-b487-048757c2871e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -389,9 +416,6 @@
     </ClInclude>
     <ClInclude Include="Color3.h">
       <Filter>Interface2D\Color\Color3</Filter>
-    </ClInclude>
-    <ClInclude Include="Image4.h">
-      <Filter>Interface2D\Image\Image4</Filter>
     </ClInclude>
     <ClInclude Include="UIObject.h">
       <Filter>Interface2D\UIObject</Filter>
@@ -530,6 +554,33 @@
     </ClInclude>
     <ClInclude Include="TileBatch.h">
       <Filter>Interface2D\TileBatch</Filter>
+    </ClInclude>
+    <ClInclude Include="Image4.h">
+      <Filter>Interface2D\Image\Image4</Filter>
+    </ClInclude>
+    <ClInclude Include="pacman.h">
+      <Filter>Demos\Pac-Man</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Demos\Pac-Man\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Demos\Pac-Man\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="PaletteImage.h">
+      <Filter>Interface2D\Image\PaletteImage</Filter>
+    </ClInclude>
+    <ClInclude Include="Palette.h">
+      <Filter>Interface2D\Image\Palette</Filter>
+    </ClInclude>
+    <ClInclude Include="PaletteTileBatch.h">
+      <Filter>Interface2D\PaletteTileBatch</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Demos\Pac-Man\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Demos\Pac-Man\Entity\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -724,6 +775,27 @@
     </ClCompile>
     <ClCompile Include="TileBatch.cpp">
       <Filter>Interface2D\TileBatch</Filter>
+    </ClCompile>
+    <ClCompile Include="pacman.cpp">
+      <Filter>Demos\Pac-Man</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Demos\Pac-Man\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Demos\Pac-Man\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="PaletteImage.cpp">
+      <Filter>Interface2D\Image\PaletteImage</Filter>
+    </ClCompile>
+    <ClCompile Include="PaletteTileBatch.cpp">
+      <Filter>Interface2D\PaletteTileBatch</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Demos\Pac-Man\Entity\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Demos\Pac-Man\Entity\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

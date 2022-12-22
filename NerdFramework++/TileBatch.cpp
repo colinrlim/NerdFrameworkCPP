@@ -3,7 +3,7 @@
 
 TileBatch::TileBatch(const TileBatch& rhs) :
     _renderer(nullptr),
-    grid(1, 1)
+    _grid(1, 1)
 { }
 TileBatch& TileBatch::operator=(const TileBatch& rhs) { return *this; }
 TileBatch& TileBatch::operator=(TileBatch&& rhs) { return *this; }
@@ -13,66 +13,59 @@ SDL_Texture* TileBatch::createTexture(const Image4& image) const {
     SDL_UpdateTexture(texture, nullptr, image.data, image.width() * 4);
     return texture;
 }
+void TileBatch::updateTileTypeTextures() {
+    for (auto pair = _tileTypes.begin(); pair != _tileTypes.end(); ++pair)
+        _tileTypesTextures[pair->first] = createTexture(pair->second);
+}
 
-TileBatch::TileBatch(SDL_Renderer* renderer, const Grid2<uint8_t>& grid, const std::map<uint8_t, Image4>& tileMap) :
-    _imageMap(tileMap),
+TileBatch::TileBatch(SDL_Renderer* renderer) :
     _renderer(renderer),
-    grid(grid)
-{
-    for (auto pair = _imageMap.begin(); pair != _imageMap.end(); ++pair)
-        _textureMap[pair->first] = createTexture(pair->second);
-}
-TileBatch::TileBatch(SDL_Renderer* renderer, Grid2<uint8_t>&& grid, std::map<uint8_t, Image4>&& tileMap) :
-    _imageMap(std::move(tileMap)),
-    _renderer(renderer),
-    grid(std::move(grid))
-{
-    for (auto pair = _imageMap.begin(); pair != _imageMap.end(); ++pair)
-        _textureMap[pair->first] = createTexture(pair->second);
-}
-TileBatch::TileBatch(SDL_Renderer* renderer, const Grid2<uint8_t>& grid) :
-    _renderer(renderer),
-    grid(grid)
-{ }
-TileBatch::TileBatch(SDL_Renderer* renderer, Grid2<uint8_t>&& grid) :
-    _renderer(renderer),
-    grid(std::move(grid))
+    _grid(1, 1)
 { }
 TileBatch::TileBatch(TileBatch&& rhs) :
-    _imageMap(std::move(rhs._imageMap)),
-    _textureMap(std::move(rhs._textureMap)),
+    _tileTypes(std::move(rhs._tileTypes)),
+    _tileTypesTextures(std::move(rhs._tileTypesTextures)),
     _renderer(rhs._renderer),
-    grid(std::move(rhs.grid))
+    _grid(std::move(rhs._grid))
 { }
 TileBatch::~TileBatch() {
-    for (auto pair = _textureMap.begin(); pair != _textureMap.end(); ++pair)
+    for (auto pair = _tileTypesTextures.begin(); pair != _tileTypesTextures.end(); ++pair)
         SDL_DestroyTexture(pair->second);
 }
 
-const Image4& TileBatch::getTileImage(uint8_t key) const {
-    return _imageMap.at(key);
+uint8_t* TileBatch::data() const {
+    return _grid.data();
 }
-void TileBatch::setTileImage(uint8_t key, const Image4& image) {
-    _imageMap[key] = image;
-    _textureMap[key] = createTexture(_imageMap[key]);
+uint8_t& TileBatch::at(size_t x, size_t y) const {
+    return _grid.get(x, y);
 }
-void TileBatch::setTileImage(uint8_t key, Image4&& image) {
-    _imageMap[key] = std::move(image);
-    _textureMap[key] = createTexture(_imageMap[key]);
+void TileBatch::setGrid(const Grid2<uint8_t>& grid) {
+    _grid = grid;
+}
+void TileBatch::setGrid(Grid2<uint8_t>&& grid) {
+    _grid = std::move(grid);
+}
+void TileBatch::setTileTypes(const std::map<uint8_t, Image4>& tileTypes) {
+    _tileTypes = tileTypes;
+    updateTileTypeTextures();
+}
+void TileBatch::setTileTypes(std::map<uint8_t, Image4>&& tileTypes) {
+    _tileTypes = std::move(tileTypes);
+    updateTileTypeTextures();
 }
 
 void TileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
     const double maxWidth = screen.width();
     const double maxHeight = screen.height();
 
-    size_t width = grid.width();
-    size_t height = grid.height();
+    size_t width = _grid.width();
+    size_t height = _grid.height();
 
     Rect2<double> destination = bounds;
     for (size_t y = 0; y < height; y++) {
         for (size_t x = 0; x < width; x++) {
-            auto pair = _imageMap.find(grid.get(x, y));
-            if (pair == _imageMap.end()) continue;
+            auto pair = _tileTypes.find(_grid.get(x, y));
+            if (pair == _tileTypes.end()) continue;
             const Image4& image = pair->second;
 
             destination.x = bounds.x + x * bounds.width;
@@ -85,12 +78,12 @@ void TileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
             double yMaxConstrained = Math::min(destination.y + destination.height, maxHeight - 1.0);
 
             // Render object fill color (image) on top of pre-existing
-            for (size_t y = (int)yMinConstrained; y <= (int)yMaxConstrained; y++) {
+            for (size_t y = (int)yMinConstrained; y < (int)yMaxConstrained; y++) {
                 double s = (y - destination.y) / destination.height;
-                for (size_t x = (int)xMinConstrained; x <= (int)xMaxConstrained; x++) {
+                for (size_t x = (int)xMinConstrained; x < (int)xMaxConstrained; x++) {
                     double t = (x - destination.x) / destination.width;
                     void* pixel = screen.pixelAt(x, y);
-                    Color4::flatten(pixel, image.colorAt(t, s));
+                    Color4::flatten(pixel, image.atParameterization(t, s));
                 }
             }
         }
@@ -98,14 +91,14 @@ void TileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
 }
 
 void TileBatch::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
-    size_t width = grid.width();
-    size_t height = grid.height();
+    size_t width = _grid.width();
+    size_t height = _grid.height();
 
     SDL_Rect destination{ (int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height };
     for (size_t y = 0; y < height; y++) {
         for (size_t x = 0; x < width; x++) {
-            auto pair = _textureMap.find(grid.get(x, y));
-            if (pair == _textureMap.end()) continue;
+            auto pair = _tileTypesTextures.find(_grid.get(x, y));
+            if (pair == _tileTypesTextures.end()) continue;
             destination.x = (int)(bounds.x + x * bounds.width);
             destination.y = (int)(bounds.y + y * bounds.height);
             SDL_RenderCopy(renderer, pair->second, nullptr, &destination);

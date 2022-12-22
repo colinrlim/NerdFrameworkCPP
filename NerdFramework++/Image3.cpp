@@ -45,6 +45,16 @@ Image3::Image3(int width, int height, std::vector<uint8_t>&& map) :
 {
 	std::move(map.data(), map.data() + _size, data);
 }
+Image3::Image3(const PaletteImage& paletteImage, const Palette<Color3>& palette) :
+	_width(paletteImage.width()),
+	_height(paletteImage.height()),
+	_size(_width* _height * 3),
+	data(new uint8_t[_size])
+{
+	size_t size = paletteImage.size();
+	for (size_t i = 0; i < size; i++)
+		palette[paletteImage.data[i]].writeToPixel(data + i*3);
+}
 Image3::Image3(const Image3& rhs) :
 	_width(rhs._width),
 	_height(rhs._height),
@@ -156,7 +166,7 @@ void* Image3::pixelAt(size_t x, size_t y) const {
 	else if (y >= this->_height) return nullptr;
 	return this->data + (x + y * this->_width) * 3;
 }
-Color3 Image3::colorAt(double t, double s) const {
+Color3 Image3::atParameterization(double t, double s) const {
 	t -= Math::floor(t);
 	s -= Math::floor(s);
 

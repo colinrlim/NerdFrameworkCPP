@@ -10,8 +10,11 @@
 #include "Tester.h"
 #include "TileBatch.h"
 
+#include "pacman.h"
+
 int main() {
-	std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;
+    launch();
+	/*std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;
 	std::cout << VigenereCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", "cryptii") << std::endl;
 
     BinaryGrid2 grid(10, 10, false);
@@ -87,7 +90,9 @@ int main() {
             interface.frame.children.push_back(&frame);
             interface.frame.children.push_back(&imageLabel);
 
-            batcher = new TileBatch(renderer, std::move(grid), std::move(map));
+            batcher = new TileBatch(renderer);
+            batcher->setGrid(std::move(grid));
+            batcher->setTileTypes(std::move(map));
 
 
         });
@@ -124,5 +129,5 @@ int main() {
 
     SDL_Quit();
 
-	return 0;
+	return 0;*/
 }

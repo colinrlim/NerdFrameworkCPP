@@ -64,6 +64,16 @@ Image4::Image4(int width, int height, std::vector<uint32_t>&& map) :
 	uint8_t* castedMapData = (uint8_t*)map.data();
 	std::move(castedMapData, castedMapData + _size, data);
 }
+Image4::Image4(const PaletteImage& paletteImage, const Palette<Color4>& palette) :
+	_width(paletteImage.width()),
+	_height(paletteImage.height()),
+	_size(_width * _height * 4),
+	data(new uint8_t[_size])
+{
+	size_t size = paletteImage.size();
+	for (size_t i = 0; i < size; i++)
+		palette[paletteImage.data[i]].writeToPixel(data + i*4);
+}
 Image4::Image4(const Image4& rhs) :
 	_width(rhs._width),
 	_height(rhs._height),
@@ -175,7 +185,7 @@ void* Image4::pixelAt(size_t x, size_t y) const {
 	else if (y >= this->_height) return nullptr;
 	return this->data + (x + y * this->_width) * 4;
 }
-Color4 Image4::colorAt(double t, double s) const {
+Color4 Image4::atParameterization(double t, double s) const {
 	t -= Math::floor(t);
 	s -= Math::floor(s);
 

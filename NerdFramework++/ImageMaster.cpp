@@ -52,7 +52,7 @@ void ImageMaster::draw(Image4& screen, const Rect2<double>& bounds) {
         for (size_t x = (int)xMinConstrained; x <= (int)xMaxConstrained; x++) {
             double t = (x - bounds.x) / bounds.width;
             void* pixel = screen.pixelAt(x, y);
-            Color4::flatten(pixel, _image.colorAt(t, s));
+            Color4::flatten(pixel, _image.atParameterization(t, s));
         }
     }
 }

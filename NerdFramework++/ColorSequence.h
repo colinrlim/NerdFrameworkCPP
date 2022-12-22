@@ -43,7 +43,7 @@ public:
 
         return TSequence(quantizedSteps);
     }
-    T colorAt(double interpolant) {
+    T atParameterization(double interpolant) {
         auto step0 = steps.rend();
         auto step1 = steps.end();
         for (auto it = steps.begin(); it != steps.end(); it++) {

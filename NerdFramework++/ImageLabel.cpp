@@ -56,16 +56,16 @@ void ImageLabel::draw(Image4& screen, const Rect2<double>& scope) {
     const double maxHeight = screen.height();
     double xMinConstrained = Math::max(0.0, childScope.x);
     double yMinConstrained = Math::max(0.0, childScope.y);
-    double xMaxConstrained = Math::min(childScope.x + childScope.width, maxWidth - 1.0);
-    double yMaxConstrained = Math::min(childScope.y + childScope.height, maxHeight - 1.0);
+    double xMaxConstrained = Math::min(childScope.x + childScope.width, maxWidth);
+    double yMaxConstrained = Math::min(childScope.y + childScope.height, maxHeight);
 
     // Render object fill color (image) on top of pre-existing
-    for (size_t y = (int)yMinConstrained; y <= (int)yMaxConstrained; y++) {
+    for (size_t y = (int)yMinConstrained; y < (int)yMaxConstrained; y++) {
         double s = (y - childScope.y) / childScope.height;
-        for (size_t x = (int)xMinConstrained; x <= (int)xMaxConstrained; x++) {
+        for (size_t x = (int)xMinConstrained; x < (int)xMaxConstrained; x++) {
             double t = (x - childScope.x) / childScope.width;
             void* pixel = screen.pixelAt(x, y);
-            Color4::flatten(pixel, _image.colorAt(t, s));
+            Color4::flatten(pixel, _image.atParameterization(t, s));
         }
     }
 }

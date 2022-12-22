@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NerdFrameworkCPP", "NerdFramework++\NerdFramework++.vcxproj", "{BE5711BD-3994-4138-937D-345254E01B96}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NerdPanel", "NerdPanel\NerdPanel.vcxproj", "{773FADA8-F334-47BE-B621-61080A89EEB0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BE5711BD-3994-4138-937D-345254E01B96} = {BE5711BD-3994-4138-937D-345254E01B96}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

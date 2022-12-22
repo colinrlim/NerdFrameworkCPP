@@ -126,28 +126,28 @@ void UIObject::draw(Image4& screen, const Rect2<double>& scope) {
     const double maxHeight = screen.height();
     xMin = Math::max(0.0, xMin);
     yMin = Math::max(0.0, yMin);
-    xMax = Math::min(xMax, maxWidth - 1.0);
-    yMax = Math::min(yMax, maxHeight - 1.0);
+    xMax = Math::min(xMax, maxWidth);
+    yMax = Math::min(yMax, maxHeight);
 
     // Render object border color on top of pre-existing
     if (borderWidth > 0 && _borderOpacity > 0.0) {
         for (size_t y = (int)Math::max(0.0, yMin - borderWidth); y < (int)Math::min(yMin, maxHeight); y++)
-            for (size_t x = (int)Math::max(0.0, xMin - borderWidth); x <= (int)Math::min(xMax + borderWidth, maxHeight); x++) {
+            for (size_t x = (int)Math::max(0.0, xMin - borderWidth); x < (int)Math::min(xMax + borderWidth, maxHeight); x++) {
                 void* pixel = screen.pixelAt(x, y);
                 Color4::flatten(pixel, _borderColorBaked);
             }
-        for (size_t y = (int)Math::max(0.0, yMax + 1); y <= (int)Math::min(yMax + borderWidth, maxHeight); y++)
-            for (size_t x = (int)Math::max(0.0, xMin - borderWidth); x <= (int)Math::min(xMax + borderWidth, maxHeight); x++) {
+        for (size_t y = (int)Math::max(0.0, yMax); y < (int)Math::min(yMax + borderWidth, maxHeight); y++)
+            for (size_t x = (int)Math::max(0.0, xMin - borderWidth); x < (int)Math::min(xMax + borderWidth, maxHeight); x++) {
                 void* pixel = screen.pixelAt(x, y);
                 Color4::flatten(pixel, _borderColorBaked);
             }
-        for (size_t y = (int)yMin; y <= (int)yMax; y++)
+        for (size_t y = (int)yMin; y < (int)yMax; y++)
             for (size_t x = (int)Math::max(0.0, xMin - borderWidth); x < (int)Math::min(xMin, maxHeight); x++) {
                 void* pixel = screen.pixelAt(x, y);
                 Color4::flatten(pixel, _borderColorBaked);
             }
-        for (size_t y = (int)yMin; y <= (int)yMax; y++)
-            for (size_t x = (int)Math::max(0.0, xMax + 1); x <= (int)Math::min(xMax + borderWidth, maxHeight); x++) {
+        for (size_t y = (int)yMin; y < (int)yMax; y++)
+            for (size_t x = (int)Math::max(0.0, xMax); x < (int)Math::min(xMax + borderWidth, maxHeight); x++) {
                 void* pixel = screen.pixelAt(x, y);
                 Color4::flatten(pixel, _borderColorBaked);
             }
@@ -155,8 +155,8 @@ void UIObject::draw(Image4& screen, const Rect2<double>& scope) {
 
     // Render object fill color on top of pre-existing
     if (_opacity > 0.0)
-        for (size_t y = (int)yMin; y <= (int)yMax; y++)
-            for (size_t x = (int)xMin; x <= (int)xMax; x++) {
+        for (size_t y = (int)yMin; y < (int)yMax; y++)
+            for (size_t x = (int)xMin; x < (int)xMax; x++) {
                 void* pixel = screen.pixelAt(x, y);
                 Color4::flatten(pixel, _colorBaked);
             }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PaletteImage.h"
+#include "Palette.h"
 #include "Color4.h"
 #include "Rect2.h"
 #include "UDim2.h"
@@ -21,6 +23,7 @@ public:
 	Image4(int width, int height, std::vector<uint8_t>&& map);
 	Image4(int width, int height, const std::vector<uint32_t>& map);
 	Image4(int width, int height, std::vector<uint32_t>&& map);
+	Image4(const PaletteImage& paletteImage, const Palette<Color4>& palette);
 	Image4(const Image4& rhs);
 	Image4& operator=(const Image4& rhs);
 	Image4(Image4&& rhs);
@@ -40,7 +43,7 @@ public:
 	static const Image4 black;
 
 	void* pixelAt(size_t x, size_t y) const;
-	Color4 colorAt(double t, double s) const;
+	Color4 atParameterization(double t, double s) const;
 	void modify(const std::function<void(void*)>& func);
 	void modify(const std::function<void(size_t, size_t, void*)>& func);
 };

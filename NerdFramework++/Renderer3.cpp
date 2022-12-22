@@ -4,11 +4,11 @@
 #include <algorithm>
 #include <iterator>
 
-Color4 Renderer3::totalColorAt(const MeshTriangle3& triangle, const Color4& colorA, const Color4& colorB, const Color4& colorC, double t, double s) const {
+Color4 Renderer3::totalatParameterization(const MeshTriangle3& triangle, const Color4& colorA, const Color4& colorB, const Color4& colorC, double t, double s) const {
     Vector2 textureCoords = Vector2::fromParameterization3(t, s, triangle.textureU, triangle.textureV, triangle.textureW);
 
     Material material = *triangle.material;
-    Color4 textureLight = material.texture.colorAt(textureCoords.x, textureCoords.y);
+    Color4 textureLight = material.texture.atParameterization(textureCoords.x, textureCoords.y);
     Color4 diffuseLight = Color4::fromVector3(material.diffuseColor);
     double lightValue = Color4::valueFromParameterization(t, s, colorA, colorB, colorC) / 255.0;
 
@@ -144,7 +144,7 @@ void Renderer3::renderBatchRasterized(SDL_Renderer* renderer, const Rect2<double
             const Color4& colorB = renderFog(calculateLighting(triangle.b, triangle.normalB), distance2);
             const Color4& colorC = renderFog(calculateLighting(triangle.c, triangle.normalC), distance3);
 
-            renderTriangle(renderer, totalColorAt(triangle, colorA, colorB, colorC, 0.0, 0.0), totalColorAt(triangle, colorA, colorB, colorC, 1.0, 0.0), totalColorAt(triangle, colorA, colorB, colorC, 0.0, 1.0), a, b, c);
+            renderTriangle(renderer, totalatParameterization(triangle, colorA, colorB, colorC, 0.0, 0.0), totalatParameterization(triangle, colorA, colorB, colorC, 1.0, 0.0), totalatParameterization(triangle, colorA, colorB, colorC, 0.0, 1.0), a, b, c);
         }
         else
         {
@@ -153,7 +153,7 @@ void Renderer3::renderBatchRasterized(SDL_Renderer* renderer, const Rect2<double
             const Color4& colorB = renderFog(calculateLighting(triangle.b, normal), distance2);
             const Color4& colorC = renderFog(calculateLighting(triangle.c, normal), distance3);
 
-            renderTriangle(renderer, totalColorAt(triangle, colorA, colorB, colorC, 0.0, 0.0), totalColorAt(triangle, colorA, colorB, colorC, 1.0, 0.0), totalColorAt(triangle, colorA, colorB, colorC, 0.0, 1.0), a, b, c);
+            renderTriangle(renderer, totalatParameterization(triangle, colorA, colorB, colorC, 0.0, 0.0), totalatParameterization(triangle, colorA, colorB, colorC, 1.0, 0.0), totalatParameterization(triangle, colorA, colorB, colorC, 0.0, 1.0), a, b, c);
         }
     }
 }

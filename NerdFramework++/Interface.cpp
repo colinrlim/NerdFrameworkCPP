@@ -8,7 +8,10 @@ Interface::Interface(std::function<void(Interface&, SDL_Renderer*)> onInit) :
 	_height(480),
 	screen(_width, _height),
 	_created(std::chrono::steady_clock::now()),
-	_lastFrame(std::chrono::steady_clock::now())
+	_lastFrame(std::chrono::steady_clock::now()),
+	onUpdate([](Interface& interface, double delta) -> void {}),
+	onDraw([](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {}),
+	onDrawSDL([](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {})
 {
 	if (window != nullptr)
 	{
@@ -22,7 +25,10 @@ Interface::Interface(SDL_Window* window, std::function<void(Interface&, SDL_Rend
 	window(window),
 	frame(UDim2::zero, UDim2::one),
 	_created(std::chrono::steady_clock::now()),
-	_lastFrame(std::chrono::steady_clock::now())
+	_lastFrame(std::chrono::steady_clock::now()),
+	onUpdate([](Interface& interface, double delta) -> void {}),
+	onDraw([](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {}),
+	onDrawSDL([](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {})
 {
 	SDL_GetWindowSize(window, &_width, &_height);
 	screen = std::move(Image4(_width, _height));
@@ -38,7 +44,10 @@ Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene, st
 	window(window),
 	frame(UDim2::zero, UDim2::one),
 	_created(std::chrono::steady_clock::now()),
-	_lastFrame(std::chrono::steady_clock::now())
+	_lastFrame(std::chrono::steady_clock::now()),
+	onUpdate([](Interface& interface, double delta) -> void {}),
+	onDraw([](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {}),
+	onDrawSDL([](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {})
 {
 	SDL_GetWindowSize(window, &_width, &_height);
 	screen = std::move(Image4(_width, _height));
@@ -58,7 +67,10 @@ Interface::Interface(const std::vector<UIObject*>& scene, std::function<void(Int
 	_height(480),
 	screen(_width, _height),
 	_created(std::chrono::steady_clock::now()),
-	_lastFrame(std::chrono::steady_clock::now())
+	_lastFrame(std::chrono::steady_clock::now()),
+	onUpdate([](Interface& interface, double delta) -> void {}),
+	onDraw([](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {}),
+	onDrawSDL([](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {})
 {
 	frame.children = scene;
 	if (window != NULL)
@@ -79,7 +91,7 @@ Interface::~Interface() {
 }
 
 double Interface::secondsElapsed() const {
-	return (double)std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - _created).count();
+	return (double)std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - _created).count() / 1000.0;
 }
 
 void Interface::update() {

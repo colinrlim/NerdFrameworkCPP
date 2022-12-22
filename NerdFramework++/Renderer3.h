@@ -16,7 +16,7 @@ private:
 	std::map<Vector3*, Vector2> _pointProjections;
 	std::map<Vector3*, double> _pointDistances;
 
-	Color4 totalColorAt(const MeshTriangle3& triangle, const Color4& color1, const Color4& color2, const Color4& Color4, double t, double s) const;
+	Color4 totalatParameterization(const MeshTriangle3& triangle, const Color4& color1, const Color4& color2, const Color4& Color4, double t, double s) const;
 	Color4 calculateLighting(const Vector3& point, const Vector3& normal) const;
 	Color4 renderFog(const Color4& original, double distance) const;
 

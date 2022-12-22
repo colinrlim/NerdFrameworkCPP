@@ -159,10 +159,18 @@
     <ClInclude Include="Color4.h" />
     <ClInclude Include="ColorSequence3.h" />
     <ClInclude Include="ColorSequence4.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Grid2.h" />
     <ClInclude Include="Image3.h" />
     <ClInclude Include="CameraRay3.h" />
     <ClInclude Include="ImageMaster.h" />
+    <ClInclude Include="pacman.h" />
+    <ClInclude Include="Palette.h" />
+    <ClInclude Include="PaletteImage.h" />
+    <ClInclude Include="PaletteTileBatch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="QuickGrid2.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="String.h" />
@@ -232,9 +240,15 @@
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Color3.cpp" />
     <ClCompile Include="Color4.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Image3.cpp" />
     <ClCompile Include="CameraRay3.cpp" />
     <ClCompile Include="ImageMaster.cpp" />
+    <ClCompile Include="PaletteImage.cpp" />
+    <ClCompile Include="PaletteTileBatch.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Tester.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -288,6 +302,7 @@
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vector3s.cpp" />
     <ClCompile Include="VigenereCipher.cpp" />
+    <ClCompile Include="pacman.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
