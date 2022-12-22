@@ -117,12 +117,11 @@ void PaletteTileBatch::draw(SDL_Renderer* renderer, const Rect2<double>& bounds)
     for (size_t y = 0; y < height; y++) {
         for (size_t x = 0; x < width; x++) {
             auto key = std::make_pair(_grid.get(x, y), _paletteGrid.get(x, y));
-            auto pair = _tileTypesTextures.find(key);
-            if (pair == _tileTypesTextures.end())
-                _tileTypesTextures[key] = createTexture(Image4(_tileTypes[key.first], _paletteTypes[key.second]));
+            if (_tileTypesTextures.find(key) == _tileTypesTextures.end())
+                _tileTypesTextures[key] = createTexture(std::move(Image4(_tileTypes[key.first], _paletteTypes[key.second])));
             destination.x = (int)(bounds.x + x * bounds.width);
             destination.y = (int)(bounds.y + y * bounds.height);
-            SDL_RenderCopy(renderer, pair->second, nullptr, &destination);
+            SDL_RenderCopy(renderer, _tileTypesTextures[key], nullptr, &destination);
         }
     }
 }

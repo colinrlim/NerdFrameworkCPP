@@ -13,10 +13,6 @@ SDL_Texture* TileBatch::createTexture(const Image4& image) const {
     SDL_UpdateTexture(texture, nullptr, image.data, image.width() * 4);
     return texture;
 }
-void TileBatch::updateTileTypeTextures() {
-    for (auto pair = _tileTypes.begin(); pair != _tileTypes.end(); ++pair)
-        _tileTypesTextures[pair->first] = createTexture(pair->second);
-}
 
 TileBatch::TileBatch(SDL_Renderer* renderer) :
     _renderer(renderer),
@@ -47,11 +43,9 @@ void TileBatch::setGrid(Grid2<uint8_t>&& grid) {
 }
 void TileBatch::setTileTypes(const std::map<uint8_t, Image4>& tileTypes) {
     _tileTypes = tileTypes;
-    updateTileTypeTextures();
 }
 void TileBatch::setTileTypes(std::map<uint8_t, Image4>&& tileTypes) {
     _tileTypes = std::move(tileTypes);
-    updateTileTypeTextures();
 }
 
 void TileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
@@ -97,11 +91,12 @@ void TileBatch::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
     SDL_Rect destination{ (int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height };
     for (size_t y = 0; y < height; y++) {
         for (size_t x = 0; x < width; x++) {
-            auto pair = _tileTypesTextures.find(_grid.get(x, y));
-            if (pair == _tileTypesTextures.end()) continue;
+            const uint8_t& key = _grid.get(x, y);
+            if (_tileTypesTextures.find(key) == _tileTypesTextures.end())
+                _tileTypesTextures.emplace(key, createTexture(_tileTypes[key]));
             destination.x = (int)(bounds.x + x * bounds.width);
             destination.y = (int)(bounds.y + y * bounds.height);
-            SDL_RenderCopy(renderer, pair->second, nullptr, &destination);
+            SDL_RenderCopy(renderer, _tileTypesTextures[key], nullptr, &destination);
         }
     }
 }

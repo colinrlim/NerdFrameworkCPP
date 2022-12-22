@@ -1017,6 +1017,9 @@ void launch() {
 		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
 			tileBatch->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
 		};
+		interface.onDrawSDL = [&](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
+			tileBatch->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
+		};
 		uint8_t* paletteData = tileBatch->paletteGridData();
 		interface.onUpdate = [&](Interface& interface, double delta) -> void {
 			if (Math::dmod(interface.secondsElapsed(), 0.5) >= 0.25 && paletteData[3] == 2)
@@ -1053,7 +1056,7 @@ void launch() {
 				}
 
 				interface.update();
-				interface.draw();
+				interface.drawSDL();
 			}
 		}
 		delete tileBatch;
