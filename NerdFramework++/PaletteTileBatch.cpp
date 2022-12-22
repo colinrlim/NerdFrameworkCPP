@@ -14,11 +14,6 @@ SDL_Texture* PaletteTileBatch::createTexture(Image4&& image) const {
     SDL_UpdateTexture(texture, nullptr, image.data, image.width() * 4);
     return texture;
 }
-void PaletteTileBatch::updateTileTypeTextures() {
-    for (auto tileTypePair = _tileTypes.begin(); tileTypePair != _tileTypes.end(); ++tileTypePair)
-        for (auto paletteTypePair = _paletteTypes.begin(); paletteTypePair != _paletteTypes.end(); ++paletteTypePair)
-            _tileTypesTextures[std::make_pair(tileTypePair->first, paletteTypePair->first)] = createTexture(Image4(tileTypePair->second, paletteTypePair->second));
-}
 
 PaletteTileBatch::PaletteTileBatch(SDL_Renderer* renderer) :
     _renderer(renderer),
@@ -66,19 +61,15 @@ void PaletteTileBatch::setPaletteGrid(Grid2<uint8_t>&& paletteGrid) {
 
 void PaletteTileBatch::setTileTypes(const std::map<uint8_t, PaletteImage>& tileTypes) {
     _tileTypes = tileTypes;
-    updateTileTypeTextures();
 }
 void PaletteTileBatch::setTileTypes(std::map<uint8_t, PaletteImage>&& tileTypes) {
     _tileTypes = std::move(tileTypes);
-    updateTileTypeTextures();
 }
 void PaletteTileBatch::setPaletteTypes(const std::map<uint8_t, Palette<Color4>>& palettes) {
     _paletteTypes = palettes;
-    updateTileTypeTextures();
 }
 void PaletteTileBatch::setPaletteTypes(std::map<uint8_t, Palette<Color4>>&& palettes) {
     _paletteTypes = std::move(palettes);
-    updateTileTypeTextures();
 }
 
 void PaletteTileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
@@ -125,8 +116,10 @@ void PaletteTileBatch::draw(SDL_Renderer* renderer, const Rect2<double>& bounds)
     SDL_Rect destination{ (int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height };
     for (size_t y = 0; y < height; y++) {
         for (size_t x = 0; x < width; x++) {
-            auto pair = _tileTypesTextures.find(std::make_pair(_grid.get(x, y), _paletteGrid.get(x, y)));
-            if (pair == _tileTypesTextures.end()) continue;
+            auto key = std::make_pair(_grid.get(x, y), _paletteGrid.get(x, y));
+            auto pair = _tileTypesTextures.find(key);
+            if (pair == _tileTypesTextures.end())
+                _tileTypesTextures[key] = createTexture(Image4(_tileTypes[key.first], _paletteTypes[key.second]));
             destination.x = (int)(bounds.x + x * bounds.width);
             destination.y = (int)(bounds.y + y * bounds.height);
             SDL_RenderCopy(renderer, pair->second, nullptr, &destination);

@@ -1,6 +1,6 @@
 ﻿  Entity.cpp
   GameState.cpp
-  main.cpp
+  PaletteTileBatch.cpp
   pacman.cpp
   Generating Code...
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe

@@ -6,6 +6,7 @@
 #include <vector>
 #include "Math.h"
 #include <iostream>
+#include "GameState.h"
 
 void launch() {
 	const uint32_t w = Color4::white.toInteger();
@@ -1010,6 +1011,8 @@ void launch() {
 
 			std::string text = "   \1UP   HIGH SCORE";
 			std::move(text.data(), text.data() + text.length(), tileBatch->gridData());
+
+			GameState::getInstance().tileBatch = tileBatch;
 		});
 		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
 			tileBatch->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});

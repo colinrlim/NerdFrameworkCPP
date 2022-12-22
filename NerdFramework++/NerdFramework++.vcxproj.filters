@@ -328,6 +328,9 @@
     <Filter Include="Demos\Pac-Man\Entity\Enemy">
       <UniqueIdentifier>{e0c0fb4b-2e6c-4cc2-b487-048757c2871e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface2D\PaletteImageMaster">
+      <UniqueIdentifier>{f3dd52a0-e020-45ca-ae24-d82c8fd90815}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -582,6 +585,9 @@
     <ClInclude Include="Player.h">
       <Filter>Demos\Pac-Man\Entity\Player</Filter>
     </ClInclude>
+    <ClInclude Include="PaletteImageMaster.h">
+      <Filter>Interface2D\PaletteImageMaster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
@@ -796,6 +802,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Demos\Pac-Man\Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PaletteImageMaster.cpp">
+      <Filter>Interface2D\PaletteImageMaster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

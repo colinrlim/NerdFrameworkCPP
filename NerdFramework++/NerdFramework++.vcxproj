@@ -169,6 +169,7 @@
     <ClInclude Include="pacman.h" />
     <ClInclude Include="Palette.h" />
     <ClInclude Include="PaletteImage.h" />
+    <ClInclude Include="PaletteImageMaster.h" />
     <ClInclude Include="PaletteTileBatch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="QuickGrid2.h" />
@@ -247,6 +248,7 @@
     <ClCompile Include="CameraRay3.cpp" />
     <ClCompile Include="ImageMaster.cpp" />
     <ClCompile Include="PaletteImage.cpp" />
+    <ClCompile Include="PaletteImageMaster.cpp" />
     <ClCompile Include="PaletteTileBatch.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="String.cpp" />

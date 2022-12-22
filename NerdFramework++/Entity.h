@@ -2,6 +2,7 @@
 
 #include <functional>
 #include <cstdint>
+#include "Interface.h"
 #include "Vector2.h"
 
 class Entity {
@@ -24,5 +25,7 @@ public:
 	uint16_t getDirection();
 
 	void update(double seconds);
+	virtual void draw(Interface& interface, Image4& screen) = 0;
+	virtual void draw(Interface& interface, SDL_Renderer* renderer) = 0;
 };
 

@@ -13,8 +13,6 @@ class PaletteTileBatch {
 private:
     SDL_Renderer* _renderer;
 
-    std::vector<Image4> _cachedBakes;
-
     std::map<uint8_t, PaletteImage> _tileTypes;
     std::map<std::pair<uint8_t, uint8_t>, SDL_Texture*> _tileTypesTextures;
     std::map<uint8_t, Palette<Color4>> _paletteTypes;
@@ -27,7 +25,6 @@ private:
     PaletteTileBatch& operator=(PaletteTileBatch&& rhs);
 
     SDL_Texture* createTexture(Image4&& image) const;
-    void updateTileTypeTextures();
 public:
     PaletteTileBatch(SDL_Renderer* renderer);
     PaletteTileBatch(PaletteTileBatch&& rhs);

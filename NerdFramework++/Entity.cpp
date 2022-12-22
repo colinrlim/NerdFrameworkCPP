@@ -8,7 +8,7 @@ bool Entity::isDirectionValid(uint16_t direction) {
 	uint8_t* nextTileComponents = (uint8_t*)&nextTile;
 	nextTileComponents[0] += positionComponents[0];
 	nextTileComponents[1] += positionComponents[1];
-	return GameState::getInstance().tileBatch->at(nextTileComponents[0], nextTileComponents[1]) % 10 == 0;
+	return GameState::getInstance().tileBatch->tileAt(nextTileComponents[0], nextTileComponents[1]) % 10 == 0;
 }
 
 void Entity::updateDirection() {
