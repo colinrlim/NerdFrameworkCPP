@@ -1,5 +1,6 @@
 #include "PaletteImageMaster.h"
 #include "Math.h"
+#include <iostream>
 
 PaletteImageMaster::PaletteImageMaster(const PaletteImageMaster& rhs) :
     _image(std::move(rhs._image)),
@@ -9,8 +10,8 @@ PaletteImageMaster::PaletteImageMaster(const PaletteImageMaster& rhs) :
 PaletteImageMaster& PaletteImageMaster::operator=(const PaletteImageMaster& rhs) { return *this; }
 PaletteImageMaster& PaletteImageMaster::operator=(PaletteImageMaster&& rhs) { return *this; }
 
-SDL_Texture* PaletteImageMaster::createTexture(Palette<Color4>* palette) const {
-    Image4 bakedImage(_image, *palette);
+SDL_Texture* PaletteImageMaster::createTexture(const Palette<Color4>& palette) const {
+    Image4 bakedImage(_image, palette);
     SDL_Texture* texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, bakedImage.width(), bakedImage.height());
     SDL_UpdateTexture(texture, nullptr, bakedImage.data, bakedImage.width() * 4);
     return texture;
@@ -43,9 +44,10 @@ void PaletteImageMaster::setImage(PaletteImage&& image) {
         SDL_DestroyTexture(pair->second);
 }
 
-void PaletteImageMaster::draw(Palette<Color4>* palette, Image4& screen, const Rect2<double>& bounds) {
-    if (_textures.find(palette) == _textures.end())
-        _textures.emplace(palette, createTexture(palette));
+void PaletteImageMaster::draw(const Palette<Color4>& palette, Image4& screen, const Rect2<double>& bounds) {
+    const Palette<Color4>* palettePtr = &palette;
+    if (_textures.find(palettePtr) == _textures.end())
+        _textures.emplace(palettePtr, createTexture(palette));
 
     // Fit to screen bounds
     const double maxWidth = screen.width();
@@ -61,13 +63,14 @@ void PaletteImageMaster::draw(Palette<Color4>* palette, Image4& screen, const Re
         for (size_t x = (int)xMinConstrained; x < (int)xMaxConstrained; x++) {
             double t = (x - bounds.x) / bounds.width;
             void* pixel = screen.pixelAt(x, y);
-            Color4::flatten(pixel, (*palette)[_image.atParameterization(t, s)]);
+            Color4::flatten(pixel, palette[_image.atParameterization(t, s)]);
         }
     }
 }
-void PaletteImageMaster::draw(Palette<Color4>* palette, SDL_Renderer* renderer, const Rect2<double>& bounds) {
+void PaletteImageMaster::draw(const Palette<Color4>& palette, SDL_Renderer* renderer, const Rect2<double>& bounds) {
+    const Palette<Color4>* palettePtr = &palette;
     SDL_Rect destination{ (int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height };
-    if (_textures.find(palette) == _textures.end())
-        _textures.emplace(palette, createTexture(palette));
-    SDL_RenderCopy(renderer, _textures[palette], nullptr, &destination);
+    if (_textures.find(palettePtr) == _textures.end())
+        _textures.emplace(palettePtr, createTexture(palette));
+    SDL_RenderCopy(renderer, _textures[palettePtr], nullptr, &destination);
 }

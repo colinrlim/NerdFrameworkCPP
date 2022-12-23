@@ -65,10 +65,10 @@ void PaletteTileBatch::setTileTypes(const std::map<uint8_t, PaletteImage>& tileT
 void PaletteTileBatch::setTileTypes(std::map<uint8_t, PaletteImage>&& tileTypes) {
     _tileTypes = std::move(tileTypes);
 }
-void PaletteTileBatch::setPaletteTypes(const std::map<uint8_t, Palette<Color4>>& palettes) {
+void PaletteTileBatch::setPaletteTypes(const std::vector<Palette<Color4>>& palettes) {
     _paletteTypes = palettes;
 }
-void PaletteTileBatch::setPaletteTypes(std::map<uint8_t, Palette<Color4>>&& palettes) {
+void PaletteTileBatch::setPaletteTypes(std::vector<Palette<Color4>>&& palettes) {
     _paletteTypes = std::move(palettes);
 }
 

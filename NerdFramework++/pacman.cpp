@@ -7,6 +7,7 @@
 #include "Math.h"
 #include <iostream>
 #include "GameState.h"
+#include "PaletteImageMaster.h"
 
 void launch() {
 	const uint32_t w = Color4::white.toInteger();
@@ -971,20 +972,33 @@ void launch() {
 	Color4 teal(72, 180, 170);
 	Color4 salmon(252, 180, 170);
 	Color4 white(252, 252, 255);
-	std::map<uint8_t, Palette<Color4>> palettes{
-		{ 0, { { Color4::none, black, black, black } } },
-		{ 1, { { Color4::none, indigo, black, salmon } } },
-		{ 2, { { Color4::none, white, brown, red } } },
-		{ 3, { { Color4::none, yellow, pink, teal } } },
-		{ 4, { { Color4::none, black, black, black } } },
-		{ 5, { { Color4::none, red, indigo, white } } },
-		{ 6, { { Color4::none, teal, indigo, white } } },
-		{ 7, { { Color4::none, yellow, red, indigo } } },
-		{ 8, { { Color4::none, salmon, indigo, green } } },
-		{ 9, { { Color4::none, brown, green, orange } } },
-		{ 10, { { Color4::none, black, indigo, white } } },
-		{ 11, { { Color4::none, red, salmon, white } } },
+	const std::vector<Palette<Color4>> palettes{
+		{ { Color4::none, black, black, black } },
+		{ { Color4::none, indigo, black, salmon } },
+		{ { Color4::none, white, brown, red } },
+		{ { Color4::none, yellow, pink, teal } },
+		{ { Color4::none, black, black, black } },
+		{ { Color4::none, red, indigo, white } },
+		{ { Color4::none, teal, indigo, white } },
+		{ { Color4::none, yellow, red, indigo } },
+		{ { Color4::none, salmon, indigo, green } },
+		{ { Color4::none, brown, green, orange } },
+		{ { Color4::none, black, indigo, white } },
+		{ { Color4::none, red, salmon, white } },
 	};
+
+	PaletteImage test(8, 8, std::vector<uint8_t>{
+		0,0,1,1,0,0,1,1,
+		2,2,0,0,2,2,0,0,
+		0,0,3,3,0,0,3,3,
+		0,1,2,3,0,1,2,3,
+		3,2,1,0,3,2,1,0,
+		0,2,0,2,0,2,0,2,
+		1,3,1,3,1,3,1,3,
+		3,3,3,3,1,1,1,1,
+	});
+
+	PaletteImageMaster* tester;
 
 	std::vector<size_t> POWER_PELLET_INDICES;
 	{
@@ -1013,12 +1027,18 @@ void launch() {
 			std::move(text.data(), text.data() + text.length(), tileBatch->gridData());
 
 			GameState::getInstance().tileBatch = tileBatch;
+
+			tester = new PaletteImageMaster(renderer, std::move(test));
 		});
 		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
 			tileBatch->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
+
+			tester->draw(palettes[2], screen, Rect2<double>{0.0, 0.0, 16 * 10, 16 * 10});
 		};
-		interface.onDrawSDL = [&](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
+		interface.onDrawSDL = [&, palettes](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
 			tileBatch->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
+
+			tester->draw(palettes[2], renderer, Rect2<double>{0.0, 0.0, 16*10, 16*10});
 		};
 		uint8_t* paletteData = tileBatch->paletteGridData();
 		interface.onUpdate = [&](Interface& interface, double delta) -> void {

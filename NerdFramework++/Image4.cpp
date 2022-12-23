@@ -71,8 +71,8 @@ Image4::Image4(const PaletteImage& paletteImage, const Palette<Color4>& palette)
 	data(new uint8_t[_size])
 {
 	size_t size = paletteImage.size();
-	for (size_t i = 0; i < size; i++)
-		palette[paletteImage.data[i]].writeToPixel(data + i*4);
+	for (int i = 0; i < size; i++)
+		palette[paletteImage.data[i]].writeToPixel(data + i * 4);
 }
 Image4::Image4(const Image4& rhs) :
 	_width(rhs._width),

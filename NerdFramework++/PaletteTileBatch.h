@@ -15,7 +15,7 @@ private:
 
     std::map<uint8_t, PaletteImage> _tileTypes;
     std::map<std::pair<uint8_t, uint8_t>, SDL_Texture*> _tileTypesTextures;
-    std::map<uint8_t, Palette<Color4>> _paletteTypes;
+    std::vector<Palette<Color4>> _paletteTypes;
 
     Grid2<uint8_t> _grid;
     Grid2<uint8_t> _paletteGrid;
@@ -42,8 +42,8 @@ public:
 
     void setTileTypes(const std::map<uint8_t, PaletteImage>& tileTypes);
     void setTileTypes(std::map<uint8_t, PaletteImage>&& tileTypes);
-    void setPaletteTypes(const std::map<uint8_t, Palette<Color4>>& palettes);
-    void setPaletteTypes(std::map<uint8_t, Palette<Color4>>&& palettes);
+    void setPaletteTypes(const std::vector<Palette<Color4>>& palettes);
+    void setPaletteTypes(std::vector<Palette<Color4>>&& palettes);
 
     void draw(Image4& screen, const Rect2<double>& bounds);
     void draw(SDL_Renderer* renderer, const Rect2<double>& bounds);
