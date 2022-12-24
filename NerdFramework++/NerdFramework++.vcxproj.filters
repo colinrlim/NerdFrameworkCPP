@@ -331,6 +331,9 @@
     <Filter Include="Interface2D\PaletteImageMaster">
       <UniqueIdentifier>{f3dd52a0-e020-45ca-ae24-d82c8fd90815}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Demos\Pac-Man\PacmanToolbox">
+      <UniqueIdentifier>{d98a4e09-fe94-4df8-9550-242e88af6c4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -588,6 +591,9 @@
     <ClInclude Include="PaletteImageMaster.h">
       <Filter>Interface2D\PaletteImageMaster</Filter>
     </ClInclude>
+    <ClInclude Include="PacmanToolbox.h">
+      <Filter>Demos\Pac-Man\PacmanToolbox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
@@ -805,6 +811,9 @@
     </ClCompile>
     <ClCompile Include="PaletteImageMaster.cpp">
       <Filter>Interface2D\PaletteImageMaster</Filter>
+    </ClCompile>
+    <ClCompile Include="PacmanToolbox.cpp">
+      <Filter>Demos\Pac-Man\PacmanToolbox</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

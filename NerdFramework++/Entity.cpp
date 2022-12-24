@@ -1,3 +1,4 @@
+#include "PacmanToolbox.h"
 #include "GameState.h"
 #include "Entity.h"
 #include "Math.h"
@@ -8,9 +9,8 @@ bool Entity::isDirectionValid(uint16_t direction) {
 	uint8_t* nextTileComponents = (uint8_t*)&nextTile;
 	nextTileComponents[0] += positionComponents[0];
 	nextTileComponents[1] += positionComponents[1];
-	return GameState::getInstance().tileBatch->tileAt(nextTileComponents[0], nextTileComponents[1]) % 10 == 0;
+	return PacmanToolbox::getInstance().tileBatch->tileAt(nextTileComponents[0], nextTileComponents[1]) % 10 == 0;
 }
-
 void Entity::updateDirection() {
 	/*const uint8_t* positionComponents = (uint8_t*)&_positionTile;
 	const uint8_t* targetComponents = (uint8_t*)&_targetTile;
@@ -51,6 +51,11 @@ void Entity::updateDirection() {
 	else
 		_direction = DIRECTION_RIGHT;*/
 }
+Entity::Entity(Vector2 position, uint16_t direction, float speed) :
+	_position(position),
+	_direction(direction),
+	speed(speed)
+{ }
 
 const Vector2& Entity::getPosition() {
 	return _position;

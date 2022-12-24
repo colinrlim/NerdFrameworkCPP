@@ -45,6 +45,9 @@ uint8_t& PaletteTileBatch::tileAt(size_t x, size_t y) const {
 uint8_t& PaletteTileBatch::paletteAt(size_t x, size_t y) const {
     return _paletteGrid.get(x, y);
 }
+size_t PaletteTileBatch::size() const {
+    return _grid.size();
+}
 
 void PaletteTileBatch::setGrid(const Grid2<uint8_t>& grid) {
     _grid = grid;

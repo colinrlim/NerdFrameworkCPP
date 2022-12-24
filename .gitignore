@@ -14,3 +14,8 @@
 *.opendb
 *.ipch
 *.ipch
+*.log
+*.recipe
+*.ipdb
+*.iobj
+*.tlog

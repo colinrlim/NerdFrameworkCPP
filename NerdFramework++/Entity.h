@@ -21,6 +21,8 @@ public:
 
 	float speed;
 
+	Entity(Vector2 position, uint16_t direction = DIRECTION_LEFT, float speed = 10.f);
+
 	const Vector2& getPosition();
 	uint16_t getDirection();
 

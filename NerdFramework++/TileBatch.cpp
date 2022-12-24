@@ -35,6 +35,10 @@ uint8_t* TileBatch::data() const {
 uint8_t& TileBatch::at(size_t x, size_t y) const {
     return _grid.get(x, y);
 }
+size_t TileBatch::size() const {
+    return _grid.size();
+}
+
 void TileBatch::setGrid(const Grid2<uint8_t>& grid) {
     _grid = grid;
 }

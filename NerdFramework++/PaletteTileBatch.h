@@ -34,6 +34,7 @@ public:
     uint8_t* paletteGridData() const;
     uint8_t& tileAt(size_t x, size_t y) const;
     uint8_t& paletteAt(size_t x, size_t y) const;
+    size_t size() const;
 
     void setGrid(const Grid2<uint8_t>& grid);
     void setGrid(Grid2<uint8_t>&& grid);

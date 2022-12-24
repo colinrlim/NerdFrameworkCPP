@@ -9,7 +9,7 @@ c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\format.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\font.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\tester.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\string.obj
-c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\imagebatcher.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\imagemaster.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\cameraray3.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\image3.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\color4.obj
@@ -53,7 +53,7 @@ c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\textbox.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\sphere3.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\scrollframe.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\udimrect2.obj
-c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\tilebatcher.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\tilebatch.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\sort.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\fontmanager.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\renderdata4.obj
@@ -64,8 +64,15 @@ c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\vigenereciphe
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\vector3s.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\vector3.obj
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\vector2i.obj
-c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\tilebatch.obj
-c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\imagemaster.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\gamestate.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\entity.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\paletteimage.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\pacman.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\palettetilebatch.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\player.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\enemy.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\paletteimagemaster.obj
+c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\pacmantoolbox.obj
 c:\users\harry\documents\nerdframework++\x64\debug\nerdframeworkcpp.exe
 c:\users\harry\documents\nerdframework++\nerdframework++\x64\debug\nerdframeworkcpp.ilk
 c:\users\harry\documents\nerdframework++\x64\debug\nerdframeworkcpp.pdb

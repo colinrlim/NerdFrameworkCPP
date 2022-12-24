@@ -8,9 +8,10 @@
 #include <iostream>
 #include "GameState.h"
 #include "PaletteImageMaster.h"
+#include "Enemy.h"
+#include "PacmanToolbox.h"
 
 void launch() {
-	const uint32_t w = Color4::white.toInteger();
 	PaletteImage zero(8, 8, std::vector<uint8_t>{
 		0,0,0,1,1,1,0,0,
 		0,0,1,0,0,1,1,0,
@@ -110,6 +111,107 @@ void launch() {
 		0,0,0,0,0,1,1,0,
 		0,0,1,1,1,1,0,0,
 		0,0,0,0,0,0,0,0,
+	});
+	
+	PaletteImage _zero(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,0,0,1,1,1,0,0,
+		0,0,1,0,0,1,1,0,
+		0,1,1,0,0,0,1,1,
+		0,1,1,0,0,0,1,1,
+		0,1,1,0,0,0,1,1,
+		0,0,1,1,0,0,1,0,
+		0,0,0,1,1,1,0,0,
+	});
+	PaletteImage _one(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,1,1,0,0,
+		0,0,0,1,1,1,0,0,
+		0,0,0,0,1,1,0,0,
+		0,0,0,0,1,1,0,0,
+		0,0,0,0,1,1,0,0,
+		0,0,0,0,1,1,0,0,
+		0,0,1,1,1,1,1,1,
+	});
+	PaletteImage _two(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,0,1,1,1,1,1,0,
+		0,1,1,0,0,0,1,1,
+		0,0,0,0,0,1,1,1,
+		0,0,0,1,1,1,1,0,
+		0,0,1,1,1,1,0,0,
+		0,1,1,1,0,0,0,0,
+		0,1,1,1,1,1,1,1,
+	});
+	PaletteImage _three(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,0,1,1,1,1,1,1,
+		0,0,0,0,0,1,1,0,
+		0,0,0,0,1,1,0,0,
+		0,0,0,1,1,1,1,0,
+		0,0,0,0,0,0,1,1,
+		0,1,1,0,0,0,1,1,
+		0,0,1,1,1,1,1,0,
+	});
+	PaletteImage _four(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,1,1,1,0,
+		0,0,0,1,1,1,1,0,
+		0,0,1,1,0,1,1,0,
+		0,1,1,0,0,1,1,0,
+		0,1,1,1,1,1,1,1,
+		0,0,0,0,0,1,1,0,
+		0,0,0,0,0,1,1,0,
+	});
+	PaletteImage _five(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,1,1,1,1,1,1,0,
+		0,1,1,0,0,0,0,0,
+		0,1,1,1,1,1,1,0,
+		0,0,0,0,0,0,1,1,
+		0,0,0,0,0,0,1,1,
+		0,1,1,0,0,0,1,1,
+		0,0,1,1,1,1,1,0,
+	});
+	PaletteImage _six(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,0,0,1,1,1,1,0,
+		0,0,1,1,0,0,0,0,
+		0,1,1,0,0,0,0,0,
+		0,1,1,1,1,1,1,0,
+		0,1,1,0,0,0,1,1,
+		0,1,1,0,0,0,1,1,
+		0,0,1,1,1,1,1,0,
+	});
+	PaletteImage _seven(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,1,1,1,1,1,1,1,
+		0,1,1,0,0,0,1,1,
+		0,0,0,0,0,1,1,0,
+		0,0,0,0,1,1,0,0,
+		0,0,0,1,1,0,0,0,
+		0,0,0,1,1,0,0,0,
+		0,0,0,1,1,0,0,0,
+	});
+	PaletteImage _eight(8, 8, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,
+		0,0,1,1,1,1,0,0,
+		0,1,1,0,0,0,1,0,
+		0,1,1,1,0,0,1,0,
+		0,0,1,1,1,1,0,0,
+		0,1,0,0,1,1,1,1,
+		0,1,0,0,0,0,1,1,
+		0,0,1,1,1,1,1,0,
+	});
+	PaletteImage _nine(8, 8, std::vector<uint8_t>{
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0,0,1,1,1,1,1,0,
+		0,1,1,0,0,0,1,1,
+		0,1,1,0,0,0,1,1,
+		0,0,1,1,1,1,1,1,
+		0,0,0,0,0,0,1,1,
+		0,0,0,0,0,1,1,0,
+		0,0,1,1,1,1,0,0,
 	});
 
 	PaletteImage A(8, 8, std::vector<uint8_t>{
@@ -445,17 +547,7 @@ void launch() {
 		0,0,3,3,3,3,0,0,
 	});
 
-	const uint32_t b = Color4(33, 33, 255).toInteger();
-	PaletteImage wall_fill(8, 8, std::vector<uint8_t>{
-		2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,
-	});
+	PaletteImage wall_fill(8, 8, 2);
 	PaletteImage reg_1(8, 8, std::vector<uint8_t>{
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
@@ -618,7 +710,6 @@ void launch() {
 		1,1,1,1,0,0,0,0,
 	});
 
-	const uint32_t p = Color4(255, 185, 255).toInteger();
 	PaletteImage sqr_1(8, 8, std::vector<uint8_t>{
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
@@ -792,23 +883,155 @@ void launch() {
 		2,2,2,2,2,2,2,2,
 	});
 
+	PaletteImage ghost_up(16, 16, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,
+		0,0,0,0,2,2,1,1,1,1,2,2,0,0,0,0,
+		0,0,0,3,2,2,3,1,1,3,2,2,3,0,0,0,
+		0,0,1,3,3,3,3,1,1,3,3,3,3,1,0,0,
+		0,0,1,3,3,3,3,1,1,3,3,3,3,1,0,0,
+		0,0,1,1,3,3,1,1,1,1,3,3,1,1,0,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+	});
+	PaletteImage ghost_down(16, 16, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,
+		0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,
+		0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,
+		0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+		0,0,1,1,3,3,1,1,1,1,3,3,1,1,0,0,
+		0,0,1,3,3,3,3,1,1,3,3,3,3,1,0,0,
+		0,1,1,3,3,3,3,1,1,3,3,3,3,1,1,0,
+		0,1,1,3,2,2,3,1,1,3,2,2,3,1,1,0,
+		0,1,1,1,2,2,1,1,1,1,2,2,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+	});
+	PaletteImage ghost_left(16, 16, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,
+		0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,
+		0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,
+		0,0,1,3,3,1,1,1,1,3,3,1,1,1,0,0,
+		0,0,3,3,3,3,1,1,3,3,3,3,1,1,0,0,
+		0,0,2,2,3,3,1,1,2,2,3,3,1,1,0,0,
+		0,1,2,2,3,3,1,1,2,2,3,3,1,1,1,0,
+		0,1,1,3,3,1,1,1,1,3,3,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+	});
+	PaletteImage ghost_right(16, 16, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,
+		0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,
+		0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,
+		0,0,1,1,1,3,3,1,1,1,1,3,3,1,0,0,
+		0,0,1,1,3,3,3,3,1,1,3,3,3,3,0,0,
+		0,0,1,1,3,3,2,2,1,1,3,3,2,2,0,0,
+		0,1,1,1,3,3,2,2,1,1,3,3,2,2,1,0,
+		0,1,1,1,1,3,3,1,1,1,1,3,3,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+	});
+	PaletteImage ghost_fright(16, 16, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,
+		0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,
+		0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,
+		0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+		0,0,1,1,1,3,3,1,1,3,3,1,1,1,0,0,
+		0,0,1,1,1,3,3,1,1,3,3,1,1,1,0,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,3,3,1,1,3,3,1,1,3,3,1,1,0,
+		0,1,3,1,1,3,3,1,1,3,3,1,1,3,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+	});
+
+	PaletteImage ghost_legs1(8, 8, std::vector<uint8_t>{
+		0,1,1,0,1,1,1,0,
+		0,1,0,0,0,1,1,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+	});
+	PaletteImage ghost_legs2(8, 8, std::vector<uint8_t>{
+		0,1,1,1,0,1,1,0,
+		0,1,1,0,0,0,1,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+	});
+	PaletteImage ghost_legs3(8, 8, std::vector<uint8_t>{
+		0,1,1,1,1,0,1,1,
+		0,0,1,1,0,0,0,1,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+	});
+	PaletteImage ghost_legs4(8, 8, std::vector<uint8_t>{
+		1,1,0,1,1,1,1,0,
+		1,0,0,0,1,1,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+	});
+
 	Grid2<uint8_t> board(28, 36, {
 		40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,
-		40,40,40,40,40,00,00,40,40,40,40,40,40,40,40,00,00,40,40,40,40,40,40,40,40,40,40,40,
 		40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,
-		21,22,22,22,22,22,22,22,22,22,22,22,22,55,56,22,22,22,22,22,22,22,22,22,22,22,22,23,
+		40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,
+		21,22,22,22,22,22,22,22,22,22,22,22,22,95,96,22,22,22,22,22,22,22,22,22,22,22,22,23,
 		24,10,10,10,10,10,10,10,10,10,10,10,10,14,15,10,10,10,10,10,10,10,10,10,10,10,10,25,
 		24,10,11,12,12,13,10,11,12,12,12,13,10,14,15,10,11,12,12,12,13,10,11,12,12,13,10,25,
-		24,30,14,50,50,15,10,14,50,50,50,15,10,14,15,10,14,50,50,50,15,10,14,50,50,15,30,25,
+		24,30,14,60,60,15,10,14,60,60,60,15,10,14,15,10,14,60,60,60,15,10,14,60,60,15,30,25,
 		24,10,16,17,17,18,10,16,17,17,17,18,10,16,18,10,16,17,17,17,18,10,16,17,17,18,10,25,
 		24,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,25,
 		24,10,11,12,12,13,10,11,13,10,11,12,12,12,12,12,12,13,10,11,13,10,11,12,12,13,10,25,
 		24,10,16,17,17,18,10,14,15,10,16,17,17,29,19,17,17,18,10,14,15,10,16,17,17,18,10,25,
 		24,10,10,10,10,10,10,14,15,10,10,10,10,14,15,10,10,10,10,14,15,10,10,10,10,10,10,25,
-		26,27,27,27,27,13,10,14,39,12,12,13,40,14,15,40,11,12,12,49,15,10,11,27,27,27,27,28,
+		26,27,27,27,27,13,10,14,39,12,12,13,40,14,15,40,11,12,12,99,15,10,11,27,27,27,27,28,
 		40,40,40,40,40,24,10,14,19,17,17,18,40,16,18,40,16,17,17,29,15,10,25,40,40,40,40,40,
 		40,40,40,40,40,24,10,14,15,40,40,40,40,40,40,40,40,40,40,14,15,10,25,40,40,40,40,40,
-		40,40,40,40,40,24,10,14,15,40,31,27,57,35,35,58,27,37,40,14,15,10,25,40,40,40,40,40,
+		40,40,40,40,40,24,10,14,15,40,31,27,97,35,35,98,27,37,40,14,15,10,25,40,40,40,40,40,
 		22,22,22,22,22,18,10,16,18,40,25,40,40,40,40,40,40,24,40,16,18,10,16,22,22,22,22,22,
 		40,40,40,40,40,40,10,40,40,40,25,40,40,40,40,40,40,24,40,40,40,10,40,40,40,40,40,40,
 		27,27,27,27,27,13,10,11,13,40,25,40,40,40,40,40,40,24,40,11,13,10,11,27,27,27,27,27,
@@ -820,16 +1043,18 @@ void launch() {
 		24,10,11,12,12,13,10,11,12,12,12,13,10,14,15,10,11,12,12,12,13,10,11,12,12,13,10,25,
 		24,10,16,17,29,15,10,16,17,17,17,18,10,16,18,10,16,17,17,17,18,10,14,19,17,18,10,25,
 		24,30,10,10,14,15,10,10,10,10,10,10,10,40,40,10,10,10,10,10,10,10,14,15,10,10,30,25,
-		51,12,13,10,14,15,10,11,13,10,11,12,12,12,12,12,12,13,10,11,13,10,14,15,10,11,12,53,
-		52,17,18,10,16,18,10,14,15,10,16,17,17,29,19,17,17,18,10,14,15,10,16,18,10,16,17,54,
+		91,12,13,10,14,15,10,11,13,10,11,12,12,12,12,12,12,13,10,11,13,10,14,15,10,11,12,93,
+		92,17,18,10,16,18,10,14,15,10,16,17,17,29,19,17,17,18,10,14,15,10,16,18,10,16,17,94,
 		24,10,10,10,10,10,10,14,15,10,10,10,10,14,15,10,10,10,10,14,15,10,10,10,10,10,10,25,
-		24,10,11,12,12,12,12,49,39,12,12,13,10,14,15,10,11,12,12,49,39,12,12,12,12,13,10,25,
+		24,10,11,12,12,12,12,99,39,12,12,13,10,14,15,10,11,12,12,99,39,12,12,12,12,13,10,25,
 		24,10,16,17,17,17,17,17,17,17,17,18,10,16,18,10,16,17,17,17,17,17,17,17,17,18,10,25,
 		24,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,25,
 		26,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,28,
 		40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,
 		40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,
 	});
+	board.get(6, 1) = '0';
+	board.get(16, 1) = '0';
 	Grid2<uint8_t> paletteBoard(28, 36, {
 		02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,
 		02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,
@@ -868,8 +1093,6 @@ void launch() {
 		02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,
 		02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,02,
 	});
-	//std::fill(paletteBoard.data() + 28*2, paletteBoard.data() + paletteBoard.size(), 4);
-	PaletteTileBatch* tileBatch;
 
 	std::map<uint8_t, PaletteImage> tileTypes {
 		{ 0, std::move(zero) },
@@ -882,6 +1105,17 @@ void launch() {
 		{ 7, std::move(seven) },
 		{ 8, std::move(eight) },
 		{ 9, std::move(nine) },
+
+		{ '0', std::move(_zero)},
+		{ '1', std::move(_one)},
+		{ '2', std::move(_two)},
+		{ '3', std::move(_three)},
+		{ '4', std::move(_four)},
+		{ '5', std::move(_five)},
+		{ '6', std::move(_six)},
+		{ '7', std::move(_seven)},
+		{ '8', std::move(_eight)},
+		{ '9', std::move(_nine)},
 
 		{ 'A', std::move(A) },
 		{ 'B', std::move(B) },
@@ -939,26 +1173,35 @@ void launch() {
 		{ 36, std::move(sqr_6) },
 		{ 38, std::move(sqr_8) },
 
-		{ 51, std::move(unq_1) },
-		{ 52, std::move(unq_2) },
-		{ 53, std::move(unq_3) },
-		{ 54, std::move(unq_4) },
-		{ 55, std::move(unq_5) },
-		{ 56, std::move(unq_6) },
-		{ 57, std::move(unq_7) },
-		{ 58, std::move(unq_8) },
+		{ 91, std::move(unq_1) },
+		{ 92, std::move(unq_2) },
+		{ 93, std::move(unq_3) },
+		{ 94, std::move(unq_4) },
+		{ 95, std::move(unq_5) },
+		{ 96, std::move(unq_6) },
+		{ 97, std::move(unq_7) },
+		{ 98, std::move(unq_8) },
 
 		{ 19, std::move(cnv_1) },
 		{ 29, std::move(cnv_2) },
 		{ 39, std::move(cnv_3) },
-		{ 49, std::move(cnv_4) },
+		{ 99, std::move(cnv_4) },
 
 		{ 10, std::move(lil_food) },
 		{ 20, std::move(mid_food) },
 		{ 30, std::move(big_food) },
 		{ 40, PaletteImage::none },
-		{ 50, std::move(wall_fill) }
+		{ 60, std::move(wall_fill) }
 	};
+
+	std::vector<size_t> POWER_PELLET_INDICES;
+	{
+		uint8_t* data = board.data();
+		for (size_t i = 0; i < board.size(); i++)
+			if (data[i] == 30)
+				POWER_PELLET_INDICES.push_back(i);
+	}
+
 	Color4 black(0, 0, 0);
 	Color4 red(252, 0, 0);
 	Color4 brown(216, 144, 85);
@@ -973,40 +1216,39 @@ void launch() {
 	Color4 salmon(252, 180, 170);
 	Color4 white(252, 252, 255);
 	const std::vector<Palette<Color4>> palettes{
-		{ { Color4::none, black, black, black } },
-		{ { Color4::none, indigo, black, salmon } },
-		{ { Color4::none, white, brown, red } },
-		{ { Color4::none, yellow, pink, teal } },
-		{ { Color4::none, black, black, black } },
-		{ { Color4::none, red, indigo, white } },
-		{ { Color4::none, teal, indigo, white } },
-		{ { Color4::none, yellow, red, indigo } },
-		{ { Color4::none, salmon, indigo, green } },
-		{ { Color4::none, brown, green, orange } },
-		{ { Color4::none, black, indigo, white } },
-		{ { Color4::none, red, salmon, white } },
+		{ { Color4::none, black, black, black } },		// 0
+		{ { Color4::none, indigo, black, salmon } },	// 1 frightened1
+		{ { Color4::none, white, brown, red } },		// 2 frightened2
+		{ { Color4::none, yellow, pink, cyan } },		// 3
+		{ { Color4::none, black, black, black } },		// 4
+		{ { Color4::none, red, indigo, white } },		// 5 blinky
+		{ { Color4::none, cyan, indigo, white } },		// 6 inky
+		{ { Color4::none, yellow, red, indigo } },		// 7
+		{ { Color4::none, salmon, indigo, green } },	// 8
+		{ { Color4::none, brown, green, orange } },		// 9
+		{ { Color4::none, black, indigo, white } },		// 10 eyes
+		{ { Color4::none, red, salmon, white } },		// 11
+		{ { Color4::none, salmon, black, white } },		// 12
+		{ { Color4::none, red, white, green } },		// 13
+		{ { Color4::none, white, blue, yellow } },		// 14
+		{ { Color4::none, indigo, black, salmon } },	// 15
+		{ { Color4::none, salmon, indigo, white } },	// 16 frightened
+		{ { Color4::none, pink, indigo, white } },		// 17 pinky
+		{ { Color4::none, orange, indigo, white } },	// 18 clyde
+		{ { Color4::none, white, green, red } },		// 19
+		{ { Color4::none, white, green, teal } },		// 20
+		{ { Color4::none, indigo, black, salmon } },	// 21
+		{ { Color4::none, white, black, salmon } },		// 22
 	};
 
-	PaletteImage test(8, 8, std::vector<uint8_t>{
-		0,0,1,1,0,0,1,1,
-		2,2,0,0,2,2,0,0,
-		0,0,3,3,0,0,3,3,
-		0,1,2,3,0,1,2,3,
-		3,2,1,0,3,2,1,0,
-		0,2,0,2,0,2,0,2,
-		1,3,1,3,1,3,1,3,
-		3,3,3,3,1,1,1,1,
-	});
+	std::vector<Enemy> enemies{
+		Enemy(palettes[5], Vector2(2, 2)),
+		Enemy(palettes[6], Vector2(4, 2)),
+		Enemy(palettes[16], Vector2(2, 5)),
+		Enemy(palettes[17], Vector2(4, 5)),
+	};
 
-	PaletteImageMaster* tester;
-
-	std::vector<size_t> POWER_PELLET_INDICES;
-	{
-		uint8_t* data = board.data();
-		for (size_t i = 0; i < board.size(); i++)
-			if (data[i] == 30)
-				POWER_PELLET_INDICES.push_back(i);
-	}
+	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -1016,31 +1258,45 @@ void launch() {
 	{
 
 		Interface interface(SDL_CreateWindow("Pac-Man", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 28 * 16, 36 * 16, 0), [&](Interface& interface, SDL_Renderer* renderer)-> void {
-			tileBatch = new PaletteTileBatch(renderer);
+			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
 
-			tileBatch->setGrid(std::move(board));
-			tileBatch->setTileTypes(std::move(tileTypes));
-			tileBatch->setPaletteGrid(std::move(paletteBoard));
-			tileBatch->setPaletteTypes(std::move(palettes));
+			toolbox.tileBatch = new PaletteTileBatch(renderer);
+
+			toolbox.tileBatch->setGrid(std::move(board));
+			toolbox.tileBatch->setTileTypes(std::move(tileTypes));
+			toolbox.tileBatch->setPaletteGrid(std::move(paletteBoard));
+			toolbox.tileBatch->setPaletteTypes(palettes);
 
 			std::string text = "   \1UP   HIGH SCORE";
-			std::move(text.data(), text.data() + text.length(), tileBatch->gridData());
+			std::move(text.data(), text.data() + text.length(), toolbox.tileBatch->gridData());
 
-			GameState::getInstance().tileBatch = tileBatch;
-
-			tester = new PaletteImageMaster(renderer, std::move(test));
+			toolbox.ghostUpMaster = new PaletteImageMaster(renderer, std::move(ghost_up));
+			toolbox.ghostDownMaster = new PaletteImageMaster(renderer, std::move(ghost_down));
+			toolbox.ghostLeftMaster = new PaletteImageMaster(renderer, std::move(ghost_left));
+			toolbox.ghostRightMaster = new PaletteImageMaster(renderer, std::move(ghost_right));
+			toolbox.ghostFrightMaster = new PaletteImageMaster(renderer, std::move(ghost_fright));
+			toolbox.ghostLegsMaster1 = new PaletteImageMaster(renderer, std::move(ghost_legs1));
+			toolbox.ghostLegsMaster2 = new PaletteImageMaster(renderer, std::move(ghost_legs2));
+			toolbox.ghostLegsMaster3 = new PaletteImageMaster(renderer, std::move(ghost_legs3));
+			toolbox.ghostLegsMaster4 = new PaletteImageMaster(renderer, std::move(ghost_legs4));
 		});
 		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
-			tileBatch->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
+			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
+			toolbox.tileBatch->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
 
-			tester->draw(palettes[2], screen, Rect2<double>{0.0, 0.0, 16 * 10, 16 * 10});
+			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+				iterator->draw(interface, screen);
+			}
 		};
 		interface.onDrawSDL = [&, palettes](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
-			tileBatch->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
+			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
+			toolbox.tileBatch->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
 
-			tester->draw(palettes[2], renderer, Rect2<double>{0.0, 0.0, 16*10, 16*10});
+			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+				//iterator->draw(interface, renderer);
+			}
 		};
-		uint8_t* paletteData = tileBatch->paletteGridData();
+		uint8_t* paletteData = toolbox.tileBatch->paletteGridData();
 		interface.onUpdate = [&](Interface& interface, double delta) -> void {
 			if (Math::dmod(interface.secondsElapsed(), 0.5) >= 0.25 && paletteData[3] == 2)
 				std::fill(paletteData + 3, paletteData + 6, 10);
@@ -1054,6 +1310,9 @@ void launch() {
 			}
 		};
 
+		GameState gameState;
+		gameState.updateScore(300);
+
 		if (interface.window == nullptr)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -1062,6 +1321,7 @@ void launch() {
 		}
 		else
 		{
+			uint8_t* paletteData = toolbox.tileBatch->paletteGridData();
 			bool running = true;
 			while (running) {
 				SDL_Event ev;
@@ -1072,6 +1332,10 @@ void launch() {
 					{
 						running = false;
 						break;
+					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_2 == ev.key.keysym.scancode && toolbox.tileBatch->paletteAt(0, 2) < palettes.size() - 1) {
+						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatch->paletteAt(0, 2) + 1);
+					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_1 == ev.key.keysym.scancode && toolbox.tileBatch->paletteAt(0, 2) > 0) {
+						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatch->paletteAt(0, 2) - 1);
 					}
 				}
 
@@ -1079,8 +1343,6 @@ void launch() {
 				interface.drawSDL();
 			}
 		}
-		delete tileBatch;
-
 	}
 	SDL_Quit();
 }

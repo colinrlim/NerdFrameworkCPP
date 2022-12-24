@@ -1,3 +1,5 @@
+#include <cmath>
+#include "PacmanToolbox.h"
 #include "GameState.h"
 
 GameState::GameState() :
@@ -10,15 +12,29 @@ GameState::GameState() :
 }
 
 void GameState::interactTile(size_t x, size_t y) {
-	uint8_t& tile = tileBatch->tileAt(x, y);
-	uint8_t& palette = tileBatch->paletteAt(x, y);
+	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
+	uint8_t& tile = toolbox.tileBatch->tileAt(x, y);
+	uint8_t& palette = toolbox.tileBatch->paletteAt(x, y);
 	if (tile == 10 && palette != 0) {
 		palette = 0;
 		pellets++;
+		updateScore(++score);
 	}
 	else if (tile == 30 && palette != 0) {
 		palette = 0;
 		_powerTimestamp = std::chrono::steady_clock::now();
+	}
+}
+void GameState::updateScore(uint32_t score) {
+	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
+	uint8_t* data = toolbox.tileBatch->gridData();
+	this->score = score;
+	
+	std::string stringized = std::to_string(score);
+	std::move(stringized.data(), stringized.data() + stringized.length(), data + 34 - stringized.length());
+	if (highscore < score) {
+		highscore = score;
+		std::move(stringized.data(), stringized.data() + stringized.length(), data + 44 - stringized.length());
 	}
 }
 void GameState::restart() {
