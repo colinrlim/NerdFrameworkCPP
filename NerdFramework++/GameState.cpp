@@ -13,8 +13,8 @@ GameState::GameState() :
 
 void GameState::interactTile(size_t x, size_t y) {
 	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
-	uint8_t& tile = toolbox.tileBatch->tileAt(x, y);
-	uint8_t& palette = toolbox.tileBatch->paletteAt(x, y);
+	uint8_t& tile = toolbox.tileBatcher->tileAt(x, y);
+	uint8_t& palette = toolbox.tileBatcher->paletteAt(x, y);
 	if (tile == 10 && palette != 0) {
 		palette = 0;
 		pellets++;
@@ -27,7 +27,7 @@ void GameState::interactTile(size_t x, size_t y) {
 }
 void GameState::updateScore(uint32_t score) {
 	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
-	uint8_t* data = toolbox.tileBatch->gridData();
+	uint8_t* data = toolbox.tileBatcher->gridData();
 	this->score = score;
 	
 	std::string stringized = std::to_string(score);

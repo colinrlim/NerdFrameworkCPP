@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <chrono>
-#include "PaletteTileBatch.h"
+#include "PaletteTileBatcher.h"
 
 class GameState {
 private:

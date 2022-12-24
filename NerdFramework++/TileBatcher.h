@@ -6,7 +6,7 @@
 #include "Grid2.h"
 #include "Rect2.h"
 
-class TileBatch {
+class TileBatcher {
 private:
     SDL_Renderer* _renderer;
 
@@ -14,16 +14,16 @@ private:
     std::map<uint8_t, SDL_Texture*> _tileTypesTextures;
     Grid2<uint8_t> _grid;
 
-    TileBatch(const TileBatch& rhs);
-    TileBatch& operator=(const TileBatch& rhs);
-    TileBatch& operator=(TileBatch&& rhs);
+    TileBatcher(const TileBatcher& rhs);
+    TileBatcher& operator=(const TileBatcher& rhs);
+    TileBatcher& operator=(TileBatcher&& rhs);
 
     SDL_Texture* createTexture(const Image4& image) const;
     void updateTileTypeTextures();
 public:
-    TileBatch(SDL_Renderer* renderer);
-    TileBatch(TileBatch&& rhs);
-    ~TileBatch();
+    TileBatcher(SDL_Renderer* renderer);
+    TileBatcher(TileBatcher&& rhs);
+    ~TileBatcher();
 
     uint8_t* data() const;
     uint8_t& at(size_t x, size_t y) const;

@@ -1,21 +1,21 @@
 #pragma once
 
-#include "PaletteImageMaster.h"
-#include "PaletteTileBatch.h"
+#include "PaletteImageStamper.h"
+#include "PaletteTileBatcher.h"
 
 class PacmanToolbox {
 public:
-	PaletteTileBatch* tileBatch;
+	PaletteTileBatcher* tileBatcher;
 
-	PaletteImageMaster* ghostUpMaster;
-	PaletteImageMaster* ghostDownMaster;
-	PaletteImageMaster* ghostLeftMaster;
-	PaletteImageMaster* ghostRightMaster;
-	PaletteImageMaster* ghostFrightMaster;
-	PaletteImageMaster* ghostLegsMaster1;
-	PaletteImageMaster* ghostLegsMaster2;
-	PaletteImageMaster* ghostLegsMaster3;
-	PaletteImageMaster* ghostLegsMaster4;
+	PaletteImageStamper* ghostUpStamper;
+	PaletteImageStamper* ghostDownStamper;
+	PaletteImageStamper* ghostLeftStamper;
+	PaletteImageStamper* ghostRightStamper;
+	PaletteImageStamper* ghostFrightStamper;
+	PaletteImageStamper* ghostLegsStamper1;
+	PaletteImageStamper* ghostLegsStamper2;
+	PaletteImageStamper* ghostLegsStamper3;
+	PaletteImageStamper* ghostLegsStamper4;
 
 	PacmanToolbox();
 	~PacmanToolbox();

@@ -8,7 +8,7 @@
 #include "BinaryGrid2.h"
 #include "ImageLabel.h"
 #include "Tester.h"
-#include "TileBatch.h"
+#include "TileBatcher.h"
 
 #include "pacman.h"
 
@@ -64,7 +64,7 @@ int main() {
         Image4 image3(1, 1, Color4::lightBlue);
         Image4 image4(1, 1, Color4::lightRed);
 
-        TileBatch* batcher;
+        TileBatcher* batcher;
         Grid2<uint8_t> grid(10, 10, {
             0,0,0,0,0,0,0,0,0,0,
             0,1,1,1,1,1,1,1,1,0,
@@ -90,7 +90,7 @@ int main() {
             interface.frame.children.push_back(&frame);
             interface.frame.children.push_back(&imageLabel);
 
-            batcher = new TileBatch(renderer);
+            batcher = new TileBatcher(renderer);
             batcher->setGrid(std::move(grid));
             batcher->setTileTypes(std::move(map));
 

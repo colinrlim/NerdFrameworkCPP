@@ -295,12 +295,6 @@
     <Filter Include="Math\2D\QuickGrid2">
       <UniqueIdentifier>{1ffb7eec-29d3-4bd8-8021-7d90934e442d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\ImageMaster">
-      <UniqueIdentifier>{878a0551-603e-43a3-93df-2c0f13bc8ae6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interface2D\TileBatch">
-      <UniqueIdentifier>{53784795-161b-4841-93ff-11c60a2f21e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface2D\Image\Palette">
       <UniqueIdentifier>{e6367d38-f158-4141-a252-b545a00125db}</UniqueIdentifier>
     </Filter>
@@ -319,20 +313,26 @@
     <Filter Include="Interface2D\Image\PaletteImage">
       <UniqueIdentifier>{3ac1fc6a-27fe-45af-afd4-9dccacfe3d34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\PaletteTileBatch">
-      <UniqueIdentifier>{06f1e6b4-c5e0-4499-8ca2-1b40e66e6dfd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Demos\Pac-Man\Entity\Player">
       <UniqueIdentifier>{3f6528f6-4343-40e6-a9c5-0c87f5d2873c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Demos\Pac-Man\Entity\Enemy">
       <UniqueIdentifier>{e0c0fb4b-2e6c-4cc2-b487-048757c2871e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\PaletteImageMaster">
-      <UniqueIdentifier>{f3dd52a0-e020-45ca-ae24-d82c8fd90815}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Demos\Pac-Man\PacmanToolbox">
       <UniqueIdentifier>{d98a4e09-fe94-4df8-9550-242e88af6c4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\ImageStamper">
+      <UniqueIdentifier>{878a0551-603e-43a3-93df-2c0f13bc8ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteImageStamper">
+      <UniqueIdentifier>{f3dd52a0-e020-45ca-ae24-d82c8fd90815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteTileBatcher">
+      <UniqueIdentifier>{06f1e6b4-c5e0-4499-8ca2-1b40e66e6dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\TileBatcher">
+      <UniqueIdentifier>{53784795-161b-4841-93ff-11c60a2f21e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -555,11 +555,11 @@
     <ClInclude Include="QuickGrid2.h">
       <Filter>Math\2D\QuickGrid2</Filter>
     </ClInclude>
-    <ClInclude Include="ImageMaster.h">
-      <Filter>Interface2D\ImageMaster</Filter>
+    <ClInclude Include="ImageStamper.h">
+      <Filter>Interface2D\ImageStamper</Filter>
     </ClInclude>
-    <ClInclude Include="TileBatch.h">
-      <Filter>Interface2D\TileBatch</Filter>
+    <ClInclude Include="TileBatcher.h">
+      <Filter>Interface2D\TileBatcher</Filter>
     </ClInclude>
     <ClInclude Include="Image4.h">
       <Filter>Interface2D\Image\Image4</Filter>
@@ -579,8 +579,8 @@
     <ClInclude Include="Palette.h">
       <Filter>Interface2D\Image\Palette</Filter>
     </ClInclude>
-    <ClInclude Include="PaletteTileBatch.h">
-      <Filter>Interface2D\PaletteTileBatch</Filter>
+    <ClInclude Include="PaletteTileBatcher.h">
+      <Filter>Interface2D\PaletteTileBatcher</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Demos\Pac-Man\Entity\Enemy</Filter>
@@ -588,8 +588,8 @@
     <ClInclude Include="Player.h">
       <Filter>Demos\Pac-Man\Entity\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PaletteImageMaster.h">
-      <Filter>Interface2D\PaletteImageMaster</Filter>
+    <ClInclude Include="PaletteImageStamper.h">
+      <Filter>Interface2D\PaletteImageStamper</Filter>
     </ClInclude>
     <ClInclude Include="PacmanToolbox.h">
       <Filter>Demos\Pac-Man\PacmanToolbox</Filter>
@@ -782,11 +782,11 @@
     <ClCompile Include="BinaryGrid2.cpp">
       <Filter>Math\2D\BinaryGrid2</Filter>
     </ClCompile>
-    <ClCompile Include="ImageMaster.cpp">
-      <Filter>Interface2D\ImageMaster</Filter>
+    <ClCompile Include="ImageStamper.cpp">
+      <Filter>Interface2D\ImageStamper</Filter>
     </ClCompile>
-    <ClCompile Include="TileBatch.cpp">
-      <Filter>Interface2D\TileBatch</Filter>
+    <ClCompile Include="TileBatcher.cpp">
+      <Filter>Interface2D\TileBatcher</Filter>
     </ClCompile>
     <ClCompile Include="pacman.cpp">
       <Filter>Demos\Pac-Man</Filter>
@@ -800,8 +800,8 @@
     <ClCompile Include="PaletteImage.cpp">
       <Filter>Interface2D\Image\PaletteImage</Filter>
     </ClCompile>
-    <ClCompile Include="PaletteTileBatch.cpp">
-      <Filter>Interface2D\PaletteTileBatch</Filter>
+    <ClCompile Include="PaletteTileBatcher.cpp">
+      <Filter>Interface2D\PaletteTileBatcher</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Demos\Pac-Man\Entity\Enemy</Filter>
@@ -809,8 +809,8 @@
     <ClCompile Include="Player.cpp">
       <Filter>Demos\Pac-Man\Entity\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PaletteImageMaster.cpp">
-      <Filter>Interface2D\PaletteImageMaster</Filter>
+    <ClCompile Include="PaletteImageStamper.cpp">
+      <Filter>Interface2D\PaletteImageStamper</Filter>
     </ClCompile>
     <ClCompile Include="PacmanToolbox.cpp">
       <Filter>Demos\Pac-Man\PacmanToolbox</Filter>

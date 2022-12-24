@@ -1,50 +1,50 @@
-#include "PaletteImageMaster.h"
+#include "PaletteImageStamper.h"
 #include "Math.h"
 #include <iostream>
 
-PaletteImageMaster::PaletteImageMaster(const PaletteImageMaster& rhs) :
+PaletteImageStamper::PaletteImageStamper(const PaletteImageStamper& rhs) :
     _image(std::move(rhs._image)),
     _renderer(nullptr),
     _textures()
 { }
-PaletteImageMaster& PaletteImageMaster::operator=(const PaletteImageMaster& rhs) { return *this; }
-PaletteImageMaster& PaletteImageMaster::operator=(PaletteImageMaster&& rhs) { return *this; }
+PaletteImageStamper& PaletteImageStamper::operator=(const PaletteImageStamper& rhs) { return *this; }
+PaletteImageStamper& PaletteImageStamper::operator=(PaletteImageStamper&& rhs) { return *this; }
 
-SDL_Texture* PaletteImageMaster::createTexture(const Palette<Color4>& palette) const {
+SDL_Texture* PaletteImageStamper::createTexture(const Palette<Color4>& palette) const {
     Image4 bakedImage(_image, palette);
     SDL_Texture* texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, bakedImage.width(), bakedImage.height());
     SDL_UpdateTexture(texture, nullptr, bakedImage.data, bakedImage.width() * 4);
     return texture;
 }
 
-PaletteImageMaster::PaletteImageMaster(SDL_Renderer* renderer, PaletteImage&& image) :
+PaletteImageStamper::PaletteImageStamper(SDL_Renderer* renderer, PaletteImage&& image) :
     _image(std::move(image)),
     _renderer(renderer),
     _textures()
 {
 }
-PaletteImageMaster::PaletteImageMaster(PaletteImageMaster&& rhs) :
+PaletteImageStamper::PaletteImageStamper(PaletteImageStamper&& rhs) :
     _image(std::move(rhs._image)),
     _renderer(rhs._renderer),
     _textures(std::move(rhs._textures))
 {
     rhs._renderer = nullptr;
 }
-PaletteImageMaster::~PaletteImageMaster() {
+PaletteImageStamper::~PaletteImageStamper() {
     for (auto pair = _textures.begin(); pair != _textures.end(); ++pair)
         SDL_DestroyTexture(pair->second);
 }
 
-const PaletteImage& PaletteImageMaster::getImage() const {
+const PaletteImage& PaletteImageStamper::getImage() const {
     return _image;
 }
-void PaletteImageMaster::setImage(PaletteImage&& image) {
+void PaletteImageStamper::setImage(PaletteImage&& image) {
     _image = std::move(image);
     for (auto pair = _textures.begin(); pair != _textures.end(); ++pair)
         SDL_DestroyTexture(pair->second);
 }
 
-void PaletteImageMaster::draw(const Palette<Color4>& palette, Image4& screen, const Rect2<double>& bounds) {
+void PaletteImageStamper::draw(const Palette<Color4>& palette, Image4& screen, const Rect2<double>& bounds) {
     const Palette<Color4>* palettePtr = &palette;
     if (_textures.find(palettePtr) == _textures.end())
         _textures.emplace(palettePtr, createTexture(palette));
@@ -67,7 +67,7 @@ void PaletteImageMaster::draw(const Palette<Color4>& palette, Image4& screen, co
         }
     }
 }
-void PaletteImageMaster::draw(const Palette<Color4>& palette, SDL_Renderer* renderer, const Rect2<double>& bounds) {
+void PaletteImageStamper::draw(const Palette<Color4>& palette, SDL_Renderer* renderer, const Rect2<double>& bounds) {
     const Palette<Color4>* palettePtr = &palette;
     SDL_Rect destination{ (int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height };
     if (_textures.find(palettePtr) == _textures.end())

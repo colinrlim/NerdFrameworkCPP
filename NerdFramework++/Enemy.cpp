@@ -16,20 +16,20 @@ void Enemy::draw(Interface& interface, Image4& screen) {
 	const double initX = _position.x * 16.0 - 16.0;
 	const double initY = _position.y * 16.0 - 24.0;
 	if (_direction == DIRECTION_UP)
-		toolbox.ghostUpMaster->draw(basePalette, screen, Rect2<double>{initX, initY, 32, 32});
+		toolbox.ghostUpStamper->draw(basePalette, screen, Rect2<double>{initX, initY, 32, 32});
 	else if (_direction == DIRECTION_DOWN)
-		toolbox.ghostDownMaster->draw(basePalette, screen, Rect2<double>{initX, initY, 32, 32});
+		toolbox.ghostDownStamper->draw(basePalette, screen, Rect2<double>{initX, initY, 32, 32});
 	else if (_direction == DIRECTION_LEFT)
-		toolbox.ghostLeftMaster->draw(basePalette, screen, Rect2<double>{initX, initY, 32, 32});
+		toolbox.ghostLeftStamper->draw(basePalette, screen, Rect2<double>{initX, initY, 32, 32});
 	else if (_direction == DIRECTION_RIGHT)
-		toolbox.ghostRightMaster->draw(basePalette, screen, Rect2<double>{initX, initY, 32, 32});
+		toolbox.ghostRightStamper->draw(basePalette, screen, Rect2<double>{initX, initY, 32, 32});
 	if (Math::dmod(interface.secondsElapsed(), 0.3) >= 0.15) {
-		toolbox.ghostLegsMaster1->draw(basePalette, screen, Rect2<double>{initX, initY + 32.0, 16, 16});
-		toolbox.ghostLegsMaster2->draw(basePalette, screen, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
+		toolbox.ghostLegsStamper1->draw(basePalette, screen, Rect2<double>{initX, initY + 32.0, 16, 16});
+		toolbox.ghostLegsStamper2->draw(basePalette, screen, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
 	}
 	else if (Math::dmod(interface.secondsElapsed(), 0.3) < 0.15) {
-		toolbox.ghostLegsMaster3->draw(basePalette, screen, Rect2<double>{initX, initY + 32.0, 16, 16});
-		toolbox.ghostLegsMaster4->draw(basePalette, screen, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
+		toolbox.ghostLegsStamper3->draw(basePalette, screen, Rect2<double>{initX, initY + 32.0, 16, 16});
+		toolbox.ghostLegsStamper4->draw(basePalette, screen, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
 	}
 }
 void Enemy::draw(Interface& interface, SDL_Renderer* renderer) {
@@ -37,19 +37,19 @@ void Enemy::draw(Interface& interface, SDL_Renderer* renderer) {
 	const double initX = _position.x * 16.0 - 16.0;
 	const double initY = _position.y * 16.0 - 24.0;
 	if (_direction == DIRECTION_UP)
-		toolbox.ghostUpMaster->draw(basePalette, renderer, Rect2<double>{initX, initY, 32, 32});
+		toolbox.ghostUpStamper->draw(basePalette, renderer, Rect2<double>{initX, initY, 32, 32});
 	else if (_direction == DIRECTION_DOWN)
-		toolbox.ghostDownMaster->draw(basePalette, renderer, Rect2<double>{initX, initY, 32, 32});
+		toolbox.ghostDownStamper->draw(basePalette, renderer, Rect2<double>{initX, initY, 32, 32});
 	else if (_direction == DIRECTION_LEFT)
-		toolbox.ghostLeftMaster->draw(basePalette, renderer, Rect2<double>{initX, initY, 32, 32});
+		toolbox.ghostLeftStamper->draw(basePalette, renderer, Rect2<double>{initX, initY, 32, 32});
 	else if (_direction == DIRECTION_RIGHT)
-		toolbox.ghostRightMaster->draw(basePalette, renderer, Rect2<double>{initX, initY, 32, 32});
+		toolbox.ghostRightStamper->draw(basePalette, renderer, Rect2<double>{initX, initY, 32, 32});
 	if (Math::dmod(interface.secondsElapsed(), 0.3) >= 0.15) {
-		toolbox.ghostLegsMaster1->draw(basePalette, renderer, Rect2<double>{initX, initY + 32.0, 16, 16});
-		toolbox.ghostLegsMaster2->draw(basePalette, renderer, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
+		toolbox.ghostLegsStamper1->draw(basePalette, renderer, Rect2<double>{initX, initY + 32.0, 16, 16});
+		toolbox.ghostLegsStamper2->draw(basePalette, renderer, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
 	}
 	else if (Math::dmod(interface.secondsElapsed(), 0.3) < 0.15) {
-		toolbox.ghostLegsMaster3->draw(basePalette, renderer, Rect2<double>{initX, initY + 32.0, 16, 16});
-		toolbox.ghostLegsMaster4->draw(basePalette, renderer, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
+		toolbox.ghostLegsStamper3->draw(basePalette, renderer, Rect2<double>{initX, initY + 32.0, 16, 16});
+		toolbox.ghostLegsStamper4->draw(basePalette, renderer, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
 	}
 }

@@ -1,27 +1,27 @@
 #include "PacmanToolbox.h"
 
 PacmanToolbox::PacmanToolbox() :
-	tileBatch(nullptr),
-	ghostUpMaster(nullptr),
-	ghostDownMaster(nullptr),
-	ghostLeftMaster(nullptr),
-	ghostRightMaster(nullptr),
-	ghostFrightMaster(nullptr),
-	ghostLegsMaster1(nullptr),
-	ghostLegsMaster2(nullptr),
-	ghostLegsMaster3(nullptr),
-	ghostLegsMaster4(nullptr)
+	tileBatcher(nullptr),
+	ghostUpStamper(nullptr),
+	ghostDownStamper(nullptr),
+	ghostLeftStamper(nullptr),
+	ghostRightStamper(nullptr),
+	ghostFrightStamper(nullptr),
+	ghostLegsStamper1(nullptr),
+	ghostLegsStamper2(nullptr),
+	ghostLegsStamper3(nullptr),
+	ghostLegsStamper4(nullptr)
 { }
 PacmanToolbox::~PacmanToolbox() {
-	delete tileBatch;
+	delete tileBatcher;
 
-	delete ghostUpMaster;
-	delete ghostDownMaster;
-	delete ghostLeftMaster;
-	delete ghostRightMaster;
-	delete ghostFrightMaster;
-	delete ghostLegsMaster1;
-	delete ghostLegsMaster2;
-	delete ghostLegsMaster3;
-	delete ghostLegsMaster4;
+	delete ghostUpStamper;
+	delete ghostDownStamper;
+	delete ghostLeftStamper;
+	delete ghostRightStamper;
+	delete ghostFrightStamper;
+	delete ghostLegsStamper1;
+	delete ghostLegsStamper2;
+	delete ghostLegsStamper3;
+	delete ghostLegsStamper4;
 }
