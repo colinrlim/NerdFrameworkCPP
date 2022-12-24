@@ -4,18 +4,18 @@
 #include "Image4.h"
 #include "Rect2.h"
 
-class ImageMaster {
+class ImageStamper {
     Image4 _image;
     SDL_Renderer* _renderer;
     SDL_Texture* _texture;
 
-    ImageMaster(const ImageMaster& rhs);
-    ImageMaster& operator=(const ImageMaster& rhs);
-    ImageMaster& operator=(ImageMaster&& rhs);
+    ImageStamper(const ImageStamper& rhs);
+    ImageStamper& operator=(const ImageStamper& rhs);
+    ImageStamper& operator=(ImageStamper&& rhs);
 public:
-    ImageMaster(SDL_Renderer* renderer, Image4&& image);
-    ImageMaster(ImageMaster&& rhs);
-    ~ImageMaster();
+    ImageStamper(SDL_Renderer* renderer, Image4&& image);
+    ImageStamper(ImageStamper&& rhs);
+    ~ImageStamper();
 
     const Image4& getImage() const;
     void setImage(Image4&& image);

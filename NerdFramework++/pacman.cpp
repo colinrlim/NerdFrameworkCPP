@@ -7,7 +7,7 @@
 #include "Math.h"
 #include <iostream>
 #include "GameState.h"
-#include "PaletteImageMaster.h"
+#include "PaletteImageStamper.h"
 #include "Enemy.h"
 #include "PacmanToolbox.h"
 
@@ -1270,15 +1270,15 @@ void launch() {
 			std::string text = "   \1UP   HIGH SCORE";
 			std::move(text.data(), text.data() + text.length(), toolbox.tileBatch->gridData());
 
-			toolbox.ghostUpMaster = new PaletteImageMaster(renderer, std::move(ghost_up));
-			toolbox.ghostDownMaster = new PaletteImageMaster(renderer, std::move(ghost_down));
-			toolbox.ghostLeftMaster = new PaletteImageMaster(renderer, std::move(ghost_left));
-			toolbox.ghostRightMaster = new PaletteImageMaster(renderer, std::move(ghost_right));
-			toolbox.ghostFrightMaster = new PaletteImageMaster(renderer, std::move(ghost_fright));
-			toolbox.ghostLegsMaster1 = new PaletteImageMaster(renderer, std::move(ghost_legs1));
-			toolbox.ghostLegsMaster2 = new PaletteImageMaster(renderer, std::move(ghost_legs2));
-			toolbox.ghostLegsMaster3 = new PaletteImageMaster(renderer, std::move(ghost_legs3));
-			toolbox.ghostLegsMaster4 = new PaletteImageMaster(renderer, std::move(ghost_legs4));
+			toolbox.ghostUpStamper = new PaletteImageStamper(renderer, std::move(ghost_up));
+			toolbox.ghostDownStamper = new PaletteImageStamper(renderer, std::move(ghost_down));
+			toolbox.ghostLeftStamper = new PaletteImageStamper(renderer, std::move(ghost_left));
+			toolbox.ghostRightStamper = new PaletteImageStamper(renderer, std::move(ghost_right));
+			toolbox.ghostFrightStamper = new PaletteImageStamper(renderer, std::move(ghost_fright));
+			toolbox.ghostLegsStamper1 = new PaletteImageStamper(renderer, std::move(ghost_legs1));
+			toolbox.ghostLegsStamper2 = new PaletteImageStamper(renderer, std::move(ghost_legs2));
+			toolbox.ghostLegsStamper3 = new PaletteImageStamper(renderer, std::move(ghost_legs3));
+			toolbox.ghostLegsStamper4 = new PaletteImageStamper(renderer, std::move(ghost_legs4));
 		});
 		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
 			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
