@@ -13,6 +13,7 @@ PaletteImageStamper& PaletteImageStamper::operator=(PaletteImageStamper&& rhs) {
 SDL_Texture* PaletteImageStamper::createTexture(const Palette<Color4>& palette) const {
     Image4 bakedImage(_image, palette);
     SDL_Texture* texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, bakedImage.width(), bakedImage.height());
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
     SDL_UpdateTexture(texture, nullptr, bakedImage.data, bakedImage.width() * 4);
     return texture;
 }

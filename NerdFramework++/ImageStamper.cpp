@@ -14,6 +14,7 @@ ImageStamper::ImageStamper(SDL_Renderer* renderer, Image4&& image) :
     _renderer(renderer),
     _texture(SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height()))
 {
+    SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
 }
 ImageStamper::ImageStamper(ImageStamper&& rhs) :
     _image(std::move(rhs._image)),
@@ -35,6 +36,7 @@ void ImageStamper::setImage(Image4&& image) {
     _image = std::move(image);
     SDL_DestroyTexture(_texture);
     _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height());
+    SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
 }
 
 void ImageStamper::draw(Image4& screen, const Rect2<double>& bounds) {

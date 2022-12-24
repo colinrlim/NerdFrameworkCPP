@@ -76,6 +76,7 @@ void ImageLabel::draw(SDL_Renderer* renderer, const Rect2<double>& scope) {
     if (_texture == nullptr) {
         _renderer = renderer;
         _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height());
+        SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
         SDL_UpdateTexture(_texture, nullptr, _image.data, _image.width() * 4);
     }
 

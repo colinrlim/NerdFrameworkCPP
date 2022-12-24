@@ -11,6 +11,7 @@ PaletteTileBatcher& PaletteTileBatcher::operator=(PaletteTileBatcher&& rhs) { re
 
 SDL_Texture* PaletteTileBatcher::createTexture(Image4&& image) const {
     SDL_Texture* texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, image.width(), image.height());
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
     SDL_UpdateTexture(texture, nullptr, image.data, image.width() * 4);
     return texture;
 }

@@ -17,6 +17,8 @@ Interface::Interface(std::function<void(Interface&, SDL_Renderer*)> onInit) :
 	{
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _width, _height);
+		SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
 	}
 
 	onInit(*this, _renderer);
@@ -36,6 +38,8 @@ Interface::Interface(SDL_Window* window, std::function<void(Interface&, SDL_Rend
 	{
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _width, _height);
+		SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
 	}
 
 	onInit(*this, _renderer);
@@ -56,6 +60,8 @@ Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene, st
 	{
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _width, _height);
+		SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
 	}
 
 	onInit(*this, _renderer);
@@ -77,6 +83,8 @@ Interface::Interface(const std::vector<UIObject*>& scene, std::function<void(Int
 	{
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 		_texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _width, _height);
+		SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
 	}
 
 	onInit(*this, _renderer);

@@ -1202,7 +1202,7 @@ void launch() {
 				POWER_PELLET_INDICES.push_back(i);
 	}
 
-	Color4 black(0, 0, 0);
+	Color4 black(0, 0, 0, 0);
 	Color4 red(252, 0, 0);
 	Color4 brown(216, 144, 85);
 	Color4 pink(252, 180, 255);
@@ -1280,7 +1280,8 @@ void launch() {
 			toolbox.ghostLegsStamper3 = new PaletteImageStamper(renderer, std::move(ghost_legs3));
 			toolbox.ghostLegsStamper4 = new PaletteImageStamper(renderer, std::move(ghost_legs4));
 		});
-		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
+		interface.frame.setColor(Color3::black);
+;		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
 			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
 			toolbox.tileBatcher->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
 
@@ -1293,7 +1294,7 @@ void launch() {
 			toolbox.tileBatcher->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
 
 			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
-				//iterator->draw(interface, renderer);
+				iterator->draw(interface, renderer);
 			}
 		};
 		uint8_t* paletteData = toolbox.tileBatcher->paletteGridData();
