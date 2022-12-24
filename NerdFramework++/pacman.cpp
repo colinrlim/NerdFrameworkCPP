@@ -1,5 +1,5 @@
 #include "pacman.h"
-#include "PaletteTileBatch.h"
+#include "PaletteTileBatcher.h"
 #include "PaletteImage.h"
 #include "Interface.h"
 #include "Grid2.h"
@@ -1260,15 +1260,15 @@ void launch() {
 		Interface interface(SDL_CreateWindow("Pac-Man", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 28 * 16, 36 * 16, 0), [&](Interface& interface, SDL_Renderer* renderer)-> void {
 			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
 
-			toolbox.tileBatch = new PaletteTileBatch(renderer);
+			toolbox.tileBatcher = new PaletteTileBatcher(renderer);
 
-			toolbox.tileBatch->setGrid(std::move(board));
-			toolbox.tileBatch->setTileTypes(std::move(tileTypes));
-			toolbox.tileBatch->setPaletteGrid(std::move(paletteBoard));
-			toolbox.tileBatch->setPaletteTypes(palettes);
+			toolbox.tileBatcher->setGrid(std::move(board));
+			toolbox.tileBatcher->setTileTypes(std::move(tileTypes));
+			toolbox.tileBatcher->setPaletteGrid(std::move(paletteBoard));
+			toolbox.tileBatcher->setPaletteTypes(palettes);
 
 			std::string text = "   \1UP   HIGH SCORE";
-			std::move(text.data(), text.data() + text.length(), toolbox.tileBatch->gridData());
+			std::move(text.data(), text.data() + text.length(), toolbox.tileBatcher->gridData());
 
 			toolbox.ghostUpStamper = new PaletteImageStamper(renderer, std::move(ghost_up));
 			toolbox.ghostDownStamper = new PaletteImageStamper(renderer, std::move(ghost_down));
@@ -1282,7 +1282,7 @@ void launch() {
 		});
 		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
 			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
-			toolbox.tileBatch->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
+			toolbox.tileBatcher->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
 
 			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
 				iterator->draw(interface, screen);
@@ -1290,13 +1290,13 @@ void launch() {
 		};
 		interface.onDrawSDL = [&, palettes](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
 			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
-			toolbox.tileBatch->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
+			toolbox.tileBatcher->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
 
 			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
 				//iterator->draw(interface, renderer);
 			}
 		};
-		uint8_t* paletteData = toolbox.tileBatch->paletteGridData();
+		uint8_t* paletteData = toolbox.tileBatcher->paletteGridData();
 		interface.onUpdate = [&](Interface& interface, double delta) -> void {
 			if (Math::dmod(interface.secondsElapsed(), 0.5) >= 0.25 && paletteData[3] == 2)
 				std::fill(paletteData + 3, paletteData + 6, 10);
@@ -1321,7 +1321,7 @@ void launch() {
 		}
 		else
 		{
-			uint8_t* paletteData = toolbox.tileBatch->paletteGridData();
+			uint8_t* paletteData = toolbox.tileBatcher->paletteGridData();
 			bool running = true;
 			while (running) {
 				SDL_Event ev;
@@ -1332,10 +1332,10 @@ void launch() {
 					{
 						running = false;
 						break;
-					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_2 == ev.key.keysym.scancode && toolbox.tileBatch->paletteAt(0, 2) < palettes.size() - 1) {
-						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatch->paletteAt(0, 2) + 1);
-					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_1 == ev.key.keysym.scancode && toolbox.tileBatch->paletteAt(0, 2) > 0) {
-						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatch->paletteAt(0, 2) - 1);
+					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_2 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) < palettes.size() - 1) {
+						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatcher->paletteAt(0, 2) + 1);
+					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_1 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) > 0) {
+						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatcher->paletteAt(0, 2) - 1);
 					}
 				}
 

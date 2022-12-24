@@ -1,26 +1,26 @@
-#include "PaletteTileBatch.h"
+#include "PaletteTileBatcher.h"
 #include "Math.h"
 
-PaletteTileBatch::PaletteTileBatch(const PaletteTileBatch& rhs) :
+PaletteTileBatcher::PaletteTileBatcher(const PaletteTileBatcher& rhs) :
     _renderer(nullptr),
     _grid(1, 1),
     _paletteGrid(1, 1)
 { }
-PaletteTileBatch& PaletteTileBatch::operator=(const PaletteTileBatch& rhs) { return *this; }
-PaletteTileBatch& PaletteTileBatch::operator=(PaletteTileBatch&& rhs) { return *this; }
+PaletteTileBatcher& PaletteTileBatcher::operator=(const PaletteTileBatcher& rhs) { return *this; }
+PaletteTileBatcher& PaletteTileBatcher::operator=(PaletteTileBatcher&& rhs) { return *this; }
 
-SDL_Texture* PaletteTileBatch::createTexture(Image4&& image) const {
+SDL_Texture* PaletteTileBatcher::createTexture(Image4&& image) const {
     SDL_Texture* texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, image.width(), image.height());
     SDL_UpdateTexture(texture, nullptr, image.data, image.width() * 4);
     return texture;
 }
 
-PaletteTileBatch::PaletteTileBatch(SDL_Renderer* renderer) :
+PaletteTileBatcher::PaletteTileBatcher(SDL_Renderer* renderer) :
     _renderer(renderer),
     _grid(1, 1),
     _paletteGrid(1, 1)
 { }
-PaletteTileBatch::PaletteTileBatch(PaletteTileBatch&& rhs) :
+PaletteTileBatcher::PaletteTileBatcher(PaletteTileBatcher&& rhs) :
     _renderer(rhs._renderer),
     _tileTypes(std::move(rhs._tileTypes)),
     _tileTypesTextures(std::move(rhs._tileTypesTextures)),
@@ -28,54 +28,54 @@ PaletteTileBatch::PaletteTileBatch(PaletteTileBatch&& rhs) :
     _grid(std::move(rhs._grid)),
     _paletteGrid(std::move(rhs._paletteGrid))
 { }
-PaletteTileBatch::~PaletteTileBatch() {
+PaletteTileBatcher::~PaletteTileBatcher() {
     for (auto pair = _tileTypesTextures.begin(); pair != _tileTypesTextures.end(); ++pair)
         SDL_DestroyTexture(pair->second);
 }
 
-uint8_t* PaletteTileBatch::gridData() const {
+uint8_t* PaletteTileBatcher::gridData() const {
     return _grid.data();
 }
-uint8_t* PaletteTileBatch::paletteGridData() const {
+uint8_t* PaletteTileBatcher::paletteGridData() const {
     return _paletteGrid.data();
 }
-uint8_t& PaletteTileBatch::tileAt(size_t x, size_t y) const {
+uint8_t& PaletteTileBatcher::tileAt(size_t x, size_t y) const {
     return _grid.get(x, y);
 }
-uint8_t& PaletteTileBatch::paletteAt(size_t x, size_t y) const {
+uint8_t& PaletteTileBatcher::paletteAt(size_t x, size_t y) const {
     return _paletteGrid.get(x, y);
 }
-size_t PaletteTileBatch::size() const {
+size_t PaletteTileBatcher::size() const {
     return _grid.size();
 }
 
-void PaletteTileBatch::setGrid(const Grid2<uint8_t>& grid) {
+void PaletteTileBatcher::setGrid(const Grid2<uint8_t>& grid) {
     _grid = grid;
 }
-void PaletteTileBatch::setGrid(Grid2<uint8_t>&& grid) {
+void PaletteTileBatcher::setGrid(Grid2<uint8_t>&& grid) {
     _grid = std::move(grid);
 }
-void PaletteTileBatch::setPaletteGrid(const Grid2<uint8_t>& paletteGrid) {
+void PaletteTileBatcher::setPaletteGrid(const Grid2<uint8_t>& paletteGrid) {
     _paletteGrid = paletteGrid;
 }
-void PaletteTileBatch::setPaletteGrid(Grid2<uint8_t>&& paletteGrid) {
+void PaletteTileBatcher::setPaletteGrid(Grid2<uint8_t>&& paletteGrid) {
     _paletteGrid = std::move(paletteGrid);
 }
 
-void PaletteTileBatch::setTileTypes(const std::map<uint8_t, PaletteImage>& tileTypes) {
+void PaletteTileBatcher::setTileTypes(const std::map<uint8_t, PaletteImage>& tileTypes) {
     _tileTypes = tileTypes;
 }
-void PaletteTileBatch::setTileTypes(std::map<uint8_t, PaletteImage>&& tileTypes) {
+void PaletteTileBatcher::setTileTypes(std::map<uint8_t, PaletteImage>&& tileTypes) {
     _tileTypes = std::move(tileTypes);
 }
-void PaletteTileBatch::setPaletteTypes(const std::vector<Palette<Color4>>& palettes) {
+void PaletteTileBatcher::setPaletteTypes(const std::vector<Palette<Color4>>& palettes) {
     _paletteTypes = palettes;
 }
-void PaletteTileBatch::setPaletteTypes(std::vector<Palette<Color4>>&& palettes) {
+void PaletteTileBatcher::setPaletteTypes(std::vector<Palette<Color4>>&& palettes) {
     _paletteTypes = std::move(palettes);
 }
 
-void PaletteTileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
+void PaletteTileBatcher::draw(Image4& screen, const Rect2<double>& bounds) {
     const double maxWidth = screen.width();
     const double maxHeight = screen.height();
 
@@ -112,7 +112,7 @@ void PaletteTileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
     }
 }
 
-void PaletteTileBatch::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
+void PaletteTileBatcher::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
     size_t width = _grid.width();
     size_t height = _grid.height();
 

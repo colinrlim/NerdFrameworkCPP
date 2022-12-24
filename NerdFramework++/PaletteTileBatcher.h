@@ -9,7 +9,7 @@
 #include "Grid2.h"
 #include "Rect2.h"
 
-class PaletteTileBatch {
+class PaletteTileBatcher {
 private:
     SDL_Renderer* _renderer;
 
@@ -20,15 +20,15 @@ private:
     Grid2<uint8_t> _grid;
     Grid2<uint8_t> _paletteGrid;
 
-    PaletteTileBatch(const PaletteTileBatch& rhs);
-    PaletteTileBatch& operator=(const PaletteTileBatch& rhs);
-    PaletteTileBatch& operator=(PaletteTileBatch&& rhs);
+    PaletteTileBatcher(const PaletteTileBatcher& rhs);
+    PaletteTileBatcher& operator=(const PaletteTileBatcher& rhs);
+    PaletteTileBatcher& operator=(PaletteTileBatcher&& rhs);
 
     SDL_Texture* createTexture(Image4&& image) const;
 public:
-    PaletteTileBatch(SDL_Renderer* renderer);
-    PaletteTileBatch(PaletteTileBatch&& rhs);
-    ~PaletteTileBatch();
+    PaletteTileBatcher(SDL_Renderer* renderer);
+    PaletteTileBatcher(PaletteTileBatcher&& rhs);
+    ~PaletteTileBatcher();
 
     uint8_t* gridData() const;
     uint8_t* paletteGridData() const;

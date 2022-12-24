@@ -1,58 +1,58 @@
-#include "TileBatch.h"
+#include "TileBatcher.h"
 #include "Math.h"
 
-TileBatch::TileBatch(const TileBatch& rhs) :
+TileBatcher::TileBatcher(const TileBatcher& rhs) :
     _renderer(nullptr),
     _grid(1, 1)
 { }
-TileBatch& TileBatch::operator=(const TileBatch& rhs) { return *this; }
-TileBatch& TileBatch::operator=(TileBatch&& rhs) { return *this; }
+TileBatcher& TileBatcher::operator=(const TileBatcher& rhs) { return *this; }
+TileBatcher& TileBatcher::operator=(TileBatcher&& rhs) { return *this; }
 
-SDL_Texture* TileBatch::createTexture(const Image4& image) const {
+SDL_Texture* TileBatcher::createTexture(const Image4& image) const {
     SDL_Texture* texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, image.width(), image.height());
     SDL_UpdateTexture(texture, nullptr, image.data, image.width() * 4);
     return texture;
 }
 
-TileBatch::TileBatch(SDL_Renderer* renderer) :
+TileBatcher::TileBatcher(SDL_Renderer* renderer) :
     _renderer(renderer),
     _grid(1, 1)
 { }
-TileBatch::TileBatch(TileBatch&& rhs) :
+TileBatcher::TileBatcher(TileBatcher&& rhs) :
     _tileTypes(std::move(rhs._tileTypes)),
     _tileTypesTextures(std::move(rhs._tileTypesTextures)),
     _renderer(rhs._renderer),
     _grid(std::move(rhs._grid))
 { }
-TileBatch::~TileBatch() {
+TileBatcher::~TileBatcher() {
     for (auto pair = _tileTypesTextures.begin(); pair != _tileTypesTextures.end(); ++pair)
         SDL_DestroyTexture(pair->second);
 }
 
-uint8_t* TileBatch::data() const {
+uint8_t* TileBatcher::data() const {
     return _grid.data();
 }
-uint8_t& TileBatch::at(size_t x, size_t y) const {
+uint8_t& TileBatcher::at(size_t x, size_t y) const {
     return _grid.get(x, y);
 }
-size_t TileBatch::size() const {
+size_t TileBatcher::size() const {
     return _grid.size();
 }
 
-void TileBatch::setGrid(const Grid2<uint8_t>& grid) {
+void TileBatcher::setGrid(const Grid2<uint8_t>& grid) {
     _grid = grid;
 }
-void TileBatch::setGrid(Grid2<uint8_t>&& grid) {
+void TileBatcher::setGrid(Grid2<uint8_t>&& grid) {
     _grid = std::move(grid);
 }
-void TileBatch::setTileTypes(const std::map<uint8_t, Image4>& tileTypes) {
+void TileBatcher::setTileTypes(const std::map<uint8_t, Image4>& tileTypes) {
     _tileTypes = tileTypes;
 }
-void TileBatch::setTileTypes(std::map<uint8_t, Image4>&& tileTypes) {
+void TileBatcher::setTileTypes(std::map<uint8_t, Image4>&& tileTypes) {
     _tileTypes = std::move(tileTypes);
 }
 
-void TileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
+void TileBatcher::draw(Image4& screen, const Rect2<double>& bounds) {
     const double maxWidth = screen.width();
     const double maxHeight = screen.height();
 
@@ -88,7 +88,7 @@ void TileBatch::draw(Image4& screen, const Rect2<double>& bounds) {
     }
 }
 
-void TileBatch::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
+void TileBatcher::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
     size_t width = _grid.width();
     size_t height = _grid.height();
 
