@@ -12,12 +12,15 @@ struct Vector2
     Vector2(double s);
     Vector2(const Vector2& a, const Vector2& b);
     Vector2(const Vector3& threedim);
+    Vector2(uint16_t integer);
 
     static const Vector2 zero;
     static const Vector2 one;
 
     double magnitude();
     Vector2 normalized();
+    uint16_t toInteger();
+    void toInteger(uint16_t& integer);
     static Vector2 lerp(const Vector2& a, const Vector2& b, double alpha);
     static Vector2 fromParameterization3(double t, double s, const Vector2& a, const Vector2& b, const Vector2& c);
 

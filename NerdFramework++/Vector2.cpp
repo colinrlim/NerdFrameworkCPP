@@ -5,6 +5,7 @@ Vector2::Vector2(double x, double y) : x(x), y(y) { }
 Vector2::Vector2(double s) : x(s), y(s) { };
 Vector2::Vector2(const Vector2& a, const Vector2& b) : x(b.x - a.x), y(b.y - a.y) { }
 Vector2::Vector2(const Vector3& threedim) : x(threedim.x), y(threedim.y) { }
+Vector2::Vector2(uint16_t integer) : x(((uint8_t*)&integer)[1]), y(((uint8_t*)&integer)[2]) { }
 
 const Vector2 Vector2::zero(0.0, 0.0);
 const Vector2 Vector2::one(1.0, 1.0);
@@ -14,6 +15,18 @@ double Vector2::magnitude() {
 }
 Vector2 Vector2::normalized() {
 	return *this / this->magnitude();
+}
+uint16_t Vector2::toInteger() {
+	uint16_t newInt;
+	uint8_t* address = (uint8_t*)&newInt;
+	address[1] = (uint8_t)x;
+	address[0] = (uint8_t)y;
+	return newInt;
+}
+void Vector2::toInteger(uint16_t& integer) {
+	uint8_t* address = (uint8_t*)&integer;
+	address[1] = (uint8_t)x;
+	address[0] = (uint8_t)y;
 }
 Vector2 Vector2::lerp(const Vector2& a, const Vector2& b, double alpha) {
 	return a * (1 - alpha) + b * alpha;

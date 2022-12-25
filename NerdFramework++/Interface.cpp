@@ -104,7 +104,7 @@ double Interface::secondsElapsed() const {
 
 void Interface::update() {
 	auto now(std::chrono::steady_clock::now());
-	double delta = (double)std::chrono::duration_cast<std::chrono::seconds>(now - _lastFrame).count();
+	double delta = (double)std::chrono::duration_cast<std::chrono::milliseconds>(now - _lastFrame).count() / 1000.0;
 	onUpdate(*this, delta);
 	frame.update(delta);
 	_lastFrame = now;

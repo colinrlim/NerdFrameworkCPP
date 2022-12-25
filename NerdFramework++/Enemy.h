@@ -4,10 +4,20 @@
 
 class Enemy : public Entity {
 private:
-	uint16_t _targetTile;
+
+	void updateDirection();
 public:
+	uint16_t _targetTile;
+	enum State {
+		CHASE,
+		SCATTER,
+		FRIGHTENED,
+		EATEN
+	};
+
 	std::function<uint16_t(const Entity&)> calculateTargetTile;
 	const Palette<Color4>& basePalette;
+	State state;
 
 	Enemy(const Palette<Color4>& basePalette, Vector2 position, uint16_t direction = DIRECTION_LEFT, float speed = 10.f);
 

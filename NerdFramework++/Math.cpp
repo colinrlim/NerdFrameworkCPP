@@ -170,16 +170,17 @@ int Math::ceil(double x)
 
 double Math::sqrt(double x, int steps)
 {
+    return std::sqrt(x);
     /* fast inverse square root (quake) algorithm
     */
 
-    uint32_t i = *reinterpret_cast<uint32_t*>(&x);
+    /*uint32_t i = *reinterpret_cast<uint32_t*>(&x);
 
     i = 0x5f375a86 - (i >> 1);
     double result = *reinterpret_cast<double*>(&i);
     result *= 1.5 - 0.5 * x * result * result;
 
-    return result * (1.5 - 0.5 * x * result * result);
+    return result * (1.5 - 0.5 * x * result * result);*/
 }
 
 double Math::pow(double x, int n)

@@ -1202,53 +1202,17 @@ void launch() {
 				POWER_PELLET_INDICES.push_back(i);
 	}
 
-	Color4 black(0, 0, 0, 0);
-	Color4 red(252, 0, 0);
-	Color4 brown(216, 144, 85);
-	Color4 pink(252, 180, 255);
-	Color4 cyan(0, 252, 255);
-	Color4 blue(72, 180, 255);
-	Color4 orange(252, 180, 85);
-	Color4 yellow(252, 252, 0);
-	Color4 indigo(36, 36, 255);
-	Color4 green(0, 252, 0);
-	Color4 teal(72, 180, 170);
-	Color4 salmon(252, 180, 170);
-	Color4 white(252, 252, 255);
-	const std::vector<Palette<Color4>> palettes{
-		{ { Color4::none, black, black, black } },		// 0
-		{ { Color4::none, indigo, black, salmon } },	// 1 frightened1
-		{ { Color4::none, white, brown, red } },		// 2 frightened2
-		{ { Color4::none, yellow, pink, cyan } },		// 3
-		{ { Color4::none, black, black, black } },		// 4
-		{ { Color4::none, red, indigo, white } },		// 5 blinky
-		{ { Color4::none, cyan, indigo, white } },		// 6 inky
-		{ { Color4::none, yellow, red, indigo } },		// 7
-		{ { Color4::none, salmon, indigo, green } },	// 8
-		{ { Color4::none, brown, green, orange } },		// 9
-		{ { Color4::none, black, indigo, white } },		// 10 eyes
-		{ { Color4::none, red, salmon, white } },		// 11
-		{ { Color4::none, salmon, black, white } },		// 12
-		{ { Color4::none, red, white, green } },		// 13
-		{ { Color4::none, white, blue, yellow } },		// 14
-		{ { Color4::none, indigo, black, salmon } },	// 15
-		{ { Color4::none, salmon, indigo, white } },	// 16 frightened
-		{ { Color4::none, pink, indigo, white } },		// 17 pinky
-		{ { Color4::none, orange, indigo, white } },	// 18 clyde
-		{ { Color4::none, white, green, red } },		// 19
-		{ { Color4::none, white, green, teal } },		// 20
-		{ { Color4::none, indigo, black, salmon } },	// 21
-		{ { Color4::none, white, black, salmon } },		// 22
-	};
+	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
 
 	std::vector<Enemy> enemies{
-		Enemy(palettes[5], Vector2(2, 2)),
-		Enemy(palettes[6], Vector2(4, 2)),
-		Enemy(palettes[16], Vector2(2, 5)),
-		Enemy(palettes[17], Vector2(4, 5)),
+		Enemy(toolbox.palettes[5], Vector2(14.5, 14.5)),
+		/*Enemy(toolbox.palettes[6], Vector2(14.5, 14.5)),
+		Enemy(toolbox.palettes[17], Vector2(14.5, 14.5)),
+		Enemy(toolbox.palettes[18], Vector2(14.5, 14.5)),*/
 	};
 
-	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
+	//enemies[2].state = Enemy::FRIGHTENED;
+	//enemies[3].state = Enemy::EATEN;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -1258,14 +1222,12 @@ void launch() {
 	{
 
 		Interface interface(SDL_CreateWindow("Pac-Man", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 28 * 16, 36 * 16, 0), [&](Interface& interface, SDL_Renderer* renderer)-> void {
-			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
-
 			toolbox.tileBatcher = new PaletteTileBatcher(renderer);
 
 			toolbox.tileBatcher->setGrid(std::move(board));
 			toolbox.tileBatcher->setTileTypes(std::move(tileTypes));
 			toolbox.tileBatcher->setPaletteGrid(std::move(paletteBoard));
-			toolbox.tileBatcher->setPaletteTypes(palettes);
+			toolbox.tileBatcher->setPaletteTypes(toolbox.palettes);
 
 			std::string text = "   \1UP   HIGH SCORE";
 			std::move(text.data(), text.data() + text.length(), toolbox.tileBatcher->gridData());
@@ -1282,15 +1244,13 @@ void launch() {
 		});
 		interface.frame.setColor(Color3::black);
 ;		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
-			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
 			toolbox.tileBatcher->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
 
 			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
 				iterator->draw(interface, screen);
 			}
 		};
-		interface.onDrawSDL = [&, palettes](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
-			PacmanToolbox& toolbox = PacmanToolbox::getInstance();
+		interface.onDrawSDL = [&](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
 			toolbox.tileBatcher->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
 
 			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
@@ -1308,6 +1268,9 @@ void launch() {
 					paletteData[i] = 4;
 				else if (Math::dmod(interface.secondsElapsed(), 1.0 / 3.0) < 1.0 / 6.0 && paletteData[i] == 4)
 					paletteData[i] = 1;
+			}
+			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+				iterator->update(delta);
 			}
 		};
 
@@ -1333,7 +1296,7 @@ void launch() {
 					{
 						running = false;
 						break;
-					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_2 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) < palettes.size() - 1) {
+					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_2 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) < toolbox.palettes.size() - 1) {
 						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatcher->paletteAt(0, 2) + 1);
 					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_1 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) > 0) {
 						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatcher->paletteAt(0, 2) - 1);

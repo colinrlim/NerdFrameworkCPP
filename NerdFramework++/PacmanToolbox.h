@@ -17,6 +17,8 @@ public:
 	PaletteImageStamper* ghostLegsStamper3;
 	PaletteImageStamper* ghostLegsStamper4;
 
+	std::vector<Palette<Color4>> palettes;
+
 	PacmanToolbox();
 	~PacmanToolbox();
 
