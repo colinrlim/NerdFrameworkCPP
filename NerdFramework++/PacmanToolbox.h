@@ -2,6 +2,7 @@
 
 #include "PaletteImageStamper.h"
 #include "PaletteTileBatcher.h"
+#include "PaletteAnimationStamper.h"
 
 class PacmanToolbox {
 public:
@@ -16,6 +17,8 @@ public:
 	PaletteImageStamper* ghostLegsStamper2;
 	PaletteImageStamper* ghostLegsStamper3;
 	PaletteImageStamper* ghostLegsStamper4;
+	PaletteAnimationStamper* ghostLegsAnim1;
+	PaletteAnimationStamper* ghostLegsAnim2;
 
 	std::vector<Palette<Color4>> palettes;
 

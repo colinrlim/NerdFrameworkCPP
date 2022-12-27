@@ -10,6 +10,7 @@
 #include "PaletteImageStamper.h"
 #include "Enemy.h"
 #include "PacmanToolbox.h"
+#include "Player.h"
 
 void launch() {
 	PaletteImage zero(8, 8, std::vector<uint8_t>{
@@ -1206,13 +1207,55 @@ void launch() {
 
 	std::vector<Enemy> enemies{
 		Enemy(toolbox.palettes[5], Vector2(14.5, 14.5)),
-		/*Enemy(toolbox.palettes[6], Vector2(14.5, 14.5)),
+		Enemy(toolbox.palettes[6], Vector2(14.5, 14.5)),
 		Enemy(toolbox.palettes[17], Vector2(14.5, 14.5)),
-		Enemy(toolbox.palettes[18], Vector2(14.5, 14.5)),*/
+		Enemy(toolbox.palettes[18], Vector2(14.5, 14.5)),
+	};
+
+	const uint16_t BLINKY_SCATTER_TILE = Vector2i(25, 0).toInteger();
+	const uint16_t INKY_SCATTER_TILE = Vector2i(27, 35).toInteger();
+	const uint16_t PINKY_SCATTER_TILE = Vector2i(2, 0).toInteger();
+	const uint16_t CLYDE_SCATTER_TILE = Vector2i(0, 35).toInteger();
+
+	Player player(Vector2(14.5, 20.5));
+	Vector2i position;
+	SDL_GetMouseState(&position.x, &position.y);
+	position /= 16;
+	enemies[0].calculateTargetTile = [&](const Enemy& entity)->uint16_t{
+		if (entity.state == Enemy::CHASE)
+			return position.toInteger();
+		else
+			return BLINKY_SCATTER_TILE;
+	};
+	enemies[1].calculateTargetTile = [&](const Enemy& entity)->uint16_t {
+		if (entity.state == Enemy::CHASE) {
+			uint16_t addVector = player.getDirection() * 2;
+			Vector2i entityPos(enemies[0].getPosition());
+			return (entityPos + (position + Vector2i(addVector) - entityPos) * 2).toInteger();
+		} else
+			return INKY_SCATTER_TILE;
+	};
+	enemies[2].calculateTargetTile = [&](const Enemy& entity)->uint16_t {
+		if (entity.state == Enemy::CHASE) {
+			uint16_t addVector = player.getDirection() * 4;
+			return (position + Vector2i(addVector)).toInteger();
+		} else
+			return PINKY_SCATTER_TILE;
+	};
+	enemies[3].calculateTargetTile = [&](const Enemy& entity)->uint16_t {
+		if (entity.state == Enemy::CHASE) {
+			if ((Vector2i(entity.getPosition()) - position).magnitude() <= 8.0)
+				return CLYDE_SCATTER_TILE;
+			else
+				return position.toInteger();
+		} else
+			return CLYDE_SCATTER_TILE;
 	};
 
 	//enemies[2].state = Enemy::FRIGHTENED;
 	//enemies[3].state = Enemy::EATEN;
+
+	PaletteImageStamper* testStamper;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -1241,11 +1284,21 @@ void launch() {
 			toolbox.ghostLegsStamper2 = new PaletteImageStamper(renderer, std::move(ghost_legs2));
 			toolbox.ghostLegsStamper3 = new PaletteImageStamper(renderer, std::move(ghost_legs3));
 			toolbox.ghostLegsStamper4 = new PaletteImageStamper(renderer, std::move(ghost_legs4));
+			toolbox.ghostLegsAnim1 = new PaletteAnimationStamper(std::vector<PaletteImageStamper*>{ toolbox.ghostLegsStamper1, toolbox.ghostLegsStamper3 }, 0.15);
+			toolbox.ghostLegsAnim2 = new PaletteAnimationStamper(std::vector<PaletteImageStamper*>{ toolbox.ghostLegsStamper2, toolbox.ghostLegsStamper4 }, 0.15);
+
+			auto now = std::chrono::steady_clock::now();
+			toolbox.ghostLegsAnim1->play(now, -1);
+			toolbox.ghostLegsAnim2->play(now, -1);
+
+			testStamper = new PaletteImageStamper(renderer, PaletteImage(1, 1, (uint8_t)1));
 		});
 		interface.frame.setColor(Color3::black);
 ;		interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
 			toolbox.tileBatcher->draw(screen, Rect2<double>{0.0, 0.0, 16, 16});
 
+			toolbox.ghostLegsAnim1->update();
+			toolbox.ghostLegsAnim2->update();
 			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
 				iterator->draw(interface, screen);
 			}
@@ -1253,10 +1306,41 @@ void launch() {
 		interface.onDrawSDL = [&](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
 			toolbox.tileBatcher->draw(renderer, Rect2<double>{0.0, 0.0, 16, 16});
 
+			toolbox.ghostLegsAnim1->update();
+			toolbox.ghostLegsAnim2->update();
 			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
 				iterator->draw(interface, renderer);
+				Vector2i targetTile(iterator->getTargetTile());
+				testStamper->draw(iterator->basePalette, renderer, Rect2<double>{targetTile.x * 16.0, targetTile.y * 16.0, 16.0, 16.0});
+			}
+
+			/*SDL_SetRenderDrawColor(renderer, 30, 30, 30, 125);
+			SDL_Rect rect{ 0, 0, 28 * 16, 36 * 16 };
+			SDL_RenderFillRect(renderer, &rect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 175);
+			for (int i = 0; i < 100; i++) {
+				SDL_Rect rect{ 0, i * 7.5 + 3, 28 * 16, 2.5 };
+				SDL_RenderFillRect(renderer, &rect);
+			}*/
+		};
+
+
+		GameState gameState;
+		auto chase = [&]()->void {
+			gameState.ghostmode++;
+			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+				iterator->state = Enemy::CHASE;
+				iterator->reverseDirection();
 			}
 		};
+		auto scatter = [&]()->void {
+			gameState.ghostmode++;
+			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+				iterator->state = Enemy::SCATTER;
+				iterator->reverseDirection();
+			}
+		};
+
 		uint8_t* paletteData = toolbox.tileBatcher->paletteGridData();
 		interface.onUpdate = [&](Interface& interface, double delta) -> void {
 			if (Math::dmod(interface.secondsElapsed(), 0.5) >= 0.25 && paletteData[3] == 2)
@@ -1272,10 +1356,65 @@ void launch() {
 			for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
 				iterator->update(delta);
 			}
-		};
 
-		GameState gameState;
-		gameState.updateScore(300);
+			double elapsedTime = gameState.levelStart.tock();
+			switch (gameState.ghostmode) {
+			case 0:
+				gameState.ghostmode++;
+				for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator)
+					iterator->state = Enemy::SCATTER;
+				break;
+			case 1:
+				if (gameState.level < 4) {
+					if (elapsedTime >= 7.0)
+						chase();
+				} else if (elapsedTime >= 5.0)
+						chase();
+				break;
+			case 2:
+				if (gameState.level < 4) {
+					if (elapsedTime >= 27.0)
+						scatter();
+				} else if (elapsedTime >= 25.0)
+						scatter();
+				break;
+			case 3:
+				if (gameState.level < 4) {
+					if (elapsedTime >= 34.0)
+						chase();
+				} else if (elapsedTime >= 30.0)
+						chase();
+				break;
+			case 4:
+				if (gameState.level < 4) {
+					if (elapsedTime >= 54.0)
+						scatter();
+				} else if (elapsedTime >= 50.0)
+						scatter();
+				break;
+			case 5:
+				if (gameState.level < 4) {
+					if (elapsedTime >= 59.0)
+						chase();
+				} else if (elapsedTime >= 55.0)
+						chase();
+				break;
+			case 6:
+				if (gameState.level == 0) {
+					if (elapsedTime >= 79.0)
+						scatter();
+				} else if (elapsedTime >= 1092.0)
+						scatter();
+				break;
+			case 7:
+				if (gameState.level == 0) {
+					if (elapsedTime >= 84.0)
+						chase();
+				} else if (elapsedTime >= 1092.0 + 1.0 / 60.0)
+						chase();
+				break;
+			}
+		};
 
 		if (interface.window == nullptr)
 		{
@@ -1296,13 +1435,34 @@ void launch() {
 					{
 						running = false;
 						break;
-					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_2 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) < toolbox.palettes.size() - 1) {
-						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatcher->paletteAt(0, 2) + 1);
-					} else if (SDL_KEYDOWN == ev.type && SDL_SCANCODE_1 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) > 0) {
-						std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatcher->paletteAt(0, 2) - 1);
+					}
+					else if (SDL_KEYDOWN == ev.type) {
+						if (SDL_SCANCODE_1 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) > 0) {
+							std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatcher->paletteAt(0, 2) - 1);
+						} else if (SDL_SCANCODE_2 == ev.key.keysym.scancode && toolbox.tileBatcher->paletteAt(0, 2) < toolbox.palettes.size() - 1) {
+							std::fill(paletteData + 28 * 2, paletteData + paletteBoard.size(), toolbox.tileBatcher->paletteAt(0, 2) + 1);
+						} else if (SDL_SCANCODE_3 == ev.key.keysym.scancode) {
+							for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+								iterator->state = Enemy::CHASE;
+							}
+						} else if (SDL_SCANCODE_4 == ev.key.keysym.scancode) {
+							for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+								iterator->state = Enemy::SCATTER;
+							}
+						} else if (SDL_SCANCODE_5 == ev.key.keysym.scancode) {
+							for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+								iterator->state = Enemy::FRIGHTENED;
+							}
+						} else if (SDL_SCANCODE_6 == ev.key.keysym.scancode) {
+							for (auto iterator = enemies.begin(); iterator != enemies.end(); ++iterator) {
+								iterator->state = Enemy::EATEN;
+							}
+						}
 					}
 				}
 
+				SDL_GetMouseState(&position.x, &position.y);
+				position /= 16;
 				interface.update();
 				interface.drawSDL();
 			}

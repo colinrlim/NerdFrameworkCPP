@@ -1,16 +1,6 @@
 #include "PacmanToolbox.h"
 
-PacmanToolbox::PacmanToolbox() :
-	tileBatcher(nullptr),
-	ghostUpStamper(nullptr),
-	ghostDownStamper(nullptr),
-	ghostLeftStamper(nullptr),
-	ghostRightStamper(nullptr),
-	ghostFrightStamper(nullptr),
-	ghostLegsStamper1(nullptr),
-	ghostLegsStamper2(nullptr),
-	ghostLegsStamper3(nullptr),
-	ghostLegsStamper4(nullptr)
+PacmanToolbox::PacmanToolbox()
 {
 	Color4 black(0, 0, 0, 0);
 	Color4 red(252, 0, 0);
@@ -63,4 +53,6 @@ PacmanToolbox::~PacmanToolbox() {
 	delete ghostLegsStamper2;
 	delete ghostLegsStamper3;
 	delete ghostLegsStamper4;
+	delete ghostLegsAnim1;
+	delete ghostLegsAnim2;
 }

@@ -1,9 +1,12 @@
 #include "Player.h"
 
-void Player::update(double delta) {
-	Entity::update(delta);
-	if (_lastPositionTile != _positionTile) {
-		_lastPositionTile = _positionTile;
+Player::Player(Vector2 position, uint16_t direction, float speed) :
+	Entity(position, direction, speed)
+{ }
 
-	}
+void Player::draw(Interface& interface, Image4& screen) const {
+
+}
+void Player::draw(Interface& interface, SDL_Renderer* renderer) const {
+
 }

@@ -16,19 +16,19 @@ protected:
 	virtual void updateDirection();
 public:
 	static constexpr uint16_t DIRECTION_UP = 0x00FF;
-	static constexpr uint16_t DIRECTION_LEFT = 0xFF00;
+	static constexpr uint16_t DIRECTION_LEFT = 0x0100;
 	static constexpr uint16_t DIRECTION_DOWN = 0x0001;
-	static constexpr uint16_t DIRECTION_RIGHT = 0x0100;
+	static constexpr uint16_t DIRECTION_RIGHT = 0xFF00;
 
 	float speed;
 
 	Entity(Vector2 position, uint16_t direction = DIRECTION_LEFT, float speed = 10.f);
 
-	const Vector2& getPosition();
-	uint16_t getDirection();
+	const Vector2& getPosition() const;
+	uint16_t getDirection() const;
 
 	void update(double seconds);
-	virtual void draw(Interface& interface, Image4& screen) = 0;
-	virtual void draw(Interface& interface, SDL_Renderer* renderer) = 0;
+	virtual void draw(Interface& interface, Image4& screen) const = 0;
+	virtual void draw(Interface& interface, SDL_Renderer* renderer) const = 0;
 };
 

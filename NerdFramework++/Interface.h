@@ -1,16 +1,16 @@
 #pragma once
 
-#include <chrono>
 #include <vector>
 #include <SDL.h>
 #include "Image4.h"
+#include "Timer.h"
 #include "Frame.h"
 
 class Interface
 {
 private:
-	std::chrono::steady_clock::time_point _created;
-	std::chrono::steady_clock::time_point _lastFrame;
+	Timer _created;
+	Timer _lastFrame;
 	SDL_Renderer* _renderer;
 	SDL_Texture* _texture;
 	int _width;

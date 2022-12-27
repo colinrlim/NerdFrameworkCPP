@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationStamper.h" />
     <ClInclude Include="BinaryGrid2.h" />
     <ClInclude Include="BoundingShape3.h" />
     <ClInclude Include="Box3.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="pacman.h" />
     <ClInclude Include="PacmanToolbox.h" />
     <ClInclude Include="Palette.h" />
+    <ClInclude Include="PaletteAnimationStamper.h" />
     <ClInclude Include="PaletteImage.h" />
     <ClInclude Include="PaletteImageStamper.h" />
     <ClInclude Include="PaletteTileBatcher.h" />
@@ -181,7 +183,7 @@
     <ClInclude Include="QuickGrid2.h" />
     <ClInclude Include="Search.h" />
     <ClInclude Include="String.h" />
-    <ClInclude Include="Tester.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="DoublyLinkedList.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Format.h" />
@@ -239,6 +241,7 @@
     <ClInclude Include="VigenereCipher.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationStamper.cpp" />
     <ClCompile Include="BinaryGrid2.cpp" />
     <ClCompile Include="BoundingShape3.cpp" />
     <ClCompile Include="Box3.cpp" />
@@ -254,12 +257,13 @@
     <ClCompile Include="CameraRay3.cpp" />
     <ClCompile Include="ImageStamper.cpp" />
     <ClCompile Include="PacmanToolbox.cpp" />
+    <ClCompile Include="PaletteAnimationStamper.cpp" />
     <ClCompile Include="PaletteImage.cpp" />
     <ClCompile Include="PaletteImageStamper.cpp" />
     <ClCompile Include="PaletteTileBatcher.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="String.cpp" />
-    <ClCompile Include="Tester.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Format.cpp" />
     <ClCompile Include="Frame.cpp" />

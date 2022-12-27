@@ -3,9 +3,10 @@
 #include "GameState.h"
 
 GameState::GameState() :
-	_fruitTimestamp(std::chrono::steady_clock::now()),
-	_powerTimestamp(std::chrono::steady_clock::now()),
-	_winTimestamp(std::chrono::steady_clock::now()),
+	levelStart(),
+	levelEnd(),
+	fruitGrab(),
+	powerGrab(),
 	highscore()
 {
 	restart();
@@ -22,7 +23,7 @@ void GameState::interactTile(size_t x, size_t y) {
 	}
 	else if (tile == 30 && palette != 0) {
 		palette = 0;
-		_powerTimestamp = std::chrono::steady_clock::now();
+		powerGrab.tickNow();
 	}
 }
 void GameState::updateScore(uint32_t score) {
@@ -32,7 +33,7 @@ void GameState::updateScore(uint32_t score) {
 	
 	std::string stringized = std::to_string(score);
 	std::move(stringized.data(), stringized.data() + stringized.length(), data + 34 - stringized.length());
-	if (highscore < score) {
+	if (highscore <= score) {
 		highscore = score;
 		std::move(stringized.data(), stringized.data() + stringized.length(), data + 44 - stringized.length());
 	}
@@ -40,5 +41,7 @@ void GameState::updateScore(uint32_t score) {
 void GameState::restart() {
 	level = 0;
 	pellets = 0;
-	score = 0;
+	ghostmode = 0;
+	updateScore(0);
+	levelStart.tickNow();
 }

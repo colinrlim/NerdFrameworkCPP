@@ -7,7 +7,7 @@
 #include "String.h"
 #include "BinaryGrid2.h"
 #include "ImageLabel.h"
-#include "Tester.h"
+#include "Timer.h"
 #include "TileBatcher.h"
 
 #include "pacman.h"

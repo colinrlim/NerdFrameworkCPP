@@ -3,15 +3,43 @@
 #include "Math.h"
 
 void Enemy::updateDirection() {
-	Vector2i positionTileVector(_position);
-	Vector2i targetTileVector(_targetTile);
-	SDL_GetMouseState(&targetTileVector.x, &targetTileVector.y);
-	targetTileVector /= 16;
+	static const uint16_t RESTRICTED_TILE1 = Vector2i(12, 14).toInteger();
+	static const uint16_t RESTRICTED_TILE2 = Vector2i(15, 14).toInteger();
+	static const uint16_t RESTRICTED_TILE3 = Vector2i(12, 26).toInteger();
+	static const uint16_t RESTRICTED_TILE4 = Vector2i(15, 26).toInteger();
 
-	bool upValid = isDirectionValid(DIRECTION_UP) && _direction != DIRECTION_DOWN;
+	bool upValid = isDirectionValid(DIRECTION_UP) && _direction != DIRECTION_DOWN
+		&& _position != RESTRICTED_TILE1 && _position != RESTRICTED_TILE2 && _position != RESTRICTED_TILE3 && _position != RESTRICTED_TILE4;
 	bool leftValid = isDirectionValid(DIRECTION_LEFT) && _direction != DIRECTION_RIGHT;
 	bool downValid = isDirectionValid(DIRECTION_DOWN) && _direction != DIRECTION_UP;
 	bool rightValid = isDirectionValid(DIRECTION_RIGHT) && _direction != DIRECTION_LEFT;
+
+	if (state == FRIGHTENED) {
+		for (int x = 0, y = 0; y < 1000; x = rand() % 4, y++) {
+			if (x == 0 && upValid) {
+				_direction = DIRECTION_UP;
+				return;
+			} else if (x == 1 && leftValid) {
+				_direction = DIRECTION_LEFT;
+				return;
+			} else if (x == 2 && downValid) {
+				_direction = DIRECTION_DOWN;
+				return;
+			} else if (x == 3 && rightValid) {
+				_direction = DIRECTION_RIGHT;
+				return;
+			}
+		}
+	}
+
+	static const uint16_t EATEN_TARGET_TILE = Vector2i(13, 14).toInteger();
+	if (state == EATEN)
+		_targetTile = EATEN_TARGET_TILE;
+	else
+		_targetTile = calculateTargetTile(*this);
+
+	const Vector2i positionTileVector(_position);
+	const Vector2i targetTileVector(_targetTile);
 
 	double upDist;
 	double leftDist;
@@ -45,17 +73,22 @@ void Enemy::updateDirection() {
 
 Enemy::Enemy(const Palette<Color4>& basePalette, Vector2 position, uint16_t direction, float speed) :
 	Entity(position, direction, speed),
-	basePalette(basePalette)
+	basePalette(basePalette),
+	state(SCATTER)
 { }
 
-uint16_t Enemy::getTargetTile() {
+uint16_t Enemy::getTargetTile() const {
 	return _targetTile;
 }
+void Enemy::reverseDirection() {
+	_direction = (Vector2i(_direction) * -1).toInteger();
+	update(0.0);
+}
 
-void Enemy::draw(Interface& interface, Image4& screen) {
+void Enemy::draw(Interface& interface, Image4& screen) const {
 	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
 	const double initX = _position.x * 16.0 - 16.0;
-	const double initY = _position.y * 16.0 - 22.0;
+	const double initY = _position.y * 16.0 - 20.0;
 	const double initX1 = initX - 28.0 * 16.0;
 	const double initX2 = initX + 28.0 * 16.0;
 	const Palette<Color4>& palette = (state == FRIGHTENED ? toolbox.palettes[1] : (state == EATEN ? toolbox.palettes[10] : basePalette));
@@ -80,27 +113,17 @@ void Enemy::draw(Interface& interface, Image4& screen) {
 		toolbox.ghostRightStamper->draw(palette, screen, Rect2<double>{initX1, initY, 32, 32});
 		toolbox.ghostRightStamper->draw(palette, screen, Rect2<double>{initX2, initY, 32, 32});
 	}
-	if (Math::dmod(interface.secondsElapsed(), 0.3) >= 0.15) {
-		toolbox.ghostLegsStamper1->draw(palette, screen, Rect2<double>{initX, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper2->draw(palette, screen, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper1->draw(palette, screen, Rect2<double>{initX1, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper2->draw(palette, screen, Rect2<double>{initX1 + 16.0, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper1->draw(palette, screen, Rect2<double>{initX2, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper2->draw(palette, screen, Rect2<double>{initX2 + 16.0, initY + 32.0, 16, 16});
-	}
-	else if (Math::dmod(interface.secondsElapsed(), 0.3) < 0.15) {
-		toolbox.ghostLegsStamper3->draw(palette, screen, Rect2<double>{initX, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper4->draw(palette, screen, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper3->draw(palette, screen, Rect2<double>{initX1, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper4->draw(palette, screen, Rect2<double>{initX1 + 16.0, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper3->draw(palette, screen, Rect2<double>{initX2, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper4->draw(palette, screen, Rect2<double>{initX2 + 16.0, initY + 32.0, 16, 16});
-	}
+	toolbox.ghostLegsAnim1->draw(palette, screen, Rect2<double>{initX, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim2->draw(palette, screen, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim1->draw(palette, screen, Rect2<double>{initX1, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim2->draw(palette, screen, Rect2<double>{initX1 + 16.0, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim1->draw(palette, screen, Rect2<double>{initX2, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim2->draw(palette, screen, Rect2<double>{initX2 + 16.0, initY + 32.0, 16, 16});
 }
-void Enemy::draw(Interface& interface, SDL_Renderer* renderer) {
+void Enemy::draw(Interface& interface, SDL_Renderer* renderer) const {
 	PacmanToolbox& toolbox = PacmanToolbox::getInstance();
 	const double initX = _position.x * 16.0 - 16.0;
-	const double initY = _position.y * 16.0 - 22.0;
+	const double initY = _position.y * 16.0 - 20.0;
 	const double initX1 = initX - 28.0 * 16.0;
 	const double initX2 = initX + 28.0 * 16.0;
 	const Palette<Color4>& palette = (state == FRIGHTENED ? toolbox.palettes[1] : (state == EATEN ? toolbox.palettes[10] : basePalette));
@@ -125,20 +148,10 @@ void Enemy::draw(Interface& interface, SDL_Renderer* renderer) {
 		toolbox.ghostRightStamper->draw(palette, renderer, Rect2<double>{initX1, initY, 32, 32});
 		toolbox.ghostRightStamper->draw(palette, renderer, Rect2<double>{initX2, initY, 32, 32});
 	}
-	if (Math::dmod(interface.secondsElapsed(), 0.3) >= 0.15) {
-		toolbox.ghostLegsStamper1->draw(palette, renderer, Rect2<double>{initX, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper2->draw(palette, renderer, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper1->draw(palette, renderer, Rect2<double>{initX1, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper2->draw(palette, renderer, Rect2<double>{initX1 + 16.0, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper1->draw(palette, renderer, Rect2<double>{initX2, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper2->draw(palette, renderer, Rect2<double>{initX2 + 16.0, initY + 32.0, 16, 16});
-	}
-	else if (Math::dmod(interface.secondsElapsed(), 0.3) < 0.15) {
-		toolbox.ghostLegsStamper3->draw(palette, renderer, Rect2<double>{initX, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper4->draw(palette, renderer, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper3->draw(palette, renderer, Rect2<double>{initX1, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper4->draw(palette, renderer, Rect2<double>{initX1 + 16.0, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper3->draw(palette, renderer, Rect2<double>{initX2, initY + 32.0, 16, 16});
-		toolbox.ghostLegsStamper4->draw(palette, renderer, Rect2<double>{initX2 + 16.0, initY + 32.0, 16, 16});
-	}
+	toolbox.ghostLegsAnim1->draw(palette, renderer, Rect2<double>{initX, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim2->draw(palette, renderer, Rect2<double>{initX + 16.0, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim1->draw(palette, renderer, Rect2<double>{initX1, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim2->draw(palette, renderer, Rect2<double>{initX1 + 16.0, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim1->draw(palette, renderer, Rect2<double>{initX2, initY + 32.0, 16, 16});
+	toolbox.ghostLegsAnim2->draw(palette, renderer, Rect2<double>{initX2 + 16.0, initY + 32.0, 16, 16});
 }

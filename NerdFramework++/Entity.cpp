@@ -23,10 +23,10 @@ Entity::Entity(Vector2 position, uint16_t direction, float speed) :
 	speed(speed)
 { }
 
-const Vector2& Entity::getPosition() {
+const Vector2& Entity::getPosition() const {
 	return _position;
 }
-uint16_t Entity::getDirection() {
+uint16_t Entity::getDirection() const {
 	return _direction;
 }
 
@@ -35,29 +35,37 @@ void Entity::update(double seconds) {
 	const double xIncrement = Math::dmod(_position.x, 1.0);
 	const double yIncrement = Math::dmod(_position.y, 1.0);
 	if (_direction == DIRECTION_UP) {
+		_position.y -= speed * seconds;
 		if (yIncrement < 0.50 && _lastPositionTile != _positionTile) {
 			_lastPositionTile = _positionTile;
 			updateDirection();
+			if (_direction != DIRECTION_UP && _direction != DIRECTION_DOWN)
+				_position.y += 0.5 - yIncrement;
 		}
-		_position.y -= speed * seconds;
 	} else if (_direction == DIRECTION_DOWN) {
+		_position.y += speed * seconds;
 		if (yIncrement > 0.50 && _lastPositionTile != _positionTile) {
 			_lastPositionTile = _positionTile;
 			updateDirection();
+			if (_direction != DIRECTION_UP && _direction != DIRECTION_DOWN)
+				_position.y += 0.5 - yIncrement;
 		}
-		_position.y += speed * seconds;
 	} else if (_direction == DIRECTION_LEFT) {
-		if (xIncrement < 0.50 && _lastPositionTile != _positionTile) {
-			_lastPositionTile = _positionTile;
-			updateDirection();
-		}
 		_position.x -= speed * seconds;
-	} else if (_direction == DIRECTION_RIGHT) {
-		if (xIncrement > 0.50 && _lastPositionTile != _positionTile) {
+		if (xIncrement < 0.50 && _lastPositionTile != _positionTile && _position.x >= 1.0) {
 			_lastPositionTile = _positionTile;
 			updateDirection();
+			if (_direction != DIRECTION_LEFT && _direction != DIRECTION_RIGHT)
+				_position.x += 0.5 - xIncrement;
 		}
+	} else if (_direction == DIRECTION_RIGHT) {
 		_position.x += speed * seconds;
+		if (xIncrement > 0.50 && _lastPositionTile != _positionTile && _position.x < 27.0) {
+			_lastPositionTile = _positionTile;
+			updateDirection();
+			if (_direction != DIRECTION_LEFT && _direction != DIRECTION_RIGHT)
+				_position.x += 0.5 - xIncrement;
+		}
 	}
 
 	_position.toInteger(_positionTile);

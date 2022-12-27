@@ -5,7 +5,7 @@ Vector2i::Vector2i(int x, int y) : x(x), y(y) { }
 Vector2i::Vector2i(int s) : x(s), y(s) { };
 Vector2i::Vector2i(const Vector2i& a, const Vector2i& b) : x(b.x - a.x), y(b.y - a.y) { }
 Vector2i::Vector2i(const Vector3& threedim) : x((int)threedim.x), y((int)threedim.y) { }
-Vector2i::Vector2i(uint16_t integer) : x(((uint8_t*)&integer)[1]), y(((uint8_t*)&integer)[2]) { }
+Vector2i::Vector2i(uint16_t integer) : x(((uint8_t*)&integer)[1] > 127 ? 256 - ((uint8_t*)&integer)[1] : ((uint8_t*)&integer)[1] * -1), y(((uint8_t*)&integer)[0] > 127 ? ((uint8_t*)&integer)[0] - 256 : ((uint8_t*)&integer)[0]) { }
 
 const Vector2i Vector2i::zero(0, 0);
 const Vector2i Vector2i::one(1, 1);
@@ -19,14 +19,14 @@ Vector2i Vector2i::normalized() {
 uint16_t Vector2i::toInteger() {
 	uint16_t newInt;
 	uint8_t* address = (uint8_t*)&newInt;
-	address[1] = (uint8_t)x;
-	address[0] = (uint8_t)y;
+	address[1] = (uint8_t)(x > 0 ? 256 - x : -1 * x);
+	address[0] = (uint8_t)(y >= 0 ? y : 256 + y);
 	return newInt;
 }
 void Vector2i::toInteger(uint16_t& integer) {
 	uint8_t* address = (uint8_t*)&integer;
-	address[1] = (uint8_t)x;
-	address[0] = (uint8_t)y;
+	address[1] = (uint8_t)(x > 0 ? 256 - x : -1 * x);
+	address[0] = (uint8_t)(y >= 0 ? y : 256 + y);
 }
 Vector2i Vector2i::fromParameterization3(double t, double s, const Vector2i& a, const Vector2i& b, const Vector2i& c) {
 	double u = 1.0 - t - s;
