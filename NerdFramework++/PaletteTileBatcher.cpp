@@ -112,7 +112,6 @@ void PaletteTileBatcher::draw(Image4& screen, const Rect2<double>& bounds) {
         }
     }
 }
-
 void PaletteTileBatcher::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
     size_t width = _grid.width();
     size_t height = _grid.height();
@@ -125,6 +124,54 @@ void PaletteTileBatcher::draw(SDL_Renderer* renderer, const Rect2<double>& bound
                 _tileTypesTextures[key] = createTexture(std::move(Image4(_tileTypes[key.first], _paletteTypes[key.second])));
             destination.x = (int)(bounds.x + x * bounds.width);
             destination.y = (int)(bounds.y + y * bounds.height);
+            SDL_RenderCopy(renderer, _tileTypesTextures[key], nullptr, &destination);
+        }
+    }
+}
+
+void PaletteTileBatcher::draw(Image4& screen, const std::function<const Rect2<double>(size_t x, size_t y)>& boundsFunction) {
+    const double maxWidth = screen.width();
+    const double maxHeight = screen.height();
+
+    size_t width = _grid.width();
+    size_t height = _grid.height();
+
+    for (size_t y = 0; y < height; y++) {
+        for (size_t x = 0; x < width; x++) {
+            auto pair = _tileTypes.find(_grid.get(x, y));
+            if (pair == _tileTypes.end()) continue;
+            PaletteImage& image = pair->second;
+            Palette<Color4>& palette = _paletteTypes[_paletteGrid.get(x, y)];
+            const Rect2<double> destination(boundsFunction(x, y));
+
+            // Fit to screen bounds
+            double xMinConstrained = Math::max(0.0, destination.x);
+            double yMinConstrained = Math::max(0.0, destination.y);
+            double xMaxConstrained = Math::min(destination.x + destination.width, maxWidth);
+            double yMaxConstrained = Math::min(destination.y + destination.height, maxHeight);
+
+            // Render object fill color (image) on top of pre-existing
+            for (size_t y = (int)yMinConstrained; y < (int)yMaxConstrained; y++) {
+                double s = (y - destination.y) / destination.height;
+                for (size_t x = (int)xMinConstrained; x < (int)xMaxConstrained; x++) {
+                    double t = (x - destination.x) / destination.width;
+                    void* pixel = screen.pixelAt(x, y);
+                    Color4::flatten(pixel, palette[image.atParameterization(t, s)]);
+                }
+            }
+        }
+    }
+}
+void PaletteTileBatcher::draw(SDL_Renderer* renderer, const std::function<const SDL_Rect(size_t x, size_t y)>& boundsFunction) {
+    size_t width = _grid.width();
+    size_t height = _grid.height();
+
+    for (size_t y = 0; y < height; y++) {
+        for (size_t x = 0; x < width; x++) {
+            auto key = std::make_pair(_grid.get(x, y), _paletteGrid.get(x, y));
+            if (_tileTypesTextures.find(key) == _tileTypesTextures.end())
+                _tileTypesTextures[key] = createTexture(std::move(Image4(_tileTypes[key.first], _paletteTypes[key.second])));
+            const SDL_Rect destination(boundsFunction(x, y));
             SDL_RenderCopy(renderer, _tileTypesTextures[key], nullptr, &destination);
         }
     }

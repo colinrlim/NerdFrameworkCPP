@@ -316,35 +316,38 @@
     <Filter Include="Demos\Pac-Man\PacmanToolbox">
       <UniqueIdentifier>{d98a4e09-fe94-4df8-9550-242e88af6c4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\Image\Palette">
-      <UniqueIdentifier>{e6367d38-f158-4141-a252-b545a00125db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math\Services\Timer">
       <UniqueIdentifier>{ed26ef11-04e5-480f-a1ee-546a0f1a4c8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\Drawer">
+    <Filter Include="Interface2D\Stamper">
       <UniqueIdentifier>{020bc641-c16d-4158-b749-ef7d506c2e5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\PaletteDrawer">
-      <UniqueIdentifier>{9b0c603e-b474-4181-af3b-ef430c3dea99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interface2D\PaletteDrawer\PaletteTileBatcher">
-      <UniqueIdentifier>{06f1e6b4-c5e0-4499-8ca2-1b40e66e6dfd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interface2D\Drawer\TileBatcher">
-      <UniqueIdentifier>{53784795-161b-4841-93ff-11c60a2f21e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interface2D\Drawer\ImageStamper">
-      <UniqueIdentifier>{878a0551-603e-43a3-93df-2c0f13bc8ae6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interface2D\PaletteDrawer\PaletteImageStamper">
-      <UniqueIdentifier>{f3dd52a0-e020-45ca-ae24-d82c8fd90815}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interface2D\Drawer\AnimationStamper">
+    <Filter Include="Interface2D\Stamper\AnimationStamper">
       <UniqueIdentifier>{c16228d5-4c70-4bb9-ac89-96c26e8e7db6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\PaletteDrawer\PaletteAnimationStamper">
+    <Filter Include="Interface2D\Stamper\TileBatcher">
+      <UniqueIdentifier>{53784795-161b-4841-93ff-11c60a2f21e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Stamper\ImageStamper">
+      <UniqueIdentifier>{878a0551-603e-43a3-93df-2c0f13bc8ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteStamper">
+      <UniqueIdentifier>{9b0c603e-b474-4181-af3b-ef430c3dea99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteStamper\PaletteAnimationStamper">
       <UniqueIdentifier>{1c97cc34-1c3e-46f8-934b-77c44534e13e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteStamper\PaletteTileBatcher">
+      <UniqueIdentifier>{06f1e6b4-c5e0-4499-8ca2-1b40e66e6dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteStamper\PaletteImageStamper">
+      <UniqueIdentifier>{f3dd52a0-e020-45ca-ae24-d82c8fd90815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Color\Palette">
+      <UniqueIdentifier>{e6367d38-f158-4141-a252-b545a00125db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Button">
+      <UniqueIdentifier>{fd5bca9a-adc2-4319-98e2-bf5ddc852368}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -427,9 +430,6 @@
       <Filter>Unflitered\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
-      <Filter>Unflitered\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
       <Filter>Unflitered\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Color3.h">
@@ -568,10 +568,10 @@
       <Filter>Math\2D\QuickGrid2</Filter>
     </ClInclude>
     <ClInclude Include="ImageStamper.h">
-      <Filter>Interface2D\Drawer\ImageStamper</Filter>
+      <Filter>Interface2D\Stamper\ImageStamper</Filter>
     </ClInclude>
     <ClInclude Include="TileBatcher.h">
-      <Filter>Interface2D\Drawer\TileBatcher</Filter>
+      <Filter>Interface2D\Stamper\TileBatcher</Filter>
     </ClInclude>
     <ClInclude Include="Image4.h">
       <Filter>Interface2D\Image\Image4</Filter>
@@ -589,10 +589,10 @@
       <Filter>Interface2D\Image\PaletteImage</Filter>
     </ClInclude>
     <ClInclude Include="Palette.h">
-      <Filter>Interface2D\Image\Palette</Filter>
+      <Filter>Interface2D\Color\Palette</Filter>
     </ClInclude>
     <ClInclude Include="PaletteTileBatcher.h">
-      <Filter>Interface2D\PaletteDrawer\PaletteTileBatcher</Filter>
+      <Filter>Interface2D\PaletteStamper\PaletteTileBatcher</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Demos\Pac-Man\Entity\Enemy</Filter>
@@ -601,16 +601,25 @@
       <Filter>Demos\Pac-Man\Entity\Player</Filter>
     </ClInclude>
     <ClInclude Include="PaletteImageStamper.h">
-      <Filter>Interface2D\PaletteDrawer\PaletteImageStamper</Filter>
+      <Filter>Interface2D\PaletteStamper\PaletteImageStamper</Filter>
     </ClInclude>
     <ClInclude Include="PacmanToolbox.h">
       <Filter>Demos\Pac-Man\PacmanToolbox</Filter>
     </ClInclude>
     <ClInclude Include="AnimationStamper.h">
-      <Filter>Interface2D\Drawer\AnimationStamper</Filter>
+      <Filter>Interface2D\Stamper\AnimationStamper</Filter>
     </ClInclude>
     <ClInclude Include="PaletteAnimationStamper.h">
-      <Filter>Interface2D\PaletteDrawer\PaletteAnimationStamper</Filter>
+      <Filter>Interface2D\PaletteStamper\PaletteAnimationStamper</Filter>
+    </ClInclude>
+    <ClInclude Include="Stamper.h">
+      <Filter>Interface2D\Stamper</Filter>
+    </ClInclude>
+    <ClInclude Include="PaletteStamper.h">
+      <Filter>Interface2D\PaletteStamper</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Interface2D\Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -696,9 +705,6 @@
       <Filter>Unflitered\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
-      <Filter>Unflitered\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
       <Filter>Unflitered\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Color3.cpp">
@@ -801,10 +807,10 @@
       <Filter>Math\2D\BinaryGrid2</Filter>
     </ClCompile>
     <ClCompile Include="ImageStamper.cpp">
-      <Filter>Interface2D\Drawer\ImageStamper</Filter>
+      <Filter>Interface2D\Stamper\ImageStamper</Filter>
     </ClCompile>
     <ClCompile Include="TileBatcher.cpp">
-      <Filter>Interface2D\Drawer\TileBatcher</Filter>
+      <Filter>Interface2D\Stamper\TileBatcher</Filter>
     </ClCompile>
     <ClCompile Include="pacman.cpp">
       <Filter>Demos\Pac-Man</Filter>
@@ -819,7 +825,7 @@
       <Filter>Interface2D\Image\PaletteImage</Filter>
     </ClCompile>
     <ClCompile Include="PaletteTileBatcher.cpp">
-      <Filter>Interface2D\PaletteDrawer\PaletteTileBatcher</Filter>
+      <Filter>Interface2D\PaletteStamper\PaletteTileBatcher</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Demos\Pac-Man\Entity\Enemy</Filter>
@@ -828,16 +834,19 @@
       <Filter>Demos\Pac-Man\Entity\Player</Filter>
     </ClCompile>
     <ClCompile Include="PaletteImageStamper.cpp">
-      <Filter>Interface2D\PaletteDrawer\PaletteImageStamper</Filter>
+      <Filter>Interface2D\PaletteStamper\PaletteImageStamper</Filter>
     </ClCompile>
     <ClCompile Include="PacmanToolbox.cpp">
       <Filter>Demos\Pac-Man\PacmanToolbox</Filter>
     </ClCompile>
     <ClCompile Include="AnimationStamper.cpp">
-      <Filter>Interface2D\Drawer\AnimationStamper</Filter>
+      <Filter>Interface2D\Stamper\AnimationStamper</Filter>
     </ClCompile>
     <ClCompile Include="PaletteAnimationStamper.cpp">
-      <Filter>Interface2D\PaletteDrawer\PaletteAnimationStamper</Filter>
+      <Filter>Interface2D\PaletteStamper\PaletteAnimationStamper</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Interface2D\Button</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

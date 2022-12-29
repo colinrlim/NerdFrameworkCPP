@@ -1,31 +1,17 @@
 #include "PaletteAnimationStamper.h"
 
-PaletteAnimationStamper::PaletteAnimationStamper(Palette<Color4>* defaultPalette, std::vector<PaletteImageStamper*> frames, int framesPerSecond) :
+PaletteAnimationStamper::PaletteAnimationStamper(std::vector<PaletteImageStamper*> frames, int framesPerSecond, Palette<Color4>* defaultPalette) :
 	_frames(frames),
 	_timer(),
-	defaultPalette(defaultPalette)
+	PaletteStamper(defaultPalette)
 {
 	_timer.tickNow();
 	setFPS(framesPerSecond);
 }
-PaletteAnimationStamper::PaletteAnimationStamper(Palette<Color4>* defaultPalette, std::vector<PaletteImageStamper*> frames, double secondsPerFrame) :
+PaletteAnimationStamper::PaletteAnimationStamper(std::vector<PaletteImageStamper*> frames, double secondsPerFrame, Palette<Color4>* defaultPalette) :
 	_frames(frames),
 	_timer(),
-	defaultPalette(defaultPalette)
-{
-	_timer.tickNow();
-	setFPS(secondsPerFrame);
-}
-PaletteAnimationStamper::PaletteAnimationStamper(std::vector<PaletteImageStamper*> frames, int framesPerSecond) :
-	_frames(frames),
-	_timer()
-{
-	_timer.tickNow();
-	setFPS(framesPerSecond);
-}
-PaletteAnimationStamper::PaletteAnimationStamper(std::vector<PaletteImageStamper*> frames, double secondsPerFrame) :
-	_frames(frames),
-	_timer()
+	PaletteStamper(defaultPalette)
 {
 	_timer.tickNow();
 	setFPS(secondsPerFrame);

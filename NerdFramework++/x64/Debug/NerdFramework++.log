@@ -1,2 +1,86 @@
-﻿  pacman.cpp
+﻿  AnimationStamper.cpp
+  BinaryGrid2.cpp
+  BoundingShape3.cpp
+  Box3.cpp
+  Button.cpp
+  CaesarCipher.cpp
+  CameraRay3.cpp
+  Canvas.cpp
+  Color3.cpp
+  Color4.cpp
+  Enemy.cpp
+  Entity.cpp
+  Font.cpp
+  FontManager.cpp
+  Format.cpp
+  Frame.cpp
+  GameState.cpp
+  Image3.cpp
+  Image4.cpp
+  ImageLabel.cpp
+  Generating Code...
+  Compiling...
+  ImageParser.cpp
+  ImageStamper.cpp
+  Interface.cpp
+  Line3.cpp
+  Material.cpp
+  MaterialManager.cpp
+  Math.cpp
+  Mesh.cpp
+  MeshParser.cpp
+  MeshQuad3.cpp
+  MeshTriangle3.cpp
+  PacmanToolbox.cpp
+  PaletteAnimationStamper.cpp
+  PaletteImage.cpp
+  PaletteImageStamper.cpp
+  PaletteTileBatcher.cpp
+  Parallel.cpp
+  PhysicsData3.cpp
+  PhysicsData4.cpp
+  Plane3.cpp
+  Generating Code...
+  Compiling...
+  Player.cpp
+  Quad3.cpp
+  Quadratic2.cpp
+  Quadratic3.cpp
+  Ray3.cpp
+  RayCaster.cpp
+  RayRadial.cpp
+  RayRectangular.cpp
+  RaySpherical.cpp
+  RenderData3.cpp
+  RenderData4.cpp
+  Renderer2.cpp
+  Renderer3.cpp
+  ScrollFrame.cpp
+  Sort.cpp
+  Sphere3.cpp
+  String.cpp
+  TextBox.cpp
+  TextLabel.cpp
+  TileBatcher.cpp
+  Generating Code...
+  Compiling...
+  Timer.cpp
+  Triangle2.cpp
+  Triangle3.cpp
+  Tween.cpp
+  UDim.cpp
+  UDim2.cpp
+  UDimRect2.cpp
+  UIObject.cpp
+  Vector2.cpp
+  Vector2i.cpp
+  Vector3.cpp
+  Vector3s.cpp
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,22): warning C4566: character represented by universal-character-name '\u03C1' cannot be represented in the current code page (1252)
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,45): warning C4566: character represented by universal-character-name '\u03D5' cannot be represented in the current code page (1252)
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(80,68): warning C4566: character represented by universal-character-name '\u03B8' cannot be represented in the current code page (1252)
+  VigenereCipher.cpp
+  main.cpp
+  pacman.cpp
+  Generating Code...
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe

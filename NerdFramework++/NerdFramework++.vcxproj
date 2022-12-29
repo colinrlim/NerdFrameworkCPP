@@ -165,6 +165,7 @@
     <ClInclude Include="Color4.h" />
     <ClInclude Include="ColorSequence3.h" />
     <ClInclude Include="ColorSequence4.h" />
+    <ClInclude Include="Stamper.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameState.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="PacmanToolbox.h" />
     <ClInclude Include="Palette.h" />
     <ClInclude Include="PaletteAnimationStamper.h" />
+    <ClInclude Include="PaletteStamper.h" />
     <ClInclude Include="PaletteImage.h" />
     <ClInclude Include="PaletteImageStamper.h" />
     <ClInclude Include="PaletteTileBatcher.h" />

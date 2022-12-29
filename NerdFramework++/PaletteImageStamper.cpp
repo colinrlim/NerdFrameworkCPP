@@ -5,7 +5,8 @@
 PaletteImageStamper::PaletteImageStamper(const PaletteImageStamper& rhs) :
     _image(std::move(rhs._image)),
     _renderer(nullptr),
-    _textures()
+    _textures(),
+    PaletteStamper(rhs)
 { }
 PaletteImageStamper& PaletteImageStamper::operator=(const PaletteImageStamper& rhs) { return *this; }
 PaletteImageStamper& PaletteImageStamper::operator=(PaletteImageStamper&& rhs) { return *this; }
@@ -18,16 +19,17 @@ SDL_Texture* PaletteImageStamper::createTexture(const Palette<Color4>& palette) 
     return texture;
 }
 
-PaletteImageStamper::PaletteImageStamper(SDL_Renderer* renderer, PaletteImage&& image) :
+PaletteImageStamper::PaletteImageStamper(SDL_Renderer* renderer, PaletteImage&& image, Palette<Color4>* defaultPalette) :
     _image(std::move(image)),
     _renderer(renderer),
-    _textures()
-{
-}
+    _textures(),
+    PaletteStamper(defaultPalette)
+{ }
 PaletteImageStamper::PaletteImageStamper(PaletteImageStamper&& rhs) :
     _image(std::move(rhs._image)),
     _renderer(rhs._renderer),
-    _textures(std::move(rhs._textures))
+    _textures(std::move(rhs._textures)),
+    PaletteStamper(std::move(rhs))
 {
     rhs._renderer = nullptr;
 }
@@ -74,4 +76,10 @@ void PaletteImageStamper::draw(const Palette<Color4>& palette, SDL_Renderer* ren
     if (_textures.find(palettePtr) == _textures.end())
         _textures.emplace(palettePtr, createTexture(palette));
     SDL_RenderCopy(renderer, _textures[palettePtr], nullptr, &destination);
+}
+void PaletteImageStamper::draw(Image4& screen, const Rect2<double>& bounds) {
+    draw(*defaultPalette, screen, bounds);
+}
+void PaletteImageStamper::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
+    draw(*defaultPalette, renderer, bounds);
 }

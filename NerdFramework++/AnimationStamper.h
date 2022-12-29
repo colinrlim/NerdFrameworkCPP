@@ -1,9 +1,10 @@
 #pragma once
 
 #include "ImageStamper.h"
+#include "Stamper.h"
 #include "Timer.h"
 
-class AnimationStamper {
+class AnimationStamper : public Stamper {
 private:
 	const std::vector<ImageStamper*> _frames;
 

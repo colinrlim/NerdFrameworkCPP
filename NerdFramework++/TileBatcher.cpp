@@ -88,7 +88,6 @@ void TileBatcher::draw(Image4& screen, const Rect2<double>& bounds) {
         }
     }
 }
-
 void TileBatcher::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
     size_t width = _grid.width();
     size_t height = _grid.height();
@@ -101,6 +100,54 @@ void TileBatcher::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
                 _tileTypesTextures.emplace(key, createTexture(_tileTypes[key]));
             destination.x = (int)(bounds.x + x * bounds.width);
             destination.y = (int)(bounds.y + y * bounds.height);
+            SDL_RenderCopy(renderer, _tileTypesTextures[key], nullptr, &destination);
+        }
+    }
+}
+
+void TileBatcher::draw(Image4& screen, const std::function<const Rect2<double>(size_t x, size_t y)>& boundsFunction) {
+    const double maxWidth = screen.width();
+    const double maxHeight = screen.height();
+
+    size_t width = _grid.width();
+    size_t height = _grid.height();
+
+    for (size_t y = 0; y < height; y++) {
+        for (size_t x = 0; x < width; x++) {
+            auto pair = _tileTypes.find(_grid.get(x, y));
+            if (pair == _tileTypes.end()) continue;
+            const Image4& image = pair->second;
+            const Rect2<double> destination(boundsFunction(x, y));
+
+            // Fit to screen bounds
+            double xMinConstrained = Math::max(0.0, destination.x);
+            double yMinConstrained = Math::max(0.0, destination.y);
+            double xMaxConstrained = Math::min(destination.x + destination.width, maxWidth - 1.0);
+            double yMaxConstrained = Math::min(destination.y + destination.height, maxHeight - 1.0);
+
+            // Render object fill color (image) on top of pre-existing
+            for (size_t y = (int)yMinConstrained; y < (int)yMaxConstrained; y++) {
+                double s = (y - destination.y) / destination.height;
+                for (size_t x = (int)xMinConstrained; x < (int)xMaxConstrained; x++) {
+                    double t = (x - destination.x) / destination.width;
+                    void* pixel = screen.pixelAt(x, y);
+                    Color4::flatten(pixel, image.atParameterization(t, s));
+                }
+            }
+        }
+    }
+}
+void TileBatcher::draw(SDL_Renderer* renderer, const std::function<const SDL_Rect(size_t x, size_t y)>& boundsFunction) {
+    size_t width = _grid.width();
+    size_t height = _grid.height();
+
+    for (size_t y = 0; y < height; y++) {
+        for (size_t x = 0; x < width; x++) {
+            const uint8_t& key = _grid.get(x, y);
+            if (_tileTypesTextures.find(key) == _tileTypesTextures.end())
+                _tileTypesTextures.emplace(key, createTexture(_tileTypes[key]));
+
+            const SDL_Rect destination(boundsFunction(x, y));
             SDL_RenderCopy(renderer, _tileTypesTextures[key], nullptr, &destination);
         }
     }

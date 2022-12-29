@@ -173,8 +173,7 @@ Color3 Image3::atParameterization(double t, double s) const {
 	int x = (int)(t * _width);
 	int y = (int)(s * _height);
 
-	uint8_t* pixel = this->data + ((uint64_t)x + (uint64_t)y * this->_width) * 3;
-	return Color3(pixel[0], pixel[1], pixel[2]);
+	return Color3(pixelAt(x, y));
 }
 void Image3::modify(const std::function<void(void*)>& func) {
 	for (uint32_t i = 0; i < _size; i += 3)

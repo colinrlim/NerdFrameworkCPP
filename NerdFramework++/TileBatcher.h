@@ -36,5 +36,7 @@ public:
 
     void draw(Image4& screen, const Rect2<double>& bounds);
     void draw(SDL_Renderer* renderer, const Rect2<double>& bounds);
+    void draw(Image4& screen, const std::function<const Rect2<double>(size_t x, size_t y)>& boundsFunction);
+    void draw(SDL_Renderer* renderer, const std::function<const SDL_Rect(size_t x, size_t y)>& boundsFunction);
 };
 

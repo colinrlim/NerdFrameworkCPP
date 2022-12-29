@@ -1,11 +1,10 @@
 #pragma once
 
 #include <map>
-#include <SDL.h>
-#include "Image4.h"
+#include "PaletteStamper.h"
 #include "Rect2.h"
 
-class PaletteImageStamper {
+class PaletteImageStamper : public PaletteStamper {
     PaletteImage _image;
     SDL_Renderer* _renderer;
     std::map<const Palette<Color4>*, SDL_Texture*> _textures;
@@ -16,7 +15,7 @@ class PaletteImageStamper {
 
     SDL_Texture* createTexture(const Palette<Color4>& palette) const;
 public:
-    PaletteImageStamper(SDL_Renderer* renderer, PaletteImage&& image);
+    PaletteImageStamper(SDL_Renderer* renderer, PaletteImage&& image, Palette<Color4>* defaultPalette = nullptr);
     PaletteImageStamper(PaletteImageStamper&& rhs);
     ~PaletteImageStamper();
 
@@ -25,5 +24,7 @@ public:
 
     void draw(const Palette<Color4>& palette, Image4& screen, const Rect2<double>& bounds);
     void draw(const Palette<Color4>& palette, SDL_Renderer* renderer, const Rect2<double>& bounds);
+    void draw(Image4& screen, const Rect2<double>& bounds);
+    void draw(SDL_Renderer* renderer, const Rect2<double>& bounds);
 };
 

@@ -3,7 +3,7 @@
 #include "PaletteImageStamper.h"
 #include "Timer.h"
 
-class PaletteAnimationStamper {
+class PaletteAnimationStamper : public PaletteStamper {
 private:
 	const std::vector<PaletteImageStamper*> _frames;
 
@@ -15,12 +15,8 @@ private:
 
 	size_t _frameIndex;
 public:
-	Palette<Color4>* defaultPalette;
-
-	PaletteAnimationStamper(Palette<Color4>* defaultPalette, std::vector<PaletteImageStamper*> frames, int framesPerSecond);
-	PaletteAnimationStamper(Palette<Color4>* defaultPalette, std::vector<PaletteImageStamper*> frames, double secondsPerFrame);
-	PaletteAnimationStamper(std::vector<PaletteImageStamper*> frames, int framesPerSecond);
-	PaletteAnimationStamper(std::vector<PaletteImageStamper*> frames, double secondsPerFrame);
+	PaletteAnimationStamper(std::vector<PaletteImageStamper*> frames, int framesPerSecond, Palette<Color4>* defaultPalette = nullptr);
+	PaletteAnimationStamper(std::vector<PaletteImageStamper*> frames, double secondsPerFrame, Palette<Color4>* defaultPalette = nullptr);
 
 	int getFPS();
 	void setFPS(int framesPerSecond);

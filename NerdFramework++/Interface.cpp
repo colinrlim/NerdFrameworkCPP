@@ -50,7 +50,7 @@ Interface::Interface(SDL_Window* window, std::function<void(Interface&, SDL_Rend
 }
 Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene, std::function<void(Interface&, SDL_Renderer*)> onInit) :
 	window(window),
-	frame(UDim2::zero, UDim2::one),
+	frame(scene, UDim2::zero, UDim2::one),
 	_created(),
 	_lastFrame(),
 	onUpdate([](Interface& interface, double delta) -> void {}),
@@ -61,7 +61,6 @@ Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene, st
 	_lastFrame.tickNow();
 	SDL_GetWindowSize(window, &_width, &_height);
 	screen = std::move(Image4(_width, _height));
-	frame.children = scene;
 	if (window != nullptr)
 	{
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -74,7 +73,7 @@ Interface::Interface(SDL_Window* window, const std::vector<UIObject*>& scene, st
 }
 Interface::Interface(const std::vector<UIObject*>& scene, std::function<void(Interface&, SDL_Renderer*)> onInit) :
 	window(SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN)),
-	frame(UDim2::zero, UDim2::one),
+	frame(scene, UDim2::zero, UDim2::one),
 	_width(640),
 	_height(480),
 	screen(_width, _height),
@@ -86,7 +85,6 @@ Interface::Interface(const std::vector<UIObject*>& scene, std::function<void(Int
 {
 	_created.tickNow();
 	_lastFrame.tickNow();
-	frame.children = scene;
 	if (window != NULL)
 	{
 		_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -111,13 +109,23 @@ double Interface::secondsElapsed() const {
 }
 
 void Interface::update() {
+	const Rect2<double> bounds(0, 0, _width, _height);
+
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+
+	if (true == false) // left click
+		frame.leftClick(x, y, bounds);
+	if (true == false) // right click
+		frame.rightClick(x, y, bounds);
+
 	double delta = _lastFrame.tock();
 	onUpdate(*this, delta);
 	frame.update(delta);
 	_lastFrame.tickNow();
 }
 void Interface::draw() {
-	Rect2<double> bounds(0, 0, _width, _height);
+	const Rect2<double> bounds(0, 0, _width, _height);
 
 	frame.draw(screen, bounds);
 	onDraw(*this, screen, bounds);
@@ -128,7 +136,7 @@ void Interface::draw() {
 	SDL_RenderPresent(_renderer);
 }
 void Interface::drawSDL() {
-	Rect2<double> bounds(0, 0, _width, _height);
+	const Rect2<double> bounds(0, 0, _width, _height);
 
 	SDL_RenderClear(_renderer);
 	frame.draw(_renderer, bounds);

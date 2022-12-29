@@ -192,8 +192,7 @@ Color4 Image4::atParameterization(double t, double s) const {
 	int x = (int)(t * _width);
 	int y = (int)(s * _height);
 
-	uint8_t* pixel = this->data + ((uint64_t)x + (uint64_t)y * this->_width) * 4;
-	return Color4(pixel[0], pixel[1], pixel[2], pixel[3]);
+	return Color4(pixelAt(x, y));
 }
 void Image4::modify(const std::function<void(void*)>& func) {
 	for (uint32_t i = 0; i < _size; i += 4)

@@ -29,15 +29,21 @@ struct Rect2
 		width((T)size.x.absolute(scope.width)),
 		height((T)size.y.absolute(scope.height))
 	{ }
-
+	
+	bool overlaps(double pointX, double pointY) const {
+		return (pointX >= x && pointY >= y && pointX <= x + width && pointY <= y + height);
+	}
+	bool overlaps(int pointX, int pointY) const {
+		return (pointX >= x && pointY >= y && pointX <= x + width && pointY <= y + height);
+	}
 	bool overlaps(const Vector2& point) const {
-		return (point.x >= x && point.y >= y && point.x <= x + width && point.y <= y + height);
+		return overlaps(point.x, point.y);
 	}
 	bool overlaps(const Vector2i& point) const {
-		return (point.x >= x && point.y >= y && point.x <= x + width && point.y <= y + height);
+		return overlaps(point.x, point.y);
 	}
 	bool overlaps(const Rect2<T>& rectangle) const {
-		return this->overlaps(Vector2i(rectangle.x, rectangle.y)) || this->overlaps(Vector2i(rectangle.x + rectangle.width, rectangle.y + rectangle.height));
+		return overlaps(Vector2i(rectangle.x, rectangle.y)) || overlaps(Vector2i(rectangle.x + rectangle.width, rectangle.y + rectangle.height));
 	}
 };
 

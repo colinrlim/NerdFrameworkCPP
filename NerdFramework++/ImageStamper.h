@@ -1,10 +1,8 @@
 #pragma once
 
-#include <SDL.h>
-#include "Image4.h"
-#include "Rect2.h"
+#include "Stamper.h"
 
-class ImageStamper {
+class ImageStamper : public Stamper {
     Image4 _image;
     SDL_Renderer* _renderer;
     SDL_Texture* _texture;
