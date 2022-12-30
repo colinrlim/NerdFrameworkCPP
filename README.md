@@ -1,3 +1,5 @@
+<a href="https://www.buymeacoffee.com/harryl"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=harryl&button_colour=2e2e2e&font_colour=ffffff&font_family=Poppins&outline_colour=ffffff&coffee_colour=FFDD00" /></a>
+
 # What is NerdFramework?
 NerdFramework is a framework developed solely by myself, completely from the ground up. It covers anything I believe I would ever need, such as physics, rendering, interfaces, general 3D and 2D mathematics, natural language processing, and more.
 ### Complete list of features:
