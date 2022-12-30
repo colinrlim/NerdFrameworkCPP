@@ -358,6 +358,9 @@
     <Filter Include="Demos\Beat Blitz!">
       <UniqueIdentifier>{20532039-dad5-4c0e-997c-d86df6be791b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Demos\An Endless Shooter Game, But Like, Super Tiny">
+      <UniqueIdentifier>{70f837dc-9148-4c32-b23c-8f384ae01c29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -630,6 +633,9 @@
     <ClInclude Include="Button.h">
       <Filter>Interface2D\Button</Filter>
     </ClInclude>
+    <ClInclude Include="shooter.h">
+      <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math.cpp">
@@ -856,6 +862,9 @@
     </ClCompile>
     <ClCompile Include="Tween.cpp">
       <Filter>Math\Services\Tween</Filter>
+    </ClCompile>
+    <ClCompile Include="shooter.cpp">
+      <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

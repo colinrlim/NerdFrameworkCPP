@@ -165,6 +165,7 @@
     <ClInclude Include="Color4.h" />
     <ClInclude Include="ColorSequence3.h" />
     <ClInclude Include="ColorSequence4.h" />
+    <ClInclude Include="shooter.h" />
     <ClInclude Include="Stamper.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="PaletteImageStamper.cpp" />
     <ClCompile Include="PaletteTileBatcher.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="shooter.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Font.cpp" />

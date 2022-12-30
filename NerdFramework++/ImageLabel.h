@@ -13,7 +13,6 @@ public:
     Stamper* stamper;
 
     ImageLabel(Stamper* stamper, const UDim2& position, const UDim2& size);
-    ~ImageLabel();
 
     void update(double delta);
     void draw(Image4& screen, const Rect2<double>& scope);
