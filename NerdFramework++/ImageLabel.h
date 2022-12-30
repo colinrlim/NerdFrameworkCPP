@@ -6,9 +6,6 @@
 
 class ImageLabel : public UIObject
 {
-    ImageLabel(const ImageLabel& rhs) = delete;
-    ImageLabel& operator=(const ImageLabel& rhs) = delete;
-    ImageLabel& operator=(ImageLabel&& rhs) = delete;
 public:
     Stamper* stamper;
 
