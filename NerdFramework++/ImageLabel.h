@@ -1,24 +1,19 @@
 #pragma once
 
 #include "UIObject.h"
+#include "Stamper.h"
 #include "Image4.h"
 
 class ImageLabel : public UIObject
 {
-    Image4 _image;
-    SDL_Renderer* _renderer;
-    SDL_Texture* _texture;
-
-    ImageLabel(const ImageLabel& rhs);
-    ImageLabel& operator=(const ImageLabel& rhs);
-    ImageLabel& operator=(ImageLabel&& rhs);
+    ImageLabel(const ImageLabel& rhs) = delete;
+    ImageLabel& operator=(const ImageLabel& rhs) = delete;
+    ImageLabel& operator=(ImageLabel&& rhs) = delete;
 public:
-    ImageLabel(Image4&& image, const UDim2& position, const UDim2& size);
-    ImageLabel(ImageLabel&& rhs);
-    ~ImageLabel();
+    Stamper* stamper;
 
-    const Image4& getImage() const;
-    void setImage(Image4&& image);
+    ImageLabel(Stamper* stamper, const UDim2& position, const UDim2& size);
+    ~ImageLabel();
 
     void update(double delta);
     void draw(Image4& screen, const Rect2<double>& scope);

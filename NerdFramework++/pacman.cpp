@@ -1483,7 +1483,7 @@ void launch() {
 				SDL_GetMouseState(&position.x, &position.y);
 				position /= 16;
 				interface.update();
-				interface.drawSDL();
+				interface.draw();
 			}
 		}
 	}

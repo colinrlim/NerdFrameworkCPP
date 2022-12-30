@@ -19,6 +19,12 @@ SDL_Texture* PaletteImageStamper::createTexture(const Palette<Color4>& palette) 
     return texture;
 }
 
+PaletteImageStamper::PaletteImageStamper(PaletteImage&& image, Palette<Color4>* defaultPalette) :
+    _image(std::move(image)),
+    _renderer(nullptr),
+    _textures(),
+    PaletteStamper(defaultPalette)
+{ }
 PaletteImageStamper::PaletteImageStamper(SDL_Renderer* renderer, PaletteImage&& image, Palette<Color4>* defaultPalette) :
     _image(std::move(image)),
     _renderer(renderer),
@@ -38,20 +44,7 @@ PaletteImageStamper::~PaletteImageStamper() {
         SDL_DestroyTexture(pair->second);
 }
 
-const PaletteImage& PaletteImageStamper::getImage() const {
-    return _image;
-}
-void PaletteImageStamper::setImage(PaletteImage&& image) {
-    _image = std::move(image);
-    for (auto pair = _textures.begin(); pair != _textures.end(); ++pair)
-        SDL_DestroyTexture(pair->second);
-}
-
 void PaletteImageStamper::draw(const Palette<Color4>& palette, Image4& screen, const Rect2<double>& bounds) {
-    const Palette<Color4>* palettePtr = &palette;
-    if (_textures.find(palettePtr) == _textures.end())
-        _textures.emplace(palettePtr, createTexture(palette));
-
     // Fit to screen bounds
     const double maxWidth = screen.width();
     const double maxHeight = screen.height();

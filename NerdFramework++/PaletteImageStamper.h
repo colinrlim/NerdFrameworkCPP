@@ -15,12 +15,10 @@ class PaletteImageStamper : public PaletteStamper {
 
     SDL_Texture* createTexture(const Palette<Color4>& palette) const;
 public:
+    PaletteImageStamper(PaletteImage&& image, Palette<Color4>* defaultPalette = nullptr);
     PaletteImageStamper(SDL_Renderer* renderer, PaletteImage&& image, Palette<Color4>* defaultPalette = nullptr);
     PaletteImageStamper(PaletteImageStamper&& rhs);
     ~PaletteImageStamper();
-
-    const PaletteImage& getImage() const;
-    void setImage(PaletteImage&& image);
 
     void draw(const Palette<Color4>& palette, Image4& screen, const Rect2<double>& bounds);
     void draw(const Palette<Color4>& palette, SDL_Renderer* renderer, const Rect2<double>& bounds);

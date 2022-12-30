@@ -9,6 +9,11 @@ ImageStamper::ImageStamper(const ImageStamper& rhs) :
 ImageStamper& ImageStamper::operator=(const ImageStamper& rhs) { return *this; }
 ImageStamper& ImageStamper::operator=(ImageStamper&& rhs) { return *this; }
 
+ImageStamper::ImageStamper(Image4&& image) :
+    _image(std::move(image)),
+    _renderer(nullptr),
+    _texture(nullptr)
+{ }
 ImageStamper::ImageStamper(SDL_Renderer* renderer, Image4&& image) :
     _image(std::move(image)),
     _renderer(renderer),
@@ -27,16 +32,6 @@ ImageStamper::ImageStamper(ImageStamper&& rhs) :
 ImageStamper::~ImageStamper() {
     if (_texture != nullptr)
         SDL_DestroyTexture(_texture);
-}
-
-const Image4& ImageStamper::getImage() const {
-    return _image;
-}
-void ImageStamper::setImage(Image4&& image) {
-    _image = std::move(image);
-    SDL_DestroyTexture(_texture);
-    _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height());
-    SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
 }
 
 void ImageStamper::draw(Image4& screen, const Rect2<double>& bounds) {
