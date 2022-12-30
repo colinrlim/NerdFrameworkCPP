@@ -3,8 +3,6 @@
 
 // https://www.desmos.com/calculator/m8myals511
 
-Tween::Tween() { };
-
 double Tween::linear(double x1, double x2, double interpolant)
 {
     if (interpolant < 0) interpolant = 0;
@@ -15,46 +13,46 @@ double Tween::linear(double x1, double x2, double interpolant)
 
 double Tween::sineIn(double x1, double x2, double interpolant)
 {
-    interpolant = Math::sin(Math::PI * interpolant / 2 - Math::PI / 2) + 1;
+    interpolant = Math::sin(PI * interpolant / 2 - PI / 2) + 1;
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::sineOut(double x1, double x2, double interpolant)
 {
-    interpolant = Math::sin(Math::PI * interpolant / 2);
+    interpolant = Math::sin(PI * interpolant / 2);
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::sineInOut(double x1, double x2, double interpolant)
 {
-    interpolant = Math::sin(Math::PI * interpolant - Math::PI / 2) / 2 + 0.5;
+    interpolant = Math::sin(PI * interpolant - PI / 2) / 2 + 0.5;
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::sineOutIn(double x1, double x2, double interpolant)
 {
-    interpolant = interpolant <= 0.5 ? Math::sin(Math::PI * interpolant) / 2 : Math::sin(Math::PI * interpolant - Math::PI) / 2 + 1;
+    interpolant = interpolant <= 0.5 ? Math::sin(PI * interpolant) / 2 : Math::sin(PI * interpolant - PI) / 2 + 1;
     return Tween::linear(x1, x2, interpolant);
 }
 
 double Tween::backIn(double x1, double x2, double interpolant)
 {
-    double s = 1.70158;
+    static constexpr double s = 1.70158;
     interpolant = interpolant * interpolant * (interpolant * (s + 1) - s);
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::backOut(double x1, double x2, double interpolant)
 {
-    double s = 1.70158;
+    static constexpr double s = 1.70158;
     interpolant = Math::pow(interpolant - 1, 2.0) * ((interpolant - 1) * (s + 1) + s) + 1;
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::backInOut(double x1, double x2, double interpolant)
 {
-    double s1 = 2.5949095;
+    static constexpr double s1 = 2.5949095;
     interpolant = interpolant <= 0.5 ? 2 * interpolant * interpolant * (2 * interpolant * (s1 + 1) - s1) : 0.5 * Math::pow(2 * interpolant - 2, 2.0) * ((2 * interpolant - 2) * (s1 + 1) + s1) + 1;
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::backOutIn(double x1, double x2, double interpolant)
 {
-    double s1 = 2.5949095;
+    static constexpr double s1 = 2.5949095;
     interpolant = 0.5 * Math::pow(2 * interpolant - 1, 2.0) * ((2 * interpolant - 1) * (s1 + 1) + s1 * (interpolant <= 0.5 ? 1 : -1)) + 0.5;
     return Tween::linear(x1, x2, interpolant);
 }
@@ -157,26 +155,26 @@ double Tween::bounceOutIn(double x1, double x2, double interpolant)
 
 double Tween::elasticIn(double x1, double x2, double interpolant)
 {
-    double p = 0.3;
-    interpolant = -Math::pow(2.0, 10.0 * (interpolant - 1.0)) * Math::sin(2.0 * Math::PI * (interpolant - 1.0 - p / 4.0) / p);
+    static constexpr double p = 0.3;
+    interpolant = -Math::pow(2.0, 10.0 * (interpolant - 1.0)) * Math::sin(2.0 * PI * (interpolant - 1.0 - p / 4.0) / p);
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::elasticOut(double x1, double x2, double interpolant)
 {
-    double p = 0.3;
-    interpolant = Math::pow(2.0, -10.0 * interpolant) * Math::sin(2.0 * Math::PI * (interpolant - p / 4.0) / p) + 1;
+    static constexpr double p = 0.3;
+    interpolant = Math::pow(2.0, -10.0 * interpolant) * Math::sin(2.0 * PI * (interpolant - p / 4.0) / p) + 1;
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::elasticInOut(double x1, double x2, double interpolant)
 {
-    double p1 = 0.45;
-    interpolant = interpolant <= 0.5 ? -0.5 * Math::pow(2.0, 20.0 * interpolant - 10.0) * Math::sin(2.0 * Math::PI * (2.0 * interpolant - 1.1125) / p1) : 0.5 * Math::pow(2.0, -20.0 * interpolant + 10.0) * Math::sin(2.0 * Math::PI * (2.0 * interpolant - 1.1125) / p1) + 1;
+    static constexpr double p1 = 0.45;
+    interpolant = interpolant <= 0.5 ? -0.5 * Math::pow(2.0, 20.0 * interpolant - 10.0) * Math::sin(2.0 * PI * (2.0 * interpolant - 1.1125) / p1) : 0.5 * Math::pow(2.0, -20.0 * interpolant + 10.0) * Math::sin(2.0 * PI * (2.0 * interpolant - 1.1125) / p1) + 1;
     return Tween::linear(x1, x2, interpolant);
 }
 double Tween::elasticOutIn(double x1, double x2, double interpolant)
 {
-    double p1 = 0.45;
-    interpolant = interpolant <= 0.5 ? 0.5 * Math::pow(2.0, -20.0 * interpolant) * Math::sin(2.0 * Math::PI * (2.0 * interpolant - p1 / 4.0) / p1) + 0.5 : -0.5 * Math::pow(2.0, 10.0 * (2.0 * interpolant - 2.0)) * Math::sin(2.0 * Math::PI * (2.0 * interpolant - 2.0 - p1 / 4.0) / p1) + 0.5;
+    static constexpr double p1 = 0.45;
+    interpolant = interpolant <= 0.5 ? 0.5 * Math::pow(2.0, -20.0 * interpolant) * Math::sin(2.0 * PI * (2.0 * interpolant - p1 / 4.0) / p1) + 0.5 : -0.5 * Math::pow(2.0, 10.0 * (2.0 * interpolant - 2.0)) * Math::sin(2.0 * PI * (2.0 * interpolant - 2.0 - p1 / 4.0) / p1) + 0.5;
     return Tween::linear(x1, x2, interpolant);
 }
 

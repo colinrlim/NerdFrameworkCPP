@@ -3,7 +3,7 @@
 class Tween
 {
 private:
-    Tween();
+    Tween() = delete;
 public:
     static double linear(double x1, double x2, double interpolant);
 

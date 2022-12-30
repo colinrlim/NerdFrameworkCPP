@@ -10,20 +10,20 @@ Vector2i::Vector2i(uint16_t integer) : x(((uint8_t*)&integer)[1] > 127 ? 256 - (
 const Vector2i Vector2i::zero(0, 0);
 const Vector2i Vector2i::one(1, 1);
 
-double Vector2i::magnitude() {
+double Vector2i::magnitude() const {
 	return Math::sqrt(this->x * this->x + this->y * this->y);
 }
-Vector2i Vector2i::normalized() {
+Vector2i Vector2i::normalized() const {
 	return *this / (int)this->magnitude();
 }
-uint16_t Vector2i::toInteger() {
+uint16_t Vector2i::toInteger() const {
 	uint16_t newInt;
 	uint8_t* address = (uint8_t*)&newInt;
 	address[1] = (uint8_t)(x > 0 ? 256 - x : -1 * x);
 	address[0] = (uint8_t)(y >= 0 ? y : 256 + y);
 	return newInt;
 }
-void Vector2i::toInteger(uint16_t& integer) {
+void Vector2i::toInteger(uint16_t& integer) const {
 	uint8_t* address = (uint8_t*)&integer;
 	address[1] = (uint8_t)(x > 0 ? 256 - x : -1 * x);
 	address[0] = (uint8_t)(y >= 0 ? y : 256 + y);

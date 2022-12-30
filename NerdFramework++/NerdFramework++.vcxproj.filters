@@ -349,6 +349,15 @@
     <Filter Include="Interface2D\Button">
       <UniqueIdentifier>{fd5bca9a-adc2-4319-98e2-bf5ddc852368}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Demos\Pathfinding">
+      <UniqueIdentifier>{64253888-644e-4075-90a8-f00c908ad163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\Painter">
+      <UniqueIdentifier>{f97db780-ddff-4306-ab95-55b43413a5c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Demos\Beat Blitz!">
+      <UniqueIdentifier>{20532039-dad5-4c0e-997c-d86df6be791b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -665,9 +674,6 @@
     <ClCompile Include="RayRadial.cpp">
       <Filter>Math\3D\Objects\RayCaster\RayRadial</Filter>
     </ClCompile>
-    <ClCompile Include="Tween.cpp">
-      <Filter>Math\Services\Tween</Filter>
-    </ClCompile>
     <ClCompile Include="RayCaster.cpp">
       <Filter>Math\3D\Objects\RayCaster</Filter>
     </ClCompile>
@@ -847,6 +853,9 @@
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Interface2D\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Tween.cpp">
+      <Filter>Math\Services\Tween</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

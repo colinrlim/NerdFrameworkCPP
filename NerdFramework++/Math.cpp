@@ -3,8 +3,6 @@
 #include "Tween.h"
 #include "Math.h"
 
-Math::Math() { };
-
 double Math::dmod(double x, double mod)
 {
     return !mod ? x : x - mod * static_cast<long long>(x / mod);

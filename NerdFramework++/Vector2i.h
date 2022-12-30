@@ -17,10 +17,10 @@ struct Vector2i
     static const Vector2i zero;
     static const Vector2i one;
 
-    double magnitude();
-    Vector2i normalized();
-    uint16_t toInteger();
-    void toInteger(uint16_t& integer);
+    double magnitude() const;
+    Vector2i normalized() const;
+    uint16_t toInteger() const;
+    void toInteger(uint16_t& integer) const;
     static Vector2i fromParameterization3(double t, double s, const Vector2i& a, const Vector2i& b, const Vector2i& c);
 
     Vector2i& operator+=(const Vector2i& rhs);

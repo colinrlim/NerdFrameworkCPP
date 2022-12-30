@@ -17,10 +17,10 @@ struct Vector2
     static const Vector2 zero;
     static const Vector2 one;
 
-    double magnitude();
-    Vector2 normalized();
-    uint16_t toInteger();
-    void toInteger(uint16_t& integer);
+    double magnitude() const;
+    Vector2 normalized() const;
+    uint16_t toInteger() const;
+    void toInteger(uint16_t& integer) const;
     static Vector2 lerp(const Vector2& a, const Vector2& b, double alpha);
     static Vector2 fromParameterization3(double t, double s, const Vector2& a, const Vector2& b, const Vector2& c);
 

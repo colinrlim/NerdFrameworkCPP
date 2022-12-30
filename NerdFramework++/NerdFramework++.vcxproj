@@ -300,6 +300,7 @@
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Sort.cpp" />
     <ClCompile Include="TileBatcher.cpp" />
+    <ClCompile Include="Tween.cpp" />
     <ClCompile Include="UDimRect2.cpp" />
     <ClCompile Include="ScrollFrame.cpp" />
     <ClCompile Include="Sphere3.cpp" />
@@ -308,7 +309,6 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Triangle2.cpp" />
     <ClCompile Include="Triangle3.cpp" />
-    <ClCompile Include="Tween.cpp" />
     <ClCompile Include="UDim.cpp" />
     <ClCompile Include="UDim2.cpp" />
     <ClCompile Include="UIObject.cpp" />

@@ -6,7 +6,7 @@
 class Format
 {
 private:
-	Format();
+	Format() = delete;
 public:
 	static std::vector<std::string> split(const std::string& input, const char delimitter);
 };

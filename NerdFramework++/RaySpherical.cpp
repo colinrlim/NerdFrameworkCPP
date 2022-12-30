@@ -3,8 +3,8 @@
 #include "Math.h"
 
 void RaySpherical::setAxes() {
-    this->w = Vector3(_spherical.rotatedPolar(-Math::HalfPI));
-    this->h = Vector3(_spherical.rotatedZenith(-Math::HalfPI));
+    this->w = Vector3(_spherical.rotatedPolar(-HALF_PI));
+    this->h = Vector3(_spherical.rotatedZenith(-HALF_PI));
 
     this->_bounds1 = Vector3(_spherical.rotatedPolar(this->_FOV / 2.0));
     this->_bounds2 = Vector3(_spherical.rotatedPolar(-this->_FOV / 2.0));
@@ -35,8 +35,8 @@ Vector2 RaySpherical::projection(const Vector3& point) {
     Vector2 diff = Vector2(pointSpherical.theta - this->_cameraTopLeft.theta, pointSpherical.phi - this->_cameraTopLeft.phi);
 
     return Vector2(
-        1.0 - (diff.x >= 0.0 ? (diff.x < Math::TwoPI ? diff.x : diff.x - Math::TwoPI) : diff.x + Math::TwoPI) / this->_FOV,
-        1.0 - (diff.y >= 0.0 ? (diff.y < Math::PI ? diff.y : diff.y - Math::PI) : diff.y + Math::PI) / this->_vertFOV);
+        1.0 - (diff.x >= 0.0 ? (diff.x < TWO_PI ? diff.x : diff.x - TWO_PI) : diff.x + TWO_PI) / this->_FOV,
+        1.0 - (diff.y >= 0.0 ? (diff.y < PI ? diff.y : diff.y - PI) : diff.y + PI) / this->_vertFOV);
 }
 bool RaySpherical::meets(const Vector3& point) {
     Vector3s pointSpherical = Vector3s(point - this->d.p);

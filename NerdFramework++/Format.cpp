@@ -1,7 +1,5 @@
 #include "Format.h"
 
-Format::Format() { };
-
 std::vector<std::string> Format::split(const std::string& input, const char delimitter) {
 	std::vector<std::string> args;
 	std::string lastString = "";

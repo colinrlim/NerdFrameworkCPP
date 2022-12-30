@@ -11,6 +11,7 @@
 #include "TileBatcher.h"
 
 #include "pacman.h"
+#include "Math.h"
 
 int main() {
     launch();

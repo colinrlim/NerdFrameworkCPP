@@ -10,23 +10,23 @@ Vector2::Vector2(uint16_t integer) : x(((uint8_t*)&integer)[1] > 127 ? 256 - ((u
 const Vector2 Vector2::zero(0.0, 0.0);
 const Vector2 Vector2::one(1.0, 1.0);
 
-double Vector2::magnitude() {
+double Vector2::magnitude() const {
 	return Math::sqrt(this->x * this->x + this->y * this->y);
 }
-Vector2 Vector2::normalized() {
+Vector2 Vector2::normalized() const {
 	return *this / this->magnitude();
 }
-uint16_t Vector2::toInteger() {
+uint16_t Vector2::toInteger() const {
 	uint16_t newInt;
 	uint8_t* address = (uint8_t*)&newInt;
-	address[1] = (uint8_t)(x > 0 ? 256 - x : -1 * x);
-	address[0] = (uint8_t)(y >= 0 ? y : 256 + y);
+	address[1] = (uint8_t)((int)(x > 0 ? 256 - x : -1 * x));
+	address[0] = (uint8_t)((int)(y >= 0 ? y : 256 + y));
 	return newInt;
 }
-void Vector2::toInteger(uint16_t& integer) {
+void Vector2::toInteger(uint16_t& integer) const {
 	uint8_t* address = (uint8_t*)&integer;
-	address[1] = (uint8_t)(x > 0 ? 256 - x : -1 * x);
-	address[0] = (uint8_t)(y >= 0 ? y : 256 + y);
+	address[1] = (uint8_t)((int)(x > 0 ? 256 - x : -1 * x));
+	address[0] = (uint8_t)((int)(y >= 0 ? y : 256 + y));
 }
 Vector2 Vector2::lerp(const Vector2& a, const Vector2& b, double alpha) {
 	return a * (1 - alpha) + b * alpha;

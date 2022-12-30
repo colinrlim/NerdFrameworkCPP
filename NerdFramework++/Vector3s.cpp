@@ -3,8 +3,8 @@
 
 Vector3s::Vector3s(double rho, double phi, double theta) :
     rho(rho),
-    phi(Math::dmod(phi, Math::PI)),
-    theta(Math::dmod(theta, Math::TwoPI))
+    phi(Math::dmod(phi, PI)),
+    theta(Math::dmod(theta, TWO_PI))
 {
     /* Spherical Coordinates:
      * ρ = |OP|
@@ -67,10 +67,10 @@ Vector3s Vector3s::rotatedPolar(double radians) const {
 Vector3s Vector3s::min(const Vector3s& a, const Vector3s& b) {
     double phiDiff = Math::abs(a.phi - b.phi);
     double thetaDiff = Math::abs(a.theta - b.theta);
-    if (phiDiff > Math::HalfPI)
-        phiDiff = Math::PI - phiDiff;
-    if (thetaDiff > Math::PI)
-        thetaDiff = Math::TwoPI - thetaDiff;
+    if (phiDiff > HALF_PI)
+        phiDiff = PI - phiDiff;
+    if (thetaDiff > PI)
+        thetaDiff = TWO_PI - thetaDiff;
 
     Vector3s newVec(1.0, phiDiff, thetaDiff);
     return newVec;

@@ -4,16 +4,16 @@
 #include <vector>
 #include <limits>
 
+#define PI         3.1415926535897931
+#define HALF_PI    1.57079632679
+#define QUARTER_PI 0.78539816339
+#define TWO_PI     6.28318530718
+
 class Math
 {
 private:
-    Math();
+    Math() = delete;
 public:
-    static constexpr double PI = 3.1415926535897931;
-    static constexpr double HalfPI = PI / 2.0;
-    static constexpr double QuarterPI = PI / 4.0;
-    static constexpr double TwoPI = PI * 2.0;
-
     static double dmod(double x, double mod);
 
     static double degreesToRadians(double degrees);
