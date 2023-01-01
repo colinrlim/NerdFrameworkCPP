@@ -39,6 +39,12 @@ double Math::fromParameterization3(double t, double s, double a, double b, doubl
 {
     return a * (1.0 - t - s) + b * t + c * s;
 }
+double Math::random(double min, double max) {
+    return (min * 1000.0 + (rand() % (int)((max - min + 1) * 1000))) / 1000.0;
+}
+int Math::random(int min, int max) {
+    return min + (rand() % (max - min + 1));
+}
 
 double Math::average(std::vector<double> values)
 {

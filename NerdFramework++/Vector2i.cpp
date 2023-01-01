@@ -10,6 +10,26 @@ Vector2i::Vector2i(uint16_t integer) : x(((uint8_t*)&integer)[1] > 127 ? 256 - (
 const Vector2i Vector2i::zero(0, 0);
 const Vector2i Vector2i::one(1, 1);
 
+void Vector2i::rotate(double radians) {
+
+	/* x' = xcos(theta) - ysin(theta)
+	 * y' = xsin(theta) + ycos(theta)
+	 */
+	
+	const double s = Math::sin(radians);
+	const double c = Math::cos(radians);
+	
+	const double newX = x * c - y * s + 0.0001;
+	const double newY = x * s + y * c + 0.0001;
+	x = (int)x;
+	y = (int)y;
+}
+Vector2i Vector2i::rotated(double radians) const {
+	Vector2i newVec(*this);
+	newVec.rotate(radians);
+	return newVec;
+}
+
 double Vector2i::magnitude() const {
 	return Math::sqrt(this->x * this->x + this->y * this->y);
 }
@@ -32,6 +52,9 @@ Vector2i Vector2i::fromParameterization3(double t, double s, const Vector2i& a, 
 	double u = 1.0 - t - s;
 	Vector2i newVec((int)(a.x * u + b.x * t + c.x * s), (int)(a.y * u + b.y * t + c.y * s));
 	return newVec;
+}
+Vector2i Vector2i::fromRandom(const Vector2i& min, const Vector2i& max) {
+	return Vector2i(Math::random(min.x, max.x), Math::random(min.y, max.y));
 }
 
 Vector2i& Vector2i::operator+=(const Vector2i& rhs) {

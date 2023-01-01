@@ -361,6 +361,15 @@
     <Filter Include="Demos\An Endless Shooter Game, But Like, Super Tiny">
       <UniqueIdentifier>{70f837dc-9148-4c32-b23c-8f384ae01c29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\NumericRange">
+      <UniqueIdentifier>{dfab856e-bade-45c6-a0ae-b7a82149ec74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Stamper\ParticleBatcher">
+      <UniqueIdentifier>{e9ff74c8-2b33-4d1b-9fe3-bfbf4ad84161}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteStamper\PaletteParticleBatcher">
+      <UniqueIdentifier>{9b09f5e6-3e81-474f-825d-852015a13ab7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -635,6 +644,12 @@
     </ClInclude>
     <ClInclude Include="shooter.h">
       <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleBatcher.h">
+      <Filter>Interface2D\Stamper\ParticleBatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="NumericRange.h">
+      <Filter>Math\NumericRange</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

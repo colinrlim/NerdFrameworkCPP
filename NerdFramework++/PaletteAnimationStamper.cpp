@@ -53,9 +53,15 @@ void PaletteAnimationStamper::draw(const Palette<Color4>& palette, Image4& scree
 void PaletteAnimationStamper::draw(const Palette<Color4>& palette, SDL_Renderer* renderer, const Rect2<double>& bounds) {
 	_frames[_frameIndex]->draw(palette, renderer, bounds);
 }
-void PaletteAnimationStamper::draw(Image4& screen, const Rect2<double>& bounds) {
-	_frames[_frameIndex]->draw(*defaultPalette, screen, bounds);
+void PaletteAnimationStamper::draw(const Palette<Color4>& palette, Image4& screen, const Rect2<double>& bounds, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
+	_frames[_frameIndex]->draw(palette, screen, bounds, flipOptions, scaleType);
 }
-void PaletteAnimationStamper::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
-	_frames[_frameIndex]->draw(*defaultPalette, renderer, bounds);
+void PaletteAnimationStamper::draw(const Palette<Color4>& palette, SDL_Renderer* renderer, const Rect2<double>& bounds, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
+	_frames[_frameIndex]->draw(palette, renderer, bounds, flipOptions, scaleType);
+}
+void PaletteAnimationStamper::draw(const Palette<Color4>& palette, Image4& screen, const Rect2<double>& bounds, double degrees, const Vector2i& origin, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
+	_frames[_frameIndex]->draw(palette, screen, bounds, degrees, origin, flipOptions, scaleType);
+}
+void PaletteAnimationStamper::draw(const Palette<Color4>& palette, SDL_Renderer* renderer, const Rect2<double>& bounds, double degrees, const Vector2i& origin, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
+	_frames[_frameIndex]->draw(palette, renderer, bounds, degrees, origin, flipOptions, scaleType);
 }

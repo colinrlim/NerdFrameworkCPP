@@ -22,6 +22,7 @@ struct Vector3s
 	Vector3s rotatedPolar(double radians) const;
 
 	static Vector3s min(const Vector3s& a, const Vector3s& b);
+	static Vector3s fromRandom(const Vector3s& min, const Vector3s& max);
 };
 
 std::ostream& operator<<(std::ostream& stream, const Vector3s& rhs);

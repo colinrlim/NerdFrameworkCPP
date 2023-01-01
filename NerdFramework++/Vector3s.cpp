@@ -72,8 +72,10 @@ Vector3s Vector3s::min(const Vector3s& a, const Vector3s& b) {
     if (thetaDiff > PI)
         thetaDiff = TWO_PI - thetaDiff;
 
-    Vector3s newVec(1.0, phiDiff, thetaDiff);
-    return newVec;
+    return Vector3s(1.0, phiDiff, thetaDiff);
+}
+Vector3s Vector3s::fromRandom(const Vector3s& min, const Vector3s& max) {
+    return Vector3s(Math::random(min.rho, max.rho), Math::random(min.phi, max.phi), Math::random(min.theta, max.theta));
 }
 
 std::ostream& operator<<(std::ostream& stream, const Vector3s& rhs) {

@@ -95,10 +95,10 @@ void PaletteTileBatcher::draw(Image4& screen, const Rect2<double>& bounds) {
             destination.y = bounds.y + y * bounds.height;
 
             // Fit to screen bounds
-            double xMinConstrained = Math::max(0.0, destination.x);
-            double yMinConstrained = Math::max(0.0, destination.y);
-            double xMaxConstrained = Math::min(destination.x + destination.width, maxWidth);
-            double yMaxConstrained = Math::min(destination.y + destination.height, maxHeight);
+            const double xMinConstrained = Math::max(0.0, destination.x);
+            const double yMinConstrained = Math::max(0.0, destination.y);
+            const double xMaxConstrained = Math::min(destination.x + destination.width, maxWidth);
+            const double yMaxConstrained = Math::min(destination.y + destination.height, maxHeight);
 
             // Render object fill color (image) on top of pre-existing
             for (size_t y = (int)yMinConstrained; y < (int)yMaxConstrained; y++) {
@@ -145,10 +145,10 @@ void PaletteTileBatcher::draw(Image4& screen, const std::function<const Rect2<do
             const Rect2<double> destination(boundsFunction(x, y));
 
             // Fit to screen bounds
-            double xMinConstrained = Math::max(0.0, destination.x);
-            double yMinConstrained = Math::max(0.0, destination.y);
-            double xMaxConstrained = Math::min(destination.x + destination.width, maxWidth);
-            double yMaxConstrained = Math::min(destination.y + destination.height, maxHeight);
+            const double xMinConstrained = Math::max(0.0, destination.x);
+            const double yMinConstrained = Math::max(0.0, destination.y);
+            const double xMaxConstrained = Math::min(destination.x + destination.width, maxWidth);
+            const double yMaxConstrained = Math::min(destination.y + destination.height, maxHeight);
 
             // Render object fill color (image) on top of pre-existing
             for (size_t y = (int)yMinConstrained; y < (int)yMaxConstrained; y++) {

@@ -60,12 +60,15 @@ void Vector3::rotateX(double radians) {
      * z' = ysin(theta) + zcos(theta)
      */
 
-    double s = Math::sin(radians);
-    double c = Math::cos(radians);
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
 
-    // x = x;
-    y = y * c - z * s;
-    z = y * s + z * c;
+    //const double newX = x;
+    const double newY = y * c - z * s;
+    const double newZ = y * s + z * c;
+    //x = newX;
+    y = newY;
+    z = newZ;
 }
 void Vector3::rotateY(double radians) {
 
@@ -74,12 +77,15 @@ void Vector3::rotateY(double radians) {
      * z' = -xsin(theta) + zcos(theta)
      */
 
-    double s = Math::sin(radians);
-    double c = Math::cos(radians);
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
 
-    x = x * c + z * s;
-    // y = y;
-    z = -x * s + z * c;
+    const double newX = x * c + z * s;
+    //const double newY = y;
+    const double newZ = -x * s + z * c;
+    x = newX;
+    //y = newY;
+    z = newZ;
 }
 void Vector3::rotateZ(double radians) {
 
@@ -88,12 +94,15 @@ void Vector3::rotateZ(double radians) {
      * z' = z
      */
 
-    double s = Math::sin(radians);
-    double c = Math::cos(radians);
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
 
-    x = x * c - y * s;
-    y = x * s + y * c;
-    // z = z;
+    const double newX = x * c - y * s;
+    const double newY = x * s + y * c;
+    //const double newZ = z;
+    x = x;
+    y = y;
+    //z = z;
 }
 void Vector3::rotate(double r1, double r2, double r3) {
     if (r1 != 0.0)
@@ -245,6 +254,9 @@ Vector3 Vector3::fromParameterization3(double t, double s, const Vector3& a, con
     double u = 1.0 - t - s;
     Vector3 newVec(a.x * u + b.x * t + c.x * s, a.y * u + b.y * t + c.y * s, a.z * u + b.z * t + c.z * s);
     return newVec;
+}
+Vector3 Vector3::fromRandom(const Vector3& min, const Vector3& max) {
+    return Vector3(Math::random(min.x, max.x), Math::random(min.y, max.y), Math::random(min.z, max.z));
 }
 
 Vector3& Vector3::operator+=(const Vector3& rhs) {

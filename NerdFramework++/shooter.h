@@ -1,4 +1,4 @@
 #pragma once
 
-void launch();
+void launchShooter();
 

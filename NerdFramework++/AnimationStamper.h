@@ -30,5 +30,9 @@ public:
 
 	void draw(Image4& screen, const Rect2<double>& bounds);
 	void draw(SDL_Renderer* renderer, const Rect2<double>& bounds);
+	void draw(Image4& screen, const Rect2<double>& bounds, ImageFlipOptions flipOptions, ImageScaleType scaleType);
+	void draw(SDL_Renderer* renderer, const Rect2<double>& bounds, ImageFlipOptions flipOptions, ImageScaleType scaleType);
+	void draw(Image4& screen, const Rect2<double>& bounds, double degrees, const Vector2i& origin, ImageFlipOptions flipOptions, ImageScaleType scaleType);
+	void draw(SDL_Renderer* renderer, const Rect2<double>& bounds, double degrees, const Vector2i& origin, ImageFlipOptions flipOptions, ImageScaleType scaleType);
 };
 

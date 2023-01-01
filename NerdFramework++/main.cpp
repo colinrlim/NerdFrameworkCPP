@@ -12,10 +12,68 @@
 
 #include "pacman.h"
 #include "Math.h"
+#include "PaletteImageStamper.h"
 
 int main() {
-    launch();
-	/*std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;
+	PaletteImage ghost_right(16, 16, std::vector<uint8_t>{
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,
+		0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,
+		0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,
+		0,0,1,1,1,3,3,1,1,1,1,3,3,1,0,0,
+		0,0,1,1,3,3,3,3,1,1,3,3,3,3,0,0,
+		0,0,1,1,3,3,2,2,1,1,3,3,2,2,0,0,
+		0,1,1,1,3,3,2,2,1,1,3,3,2,2,1,0,
+		0,1,1,1,1,3,3,1,1,1,1,3,3,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+		0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+	});
+
+    Color4 black(0, 0, 0, 0);
+    Color4 red(252, 0, 0);
+    Color4 brown(216, 144, 85);
+    Color4 pink(252, 180, 255);
+    Color4 cyan(0, 252, 255);
+    Color4 blue(72, 180, 255);
+    Color4 orange(252, 180, 85);
+    Color4 yellow(252, 252, 0);
+    Color4 indigo(36, 36, 255);
+    Color4 green(0, 252, 0);
+    Color4 teal(72, 180, 170);
+    Color4 salmon(252, 180, 170);
+    Color4 white(252, 252, 255);
+    std::vector<Palette<Color4>> palettes{
+        { { Color4::none, black, black, black } },		// 0
+        { { Color4::none, indigo, black, salmon } },	// 1 frightened1
+        { { Color4::none, white, brown, red } },		// 2 frightened2
+        { { Color4::none, yellow, pink, cyan } },		// 3
+        { { Color4::none, black, black, black } },		// 4
+        { { Color4::none, red, indigo, white } },		// 5 blinky
+        { { Color4::none, cyan, indigo, white } },		// 6 inky
+        { { Color4::none, yellow, red, indigo } },		// 7
+        { { Color4::none, salmon, indigo, green } },	// 8
+        { { Color4::none, brown, green, orange } },		// 9
+        { { Color4::none, black, indigo, white } },		// 10 eyes
+        { { Color4::none, red, salmon, white } },		// 11
+        { { Color4::none, salmon, black, white } },		// 12
+        { { Color4::none, red, white, green } },		// 13
+        { { Color4::none, white, blue, yellow } },		// 14
+        { { Color4::none, indigo, black, salmon } },	// 15
+        { { Color4::none, salmon, indigo, white } },	// 16
+        { { Color4::none, pink, indigo, white } },		// 17 pinky
+        { { Color4::none, orange, indigo, white } },	// 18 clyde
+        { { Color4::none, white, green, red } },		// 19
+        { { Color4::none, white, green, teal } },		// 20
+        { { Color4::none, indigo, black, salmon } },	// 21
+        { { Color4::none, white, black, salmon } },		// 22
+    };
+    //launch();
+	std::cout << CaesarCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", 7) << std::endl;
 	std::cout << VigenereCipher::encrypt("If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.", "cryptii") << std::endl;
 
     BinaryGrid2 grid(10, 10, false);
@@ -23,6 +81,8 @@ int main() {
     std::cout << grid;
 
     String test = std::string("Once upon a time, this was a string. Now it is a String. The End.");
+
+    PaletteImageStamper* paletteImageStamper;
 
     //Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -39,7 +99,7 @@ int main() {
         frame2.setColor(Color3::lightRed);
         frame2.setBorderColor(Color3::green);
         frame2.borderWidth = 2;
-        frame.children.push_back(&frame2);
+        frame.addChild(&frame2);
     
         uint32_t r = Color4::red.toInteger();
         uint32_t g = Color4::green.toInteger();
@@ -59,7 +119,7 @@ int main() {
             0,m,m,m,m,m,m,m,m,0,
             0,c,c,c,c,c,c,c,c,0,
         });
-        ImageLabel imageLabel(std::move(image), { 0.5, 0.5 }, { 0, 100, 0, 100 });
+        //ImageLabel imageLabel(std::move(image), { 0.5, 0.5 }, { 0, 100, 0, 100 });
 
         Image4 image2(1, 1, Color4::lightGreen);
         Image4 image3(1, 1, Color4::lightBlue);
@@ -88,17 +148,28 @@ int main() {
             interface.frame.setColor(Color3::blue);
             interface.frame.setBorderColor(Color3::blue);
 
-            interface.frame.children.push_back(&frame);
-            interface.frame.children.push_back(&imageLabel);
+            interface.frame.addChild(&frame);
+            //interface.frame.addChild(&imageLabel);
 
             batcher = new TileBatcher(renderer);
             batcher->setGrid(std::move(grid));
             batcher->setTileTypes(std::move(map));
 
-
+            paletteImageStamper = new PaletteImageStamper(renderer, std::move(ghost_right));
         });
+        interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
+            batcher->draw(screen, Rect2<double>{200.0, 200.0, 20.0, 20.0});
+            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 50.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_HORIZONTALLY, Stamper::ImageScaleType::CROP);
+            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 150.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_VERTICALLY, Stamper::ImageScaleType::FIT);
+            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 250.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::STRETCH);
+            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 350.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::TILE);
+        };
         interface.onDrawSDL = [&](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
             batcher->draw(renderer, Rect2<double>{200.0, 200.0, 20.0, 20.0});
+            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 50.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_HORIZONTALLY, Stamper::ImageScaleType::CROP);
+            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 150.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_VERTICALLY, Stamper::ImageScaleType::FIT);
+            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 250.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::STRETCH);
+            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 350.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::TILE);
         };
 
         if (interface.window == nullptr)
@@ -130,5 +201,5 @@ int main() {
 
     SDL_Quit();
 
-	return 0;*/
+	return 0;
 }

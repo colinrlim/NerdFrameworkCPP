@@ -20,6 +20,8 @@ public:
     static double radiansToDegrees(double radians);
 
     static double fromParameterization3(double t, double s, double a, double b, double c);
+    static double random(double min, double max);
+    static int random(int min, int max);
 
     static double average(std::vector<double> values);
 

@@ -51,3 +51,15 @@ void AnimationStamper::draw(Image4& screen, const Rect2<double>& bounds) {
 void AnimationStamper::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
 	_frames[_frameIndex]->draw(renderer, bounds);
 }
+void AnimationStamper::draw(Image4& screen, const Rect2<double>& bounds, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
+	_frames[_frameIndex]->draw(screen, bounds, flipOptions, scaleType);
+}
+void AnimationStamper::draw(SDL_Renderer* renderer, const Rect2<double>& bounds, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
+	_frames[_frameIndex]->draw(renderer, bounds, flipOptions, scaleType);
+}
+void AnimationStamper::draw(Image4& screen, const Rect2<double>& bounds, double degrees, const Vector2i& origin, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
+	_frames[_frameIndex]->draw(screen, bounds, degrees, origin, flipOptions, scaleType);
+}
+void AnimationStamper::draw(SDL_Renderer* renderer, const Rect2<double>& bounds, double degrees, const Vector2i& origin, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
+	_frames[_frameIndex]->draw(renderer, bounds, degrees, origin, flipOptions, scaleType);
+}

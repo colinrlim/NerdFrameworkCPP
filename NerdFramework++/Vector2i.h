@@ -17,11 +17,15 @@ struct Vector2i
     static const Vector2i zero;
     static const Vector2i one;
 
+    void rotate(double radians);
+    Vector2i rotated(double radians) const;
+
     double magnitude() const;
     Vector2i normalized() const;
     uint16_t toInteger() const;
     void toInteger(uint16_t& integer) const;
     static Vector2i fromParameterization3(double t, double s, const Vector2i& a, const Vector2i& b, const Vector2i& c);
+    static Vector2i fromRandom(const Vector2i & min, const Vector2i & max);
 
     Vector2i& operator+=(const Vector2i& rhs);
     Vector2i& operator+=(int rhs);

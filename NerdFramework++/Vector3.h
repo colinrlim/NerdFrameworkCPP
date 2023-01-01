@@ -49,6 +49,7 @@ struct Vector3
 	static bool parallel(const Vector3& a, const Vector3& b);
 	static Vector3 lerp(const Vector3& a, const Vector3& b, double alpha);
 	static Vector3 fromParameterization3(double t, double s, const Vector3& a, const Vector3& b, const Vector3& c);
+	static Vector3 fromRandom(const Vector3& min, const Vector3& max);
 
 	Vector3& operator+=(const Vector3& rhs);
 	Vector3& operator+=(double rhs);

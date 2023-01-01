@@ -167,10 +167,10 @@ void UIObject::draw(SDL_Renderer* renderer, const Rect2<double>& scope) {
     if (visible == false) return;
 
     // Object bounds; Doesn't use AbsolutePosition() and AbsoluteSize() for optimization purposes
-    double xPos = _position.x.absolute(scope.width) + scope.x;
-    double yPos = _position.y.absolute(scope.height) + scope.y;
-    double xSize = _size.x.absolute(scope.width);
-    double ySize = _size.y.absolute(scope.height);
+    const double xPos = _position.x.absolute(scope.width) + scope.x;
+    const double yPos = _position.y.absolute(scope.height) + scope.y;
+    const double xSize = _size.x.absolute(scope.width);
+    const double ySize = _size.y.absolute(scope.height);
 
     // Render object border color on top of pre-existing
     if (borderWidth > 0 && _borderOpacity > 0.0) {

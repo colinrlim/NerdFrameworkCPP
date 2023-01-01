@@ -1,7 +1,7 @@
 #include "shooter.h"
 #include "PaletteImageStamper.h"
 
-void launch() {
+void launchShooter() {
 	PaletteImage enemy1_idle(3, 3, std::vector<uint8_t>{
 		0,0,0,
 		0,1,0,
