@@ -55,6 +55,13 @@ Vector3 Vector3s::asRectangular() const {
 }
 
 
+void Vector3s::rotateZenith(double radians) {
+    phi += radians;
+}
+void Vector3s::rotatePolar(double radians) {
+    theta += radians;
+}
+
 Vector3s Vector3s::rotatedZenith(double radians) const {
     Vector3s newVec(rho, phi + radians, theta);
     return newVec;

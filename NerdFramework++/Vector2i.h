@@ -20,6 +20,11 @@ struct Vector2i
     void rotate(double radians);
     Vector2i rotated(double radians) const;
 
+    template <typename iter>
+    static void rotate(iter begin, iter end, double radians);
+    template <typename iter, typename d_iter>
+    static void rotated(iter begin, iter end, d_iter dest, double radians);
+
     double magnitude() const;
     Vector2i normalized() const;
     uint16_t toInteger() const;

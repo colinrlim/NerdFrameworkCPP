@@ -105,15 +105,122 @@ void Vector3::rotateZ(double radians) {
     //z = z;
 }
 void Vector3::rotate(double r1, double r2, double r3) {
-    if (r1 != 0.0)
+    if (Math::abs(r1) > 0.0001)
         rotateX(r1);
-    if (r2 != 0.0)
+    if (Math::abs(r2) > 0.0001)
         rotateY(r2);
-    if (r3 != 0.0)
+    if (Math::abs(r3) > 0.0001)
         rotateZ(r3);
 }
 void Vector3::rotateAbout(const Vector3& rotand, double radians) {
     throw "Not implemented yet";
+}
+
+template <typename iter>
+static void Vector3::rotateX(iter begin, iter end, double radians) {
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
+
+    while (begin != end) {
+        Vector3& vec = *begin;
+        const double newY = y * c - z * s;
+        const double newZ = y * s + z * c;
+        y = newY;
+        z = newZ;
+        ++begin;
+    }
+}
+template <typename iter>
+static void Vector3::rotateY(iter begin, iter end, double radians) {
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
+
+    while (begin != end) {
+        Vector3& vec = *begin;
+        const double newX = x * c + z * s;
+        const double newZ = -x * s + z * c;
+        x = newX;
+        z = newZ;
+        ++begin;
+    }
+}
+template <typename iter>
+static void Vector3::rotateZ(iter begin, iter end, double radians) {
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
+
+    while (begin != end) {
+        Vector3& vec = *begin;
+        const double newX = x * c - y * s;
+        const double newY = x * s + y * c;
+        x = x;
+        y = y;
+        ++begin;
+    }
+}
+template <typename iter>
+static void Vector3::rotate(iter begin, iter end, double r1, double r2, double r3) {
+    if (Math::abs(r1) > 0.0001)
+        rotateX(begin, end, r1);
+    if (Math::abs(r2) > 0.0001)
+        rotateY(begin, end, r2);
+    if (Math::abs(r3) > 0.0001)
+        rotateZ(begin, end, r3);
+}
+
+template <typename iter, typename d_iter>
+static void Vector3::rotatedX(iter begin, iter end, d_iter dest, double radians) {
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
+
+    while (begin != end) {
+        const Vector3& vec = *begin;
+        Vector3& destVec = *dest;
+        destVec.x = vec.x;
+        destVec.y = vec.y * c - vec.z * s;
+        destVec.z = vec.y * s + vec.z * c;
+        ++begin;
+        ++dest;
+    }
+}
+template <typename iter, typename d_iter>
+static void Vector3::rotatedY(iter begin, iter end, d_iter dest, double radians) {
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
+
+    while (begin != end) {
+        const Vector3& vec = *begin;
+        Vector3& destVec = *dest;
+        destVec.x = vec.x * c + vec.z * s;
+        destVec.y = vec.y;
+        destVec.z = -vec.x * s + vec.z * c;
+        ++begin;
+        ++dest;
+    }
+}
+template <typename iter, typename d_iter>
+static void Vector3::rotatedZ(iter begin, iter end, d_iter dest, double radians) {
+    const double s = Math::sin(radians);
+    const double c = Math::cos(radians);
+
+    while (begin != end) {
+        const Vector3& vec = *begin;
+        Vector3& destVec = *dest;
+        destVec.x = vec.x * c - vec.y * s;
+        destVec.y = vec.x * s + vec.y * c;
+        destVec.z = vec.z;
+        ++begin;
+        ++dest;
+    }
+}
+template <typename iter, typename d_iter>
+static void Vector3::rotated(iter begin, iter end, d_iter dest, double r1, double r2, double r3) {
+    if (Math::abs(r1) > 0.0001)
+        rotatedX(begin, end, dest, r1);
+    if (Math::abs(r2) > 0.0001)
+        rotatedY(begin, end, dest, r2);
+    if (Math::abs(r3) > 0.0001)
+        rotatedZ(begin, end, dest, r3);
 }
 
 Vector3 Vector3::rotatedX(double radians) const {

@@ -18,6 +18,8 @@ struct Vector3s
 
 	Vector3 asRectangular() const;
 
+	void rotateZenith(double radians);
+	void rotatePolar(double radians);
 	Vector3s rotatedZenith(double radians) const;
 	Vector3s rotatedPolar(double radians) const;
 

@@ -41,6 +41,24 @@ struct Vector3
 	Vector3 rotated(double r1, double r2, double r3) const;
 	Vector3 rotatedAbout(const Vector3& rotand, double radians) const;
 
+	template <typename iter>
+	static void rotateX(iter begin, iter end, double radians);
+	template <typename iter>
+	static void rotateY(iter begin, iter end, double radians);
+	template <typename iter>
+	static void rotateZ(iter begin, iter end, double radians);
+	template <typename iter>
+	static void rotate(iter begin, iter end, double r1, double r2, double r3);
+
+	template <typename iter, typename d_iter>
+	static void rotatedX(iter begin, iter end, d_iter dest, double radians);
+	template <typename iter, typename d_iter>
+	static void rotatedY(iter begin, iter end, d_iter dest, double radians);
+	template <typename iter, typename d_iter>
+	static void rotatedZ(iter begin, iter end, d_iter dest, double radians);
+	template <typename iter, typename d_iter>
+	static void rotated(iter begin, iter end, d_iter dest, double r1, double r2, double r3);
+
 	static Vector3 angle3(const Vector3& a, const Vector3& b);
 	static double angle(const Vector3& a, const Vector3& b);
 	static double dot(const Vector3& a, const Vector3& b);

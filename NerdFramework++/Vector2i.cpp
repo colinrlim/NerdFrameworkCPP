@@ -30,6 +30,36 @@ Vector2i Vector2i::rotated(double radians) const {
 	return newVec;
 }
 
+template <typename iter>
+static void Vector2i::rotate(iter begin, iter end, double radians) {
+	const double s = Math::sin(radians);
+	const double c = Math::cos(radians);
+
+	while (begin != end) {
+		Vector2i& vec = *begin;
+		const double newX = vec.x * c - vec.y * s;
+		const double newY = vec.x * s + vec.y * c;
+		vec.x = (int)newX;
+		vec.y = (int)newY;
+		++begin;
+		++dest;
+	}
+}
+template <typename iter, typename d_iter>
+static void Vector2i::rotated(iter begin, iter end, d_iter dest, double radians) {
+	const double s = Math::sin(radians);
+	const double c = Math::cos(radians);
+
+	while (begin != end) {
+		const Vector2i& vec = *begin;
+		Vector2i& destVec = *dest;
+		destVec.x = (int)(vec.x * c - vec.y * s);
+		destVec.y = (int)(vec.x * s + vec.y * c);
+		++begin;
+		++dest;
+	}
+}
+
 double Vector2i::magnitude() const {
 	return Math::sqrt(this->x * this->x + this->y * this->y);
 }
