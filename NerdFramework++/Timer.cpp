@@ -13,7 +13,7 @@ void Timer::tickForward(double seconds) {
 	_offset += seconds;
 }
 double Timer::tock() const {
-	return (double)std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - _init).count() / 1000.0 + _offset;
+	return (double)std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - _init).count() / 1000.0 - _offset;
 }
 
 double Timer::measureFunction(std::function<void(void)> func) {

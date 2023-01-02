@@ -122,7 +122,7 @@ void Interface::update() {
 	double delta = _lastFrame.tock();
 	onUpdate(*this, delta);
 	frame.update(delta);
-	_lastFrame.tickNow();
+	_lastFrame.tickForward(delta);
 }
 void Interface::draw() {
 	const Rect2<double> bounds(0, 0, _width, _height);

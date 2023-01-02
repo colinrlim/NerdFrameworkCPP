@@ -13,6 +13,8 @@
 #include "pacman.h"
 #include "Math.h"
 #include "PaletteImageStamper.h"
+#include "ImageStamper.h"
+#include "ParticleBatcher.h"
 
 int main() {
 	PaletteImage ghost_right(16, 16, std::vector<uint8_t>{
@@ -82,7 +84,8 @@ int main() {
 
     String test = std::string("Once upon a time, this was a string. Now it is a String. The End.");
 
-    PaletteImageStamper* paletteImageStamper;
+    PaletteImageStamper* paletteImageStamper = nullptr;
+    ImageStamper* imageStamper = nullptr;
 
     //Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -99,7 +102,7 @@ int main() {
         frame2.setColor(Color3::lightRed);
         frame2.setBorderColor(Color3::green);
         frame2.borderWidth = 2;
-        frame.addChild(&frame2);
+        //frame.addChild(&frame2);
     
         uint32_t r = Color4::red.toInteger();
         uint32_t g = Color4::green.toInteger();
@@ -144,6 +147,10 @@ int main() {
         map[2] = image4;
         std::cout << (short)grid.get(3, 3) << std::endl;
 
+        Kinematics<Vector2> position;
+        Kinematics<double> size(1.0, 0.1, 500.0);
+        ParticleBatcher* particleBatcher;
+
         Interface interface([&](Interface& interface, SDL_Renderer* renderer)-> void{
             interface.frame.setColor(Color3::blue);
             interface.frame.setBorderColor(Color3::blue);
@@ -156,20 +163,39 @@ int main() {
             batcher->setTileTypes(std::move(map));
 
             paletteImageStamper = new PaletteImageStamper(renderer, std::move(ghost_right));
+            paletteImageStamper->defaultPalette = &palettes[5];
+            Image4 test(1, 1, Color4::red);
+            imageStamper = new ImageStamper(renderer, std::move(test));
+            particleBatcher = new ParticleBatcher(paletteImageStamper, NumericRange<Kinematics<Vector2>>(
+                Kinematics<Vector2>(Vector2(0, 0), Vector2(-100, 0), Vector2(0, 0)),
+                Kinematics<Vector2>(Vector2(0, 0), Vector2(100, 0), Vector2(0, 0))
+            ), NumericRange<Kinematics<double>>(
+                Kinematics<double>(0, -100, -5),
+                Kinematics<double>(0, 100, 5)
+            ), size);
+            particleBatcher->particleRate = 0.001;
+            particleBatcher->position = Vector2(200, 200);
+            particleBatcher->rotationOrigin = Vector2i(5, 5);
         });
         interface.onDraw = [&](Interface& interface, Image4& screen, const Rect2<double>& bounds) -> void {
             batcher->draw(screen, Rect2<double>{200.0, 200.0, 20.0, 20.0});
-            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 50.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_HORIZONTALLY, Stamper::ImageScaleType::CROP);
-            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 150.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_VERTICALLY, Stamper::ImageScaleType::FIT);
-            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 250.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::STRETCH);
-            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 350.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::TILE);
+            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 50.0, 100.0, 100.0, 150.0 }, 45, Vector2i(8, 8), Stamper::ImageFlipOptions::FLIP_HORIZONTALLY, Stamper::ImageScaleType::CROP);
+            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 150.0, 100.0, 100.0, 150.0 }, 45, Vector2i(8, 8), Stamper::ImageFlipOptions::FLIP_VERTICALLY, Stamper::ImageScaleType::FIT);
+            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 250.0, 100.0, 100.0, 150.0 }, 45, Vector2i(8, 8), Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::STRETCH);
+            paletteImageStamper->draw(palettes[5], screen, Rect2<double>{ 350.0, 100.0, 100.0, 150.0 }, 45, Vector2i(8, 8), Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::TILE);
+            particleBatcher->draw(screen, Rect2<double>{ 0.0, 0.0, 16.0, 16.0 });
         };
         interface.onDrawSDL = [&](Interface& interface, SDL_Renderer* renderer, const Rect2<double>& bounds) -> void {
             batcher->draw(renderer, Rect2<double>{200.0, 200.0, 20.0, 20.0});
-            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 50.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_HORIZONTALLY, Stamper::ImageScaleType::CROP);
-            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 150.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_VERTICALLY, Stamper::ImageScaleType::FIT);
-            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 250.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::STRETCH);
-            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 350.0, 100.0, 100.0, 150.0 }, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::TILE);
+            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 50.0, 100.0, 100.0, 150.0 }, 45, Vector2i(8, 8), Stamper::ImageFlipOptions::FLIP_HORIZONTALLY, Stamper::ImageScaleType::CROP);
+            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 150.0, 100.0, 100.0, 150.0 }, 45, Vector2i(8, 8), Stamper::ImageFlipOptions::FLIP_VERTICALLY, Stamper::ImageScaleType::FIT);
+            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 250.0, 100.0, 100.0, 150.0 }, 45, Vector2i(8, 8), Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::STRETCH);
+            paletteImageStamper->draw(palettes[5], renderer, Rect2<double>{ 350.0, 100.0, 100.0, 150.0 }, 45, Vector2i(8, 8), Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::TILE);
+            particleBatcher->draw(renderer, Rect2<double>{ 0.0, 0.0, 16.0, 16.0 });
+        };
+        interface.onUpdate = [&](Interface& interface, double delta) -> void {
+            particleBatcher->update(delta);
+            SDL_Delay(1000 / 60);
         };
 
         if (interface.window == nullptr)
@@ -193,6 +219,7 @@ int main() {
                     }
                 }
 
+                interface.update();
                 interface.drawSDL();
             }
         }

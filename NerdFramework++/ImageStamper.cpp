@@ -21,6 +21,7 @@ ImageStamper::ImageStamper(SDL_Renderer* renderer, Image4&& image) :
     _texture(SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, _image.width(), _image.height()))
 {
     SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
+    SDL_UpdateTexture(_texture, nullptr, _image.data, _image.width() * 4);
 }
 ImageStamper::ImageStamper(ImageStamper&& rhs) :
     _image(std::move(rhs._image)),

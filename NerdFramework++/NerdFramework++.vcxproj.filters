@@ -325,9 +325,6 @@
     <Filter Include="Interface2D\Stamper\AnimationStamper">
       <UniqueIdentifier>{c16228d5-4c70-4bb9-ac89-96c26e8e7db6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\Stamper\TileBatcher">
-      <UniqueIdentifier>{53784795-161b-4841-93ff-11c60a2f21e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface2D\Stamper\ImageStamper">
       <UniqueIdentifier>{878a0551-603e-43a3-93df-2c0f13bc8ae6}</UniqueIdentifier>
     </Filter>
@@ -336,9 +333,6 @@
     </Filter>
     <Filter Include="Interface2D\PaletteStamper\PaletteAnimationStamper">
       <UniqueIdentifier>{1c97cc34-1c3e-46f8-934b-77c44534e13e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interface2D\PaletteStamper\PaletteTileBatcher">
-      <UniqueIdentifier>{06f1e6b4-c5e0-4499-8ca2-1b40e66e6dfd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Interface2D\PaletteStamper\PaletteImageStamper">
       <UniqueIdentifier>{f3dd52a0-e020-45ca-ae24-d82c8fd90815}</UniqueIdentifier>
@@ -364,11 +358,32 @@
     <Filter Include="Math\NumericRange">
       <UniqueIdentifier>{dfab856e-bade-45c6-a0ae-b7a82149ec74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\Stamper\ParticleBatcher">
+    <Filter Include="Math\4D">
+      <UniqueIdentifier>{4da18b95-714b-455b-9818-a7eff396b42a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\4D\Vector4">
+      <UniqueIdentifier>{6d852b78-2354-42b8-a03e-2ee0533bb14f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Stamper\Batcher">
+      <UniqueIdentifier>{e34d5fae-7a31-4bab-ae9f-e6ff6e589a44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\Stamper\Batcher\ParticleBatcher">
       <UniqueIdentifier>{e9ff74c8-2b33-4d1b-9fe3-bfbf4ad84161}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface2D\PaletteStamper\PaletteParticleBatcher">
+    <Filter Include="Interface2D\Stamper\Batcher\TileBatcher">
+      <UniqueIdentifier>{53784795-161b-4841-93ff-11c60a2f21e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteStamper\PaletteBatcher">
+      <UniqueIdentifier>{54db4500-06a4-4144-96cd-156fd1a2563e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteStamper\PaletteBatcher\PaletteTileBatcher">
+      <UniqueIdentifier>{06f1e6b4-c5e0-4499-8ca2-1b40e66e6dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher">
       <UniqueIdentifier>{9b09f5e6-3e81-474f-825d-852015a13ab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Kinematics">
+      <UniqueIdentifier>{92a4e69f-67cb-4fb8-b244-4c78c19729ce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -592,7 +607,7 @@
       <Filter>Interface2D\Stamper\ImageStamper</Filter>
     </ClInclude>
     <ClInclude Include="TileBatcher.h">
-      <Filter>Interface2D\Stamper\TileBatcher</Filter>
+      <Filter>Interface2D\Stamper\Batcher\TileBatcher</Filter>
     </ClInclude>
     <ClInclude Include="Image4.h">
       <Filter>Interface2D\Image\Image4</Filter>
@@ -613,7 +628,7 @@
       <Filter>Interface2D\Color\Palette</Filter>
     </ClInclude>
     <ClInclude Include="PaletteTileBatcher.h">
-      <Filter>Interface2D\PaletteStamper\PaletteTileBatcher</Filter>
+      <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteTileBatcher</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Demos\Pac-Man\Entity\Enemy</Filter>
@@ -646,16 +661,22 @@
       <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
     </ClInclude>
     <ClInclude Include="ParticleBatcher.h">
-      <Filter>Interface2D\Stamper\ParticleBatcher</Filter>
+      <Filter>Interface2D\Stamper\Batcher\ParticleBatcher</Filter>
     </ClInclude>
     <ClInclude Include="NumericRange.h">
       <Filter>Math\NumericRange</Filter>
     </ClInclude>
+    <ClInclude Include="Kinematics.h">
+      <Filter>Math\Kinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Math\4D\Vector4</Filter>
+    </ClInclude>
+    <ClInclude Include="PaletteParticleBatcher.h">
+      <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Math.cpp">
-      <Filter>Math\Services\Math</Filter>
-    </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>Math\2D\Vector2</Filter>
     </ClCompile>
@@ -837,7 +858,7 @@
       <Filter>Interface2D\Stamper\ImageStamper</Filter>
     </ClCompile>
     <ClCompile Include="TileBatcher.cpp">
-      <Filter>Interface2D\Stamper\TileBatcher</Filter>
+      <Filter>Interface2D\Stamper\Batcher\TileBatcher</Filter>
     </ClCompile>
     <ClCompile Include="pacman.cpp">
       <Filter>Demos\Pac-Man</Filter>
@@ -852,7 +873,7 @@
       <Filter>Interface2D\Image\PaletteImage</Filter>
     </ClCompile>
     <ClCompile Include="PaletteTileBatcher.cpp">
-      <Filter>Interface2D\PaletteStamper\PaletteTileBatcher</Filter>
+      <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteTileBatcher</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Demos\Pac-Man\Entity\Enemy</Filter>
@@ -880,6 +901,18 @@
     </ClCompile>
     <ClCompile Include="shooter.cpp">
       <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Math\4D\Vector4</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Math\Services\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleBatcher.cpp">
+      <Filter>Interface2D\Stamper\Batcher\ParticleBatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="PaletteParticleBatcher.cpp">
+      <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

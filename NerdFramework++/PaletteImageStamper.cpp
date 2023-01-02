@@ -1,8 +1,5 @@
 ﻿#include "PaletteImageStamper.h"
-#include "Triangle2.h"
 #include "Math.h"
-#include <iostream>
-#include "Triangle3.h"
 
 PaletteImageStamper::PaletteImageStamper(const PaletteImageStamper& rhs) :
     _image(std::move(rhs._image)),

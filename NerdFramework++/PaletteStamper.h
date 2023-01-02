@@ -29,10 +29,10 @@ public:
 		draw(*defaultPalette, renderer, bounds, flipOptions, scaleType);
 	}
 	void draw(Image4& screen, const Rect2<double>& bounds, double degrees, const Vector2i& origin, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
-		draw(*defaultPalette, screen, bounds, flipOptions, scaleType);
+		draw(*defaultPalette, screen, bounds, degrees, origin, flipOptions, scaleType);
 	}
 	void draw(SDL_Renderer* renderer, const Rect2<double>& bounds, double degrees, const Vector2i& origin, ImageFlipOptions flipOptions, ImageScaleType scaleType) {
-		draw(*defaultPalette, renderer, bounds, flipOptions, scaleType);
+		draw(*defaultPalette, renderer, bounds, degrees, origin, flipOptions, scaleType);
 	}
 };
 

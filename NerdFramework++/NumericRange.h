@@ -1,9 +1,12 @@
 #pragma once
 
-template <typename T>
+#include <concepts>
+#include "Math.h"
+
+template<typename T>
 struct NumericRange {
-	const T min;
-	const T max;
+	T min;
+	T max;
 
 	NumericRange(const T& constant) :
 		min(constant),
@@ -16,5 +19,8 @@ struct NumericRange {
 
 	T random() const {
 		return T::fromRandom(min, max);
+	}
+	T randomArithmetic() const {
+		return Math::random(min, max);
 	}
 };

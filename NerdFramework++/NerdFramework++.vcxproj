@@ -165,7 +165,9 @@
     <ClInclude Include="Color4.h" />
     <ClInclude Include="ColorSequence3.h" />
     <ClInclude Include="ColorSequence4.h" />
+    <ClInclude Include="Kinematics.h" />
     <ClInclude Include="NumericRange.h" />
+    <ClInclude Include="PaletteParticleBatcher.h" />
     <ClInclude Include="ParticleBatcher.h" />
     <ClInclude Include="shooter.h" />
     <ClInclude Include="Stamper.h" />
@@ -243,6 +245,7 @@
     <ClInclude Include="Vector2i.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector3s.h" />
+    <ClInclude Include="Vector4.h" />
     <ClInclude Include="VigenereCipher.h" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +269,8 @@
     <ClCompile Include="PaletteImage.cpp" />
     <ClCompile Include="PaletteImageStamper.cpp" />
     <ClCompile Include="PaletteTileBatcher.cpp" />
+    <ClCompile Include="ParticleBatcher.cpp" />
+    <ClCompile Include="PaletteParticleBatcher.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="shooter.cpp" />
     <ClCompile Include="String.cpp" />
@@ -320,6 +325,7 @@
     <ClCompile Include="Vector2i.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vector3s.cpp" />
+    <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="VigenereCipher.cpp" />
     <ClCompile Include="pacman.cpp" />
   </ItemGroup>

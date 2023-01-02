@@ -1,63 +1,52 @@
 #pragma once
 
 #include <deque>
-#include <SDL.h>
 #include "ColorSequence4.h"
 #include "NumericRange.h"
+#include "Kinematics.h"
+#include "Stamper.h"
 #include "Vector2.h"
-#include "Image4.h"
 #include "Timer.h"
 
 class ParticleBatcher {
 public:
 	struct Particle {
 		Timer init;
-		Vector2 position;
-		Vector2 velocity;
-		Vector2 acceleration;
+		Kinematics<Vector2> position;
+		Kinematics<double> rotation;
+		Kinematics<double> size;
 
-		Particle(const Vector2& position, const Vector2& velocity, const Vector2& acceleration) :
-			position(position),
-			velocity(velocity),
-			acceleration(acceleration)
-		{
-			init.tickNow();
-		}
+		Particle(const Kinematics<Vector2>& position, const Kinematics<double>& rotation, const Kinematics<double>& size);
 
-		void update(double delta) {
-			position += velocity * delta;
-			velocity += acceleration * delta;
-		}
+		void update(double delta);
 	};
 private:
 	std::deque<Particle> _particles;
+
+	const Rect2<double> getBounds(const Rect2<double>& bounds, const Particle& particle) const;
 public:
+	Stamper* stamper;
+	Vector2i rotationOrigin;
 	Vector2 position;
+
 	double particleRate;
+	double particleLifespan;
+	ColorSequence4 particleColor;
+	bool particleLockedToBatcher;
+
 	Timer lastGenerated;
 
 	// Particle settings
-	NumericRange<Vector2> initialOffset;
-	NumericRange<Vector2> initialVelocity;
-	NumericRange<Vector2> initialAcceleration;
-	ColorSequence4 particleColor;
-	double lifespan;
+	NumericRange<Kinematics<Vector2>> initialTranslational;
+	NumericRange<Kinematics<double>> initialRotational;
+	NumericRange<Kinematics<double>> initialSize;
 
-	void generate() {
-		_particles.push_back(Particle(position + initialOffset.random(), initialVelocity.random(), initialAcceleration.random()));
-	}
-	void update(double delta) {
-		for (auto iterator = _particles.begin(); iterator != _particles.end(); ++iterator) {
-			if (iterator->init.tock() > lifespan)
-				_particles.pop_front();
-			else
-				break;
-		}
-		if (lastGenerated.tock() >= particleRate) {
-			lastGenerated.tickForward(particleRate);
-			generate();
-		}
-	}
+	ParticleBatcher(Stamper* stamper, NumericRange<Kinematics<Vector2>> initialTranslational, NumericRange<Kinematics<double>> initialRotational, NumericRange<Kinematics<double>> initialSize);
+
+	std::deque<Particle>& getParticles();
+
+	void generate();
+	void update(double delta);
 
 	void draw(Image4& screen, const Rect2<double>& bounds);
 	void draw(SDL_Renderer* renderer, const Rect2<double>& bounds);

@@ -19,7 +19,6 @@ private:
     TileBatcher& operator=(TileBatcher&& rhs);
 
     SDL_Texture* createTexture(const Image4& image) const;
-    void updateTileTypeTextures();
 public:
     TileBatcher(SDL_Renderer* renderer);
     TileBatcher(TileBatcher&& rhs);
