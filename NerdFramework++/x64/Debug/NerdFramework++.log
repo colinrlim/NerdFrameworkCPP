@@ -1,10 +1,68 @@
 ﻿  AnimationStamper.cpp
-  shooter.cpp
-  MaterialManager.cpp
-  RaySpherical.cpp
+  BoundingShape3.cpp
+  Box3.cpp
+  Button.cpp
+  CameraRay3.cpp
+  Canvas.cpp
+  Color3.cpp
+  Color4.cpp
+  Enemy.cpp
+  Entity.cpp
+  Frame.cpp
+  GameState.cpp
+  Image3.cpp
+  Image4.cpp
+  ImageLabel.cpp
+  ImageParser.cpp
+  ImageStamper.cpp
+  Interface.cpp
+  Line3.cpp
   Material.cpp
+  Generating Code...
+  Compiling...
+  MaterialManager.cpp
+  Mesh.cpp
+  MeshParser.cpp
+  MeshQuad3.cpp
+  MeshTriangle3.cpp
+  PacmanToolbox.cpp
+  PaletteAnimationStamper.cpp
+  PaletteImage.cpp
+  PaletteImageStamper.cpp
+  PaletteParticleBatcher.cpp
+  PaletteTileBatcher.cpp
+  ParticleBatcher.cpp
+  Plane3.cpp
+  Player.cpp
+  Quad3.cpp
+  Ray3.cpp
+  RayCaster.cpp
+  RayRadial.cpp
+  RayRectangular.cpp
+  RaySpherical.cpp
+  Generating Code...
+  Compiling...
+  RenderData3.cpp
+  RenderData4.cpp
+  Renderer2.cpp
+  Renderer3.cpp
+  Sphere3.cpp
+  TileBatcher.cpp
+  Triangle2.cpp
+  Triangle3.cpp
+  UDim2.cpp
+  UDimRect2.cpp
+  UIObject.cpp
   Vector2.cpp
   Vector2i.cpp
   Vector3.cpp
+  Vector3s.cpp
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(117,22): warning C4566: character represented by universal-character-name '\u03C1' cannot be represented in the current code page (1252)
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(117,45): warning C4566: character represented by universal-character-name '\u03D5' cannot be represented in the current code page (1252)
+C:\Users\harry\Documents\NerdFramework++\NerdFramework++\Vector3s.cpp(117,68): warning C4566: character represented by universal-character-name '\u03B8' cannot be represented in the current code page (1252)
+  Vector4.cpp
+  main.cpp
+  pacman.cpp
+  shooter.cpp
   Generating Code...
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe

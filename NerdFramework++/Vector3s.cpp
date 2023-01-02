@@ -61,7 +61,6 @@ void Vector3s::rotateZenith(double radians) {
 void Vector3s::rotatePolar(double radians) {
     theta += radians;
 }
-
 Vector3s Vector3s::rotatedZenith(double radians) const {
     Vector3s newVec(rho, phi + radians, theta);
     return newVec;
@@ -69,6 +68,35 @@ Vector3s Vector3s::rotatedZenith(double radians) const {
 Vector3s Vector3s::rotatedPolar(double radians) const {
     Vector3s newVec(rho, phi, theta + radians);
     return newVec;
+}
+
+template <typename iter>
+void rotateZenith(iter begin, iter end, double radians) {
+    while (begin != end) {
+        begin->rotateZenith(radians);
+        ++begin;
+    }
+}
+template <typename iter>
+void rotatePolar(iter begin, iter end, double radians) {
+    while (begin != end) {
+        begin->rotatePolar(radians);
+        ++begin;
+    }
+}
+template <typename iter, typename d_iter>
+void rotatedZenith(iter begin, iter end, d_iter dest, double radians) {
+    while (begin != end) {
+        *dest = begin->rotatedZenith(radians);
+        ++begin;
+    }
+}
+template <typename iter, typename d_iter>
+void rotatedPolar(iter begin, iter end, d_iter dest, double radians) {
+    while (begin != end) {
+        *dest = begin->rotatedPolar(radians);
+        ++begin;
+    }
 }
 
 Vector3s Vector3s::min(const Vector3s& a, const Vector3s& b) {

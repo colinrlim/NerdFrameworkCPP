@@ -23,6 +23,15 @@ struct Vector3s
 	Vector3s rotatedZenith(double radians) const;
 	Vector3s rotatedPolar(double radians) const;
 
+	template <typename iter>
+	static void rotateZenith(iter begin, iter end, double radians);
+	template <typename iter>
+	static void rotatePolar(iter begin, iter end, double radians);
+	template <typename iter, typename d_iter>
+	static void rotatedZenith(iter begin, iter end, d_iter dest, double radians);
+	template <typename iter, typename d_iter>
+	static void rotatedPolar(iter begin, iter end, d_iter dest, double radians);
+
 	static Vector3s min(const Vector3s& a, const Vector3s& b);
 	static Vector3s fromRandom(const Vector3s& min, const Vector3s& max);
 };

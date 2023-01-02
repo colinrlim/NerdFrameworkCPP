@@ -32,7 +32,7 @@ Vector2 Vector2::rotated(double radians) const {
 }
 
 template <typename iter>
-static void Vector2::rotate(iter begin, iter end, double radians) {
+void Vector2::rotate(iter begin, iter end, double radians) {
 	const double s = Math::sin(radians);
 	const double c = Math::cos(radians);
 
@@ -46,7 +46,7 @@ static void Vector2::rotate(iter begin, iter end, double radians) {
 	}
 }
 template <typename iter, typename d_iter>
-static void Vector2::rotated(iter begin, iter end, d_iter dest, double radians) {
+void Vector2::rotated(iter begin, iter end, d_iter dest, double radians) {
 	const double s = Math::sin(radians);
 	const double c = Math::cos(radians);
 

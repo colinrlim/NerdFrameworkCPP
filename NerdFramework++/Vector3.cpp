@@ -117,7 +117,7 @@ void Vector3::rotateAbout(const Vector3& rotand, double radians) {
 }
 
 template <typename iter>
-static void Vector3::rotateX(iter begin, iter end, double radians) {
+void Vector3::rotateX(iter begin, iter end, double radians) {
     const double s = Math::sin(radians);
     const double c = Math::cos(radians);
 
@@ -131,7 +131,7 @@ static void Vector3::rotateX(iter begin, iter end, double radians) {
     }
 }
 template <typename iter>
-static void Vector3::rotateY(iter begin, iter end, double radians) {
+void Vector3::rotateY(iter begin, iter end, double radians) {
     const double s = Math::sin(radians);
     const double c = Math::cos(radians);
 
@@ -145,7 +145,7 @@ static void Vector3::rotateY(iter begin, iter end, double radians) {
     }
 }
 template <typename iter>
-static void Vector3::rotateZ(iter begin, iter end, double radians) {
+void Vector3::rotateZ(iter begin, iter end, double radians) {
     const double s = Math::sin(radians);
     const double c = Math::cos(radians);
 
@@ -159,7 +159,7 @@ static void Vector3::rotateZ(iter begin, iter end, double radians) {
     }
 }
 template <typename iter>
-static void Vector3::rotate(iter begin, iter end, double r1, double r2, double r3) {
+void Vector3::rotate(iter begin, iter end, double r1, double r2, double r3) {
     if (Math::abs(r1) > 0.0001)
         rotateX(begin, end, r1);
     if (Math::abs(r2) > 0.0001)
@@ -169,7 +169,7 @@ static void Vector3::rotate(iter begin, iter end, double r1, double r2, double r
 }
 
 template <typename iter, typename d_iter>
-static void Vector3::rotatedX(iter begin, iter end, d_iter dest, double radians) {
+void Vector3::rotatedX(iter begin, iter end, d_iter dest, double radians) {
     const double s = Math::sin(radians);
     const double c = Math::cos(radians);
 
@@ -184,7 +184,7 @@ static void Vector3::rotatedX(iter begin, iter end, d_iter dest, double radians)
     }
 }
 template <typename iter, typename d_iter>
-static void Vector3::rotatedY(iter begin, iter end, d_iter dest, double radians) {
+void Vector3::rotatedY(iter begin, iter end, d_iter dest, double radians) {
     const double s = Math::sin(radians);
     const double c = Math::cos(radians);
 
@@ -199,7 +199,7 @@ static void Vector3::rotatedY(iter begin, iter end, d_iter dest, double radians)
     }
 }
 template <typename iter, typename d_iter>
-static void Vector3::rotatedZ(iter begin, iter end, d_iter dest, double radians) {
+void Vector3::rotatedZ(iter begin, iter end, d_iter dest, double radians) {
     const double s = Math::sin(radians);
     const double c = Math::cos(radians);
 
@@ -214,7 +214,7 @@ static void Vector3::rotatedZ(iter begin, iter end, d_iter dest, double radians)
     }
 }
 template <typename iter, typename d_iter>
-static void Vector3::rotated(iter begin, iter end, d_iter dest, double r1, double r2, double r3) {
+void Vector3::rotated(iter begin, iter end, d_iter dest, double r1, double r2, double r3) {
     if (Math::abs(r1) > 0.0001)
         rotatedX(begin, end, dest, r1);
     if (Math::abs(r2) > 0.0001)
