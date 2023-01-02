@@ -1,12 +1,10 @@
-﻿  Enemy.cpp
-  Entity.cpp
-  GameState.cpp
-  PacmanToolbox.cpp
-  PaletteTileBatcher.cpp
-  ParticleBatcher.cpp
-  PaletteParticleBatcher.cpp
-  main.cpp
-  TileBatcher.cpp
-  pacman.cpp
+﻿  AnimationStamper.cpp
+  shooter.cpp
+  MaterialManager.cpp
+  RaySpherical.cpp
+  Material.cpp
+  Vector2.cpp
+  Vector2i.cpp
+  Vector3.cpp
   Generating Code...
   NerdFramework++.vcxproj -> C:\Users\harry\Documents\NerdFramework++\x64\Debug\NerdFrameworkCPP.exe

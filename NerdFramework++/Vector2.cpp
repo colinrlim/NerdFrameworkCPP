@@ -43,7 +43,6 @@ static void Vector2::rotate(iter begin, iter end, double radians) {
 		vec.x = newX;
 		vec.y = newY;
 		++begin;
-		++dest;
 	}
 }
 template <typename iter, typename d_iter>
