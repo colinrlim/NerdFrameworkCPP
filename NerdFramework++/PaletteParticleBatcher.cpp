@@ -49,11 +49,12 @@ void PaletteParticleBatcher::update(double delta) {
 		else
 			break;
 	}
-	for (auto iterator = _particles.begin(); iterator != _particles.end(); ++iterator) {
+	for (auto iterator = _particles.begin(); iterator != _particles.end(); ++iterator)
 		iterator->update(delta);
-	}
-	while (lastGenerated.tock() >= particleRate) {
+	double tock = lastGenerated.tock();
+	while (tock >= particleRate) {
 		lastGenerated.tickForward(particleRate);
+		tock -= particleRate;
 		generate();
 	}
 }
