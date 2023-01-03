@@ -148,7 +148,7 @@ int main() {
         std::cout << (short)grid.get(3, 3) << std::endl;
 
         Kinematics<Vector2> position;
-        Kinematics<double> size(1.0, 0.1, 500.0);
+        Kinematics<double> size(3.0, 0.1, 50.0);
         ParticleBatcher* particleBatcher;
 
         Interface interface([&](Interface& interface, SDL_Renderer* renderer)-> void{
@@ -167,11 +167,11 @@ int main() {
             Image4 test(1, 1, Color4::red);
             imageStamper = new ImageStamper(renderer, std::move(test));
             particleBatcher = new ParticleBatcher(paletteImageStamper, NumericRange<Kinematics<Vector2>>(
-                Kinematics<Vector2>(Vector2(0, 0), Vector2(-100, 0), Vector2(0, 0)),
-                Kinematics<Vector2>(Vector2(0, 0), Vector2(100, 0), Vector2(0, 0))
+                Kinematics<Vector2>(Vector2(100, 0), Vector2(-100, -10), Vector2(0, 0)),
+                Kinematics<Vector2>(Vector2(100, 0), Vector2(100, 10), Vector2(0, 0))
             ), NumericRange<Kinematics<double>>(
-                Kinematics<double>(0, -100, -5),
-                Kinematics<double>(0, 100, 5)
+                Kinematics<double>(0, -10, -1),
+                Kinematics<double>(0, 10, 1)
             ), size);
             particleBatcher->particleRate = 0.001;
             particleBatcher->position = Vector2(200, 200);
