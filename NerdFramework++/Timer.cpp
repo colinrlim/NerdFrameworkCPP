@@ -5,9 +5,11 @@ Timer::Timer() : _offset() { }
 
 void Timer::tickTo(std::chrono::steady_clock::time_point timepoint) {
 	_init = timepoint;
+	_offset = 0.0;
 }
 void Timer::tickNow() {
 	_init = std::chrono::steady_clock::now();
+	_offset = 0.0;
 }
 void Timer::tickForward(double seconds) {
 	_offset += seconds;
