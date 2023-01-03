@@ -15,10 +15,12 @@ void PaletteParticleBatcher::Particle::update(double delta) {
 }
 
 const Rect2<double> PaletteParticleBatcher::getBounds(const Rect2<double>& bounds, const Particle& particle) const {
+	const double particleWidth = bounds.width * particle.size.displacement;
+	const double particleHeight = bounds.height * particle.size.displacement;
 	if (particleLockedToBatcher)
-		return Rect2<double>(position.x + particle.position.displacement.x, position.y + particle.position.displacement.y, bounds.width * particle.size.displacement, bounds.height * particle.size.displacement);
+		return Rect2<double>(position.x + particle.position.displacement.x - particleWidth / 2.0, position.y + particle.position.displacement.y - particleHeight / 2.0, particleWidth, particleHeight);
 	else
-		return Rect2<double>(particle.position.displacement.x, particle.position.displacement.y, bounds.width * particle.size.displacement, bounds.height * particle.size.displacement);
+		return Rect2<double>(particle.position.displacement.x - particleWidth / 2.0, particle.position.displacement.y - particleHeight / 2.0, particleWidth, particleHeight);
 }
 
 PaletteParticleBatcher::PaletteParticleBatcher(PaletteStamper* stamper, NumericRange<Kinematics<Vector2>> initialTranslational, NumericRange<Kinematics<double>> initialRotational, NumericRange<Kinematics<double>> initialSize) :
