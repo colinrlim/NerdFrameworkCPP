@@ -31,7 +31,9 @@ ParticleBatcher::ParticleBatcher(Stamper* stamper, NumericRange<Kinematics<Vecto
 	particleRate(0.1),
 	particleLifespan(4.0),
 	particleLockedToBatcher(false)
-{ }
+{
+	lastGenerated.tickNow();
+}
 
 std::deque<ParticleBatcher::Particle>& ParticleBatcher::getParticles() {
 	return _particles;

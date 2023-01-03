@@ -31,7 +31,9 @@ PaletteParticleBatcher::PaletteParticleBatcher(PaletteStamper* stamper, NumericR
 	particleRate(0.1),
 	particleLifespan(4.0),
 	particleLockedToBatcher(false)
-{ }
+{
+	lastGenerated.tickNow();
+}
 
 std::deque<PaletteParticleBatcher::Particle>& PaletteParticleBatcher::getParticles() {
 	return _particles;
