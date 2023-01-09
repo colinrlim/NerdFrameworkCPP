@@ -40,8 +40,7 @@ double Math::fromParameterization3(double t, double s, double a, double b, doubl
     return a * (1.0 - t - s) + b * t + c * s;
 }
 double Math::random(double min, double max) {
-    const double random = ((double)rand()) / (double)RAND_MAX;
-    return random * (max - min) + min;
+    return Math::random((int)(min * 1000.0), (int)(max * 1000.0)) / 1000.0;
 }
 int Math::random(int min, int max) {
     if (min == max)

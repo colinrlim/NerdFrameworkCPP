@@ -46,7 +46,7 @@ void ParticleBatcher::generate() {
 }
 void ParticleBatcher::update(double delta) {
 	while (!_particles.empty()) {
-		if (_particles.begin()->init.tock() > particleLifespan)
+		if (_particles.front().init.tock() > particleLifespan)
 			_particles.pop_front();
 		else
 			break;

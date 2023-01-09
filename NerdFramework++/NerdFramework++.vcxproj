@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimationStamper.h" />
+    <ClInclude Include="beatblitz.h" />
     <ClInclude Include="BinaryGrid2.h" />
     <ClInclude Include="BoundingShape3.h" />
     <ClInclude Include="Box3.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="ColorSequence4.h" />
     <ClInclude Include="Kinematics.h" />
     <ClInclude Include="NumericRange.h" />
+    <ClInclude Include="painter.h" />
     <ClInclude Include="PaletteParticleBatcher.h" />
     <ClInclude Include="ParticleBatcher.h" />
     <ClInclude Include="shooter.h" />

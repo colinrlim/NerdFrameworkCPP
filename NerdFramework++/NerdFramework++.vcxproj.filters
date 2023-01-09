@@ -675,6 +675,12 @@
     <ClInclude Include="PaletteParticleBatcher.h">
       <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher</Filter>
     </ClInclude>
+    <ClInclude Include="beatblitz.h">
+      <Filter>Unflitered\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="painter.h">
+      <Filter>Unflitered\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Vector2.cpp">

@@ -17,7 +17,8 @@
 #include "ParticleBatcher.h"
 
 int main() {
-	PaletteImage ghost_right(16, 16, std::vector<uint8_t>{
+    launch();
+	/*PaletteImage ghost_right(16, 16, std::vector<uint8_t>{
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -228,5 +229,5 @@ int main() {
 
     SDL_Quit();
 
-	return 0;
+	return 0;*/
 }

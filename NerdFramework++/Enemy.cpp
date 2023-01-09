@@ -11,8 +11,6 @@ void Enemy::updateDirection() {
 
 	bool upValid = isDirectionValid(DIRECTION_UP) && _direction != DIRECTION_DOWN
 		&& _position != RESTRICTED_TILE1 && _position != RESTRICTED_TILE2 && _position != RESTRICTED_TILE3 && _position != RESTRICTED_TILE4;
-	if ((_position == RESTRICTED_TILE1))
-		std::cout << "wa";
 	bool leftValid = isDirectionValid(DIRECTION_LEFT) && _direction != DIRECTION_RIGHT;
 	bool downValid = isDirectionValid(DIRECTION_DOWN) && _direction != DIRECTION_UP;
 	bool rightValid = isDirectionValid(DIRECTION_RIGHT) && _direction != DIRECTION_LEFT;
@@ -43,7 +41,6 @@ void Enemy::updateDirection() {
 
 	const Vector2i positionTileVector(_position);
 	const Vector2i targetTileVector(_targetTile);
-	std::cout << (targetTileVector.toInteger() == _targetTile);
 
 	double upDist;
 	double leftDist;
