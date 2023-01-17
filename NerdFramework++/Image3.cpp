@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Image3.h"
 #include "Math.h"
 
@@ -192,5 +193,33 @@ void Image3::modify(const std::function<void(size_t, size_t, void*)>& func) {
 		x = 0;
 		y++;
 		pixel = this->pixelAt(x, y);
+	}
+}
+
+void Image3::flipHorizontally() {
+	for (int i = 0; i < _height; i++)
+		Image3::reverse(data + i * _width * 3, data + (i + 1) * _width * 3);
+}
+void Image3::flipVertically() {
+	for (int i = 0; i < _height / 2; i++)
+		Image3::swap_ranges(data + i * _width * 3, data + (i + 1) * _width * 3, data + (_height - 1 - i) * _width * 3);
+}
+void Image3::flipBoth() {
+	Image3::reverse(data, data + _width * _height * 3);
+}
+
+void Image3::reverse(uint8_t* first, uint8_t* last) {
+	last -= 3;
+	while (first < last) {
+		std::swap_ranges(first, first + 3, last);
+		first += 3;
+		last -= 3;
+	}
+}
+void Image3::swap_ranges(uint8_t* first1, uint8_t* last1, uint8_t* first2) {
+	while (first1 != last1) {
+		std::swap_ranges(first1, first1 + 3, first2);
+		first1 += 3;
+		first2 += 3;
 	}
 }

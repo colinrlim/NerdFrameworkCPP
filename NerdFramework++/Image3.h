@@ -44,5 +44,12 @@ public:
 	Color3 atParameterization(double t, double s) const;
 	void modify(const std::function<void(void*)>& func);
 	void modify(const std::function<void(size_t, size_t, void*)>& func);
+
+	void flipHorizontally();
+	void flipVertically();
+	void flipBoth();
+
+	static void reverse(uint8_t* first, uint8_t* last);
+	static void swap_ranges(uint8_t* first1, uint8_t* last1, uint8_t* first2);
 };
 

@@ -1,5 +1,6 @@
 #include "Image4.h"
 #include "Math.h"
+#include <algorithm>
 #include <iostream>
 
 Image4::Image4() :
@@ -212,4 +213,19 @@ void Image4::modify(const std::function<void(size_t, size_t, void*)>& func) {
 		y++;
 		pixel = this->pixelAt(x, y);
 	}
+}
+
+void Image4::flipHorizontally() {
+	uint32_t* castedData = (uint32_t*)data;
+	for (int i = 0; i < _height; i++)
+		std::reverse(castedData + i * _width, castedData + (i + 1) * _width);
+}
+void Image4::flipVertically() {
+	uint32_t* castedData = (uint32_t*)data;
+	for (int i = 0; i < _height / 2; i++)
+		std::swap_ranges(castedData + i * _width, castedData + (i + 1) * _width, castedData + (_height - 1 - i) * _width);
+}
+void Image4::flipBoth() {
+	uint32_t* castedData = (uint32_t*)data;
+	std::reverse(castedData, castedData + _width * _height);
 }

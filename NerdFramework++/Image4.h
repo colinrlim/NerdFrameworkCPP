@@ -46,5 +46,9 @@ public:
 	Color4 atParameterization(double t, double s) const;
 	void modify(const std::function<void(void*)>& func);
 	void modify(const std::function<void(size_t, size_t, void*)>& func);
+
+	void flipHorizontally();
+	void flipVertically();
+	void flipBoth();
 };
 

@@ -1282,7 +1282,6 @@ void launch() {
 	}
 	else
 	{
-
 		Interface interface(SDL_CreateWindow("Pac-Man", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 28 * 16, 36 * 16, 0), [&](Interface& interface, SDL_Renderer* renderer)-> void {
 			toolbox.tileBatcher = new PaletteTileBatcher(renderer);
 
