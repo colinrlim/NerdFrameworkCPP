@@ -1,9 +1,10 @@
 #include "ParticleBatcher.h"
 
-ParticleBatcher::Particle::Particle(const Kinematics<Vector2>& position, const Kinematics<double>& rotation, const Kinematics<double>& size) :
+ParticleBatcher::Particle::Particle(const Kinematics<Vector2>& position, const Kinematics<double>& rotation, const Kinematics<double>& size, Particle* next) :
 	position(position),
 	rotation(rotation),
-	size(size)
+	size(size),
+	next(next)
 {
 	init.tickNow();
 }
@@ -35,24 +36,38 @@ ParticleBatcher::ParticleBatcher(Stamper* stamper, NumericRange<Kinematics<Vecto
 	lastGenerated.tickNow();
 }
 
-std::deque<ParticleBatcher::Particle>& ParticleBatcher::getParticles() {
-	return _particles;
+ParticleBatcher::Particle* ParticleBatcher::getFront() {
+	return _front;
+}
+ParticleBatcher::Particle* ParticleBatcher::getBack() {
+	return _back;
 }
 
 void ParticleBatcher::generate() {
-	_particles.push_back(Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max)));
+	if (_back) {
+		_back = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max), _back);
+	} else {
+		_front = _back = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max));
+	}
 	if (!particleLockedToBatcher)
-		_particles.rbegin()->position.displacement += position;
+		_back->position.displacement += position;
 }
 void ParticleBatcher::update(double delta) {
-	while (!_particles.empty()) {
-		if (_particles.front().init.tock() > particleLifespan)
-			_particles.pop_front();
-		else
+	while (_front) {
+		if (_front->init.tock() > particleLifespan) {
+			Particle* temp = _front;
+			_front = _front->next;
+			if (_back == temp)
+				_back = nullptr;
+			delete temp;
+		} else
 			break;
 	}
-	for (auto iterator = _particles.begin(); iterator != _particles.end(); ++iterator)
+	Particle* iterator = _front;
+	while (iterator) {
 		iterator->update(delta);
+		iterator = iterator->next;
+	}
 	double tock = lastGenerated.tock();
 	while (tock >= particleRate) {
 		lastGenerated.tickForward(particleRate);
@@ -62,14 +77,18 @@ void ParticleBatcher::update(double delta) {
 }
 
 void ParticleBatcher::draw(Image4& screen, const Rect2<double>& bounds) {
-	for (auto iterator = _particles.begin(); iterator != _particles.end(); ++iterator) {
+	Particle* iterator = _front;
+	while (iterator) {
 		const Particle& particle = *iterator;
 		stamper->draw(screen, getBounds(bounds, particle), particle.rotation.displacement, rotationOrigin, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::STRETCH);
+		iterator = particle.next;
 	}
 }
 void ParticleBatcher::draw(SDL_Renderer* renderer, const Rect2<double>& bounds) {
-	for (auto iterator = _particles.begin(); iterator != _particles.end(); ++iterator) {
+	Particle* iterator = _front;
+	while (iterator) {
 		const Particle& particle = *iterator;
 		stamper->draw(renderer, getBounds(bounds, particle), particle.rotation.displacement, rotationOrigin, Stamper::ImageFlipOptions::FLIP_NONE, Stamper::ImageScaleType::STRETCH);
+		iterator = particle.next;
 	}
 }

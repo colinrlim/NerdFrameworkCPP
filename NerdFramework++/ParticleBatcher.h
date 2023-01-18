@@ -1,6 +1,5 @@
 #pragma once
 
-#include <queue>
 #include "ColorSequence4.h"
 #include "NumericRange.h"
 #include "Kinematics.h"
@@ -11,17 +10,20 @@
 class ParticleBatcher {
 public:
 	struct Particle {
+		Particle* next;
+
 		Timer init;
 		Kinematics<Vector2> position;
 		Kinematics<double> rotation;
 		Kinematics<double> size;
 
-		Particle(const Kinematics<Vector2>& position, const Kinematics<double>& rotation, const Kinematics<double>& size);
+		Particle(const Kinematics<Vector2>& position, const Kinematics<double>& rotation, const Kinematics<double>& size, Particle* next = nullptr);
 
 		void update(double delta);
 	};
 private:
-	std::deque<Particle> _particles;
+	Particle* _front;
+	Particle* _back;
 
 	const Rect2<double> getBounds(const Rect2<double>& bounds, const Particle& particle) const;
 public:
@@ -43,7 +45,8 @@ public:
 
 	ParticleBatcher(Stamper* stamper, NumericRange<Kinematics<Vector2>> initialTranslational, NumericRange<Kinematics<double>> initialRotational, NumericRange<Kinematics<double>> initialSize);
 
-	std::deque<Particle>& getParticles();
+	Particle* getFront();
+	Particle* getBack();
 
 	void generate();
 	void update(double delta);
