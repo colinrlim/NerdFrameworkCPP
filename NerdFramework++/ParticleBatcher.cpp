@@ -1,4 +1,5 @@
 #include "ParticleBatcher.h"
+#include <iostream>
 
 ParticleBatcher::Particle::Particle(const Kinematics<Vector2>& position, const Kinematics<double>& rotation, const Kinematics<double>& size, Particle* next) :
 	position(position),
@@ -31,7 +32,9 @@ ParticleBatcher::ParticleBatcher(Stamper* stamper, NumericRange<Kinematics<Vecto
 	initialSize(initialSize),
 	particleRate(0.1),
 	particleLifespan(4.0),
-	particleLockedToBatcher(false)
+	particleLockedToBatcher(false),
+	_front(nullptr),
+	_back(nullptr)
 {
 	lastGenerated.tickNow();
 }
@@ -45,7 +48,8 @@ ParticleBatcher::Particle* ParticleBatcher::getBack() {
 
 void ParticleBatcher::generate() {
 	if (_back) {
-		_back = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max), _back);
+		_back->next = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max));
+		_back = _back->next;
 	} else {
 		_front = _back = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max));
 	}
@@ -68,10 +72,8 @@ void ParticleBatcher::update(double delta) {
 		iterator->update(delta);
 		iterator = iterator->next;
 	}
-	double tock = lastGenerated.tock();
-	while (tock >= particleRate) {
+	for (double tock = lastGenerated.tock(); tock >= particleRate; tock -= particleRate) {
 		lastGenerated.tickForward(particleRate);
-		tock -= particleRate;
 		generate();
 	}
 }

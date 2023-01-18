@@ -15,7 +15,6 @@
 #include "PaletteImageStamper.h"
 #include "ImageStamper.h"
 #include "ParticleBatcher.h"
-#include "PaletteParticleBatcher.h"
 
 int main() {
     //launch();
@@ -151,7 +150,7 @@ int main() {
 
         Kinematics<Vector2> position;
         Kinematics<double> size(3.0, 0.1, 50.0);
-        PaletteParticleBatcher* particleBatcher;
+        ParticleBatcher* particleBatcher;
 
         Interface interface([&](Interface& interface, SDL_Renderer* renderer)-> void{
             interface.frame.setColor(Color3::blue);
@@ -168,7 +167,7 @@ int main() {
             paletteImageStamper->defaultPalette = &palettes[5];
             Image4 test(1, 1, Color4::red);
             imageStamper = new ImageStamper(renderer, std::move(test));
-            particleBatcher = new PaletteParticleBatcher(paletteImageStamper, NumericRange<Kinematics<Vector2>>(
+            particleBatcher = new ParticleBatcher(paletteImageStamper, NumericRange<Kinematics<Vector2>>(
                 Kinematics<Vector2>(Vector2(100, 0), Vector2(-100, -10), Vector2(0, 0)),
                 Kinematics<Vector2>(Vector2(100, 0), Vector2(100, 10), Vector2(0, 0))
             ), NumericRange<Kinematics<double>>(
@@ -200,10 +199,6 @@ int main() {
             SDL_Delay(1000 / 60);
         };
 
-        Timer timer;
-        timer.tickNow();
-        int frames = 0;
-
         if (interface.window == nullptr)
         {
             printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -227,12 +222,6 @@ int main() {
 
                 interface.update();
                 interface.drawSDL();
-                frames++;
-                if (timer.tock() > 1.0) {
-                    std::cout << frames / timer.tock() << std::endl;
-                    timer.tickForward(1.0);
-                    frames = 0;
-                }
             }
         }
         delete batcher;

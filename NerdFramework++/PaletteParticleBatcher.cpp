@@ -48,7 +48,8 @@ PaletteParticleBatcher::Particle* PaletteParticleBatcher::getBack() {
 
 void PaletteParticleBatcher::generate() {
 	if (_back) {
-		_back = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max), _back);
+		_back->next = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max));
+		_back = _back->next;
 	} else {
 		_front = _back = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max));
 	}
@@ -71,10 +72,8 @@ void PaletteParticleBatcher::update(double delta) {
 		iterator->update(delta);
 		iterator = iterator->next;
 	}
-	double tock = lastGenerated.tock();
-	while (tock >= particleRate) {
+	for (double tock = lastGenerated.tock(); tock >= particleRate; tock -= particleRate) {
 		lastGenerated.tickForward(particleRate);
-		tock -= particleRate;
 		generate();
 	}
 }
