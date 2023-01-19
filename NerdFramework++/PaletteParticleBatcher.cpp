@@ -47,7 +47,7 @@ PaletteParticleBatcher::Particle* PaletteParticleBatcher::getBack() {
 }
 
 void PaletteParticleBatcher::generate() {
-	if (_back) {
+	if (_front) {
 		_back->next = new Particle(Kinematics<Vector2>::fromRandom(initialTranslational.min, initialTranslational.max), Kinematics<double>::fromRandomArithmetic(initialRotational.min, initialRotational.max), Kinematics<double>::fromRandomArithmetic(initialSize.min, initialSize.max));
 		_back = _back->next;
 	} else {
@@ -61,8 +61,6 @@ void PaletteParticleBatcher::update(double delta) {
 		if (_front->init.tock() > particleLifespan) {
 			Particle* temp = _front;
 			_front = _front->next;
-			if (_back == temp)
-				_back = nullptr;
 			delete temp;
 		} else
 			break;
