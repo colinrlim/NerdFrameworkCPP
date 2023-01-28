@@ -385,6 +385,9 @@
     <Filter Include="Math\Kinematics">
       <UniqueIdentifier>{92a4e69f-67cb-4fb8-b244-4c78c19729ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Demos\NewFilter1">
+      <UniqueIdentifier>{8fcbe90a-0f75-443a-a91c-bbb0a0bec02d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -657,9 +660,6 @@
     <ClInclude Include="Button.h">
       <Filter>Interface2D\Button</Filter>
     </ClInclude>
-    <ClInclude Include="shooter.h">
-      <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleBatcher.h">
       <Filter>Interface2D\Stamper\Batcher\ParticleBatcher</Filter>
     </ClInclude>
@@ -675,11 +675,11 @@
     <ClInclude Include="PaletteParticleBatcher.h">
       <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher</Filter>
     </ClInclude>
-    <ClInclude Include="beatblitz.h">
-      <Filter>Unflitered\Header Files</Filter>
+    <ClInclude Include="ignore\shooter.h">
+      <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
     </ClInclude>
-    <ClInclude Include="painter.h">
-      <Filter>Unflitered\Header Files</Filter>
+    <ClInclude Include="Matrix.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -905,9 +905,6 @@
     <ClCompile Include="Tween.cpp">
       <Filter>Math\Services\Tween</Filter>
     </ClCompile>
-    <ClCompile Include="shooter.cpp">
-      <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
-    </ClCompile>
     <ClCompile Include="Vector4.cpp">
       <Filter>Math\4D\Vector4</Filter>
     </ClCompile>
@@ -919,6 +916,9 @@
     </ClCompile>
     <ClCompile Include="PaletteParticleBatcher.cpp">
       <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="ignore\shooter.cpp">
+      <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
