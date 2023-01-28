@@ -2,9 +2,14 @@
 
 #include <vector>
 #include <map>
+#include "Color3.h"
+#include "Color4.h"
 #include "Tween.h"
 
-// Only use this class with Color structs!!
+template <typename T>
+class ColorSequence;
+using ColorSequence3 = ColorSequence<Color3>;
+using ColorSequence4 = ColorSequence<Color4>;
 
 template <typename T>
 class ColorSequence
@@ -69,4 +74,3 @@ public:
         return T::lerp(step0->second, step1->second, (interpolant - step0->first) / (step1->first - step0->first));
     }
 };
-

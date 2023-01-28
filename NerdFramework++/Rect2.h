@@ -5,6 +5,12 @@
 #include "UDim2.h"
 
 template <typename T>
+struct Rect2;
+using IntRect2 = Rect2<int>;
+using FloatRect2 = Rect2<float>;
+using DoubleRect2 = Rect2<double>;
+
+template <typename T>
 struct Rect2
 {
     T x;

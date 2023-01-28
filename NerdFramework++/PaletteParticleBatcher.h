@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ColorSequence4.h"
+#include "ColorSequence.h"
 #include "PaletteStamper.h"
 #include "NumericRange.h"
 #include "Kinematics.h"

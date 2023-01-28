@@ -163,8 +163,6 @@
     <ClInclude Include="Color3.h" />
     <ClInclude Include="ColorSequence.h" />
     <ClInclude Include="Color4.h" />
-    <ClInclude Include="ColorSequence3.h" />
-    <ClInclude Include="ColorSequence4.h" />
     <ClInclude Include="ignore\shooter.h" />
     <ClInclude Include="Kinematics.h" />
     <ClInclude Include="Matrix.h" />
