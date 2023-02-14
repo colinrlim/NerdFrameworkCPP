@@ -379,8 +379,11 @@
     <Filter Include="Math\Kinematics">
       <UniqueIdentifier>{92a4e69f-67cb-4fb8-b244-4c78c19729ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Demos\NewFilter1">
+    <Filter Include="Demos\Detention">
       <UniqueIdentifier>{8fcbe90a-0f75-443a-a91c-bbb0a0bec02d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parsers\MathParser">
+      <UniqueIdentifier>{351356f0-3863-40f0-98e0-68ace524f2b5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -669,6 +672,12 @@
     <ClInclude Include="Matrix.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="ignore\Detention\game.h">
+      <Filter>Demos\Detention</Filter>
+    </ClInclude>
+    <ClInclude Include="MathParser.h">
+      <Filter>Parsers\MathParser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Vector2.cpp">
@@ -907,6 +916,15 @@
     </ClCompile>
     <ClCompile Include="ignore\shooter.cpp">
       <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
+    </ClCompile>
+    <ClCompile Include="ignore\Detention\game.cpp">
+      <Filter>Demos\Detention</Filter>
+    </ClCompile>
+    <ClCompile Include="ignore\template.cpp">
+      <Filter>Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="MathParser.cpp">
+      <Filter>Parsers\MathParser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

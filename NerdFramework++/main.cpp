@@ -10,14 +10,14 @@
 #include "Timer.h"
 #include "TileBatcher.h"
 
-#include "pacman.h"
+#include "ignore/Detention/game.h"
 #include "Math.h"
 #include "PaletteImageStamper.h"
 #include "ImageStamper.h"
 #include "ParticleBatcher.h"
 
 int main() {
-    //launch();
+    launch1();
 	PaletteImage ghost_right(16, 16, std::vector<uint8_t>{
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
