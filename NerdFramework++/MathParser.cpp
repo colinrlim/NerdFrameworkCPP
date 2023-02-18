@@ -1,4 +1,4 @@
-#include <stack>
+﻿#include <stack>
 #include <queue>
 #include "MathParser.h"
 #include "MathNode.h"
@@ -13,8 +13,10 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	case '-':
 		return Item(string, 1, 1, 2);
 	case '*':
+	case '×':
 		return Item(string, 2, 1, 3);
 	case '/':
+	case '÷':
 		return Item(string, 2, 1, 4);
 	case '%':
 		return Item(string, 3, 1, 5);
@@ -22,6 +24,8 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 		return Item(string, 3, 1, 6);
 	case '=':
 		return Item(string, 99, 1, 7);
+	case 'π':
+		return Item(string, -1, 1, -4);
 	}
 	if (size >= 6) {
 		if (string[0] == 'a' && string[1] == 'r' && string[2] == 'c') {
@@ -62,6 +66,8 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, 90, 3, 21);
 		else if (string[0] == 'm' && string[1] == 'i' && string[2] == 'n')
 			return Item(string, 90, 3, 22);
+		else if (string[0] == 'e' && string[1] == '_' && string[2] == '0')
+			return Item(string, -1, 3, -5);
 	}
 	if (size >= 2) {
 		if (string[0] == 'l' && string[1] == 'n')
