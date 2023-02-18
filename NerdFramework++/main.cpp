@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <SDL.h>
 #undef main
 #include "CaesarCipher.h"
@@ -21,8 +21,9 @@
 int main() {
     std::cout << (double)MathParser::toExpressionTree("((0.2*3^0.5)^2+(3^2^3/2^(1/2)))", 31)->getValue();
     std::cout << (double)MathParser::toExpressionTree("2+4/5*(5-3)^5^4", 15)->getValue();
-    MathParser::toExpressionTree("A+B/C*(D-A)^F^H", 15);
-    MathParser::toExpressionTree("A*(B+C*D)+E", 11);
+    std::cout << (double)MathParser::toExpressionTree("3+4*2/(1-5)^2^3", 15)->getValue();
+    //MathParser::toExpressionTree("A+B/C*(D-A)^F^H", 15);
+    //MathParser::toExpressionTree("A*(B+C*D)+E", 11);
     
     /*launch1();
 	PaletteImage ghost_right(16, 16, std::vector<uint8_t>{

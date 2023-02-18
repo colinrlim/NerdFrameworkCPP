@@ -234,3 +234,18 @@ struct LnNode : ContainerNode {
 		return std::log(inner->getValue());
 	}
 };
+
+struct MaxNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+
+	double getValue() {
+		return std::max(lhs->getValue(), rhs->getValue());
+	}
+};
+struct MinNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+
+	double getValue() {
+		return std::min(lhs->getValue(), rhs->getValue());
+	}
+};

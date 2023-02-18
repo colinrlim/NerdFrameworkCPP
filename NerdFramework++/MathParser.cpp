@@ -8,19 +8,19 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	switch (string[0]) {
 	case '(':
 	case ')':
-		return Item(string, 1, 1, 0);
+		return Item(string, 0, 1, 0);
 	case '+':
-		return Item(string, 2, 1, 1);
+		return Item(string, 1, 1, 1);
 	case '-':
-		return Item(string, 2, 1, 2);
+		return Item(string, 1, 1, 2);
 	case '*':
-		return Item(string, 3, 1, 3);
+		return Item(string, 2, 1, 3);
 	case '/':
-		return Item(string, 3, 1, 4);
+		return Item(string, 2, 1, 4);
 	case '%':
 		return Item(string, 3, 1, 5);
 	case '^':
-		return Item(string, 4, 1, 6);
+		return Item(string, 3, 1, 6);
 	case '=':
 		return Item(string, 99, 1, 7);
 	}
@@ -59,10 +59,16 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, 90, 3, 16);
 		else if (string[0] == 'l' && string[1] == 'o' && string[2] == 'g')
 			return Item(string, 90, 3, 17);
+		else if (string[0] == 'm' && string[1] == 'a' && string[2] == 'x')
+			return Item(string, 90, 3, 21);
+		else if (string[0] == 'm' && string[1] == 'i' && string[2] == 'n')
+			return Item(string, 90, 3, 22);
 	}
 	if (size >= 2) {
 		if (string[0] == 'l' && string[1] == 'n')
 			return Item(string, 90, 2, 18);
+		if (string[0] == 'p' && string[1] == 'i')
+			return Item(string, -1, 2, -2);
 	}
 	size_t i = 0;
 	while (i != size && ((string[i] >= '0' && string[i] <= '9') || string[i] == '.')) {
@@ -72,75 +78,81 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 }
 
 MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
+	
+	/* Transform string to postfix notation, using Shunting-Yard Algorithm */
 	std::stack<Item> stack;
 	std::queue<Item> queue;
 
 	size_t i = 0;
-	while (i != size) {
-		Item op = getNextOperator(string + i, size - i);
-		if (op.ptr[0] == '(') {
-			stack.push(op);
-			i += 1;
-			continue;
-		}
-		if (op.precedence > 0) {
-			if (!stack.empty()) {
-				if (op.ptr[0] == ')') {
-					while (!stack.empty()) {
-						if (stack.top().ptr[0] == '(') {
-							stack.pop();
-							break;
-						} else {
-							queue.push(stack.top());
-							stack.pop();
-						}
-					}
-				} else if (stack.top().precedence >= op.precedence && (stack.top().ptr[0] != '^' || op.ptr[0] != '^')) {
-					queue.push(stack.top());
-					stack.pop();
-				}
+	while (i != size) { // Tokenize string, iterate through all tokens
+		Item token = getNextOperator(string + i, size - i);
+		if (token.precedence < 0) // Token is a number
+			queue.push(token); // Push to queue
+		else if (token.precedence == 90 || token.ptr[0] == '(') // Token is a function or a left-parentheses
+			stack.push(token); // Push to stack
+		else if (token.precedence > 0) { // Token is an operator
+			// While top of stack exists and isn't a left-parentheses, and
+			//   the top of the stack has a higher precedence than the current token, or
+			//   the top of the stack and the current token has the same precedence and is left associative (not ^),
+			//   move it to the queue
+			// Afterwards, push the token to the stack
+			while ((!stack.empty() && stack.top().ptr[0] != '(')
+				&& (stack.top().precedence > token.precedence || (stack.top().precedence == token.precedence && token.ptr[0] != '^'))) {
+				queue.push(stack.top());
+				stack.pop();
 			}
-			if (op.ptr[0] != ')')
-				stack.push(op);
-		} else {
-			queue.push(op);
+			stack.push(token);
+		} else if (token.ptr[0] == ')') { // Token is a right-parentheses
+			// Keep moving the top of stack to the queue until the top of the stack is a left-parentheses
+			// Then discard both left and right parentheses
+			// If final top of stack is a function, push it to queue too
+			while (!stack.empty() && stack.top().ptr[0] != '(') {
+				queue.push(stack.top());
+				stack.pop();
+			}
+			if (stack.empty())
+				return nullptr;
+			stack.pop();
+			if (!stack.empty() && (stack.top().precedence == 90)) {
+				queue.push(stack.top());
+				stack.pop();
+			}
 		}
-		i += op.size;
+		i += token.size;
 	}
 
+	// Move whatever remains in the stack to the queue
 	while (!stack.empty()) {
+		if (stack.top().ptr[0] == '(')
+			return nullptr;
 		queue.push(stack.top());
 		stack.pop();
 	}
 
-	std::string result;
-	result.reserve(size);
-
-	std::queue<Item> queueCopy(queue);
-	while (!queueCopy.empty()) {
-		result.append(queueCopy.front().ptr, queueCopy.front().size);
-		queueCopy.pop();
-	}
-
-	std::cout << std::endl << result << std::endl;
-
 	std::stack<MathNode*> treeStack;
 
+	/* Transform postfix notation to expression tree */
 	while (!queue.empty()) {
 		char* ptr_end = (char*)queue.front().ptr + queue.front().size - 1;
-		if (queue.front().precedence < 0) {
-			if (queue.front().precedence == -1)
-				treeStack.push(new ValueNode(std::strtod(queue.front().ptr, &ptr_end)));
+		if (queue.front().precedence < 0) { // Token is a variable or number
+			if (queue.front().precedence == -1) // Token is a number
+				treeStack.push(new ValueNode(std::strtod(queue.front().ptr, &ptr_end))); // Parse and push to stack
+			/* Token is a constant */
 			else if (queue.front().ptr[0] == 'e')
 				treeStack.push(new E_Node());
-			else
+			else if (queue.front().ptr[0] == 'p')
+				treeStack.push(new PI_Node());
+			else // Token is a variable
 				treeStack.push(new VariableNode(std::string(queue.front().ptr, queue.front().size)));
-		} else {
-			if (queue.front().precedence == 90) {
+		} else { // Token is an operator or function
+			if (queue.front().precedence == 90 && queue.front().id <= 20) { // Token is a unary function
 				if (treeStack.empty())
 					return nullptr;
+				// Pop inner argument from stack
 				MathNode* inner = treeStack.top();
 				treeStack.pop();
+
+				/* Push operator or function node to stack, w/ inner argument */
 				switch (queue.front().id) {
 				case 8:
 					treeStack.push(new ArcSineNode(inner));
@@ -176,13 +188,16 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 					treeStack.push(new LnNode(inner));
 					break;
 				}
-			} else {
+			} else { // Token is an operator or bivariate function
 				if (treeStack.size() < 2)
 					return nullptr;
+				// Pop lhs and rhs arguments from stack
 				MathNode* rhs = treeStack.top();
 				treeStack.pop();
 				MathNode* lhs = treeStack.top();
 				treeStack.pop();
+
+				/* Push operator or function node to stack, w/ inner lhs and rhs arguments */
 				switch (queue.front().id) {
 				case 1:
 					treeStack.push(new AddNode(lhs, rhs));
@@ -205,11 +220,20 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				case 7:
 					treeStack.push(new EqualsNode(lhs, rhs));
 					break;
+				case 21:
+					treeStack.push(new MaxNode(lhs, rhs));
+					break;
+				case 22:
+					treeStack.push(new MinNode(lhs, rhs));
+					break;
 				}
 			}
 		}
+		// Iterate to next token in queue
 		queue.pop();
 	}
 
+	// There should now be only one node left in the stack, which is the head node
+	// > We did it boys
 	return treeStack.top();
 }
