@@ -18,26 +18,29 @@
 #include "MathParser.h"
 
 int main() {
-    std::cout << (double)MathParser::toExpressionTree("((0.2*3^0.5)^2+(3^2^3/2^(1/2)))", 31)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("2+4/5*(5-3)^5^4", 15)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("3+4*2/(1-5)^2^3", 15)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("e", 1)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("pi", 2)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("e0", 2)->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("((0.2*3^0.5)^2+(3^2^3/2^(1/2)))")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("2+4/5*(5-3)^5^4")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("3+4*2/(1-5)^2^3")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("e")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("pi")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("e0")->getValue() << std::endl;
     std::cout << std::endl << "yuh" << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("sinpi", 5)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("sin(pi)", 7)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("cos(pi)", 7)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("sin(0)", 6)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("cos(0)", 6)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("sinpi/2", 7)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("cospi/2", 7)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("sin(pi/4)", 9)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("cos(pi/4)", 9)->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("sinpi")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("sin(pi)")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("cos(pi)")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("sin(0)")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("cos(0)")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("sinpi/2")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("cospi/2")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("sin(pi/4)")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("cos(pi/4)")->getValue() << std::endl;
     std::cout << "nah" << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("max(3,2)", 8)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("min(3,2)", 8)->getValue() << std::endl;
-    std::cout << (double)MathParser::toExpressionTree("sin(min(2,3)/3*pi)", 18)->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("max(3,2)")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("min(3,2)")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("sin(min(2,3)/3*pi)")->getValue() << std::endl;
+
+    std::cout << (double)MathParser::toExpressionTree("(2^10+162)%256")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("mod(1100,256)")->getValue() << std::endl;
     //MathParser::toExpressionTree("A+B/C*(D-A)^F^H", 15);
     //MathParser::toExpressionTree("A*(B+C*D)+E", 11);
     

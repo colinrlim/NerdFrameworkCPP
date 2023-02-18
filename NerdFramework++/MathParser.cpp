@@ -77,6 +77,8 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, 90, 3, 22);
 		else if (strncmp(string, "e_0", 3) == 0)
 			return Item(string, -1, 3, -5);
+		else if (strncmp(string, "mod", 3) == 0)
+			return Item(string, 90, 3, 23);
 	}
 	if (size >= 2) {
 		if (strncmp(string, "ln", 2) == 0)
@@ -252,6 +254,9 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				case 22:
 					treeStack.push(new MinNode(lhs, rhs));
 					break;
+				case 23:
+					treeStack.push(new ModulusNode(lhs, rhs));
+					break;
 				}
 			}
 		}
@@ -262,4 +267,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 	// There should now be only one node left in the stack, which is the head node
 	// > We did it boys
 	return treeStack.top();
+}
+MathNode* MathParser::toExpressionTree(const char* string) {
+	return MathParser::toExpressionTree(string, std::strlen(string));
 }

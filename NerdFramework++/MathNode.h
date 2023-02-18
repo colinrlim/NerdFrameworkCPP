@@ -3,7 +3,6 @@
 #include <functional>
 #include <cmath>
 #include "VariableManager.h"
-#include <iostream>
 
 struct MathNode {
 	virtual double getValue() { return 0.0; }
@@ -15,7 +14,7 @@ struct MathNode {
 struct EndNode : MathNode {
 	EndNode() = default;
 
-	virtual double getValue() { return 0.0; }
+	virtual double getValue() { return 1.0; }
 
 	void traverse(std::function<void(MathNode*)> func) {
 		func(this);
