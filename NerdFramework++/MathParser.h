@@ -21,7 +21,9 @@ class MathParser {
 	static Item getNextOperator(const char* string, size_t size);
 public:
 	static MathNode* toExpressionTree(const char* string, size_t size);
-	static MathNode* toExpressionTree(const char* string);
+	inline static MathNode* toExpressionTree(const char* string) {
+		return MathParser::toExpressionTree(string, std::strlen(string));
+	}
 
 	static std::vector<std::string> getUnknowns(MathNode* head);
 	static double calculate(MathNode* head);
