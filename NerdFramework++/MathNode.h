@@ -3,6 +3,7 @@
 #include <functional>
 #include <cmath>
 #include "VariableManager.h"
+#include <iostream>
 
 struct MathNode {
 	virtual double getValue() { return 0.0; }
@@ -162,21 +163,24 @@ struct SineNode : ContainerNode {
 	using ContainerNode::ContainerNode;
 
 	double getValue() {
-		return std::sin(inner->getValue());
+		double result = std::sin(inner->getValue());
+		return std::abs(result) < 0.000000001 ? 0 : result;
 	}
 };
 struct CosineNode : ContainerNode {
 	using ContainerNode::ContainerNode;
 
 	double getValue() {
-		return std::cos(inner->getValue());
+		double result = std::cos(inner->getValue());
+		return std::abs(result) < 0.000000001 ? 0 : result;
 	}
 };
 struct TangentNode : ContainerNode {
 	using ContainerNode::ContainerNode;
 
 	double getValue() {
-		return std::tan(inner->getValue());
+		double result = std::tan(inner->getValue());
+		return std::abs(result) < 0.000000001 ? 0 : result;
 	}
 };
 struct ArcSineNode : ContainerNode {

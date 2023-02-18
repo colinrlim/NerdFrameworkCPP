@@ -27,54 +27,63 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	case 'π':
 		return Item(string, -1, 1, -4);
 	}
+	if (size >= 7) {
+		if (strncmp(string, "ceiling", 7) == 0)
+			return Item(string, 90, 7, 21);
+	}
 	if (size >= 6) {
-		if (string[0] == 'a' && string[1] == 'r' && string[2] == 'c') {
-			if (string[3] == 's' && string[4] == 'i' && string[5] == 'n')
+		if (strncmp(string, "arc", 3) == 0) {
+			if (strncmp(string + 3, "sin", 3) == 0)
 				return Item(string, 90, 6, 8);
-			else if (string[3] == 'c' && string[4] == 'o' && string[5] == 's')
+			else if (strncmp(string + 3, "cos", 3) == 0)
 				return Item(string, 90, 6, 9);
-			else if (string[3] == 't' && string[4] == 'a' && string[5] == 'n')
+			else if (strncmp(string + 3, "tan", 3) == 0)
 				return Item(string, 90, 6, 10);
 		}
 	}
+	if (size >= 5) {
+		if (strncmp(string, "floor", 5) == 0)
+			return Item(string, 90, 5, 22);
+	}
 	if (size >= 4) {
 		if (string[0] == 'a') {
-			if (string[1] == 's' && string[2] == 'i' && string[3] == 'n')
+			if (strncmp(string + 1, "sin", 3) == 0)
 				return Item(string, 90, 4, 8);
-			else if (string[1] == 'c' && string[2] == 'o' && string[3] == 's')
+			else if (strncmp(string + 1, "cos", 3) == 0)
 				return Item(string, 90, 4, 9);
-			else if (string[1] == 't' && string[2] == 'a' && string[3] == 'n')
+			else if (strncmp(string + 1, "tan", 3) == 0)
 				return Item(string, 90, 4, 10);
-		}
+		} else if (strncmp(string, "ceil", 3) == 0)
+			return Item(string, 90, 4, 21);
 	}
 	if (size >= 3) {
-		if (string[0] == 's' && string[1] == 'i' && string[2] == 'n')
+		if (strncmp(string, "sin", 3) == 0)
 			return Item(string, 90, 3, 11);
-		else if (string[0] == 'c' && string[1] == 'o' && string[2] == 's')
+		else if (strncmp(string, "cos", 3) == 0)
 			return Item(string, 90, 3, 12);
-		else if (string[0] == 't' && string[1] == 'a' && string[2] == 'n')
+		else if (strncmp(string, "tan", 3) == 0)
 			return Item(string, 90, 3, 13);
-		else if (string[0] == 'c' && string[1] == 's' && string[2] == 'c')
+		else if (strncmp(string, "csc", 3) == 0)
 			return Item(string, 90, 3, 14);
-		else if (string[0] == 's' && string[1] == 'e' && string[2] == 'c')
+		else if (strncmp(string, "sec", 3) == 0)
 			return Item(string, 90, 3, 15);
-		else if (string[0] == 'c' && string[1] == 'o' && string[2] == 't')
+		else if (strncmp(string, "cot", 3) == 0)
 			return Item(string, 90, 3, 16);
-		else if (string[0] == 'l' && string[1] == 'o' && string[2] == 'g')
+		else if (strncmp(string, "log", 3) == 0)
 			return Item(string, 90, 3, 17);
-		else if (string[0] == 'm' && string[1] == 'a' && string[2] == 'x')
+		else if (strncmp(string, "max", 3) == 0)
 			return Item(string, 90, 3, 21);
-		else if (string[0] == 'm' && string[1] == 'i' && string[2] == 'n')
+		else if (strncmp(string, "min", 3) == 0)
 			return Item(string, 90, 3, 22);
-		else if (string[0] == 'e' && string[1] == '_' && string[2] == '0')
+		else if (strncmp(string, "e_0", 3) == 0)
 			return Item(string, -1, 3, -5);
 	}
 	if (size >= 2) {
-		if (string[0] == 'l' && string[1] == 'n')
+		if (strncmp(string, "ln", 2) == 0)
 			return Item(string, 90, 2, 18);
-		else if (string[0] == 'p' && string[1] == 'i')
+		else if (strncmp(string, "pi", 2) == 0)
 			return Item(string, -1, 2, -4);
-		else if (string[0] == 'e' && string[1] == '0')
+		else if (strncmp(string, "e0", 2) == 0)
 			return Item(string, -1, 2, -5);
 	}
 	if (size >= 1) {
@@ -96,6 +105,10 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 
 	size_t i = 0;
 	while (i != size) { // Tokenize string, iterate through all tokens
+		if (string[i] == ' ' || string[i] == ',') {
+			i++;
+			continue;
+		}
 		Item token = getNextOperator(string + i, size - i);
 		if (token.precedence < 0) // Token is a number
 			queue.push(token); // Push to queue
