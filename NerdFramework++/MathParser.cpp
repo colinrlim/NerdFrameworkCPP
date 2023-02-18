@@ -2,7 +2,6 @@
 #include <queue>
 #include "MathParser.h"
 #include "MathNode.h"
-#include <iostream>
 
 MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	switch (string[0]) {
@@ -67,8 +66,14 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	if (size >= 2) {
 		if (string[0] == 'l' && string[1] == 'n')
 			return Item(string, 90, 2, 18);
-		if (string[0] == 'p' && string[1] == 'i')
-			return Item(string, -1, 2, -2);
+		else if (string[0] == 'p' && string[1] == 'i')
+			return Item(string, -1, 2, -4);
+		else if (string[0] == 'e' && string[1] == '0')
+			return Item(string, -1, 2, -5);
+	}
+	if (size >= 1) {
+		if (string[0] == 'e')
+			return Item(string, -1, 1, -3);
 	}
 	size_t i = 0;
 	while (i != size && ((string[i] >= '0' && string[i] <= '9') || string[i] == '.')) {
@@ -135,13 +140,15 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 	while (!queue.empty()) {
 		char* ptr_end = (char*)queue.front().ptr + queue.front().size - 1;
 		if (queue.front().precedence < 0) { // Token is a variable or number
-			if (queue.front().precedence == -1) // Token is a number
+			if (queue.front().id == -1) // Token is a number
 				treeStack.push(new ValueNode(std::strtod(queue.front().ptr, &ptr_end))); // Parse and push to stack
 			/* Token is a constant */
-			else if (queue.front().ptr[0] == 'e')
+			else if (queue.front().id == -3)
 				treeStack.push(new E_Node());
-			else if (queue.front().ptr[0] == 'p')
+			else if (queue.front().id == -4)
 				treeStack.push(new PI_Node());
+			else if (queue.front().id == -5)
+				treeStack.push(new EPSILON_NAUGHT_Node());
 			else // Token is a variable
 				treeStack.push(new VariableNode(std::string(queue.front().ptr, queue.front().size)));
 		} else { // Token is an operator or function

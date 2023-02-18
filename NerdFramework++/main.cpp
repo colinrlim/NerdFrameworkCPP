@@ -19,9 +19,13 @@
 #include "MathParser.h"
 
 int main() {
-    std::cout << (double)MathParser::toExpressionTree("((0.2*3^0.5)^2+(3^2^3/2^(1/2)))", 31)->getValue();
-    std::cout << (double)MathParser::toExpressionTree("2+4/5*(5-3)^5^4", 15)->getValue();
-    std::cout << (double)MathParser::toExpressionTree("3+4*2/(1-5)^2^3", 15)->getValue();
+    std::cout << (double)MathParser::toExpressionTree("((0.2*3^0.5)^2+(3^2^3/2^(1/2)))", 31)->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("2+4/5*(5-3)^5^4", 15)->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("3+4*2/(1-5)^2^3", 15)->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("e", 1)->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("pi", 2)->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("e0", 2)->getValue() << std::endl;
+    //std::cout << (double)MathParser::toExpressionTree("sin(max(2,3)/3*pi)", 15)->getValue() << std::endl;
     //MathParser::toExpressionTree("A+B/C*(D-A)^F^H", 15);
     //MathParser::toExpressionTree("A*(B+C*D)+E", 11);
     
