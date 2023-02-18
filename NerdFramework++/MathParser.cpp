@@ -268,6 +268,3 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 	// > We did it boys
 	return treeStack.top();
 }
-MathNode* MathParser::toExpressionTree(const char* string) {
-	return MathParser::toExpressionTree(string, std::strlen(string));
-}
