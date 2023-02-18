@@ -10,14 +10,21 @@
 #include "Timer.h"
 #include "TileBatcher.h"
 
-#include "ignore/Detention/game.h"
+//#include "ignore/Detention/game.h"
 #include "Math.h"
 #include "PaletteImageStamper.h"
 #include "ImageStamper.h"
 #include "ParticleBatcher.h"
 
+#include "MathParser.h"
+
 int main() {
-    launch1();
+    std::cout << (double)MathParser::toExpressionTree("((0.2*3^0.5)^2+(3^2^3/2^(1/2)))", 31)->getValue();
+    std::cout << (double)MathParser::toExpressionTree("2+4/5*(5-3)^5^4", 15)->getValue();
+    MathParser::toExpressionTree("A+B/C*(D-A)^F^H", 15);
+    MathParser::toExpressionTree("A*(B+C*D)+E", 11);
+    
+    /*launch1();
 	PaletteImage ghost_right(16, 16, std::vector<uint8_t>{
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -229,5 +236,5 @@ int main() {
 
     SDL_Quit();
 
-	return 0;
+	return 0;*/
 }

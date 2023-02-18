@@ -666,14 +666,8 @@
     <ClInclude Include="PaletteParticleBatcher.h">
       <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher</Filter>
     </ClInclude>
-    <ClInclude Include="ignore\shooter.h">
-      <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
-    </ClInclude>
     <ClInclude Include="Matrix.h">
       <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="ignore\Detention\game.h">
-      <Filter>Demos\Detention</Filter>
     </ClInclude>
     <ClInclude Include="MathParser.h">
       <Filter>Parsers\MathParser</Filter>
@@ -913,15 +907,6 @@
     </ClCompile>
     <ClCompile Include="PaletteParticleBatcher.cpp">
       <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher</Filter>
-    </ClCompile>
-    <ClCompile Include="ignore\shooter.cpp">
-      <Filter>Demos\An Endless Shooter Game, But Like, Super Tiny</Filter>
-    </ClCompile>
-    <ClCompile Include="ignore\Detention\game.cpp">
-      <Filter>Demos\Detention</Filter>
-    </ClCompile>
-    <ClCompile Include="ignore\template.cpp">
-      <Filter>Demos</Filter>
     </ClCompile>
     <ClCompile Include="MathParser.cpp">
       <Filter>Parsers\MathParser</Filter>

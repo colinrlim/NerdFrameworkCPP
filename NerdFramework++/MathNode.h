@@ -5,10 +5,10 @@
 #include "VariableManager.h"
 
 struct MathNode {
-	virtual double getValue() = 0;
-	virtual char* toLaTeX() = 0;
+	virtual double getValue() { return 0.0; }
+	virtual char* toLaTeX() { return nullptr; }
 
-	virtual void traverse(std::function<void(MathNode*)> func) = 0;
+	virtual void traverse(std::function<void(MathNode*)> func) { }
 };
 
 struct EndNode : MathNode {
@@ -45,62 +45,92 @@ struct OperatorNode : MathNode {
 };
 
 struct UnparsedNode : EndNode {
-	char* value;
+	const char* value;
+
+	UnparsedNode(const char* value) : value(value) { }
 };
 struct ValueNode : EndNode {
 	double value;
+
+	ValueNode(double value) : value(value) { }
 
 	double getValue() {
 		return value;
 	}
 };
 struct VariableNode : EndNode {
-	char* name;
+	std::string name;
+
+	VariableNode(std::string name) : name(name) { }
 
 	double getValue() {
-		return VariableManager::getInstance().getVariable(name);
+		return 0;// VariableManager::getInstance().getVariable(name);
 	}
 	void appendUnknowns(std::vector<std::string>& unknowns) { }
 };
 struct EqualsNode : OperatorNode {
+	using OperatorNode::OperatorNode;
 
 };
 struct GroupNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return inner->getValue();
 	}
 };
 struct AddNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+
 	double getValue() {
 		return lhs->getValue() + rhs->getValue();
 	}
 };
 struct SubtractNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+	
 	double getValue() {
 		return lhs->getValue() - rhs->getValue();
 	}
 };
 struct MultiplyNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+
 	double getValue() {
 		return lhs->getValue() * rhs->getValue();
 	}
 };
 struct DivideNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+
 	double getValue() {
 		return lhs->getValue() / rhs->getValue();
 	}
 };
+struct ModulusNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+
+	double getValue() {
+		return std::fmod(lhs->getValue(), rhs->getValue());
+	}
+};
 struct ExponentNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+
 	double getValue() {
 		return std::pow(lhs->getValue(), rhs->getValue());
 	}
 };
 struct SquareRootNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return std::sqrt(inner->getValue());
 	}
 };
 struct FactorialNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		int n = (int)inner->getValue();
 		int result = 1;
@@ -127,47 +157,80 @@ struct EPSILON_NAUGHT_Node : EndNode {
 };
 
 struct SineNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return std::sin(inner->getValue());
 	}
 };
 struct CosineNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return std::cos(inner->getValue());
 	}
 };
 struct TangentNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return std::tan(inner->getValue());
 	}
 };
 struct ArcSineNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return std::asin(inner->getValue());
 	}
 };
 struct ArcCosineNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return std::acos(inner->getValue());
 	}
 };
 struct ArcTangentNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return std::atan(inner->getValue());
 	}
 };
 struct CosecantNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return 1 / std::sin(inner->getValue());
 	}
 };
 struct SecantNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return 1 / std::cos(inner->getValue());
 	}
 };
 struct CotangentNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
 	double getValue() {
 		return 1 / std::tan(inner->getValue());
+	}
+};
+
+struct LogNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
+	double getValue() {
+		return std::log10(inner->getValue());
+	}
+};
+struct LnNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
+	double getValue() {
+		return std::log(inner->getValue());
 	}
 };
