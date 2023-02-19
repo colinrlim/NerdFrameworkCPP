@@ -7,6 +7,7 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	switch (string[0]) {
 	case '(':
 	case ')':
+	case ',':
 		return Item(string, 0, 1, 0);
 	case '+':
 		return Item(string, 1, 1, 1);
@@ -19,7 +20,7 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	case '÷':
 		return Item(string, 2, 1, 4);
 	case '%':
-		return Item(string, 3, 1, 5);
+		return Item(string, 2, 1, 5);
 	case '^':
 		return Item(string, 3, 1, 6);
 	case '=':
@@ -107,7 +108,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 
 	size_t i = 0;
 	while (i != size) { // Tokenize string, iterate through all tokens
-		if (string[i] == ' ' || string[i] == ',') {
+		if (string[i] == ' ') {
 			i++;
 			continue;
 		}
@@ -128,7 +129,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				stack.pop();
 			}
 			stack.push(token);
-		} else if (token.ptr[0] == ')') { // Token is a right-parentheses
+		} else if (token.ptr[0] == ')' || token.ptr[0] == ',') { // Token is a right-parentheses or argument delimiter (comma)
 			// Keep moving the top of stack to the queue until the top of the stack is a left-parentheses
 			// Then discard both left and right parentheses
 			// If final top of stack is a function, push it to queue too
@@ -138,7 +139,8 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			}
 			if (stack.empty())
 				return nullptr;
-			stack.pop();
+			if (token.ptr[0] != ',') // Don't discard left-parentheses if token is just an argument delimiter!
+				stack.pop();
 			if (!stack.empty() && (stack.top().precedence == 90)) {
 				queue.push(stack.top());
 				stack.pop();
