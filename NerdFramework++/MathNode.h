@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <numeric>
 #include <cmath>
 #include "VariableManager.h"
 
@@ -262,6 +263,43 @@ struct ModulusNode : ContainerNode {
 	}
 };
 
+struct RoundNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
+	double getValue() {
+		return std::round(inner->getValue());
+	}
+};
+struct CeilingNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
+	double getValue() {
+		return std::ceil(inner->getValue());
+	}
+};
+struct FloorNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
+	double getValue() {
+		return std::floor(inner->getValue());
+	}
+};
+
+struct LCM_Node : OperatorNode {
+	using OperatorNode::OperatorNode;
+
+	double getValue() {
+		return std::lcm((int)std::round(lhs->getValue()), (int)std::round(rhs->getValue()));
+	}
+};
+struct GCD_Node : OperatorNode {
+	using OperatorNode::OperatorNode;
+
+	double getValue() {
+		return std::gcd((int)std::round(lhs->getValue()), (int)std::round(rhs->getValue()));
+	}
+};
+
 /* To add:
 * dnorm()
 * pnorm()
@@ -278,9 +316,6 @@ struct ModulusNode : ContainerNode {
 * df()
 * pf()
 * qf()
-* 
-* lcm()
-* gcd()
 * 
 * rand()
 * randInt()

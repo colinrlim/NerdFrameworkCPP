@@ -33,7 +33,7 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	}
 	if (size >= 7) {
 		if (strncmp(string, "ceiling", 7) == 0)
-			return Item(string, 90, 7, 31);
+			return Item(string, 90, 7, 22);
 	}
 	if (size >= 6) {
 		if (strncmp(string, "arc", 3) == 0) {
@@ -47,7 +47,9 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	}
 	if (size >= 5) {
 		if (strncmp(string, "floor", 5) == 0)
-			return Item(string, 90, 5, 32);
+			return Item(string, 90, 5, 23);
+		else if (strncmp(string, "round", 5) == 0)
+			return Item(string, 90, 5, 21);
 	}
 	if (size >= 4) {
 		if (string[0] == 'a') {
@@ -58,7 +60,7 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			else if (strncmp(string + 1, "tan", 3) == 0)
 				return Item(string, 90, 4, 10);
 		} else if (strncmp(string, "ceil", 3) == 0)
-			return Item(string, 90, 4, 31);
+			return Item(string, 90, 4, 22);
 	}
 	if (size >= 3) {
 		if (strncmp(string, "e_0", 3) == 0)
@@ -85,6 +87,10 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, 90, 3, 32);
 		else if (strncmp(string, "mod", 3) == 0)
 			return Item(string, 90, 3, 33);
+		else if (strncmp(string, "lcm", 3) == 0)
+			return Item(string, 90, 3, 34);
+		else if (strncmp(string, "gcd", 3) == 0)
+			return Item(string, 90, 3, 35);
 	}
 	if (size >= 2) {
 		if (strncmp(string, "pi", 2) == 0)
@@ -251,6 +257,15 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				case 20:
 					treeStack.push(new FactorialNode(inner));
 					break;
+				case 21:
+					treeStack.push(new RoundNode(inner));
+					break;
+				case 22:
+					treeStack.push(new CeilingNode(inner));
+					break;
+				case 23:
+					treeStack.push(new FloorNode(inner));
+					break;
 				}
 			} else { // Token is an operator or bivariate function
 				if (treeStack.size() < 2)
@@ -292,6 +307,12 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 					break;
 				case 33:
 					treeStack.push(new ModuloNode(lhs, rhs));
+					break;
+				case 34:
+					treeStack.push(new LCM_Node(lhs, rhs));
+					break;
+				case 35:
+					treeStack.push(new GCD_Node(lhs, rhs));
 					break;
 				}
 			}
