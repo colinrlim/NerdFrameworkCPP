@@ -24,14 +24,16 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 		return Item(string, 2, 1, 5);
 	case '^':
 		return Item(string, 3, 1, 6);
+	case '!':
+		return Item(string, 90, 1, 20);
 	case '=':
-		return Item(string, 99, 1, 7);
+		return Item(string, 99, 1, 99);
 	case 'π':
 		return Item(string, -1, 1, -4);
 	}
 	if (size >= 7) {
 		if (strncmp(string, "ceiling", 7) == 0)
-			return Item(string, 90, 7, 21);
+			return Item(string, 90, 7, 31);
 	}
 	if (size >= 6) {
 		if (strncmp(string, "arc", 3) == 0) {
@@ -45,7 +47,7 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	}
 	if (size >= 5) {
 		if (strncmp(string, "floor", 5) == 0)
-			return Item(string, 90, 5, 22);
+			return Item(string, 90, 5, 32);
 	}
 	if (size >= 4) {
 		if (string[0] == 'a') {
@@ -56,10 +58,12 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			else if (strncmp(string + 1, "tan", 3) == 0)
 				return Item(string, 90, 4, 10);
 		} else if (strncmp(string, "ceil", 3) == 0)
-			return Item(string, 90, 4, 21);
+			return Item(string, 90, 4, 31);
 	}
 	if (size >= 3) {
-		if (strncmp(string, "sin", 3) == 0)
+		if (strncmp(string, "e_0", 3) == 0)
+			return Item(string, -1, 3, -5);
+		else if (strncmp(string, "sin", 3) == 0)
 			return Item(string, 90, 3, 11);
 		else if (strncmp(string, "cos", 3) == 0)
 			return Item(string, 90, 3, 12);
@@ -73,24 +77,22 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, 90, 3, 16);
 		else if (strncmp(string, "log", 3) == 0)
 			return Item(string, 90, 3, 17);
-		else if (strncmp(string, "max", 3) == 0)
-			return Item(string, 90, 3, 21);
-		else if (strncmp(string, "min", 3) == 0)
-			return Item(string, 90, 3, 22);
-		else if (strncmp(string, "e_0", 3) == 0)
-			return Item(string, -1, 3, -5);
-		else if (strncmp(string, "mod", 3) == 0)
-			return Item(string, 90, 3, 23);
 		else if (strncmp(string, "abs", 3) == 0)
 			return Item(string, 90, 3, 19);
+		else if (strncmp(string, "max", 3) == 0)
+			return Item(string, 90, 3, 31);
+		else if (strncmp(string, "min", 3) == 0)
+			return Item(string, 90, 3, 32);
+		else if (strncmp(string, "mod", 3) == 0)
+			return Item(string, 90, 3, 33);
 	}
 	if (size >= 2) {
-		if (strncmp(string, "ln", 2) == 0)
-			return Item(string, 90, 2, 18);
-		else if (strncmp(string, "pi", 2) == 0)
+		if (strncmp(string, "pi", 2) == 0)
 			return Item(string, -1, 2, -4);
 		else if (strncmp(string, "e0", 2) == 0)
 			return Item(string, -1, 2, -5);
+		else if (strncmp(string, "ln", 2) == 0)
+			return Item(string, 90, 2, 18);
 	}
 	if (size >= 1) {
 		if (string[0] == 'e')
@@ -201,7 +203,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			else // Token is a variable
 				treeStack.push(new VariableNode(std::string(queue.front().ptr, queue.front().size)));
 		} else { // Token is an operator or function
-			if (queue.front().precedence == 90 && queue.front().id <= 20) { // Token is a unary function
+			if (queue.front().precedence == 90 && queue.front().id <= 30) { // Token is a unary function
 				if (treeStack.empty())
 					return nullptr;
 				// Pop inner argument from stack
@@ -246,6 +248,9 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				case 19:
 					treeStack.push(new ModulusNode(inner));
 					break;
+				case 20:
+					treeStack.push(new FactorialNode(inner));
+					break;
 				}
 			} else { // Token is an operator or bivariate function
 				if (treeStack.size() < 2)
@@ -276,16 +281,16 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				case 6:
 					treeStack.push(new ExponentNode(lhs, rhs));
 					break;
-				case 7:
+				case 99:
 					treeStack.push(new EqualsNode(lhs, rhs));
 					break;
-				case 21:
+				case 31:
 					treeStack.push(new MaxNode(lhs, rhs));
 					break;
-				case 22:
+				case 32:
 					treeStack.push(new MinNode(lhs, rhs));
 					break;
-				case 23:
+				case 33:
 					treeStack.push(new ModuloNode(lhs, rhs));
 					break;
 				}

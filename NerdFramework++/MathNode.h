@@ -261,3 +261,29 @@ struct ModulusNode : ContainerNode {
 		return std::abs(inner->getValue());
 	}
 };
+
+/* To add:
+* dnorm()
+* pnorm()
+* qnorm()
+* 
+* dchisq()
+* pchisq()
+* qchisq()
+* 
+* dt()
+* pt()
+* qt()
+* 
+* df()
+* pf()
+* qf()
+* 
+* lcm()
+* gcd()
+* 
+* rand()
+* randInt()
+* randNorm()
+* randBin()
+*/
