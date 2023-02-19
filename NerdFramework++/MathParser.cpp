@@ -80,6 +80,8 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, -1, 3, -5);
 		else if (strncmp(string, "mod", 3) == 0)
 			return Item(string, 90, 3, 23);
+		else if (strncmp(string, "abs", 3) == 0)
+			return Item(string, 90, 3, 19);
 	}
 	if (size >= 2) {
 		if (strncmp(string, "ln", 2) == 0)
@@ -217,6 +219,9 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				case 18:
 					treeStack.push(new LnNode(inner));
 					break;
+				case 19:
+					treeStack.push(new ModulusNode(inner));
+					break;
 				}
 			} else { // Token is an operator or bivariate function
 				if (treeStack.size() < 2)
@@ -242,7 +247,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 					treeStack.push(new DivideNode(lhs, rhs));
 					break;
 				case 5:
-					treeStack.push(new ModulusNode(lhs, rhs));
+					treeStack.push(new ModuloNode(lhs, rhs));
 					break;
 				case 6:
 					treeStack.push(new ExponentNode(lhs, rhs));
@@ -257,7 +262,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 					treeStack.push(new MinNode(lhs, rhs));
 					break;
 				case 23:
-					treeStack.push(new ModulusNode(lhs, rhs));
+					treeStack.push(new ModuloNode(lhs, rhs));
 					break;
 				}
 			}

@@ -109,7 +109,7 @@ struct DivideNode : OperatorNode {
 		return lhs->getValue() / rhs->getValue();
 	}
 };
-struct ModulusNode : OperatorNode {
+struct ModuloNode : OperatorNode {
 	using OperatorNode::OperatorNode;
 
 	double getValue() {
@@ -252,5 +252,12 @@ struct MinNode : OperatorNode {
 
 	double getValue() {
 		return std::min(lhs->getValue(), rhs->getValue());
+	}
+};
+struct ModulusNode : ContainerNode {
+	using ContainerNode::ContainerNode;
+
+	double getValue() {
+		return std::abs(inner->getValue());
 	}
 };
