@@ -155,9 +155,50 @@ struct PI_Node : EndNode {
 };
 struct EPSILON_NAUGHT_Node : EndNode {
 	double getValue() {
-		return 0.000000000008854187817;
+		return 8.854187817e-12;
 	}
 };
+struct COULOUMB_CONSTANT_Node : EndNode {
+	double getValue() {
+		return 8987551788;
+	}
+};
+struct PROTON_MASS_Node : EndNode {
+	double getValue() {
+		return 1.67262192e-27;
+	}
+};
+struct NEUTRON_MASS_Node : EndNode {
+	double getValue() {
+		return 1.67262192e-27;
+	}
+};
+struct ELECTRON_MASS_Node : EndNode {
+	double getValue() {
+		return 9.1093837e-31;
+	}
+};
+struct ELECTRON_CHARGE_NODE : EndNode {
+	double getValue() {
+		return 1.60217663e-19;
+	}
+};
+struct LIGHT_SPEED_Node : EndNode {
+	double getValue() {
+		return 299792458;
+	}
+};
+struct GRAVITATIONAL_CONSTANT_Node : EndNode {
+	double getValue() {
+		return 6.67428e-11;
+	}
+};
+struct GRAVITY_Node : EndNode {
+	double getValue() {
+		return 9.80665;
+	}
+};
+
 
 struct SineNode : ContainerNode {
 	using ContainerNode::ContainerNode;

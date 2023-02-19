@@ -91,6 +91,16 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, 90, 3, 34);
 		else if (strncmp(string, "gcd", 3) == 0)
 			return Item(string, 90, 3, 35);
+		else if (strncmp(string, "m_p", 3) == 0)
+			return Item(string, -1, 3, -7);
+		else if (strncmp(string, "m_n", 3) == 0)
+			return Item(string, -1, 3, -8);
+		else if (strncmp(string, "m_e", 3) == 0)
+			return Item(string, -1, 3, -9);
+		else if (strncmp(string, "q_e", 3) == 0)
+			return Item(string, -1, 3, -10);
+		else if (strncmp(string, "c", 3) == 0)
+			return Item(string, -1, 3, -11);
 	}
 	if (size >= 2) {
 		if (strncmp(string, "pi", 2) == 0)
@@ -103,6 +113,12 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	if (size >= 1) {
 		if (string[0] == 'e')
 			return Item(string, -1, 1, -3);
+		else if (string[0] == 'k')
+			return Item(string, -1, 1, -6);
+		else if (string[0] == 'G')
+			return Item(string, -1, 1, -12);
+		else if (string[0] == 'g')
+			return Item(string, -1, 1, -13);
 	}
 	size_t i = 0;
 	while (i != size && ((string[i] >= '0' && string[i] <= '9') || string[i] == '.' || (i != 0 && (string[i] == 'e' || (string[i] == '-' && string[i-1] == 'e'))))) {
@@ -206,6 +222,23 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				treeStack.push(new PI_Node());
 			else if (queue.front().id == -5)
 				treeStack.push(new EPSILON_NAUGHT_Node());
+			else if (queue.front().id == -6)
+				treeStack.push(new COULOUMB_CONSTANT_Node());
+			else if (queue.front().id == -7)
+				treeStack.push(new PROTON_MASS_Node());
+			else if (queue.front().id == -8)
+				treeStack.push(new NEUTRON_MASS_Node());
+			else if (queue.front().id == -9)
+				treeStack.push(new ELECTRON_MASS_Node());
+			else if (queue.front().id == -10)
+				treeStack.push(new ELECTRON_CHARGE_NODE());
+			else if (queue.front().id == -11)
+				treeStack.push(new LIGHT_SPEED_Node());
+			else if (queue.front().id == -12)
+				treeStack.push(new GRAVITATIONAL_CONSTANT_Node());
+			else if (queue.front().id == -13)
+				treeStack.push(new GRAVITY_Node());
+
 			else // Token is a variable
 				treeStack.push(new VariableNode(std::string(queue.front().ptr, queue.front().size)));
 		} else { // Token is an operator or function
