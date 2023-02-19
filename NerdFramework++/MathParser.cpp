@@ -99,7 +99,7 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, -1, 1, -3);
 	}
 	size_t i = 0;
-	while (i != size && ((string[i] >= '0' && string[i] <= '9') || string[i] == '.')) {
+	while (i != size && ((string[i] >= '0' && string[i] <= '9') || string[i] == '.' || (i != 0 && (string[i] == 'e' || (string[i] == '-' && string[i-1] == 'e'))))) {
 		i++;
 	}
 	return i == 0 ? Item(string, -1, 1, -2) : Item(string, -1, i, -1);

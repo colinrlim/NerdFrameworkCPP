@@ -18,6 +18,7 @@
 #include "MathParser.h"
 
 int main() {
+    std::cout << (double)MathParser::toExpressionTree("5e-3")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("3+4*2/abs(1-5)!*2^3")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("((0.2*3^0.5)^2+(3^2^3/2^(1/2)))")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("2+4/5*(5-3)^5^4")->getValue() << std::endl;
