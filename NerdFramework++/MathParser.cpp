@@ -8,6 +8,7 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	case '(':
 	case ')':
 	case ',':
+	case '|':
 		return Item(string, 0, 1, 0);
 	case '+':
 		return Item(string, 1, 1, 1);
@@ -108,6 +109,8 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 	std::stack<Item> stack;
 	std::queue<Item> queue;
 
+	bool openAbsolute = false;
+
 	size_t i = 0;
 	while (i != size) { // Tokenize string, iterate through all tokens
 		if (string[i] == ' ') {
@@ -119,7 +122,11 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			queue.push(token); // Push to queue
 		else if (token.precedence == 90 || token.ptr[0] == '(') // Token is a function or a left-parentheses
 			stack.push(token); // Push to stack
-		else if (token.precedence > 0) { // Token is an operator
+		else if (token.ptr[0] == '|' && !openAbsolute) { // Token is an open-modulus bar
+			openAbsolute = true; // Set flag
+			stack.push(Item("abs", 90, 3, 19)); // Push modulus function to stack
+			stack.push(token); // Push bar to stack
+		} else if (token.precedence > 0) { // Token is an operator
 			// While top of stack exists and isn't a left-parentheses, and
 			//   the top of the stack has a higher precedence than the current token, or
 			//   the top of the stack and the current token has the same precedence and is left associative (not ^),
@@ -132,6 +139,8 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			}
 			stack.push(token);
 		} else if (token.ptr[0] == ')' || token.ptr[0] == ',') { // Token is a right-parentheses or argument delimiter (comma)
+			// Disable openAbsolute flag if enabled
+			openAbsolute = false;
 			// Keep moving the top of stack to the queue until the top of the stack is a left-parentheses
 			// Then discard both left and right parentheses
 			// If final top of stack is a function, push it to queue too
@@ -147,6 +156,21 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				queue.push(stack.top());
 				stack.pop();
 			}
+		} else if (token.ptr[0] == '|') { // Token is a close-modulus bar
+			// Disable openAbsolute flag
+			openAbsolute = false;
+			// Keep moving the top of stack to the queue until the top of the stack is an open-modulus bar
+			while (!stack.empty() && stack.top().ptr[0] != '|') {
+				queue.push(stack.top());
+				stack.pop();
+			}
+			if (stack.empty())
+				return nullptr;
+			// Then discard both modulus bars
+			stack.pop();
+			// Push absolute function to the queue afterwards
+			queue.push(stack.top());
+			stack.pop();
 		}
 		i += token.size;
 	}

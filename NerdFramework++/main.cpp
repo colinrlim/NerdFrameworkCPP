@@ -21,6 +21,8 @@ int main() {
     std::cout << (double)MathParser::toExpressionTree("((0.2*3^0.5)^2+(3^2^3/2^(1/2)))")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("2+4/5*(5-3)^5^4")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("3+4*2/(1-5)^2^3")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("3+4*2/|1-5|*2^3")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("3+4*2/abs(1-5)*2^3")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("e")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("pi")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("e0")->getValue() << std::endl;
@@ -43,6 +45,7 @@ int main() {
     std::cout << (double)MathParser::toExpressionTree("mod(2^10+162,256)")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("max(3+2,1+2)")->getValue() << std::endl;
     std::cout << (double)MathParser::toExpressionTree("abs(32-1904)")->getValue() << std::endl;
+    std::cout << (double)MathParser::toExpressionTree("|32-1904|")->getValue() << std::endl;
     //MathParser::toExpressionTree("A+B/C*(D-A)^F^H", 15);
     //MathParser::toExpressionTree("A*(B+C*D)+E", 11);
     
