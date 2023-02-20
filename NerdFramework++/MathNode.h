@@ -6,7 +6,21 @@
 #include "VariableManager.h"
 
 struct MathNode {
+	struct UnknownVariable {
+		const char* name;
+		double coefficient;
+		double power;
+		UnknownVariable(const char* name, double coefficient = 1.0, double power = 1.0) :
+			name(name),
+			coefficient(coefficient),
+			power(power)
+		{ }
+	};
+
+	virtual ~MathNode() { };
+
 	virtual double getValue() { return 0.0; }
+	virtual std::vector<UnknownVariable> getUnknowns() { return { }; }
 	virtual char* toLaTeX() { return nullptr; }
 
 	virtual void traverse(std::function<void(MathNode*)> func) { }
@@ -14,8 +28,6 @@ struct MathNode {
 
 struct EndNode : MathNode {
 	EndNode() = default;
-
-	virtual double getValue() { return 1.0; }
 
 	void traverse(std::function<void(MathNode*)> func) {
 		func(this);
@@ -25,6 +37,9 @@ struct ContainerNode : MathNode {
 	MathNode* inner;
 
 	ContainerNode(MathNode* inner) : inner(inner) { }
+	~ContainerNode() {
+		delete inner;
+	}
 
 	void traverse(std::function<void(MathNode*)> func) {
 		inner->traverse(func);
@@ -39,6 +54,10 @@ struct OperatorNode : MathNode {
 		lhs(lhs),
 		rhs(rhs)
 	{ }
+	~OperatorNode() {
+		delete lhs;
+		delete rhs;
+	}
 
 	void traverse(std::function<void(MathNode*)> func) {
 		lhs->traverse(func);

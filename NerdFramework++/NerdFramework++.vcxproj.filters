@@ -385,6 +385,9 @@
     <Filter Include="Parsers\MathParser">
       <UniqueIdentifier>{351356f0-3863-40f0-98e0-68ace524f2b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Demos\MathBuddy">
+      <UniqueIdentifier>{f8985955-4754-4ebb-b778-0af58bf6fa56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -672,6 +675,9 @@
     <ClInclude Include="MathParser.h">
       <Filter>Parsers\MathParser</Filter>
     </ClInclude>
+    <ClInclude Include="ignore\calculator.h">
+      <Filter>Demos\MathBuddy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Vector2.cpp">
@@ -910,6 +916,9 @@
     </ClCompile>
     <ClCompile Include="MathParser.cpp">
       <Filter>Parsers\MathParser</Filter>
+    </ClCompile>
+    <ClCompile Include="ignore\calculator.cpp">
+      <Filter>Demos\MathBuddy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

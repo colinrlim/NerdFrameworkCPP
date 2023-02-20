@@ -163,6 +163,7 @@
     <ClInclude Include="Color3.h" />
     <ClInclude Include="ColorSequence.h" />
     <ClInclude Include="Color4.h" />
+    <ClInclude Include="ignore\calculator.h" />
     <ClInclude Include="Kinematics.h" />
     <ClInclude Include="MathParser.h" />
     <ClInclude Include="Matrix.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="ignore\calculator.cpp" />
     <ClCompile Include="Image3.cpp" />
     <ClCompile Include="CameraRay3.cpp" />
     <ClCompile Include="ImageStamper.cpp" />
