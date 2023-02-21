@@ -147,7 +147,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 		}
 		Item token = getNextOperator(string + i, size - i);
 		/* Token is implicitly linkable by multiplication */
-		if ((token.precedence < 0 || token.precedence == 90) && (stack.empty() || stack.top().precedence != 90)) {
+		if (((token.precedence < 0 || token.precedence == 90) && (stack.empty() || stack.top().precedence != 90))) {
 			if (prevLinkable) { // Last token was a number too
 				/* Link them together with multiplication (Create and add new multiply token) */
 				while ((!stack.empty() && stack.top().ptr[0] != '(')
@@ -157,8 +157,9 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				}
 				stack.push(Item("*", 2, 1, 3));
 			}
-			prevLinkable = true; // Set linkable flag
-		} else if (token.ptr[0] != '(' || stack.top().precedence == 90) // Token is not implicity linkable
+			if (token.precedence != 90)
+				prevLinkable = true; // Set linkable flag
+		} else if (token.ptr[0] != '(') // Token is not implicity linkable
 			prevLinkable = false; // Unset linkable flag
 		if (token.precedence < 0) // Token is a number
 			queue.push(token); // Push number to queue
