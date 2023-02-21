@@ -167,8 +167,9 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 		/* Allow negative starting numbers */
 		if (token.precedence == 0) {
 			beginning = true;
-		} else if (beginning && token.id == 2) {
+		} else if (beginning) {
 			beginning = false;
+			if (token.id == 2)
 			queue.push(Item("0", -1, 1, -1));
 		}
 
