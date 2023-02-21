@@ -138,6 +138,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 
 	bool openAbsolute = false;
 	bool prevLinkable = false;
+	bool beginning = true;
 
 	size_t i = 0;
 	while (i != size) { // Tokenize string, iterate through all tokens
@@ -146,6 +147,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			continue;
 		}
 		Item token = getNextOperator(string + i, size - i);
+
 		/* Token is implicitly linkable by multiplication */
 		if (((token.precedence < 0 || token.precedence == 90) && (stack.empty() || stack.top().precedence != 90))) {
 			if (prevLinkable) { // Last token was a number too
@@ -159,8 +161,17 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			}
 			if (token.precedence != 90)
 				prevLinkable = true; // Set linkable flag
-		} else if (token.ptr[0] != '(') // Token is not implicity linkable
+		} else if (token.ptr[0] != '(' && token.ptr[0] != '|') // Token is not implicity linkable
 			prevLinkable = false; // Unset linkable flag
+		
+		/* Allow negative starting numbers */
+		if (token.precedence == 0) {
+			beginning = true;
+		} else if (beginning && token.id == 2) {
+			beginning = false;
+			queue.push(Item("0", -1, 1, -1));
+		}
+
 		if (token.precedence < 0) // Token is a number
 			queue.push(token); // Push number to queue
 		else if (token.precedence == 90 || token.ptr[0] == '(') // Token is a function or a left-parentheses
