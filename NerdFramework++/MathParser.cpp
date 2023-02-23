@@ -30,107 +30,108 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 		return Item(string, 1, 1, 99);
 	case 'π':
 		return Item(string, -1, 1, -4);
+	case 'G':
+		return Item(string, -1, 1, -12);
 	}
-	if (string[0] >= 'a' && string[0] <= 'z') {
-		if (size >= 7) {
-			if (strncmp(string, "ceiling", 7) == 0)
-				return Item(string, 90, 7, 22);
+	int alphaLength = 0;
+	while (string[alphaLength] >= '_' && string[alphaLength] <= 'z') {
+		alphaLength++;
+	}
+	if (alphaLength >= 7) {
+		if (substreq(string, "ceiling", 7))
+			return Item(string, 90, 7, 22);
+	}
+	if (alphaLength >= 6) {
+		if (substreq(string, "arc", 3)) {
+			if (substreq(string + 3, "sin", 3))
+				return Item(string, 90, 6, 8);
+			else if (substreq(string + 3, "cos", 3))
+				return Item(string, 90, 6, 9);
+			else if (substreq(string + 3, "tan", 3))
+				return Item(string, 90, 6, 10);
 		}
-		if (size >= 6) {
-			if (strncmp(string, "arc", 3) == 0) {
-				if (strncmp(string + 3, "sin", 3) == 0)
-					return Item(string, 90, 6, 8);
-				else if (strncmp(string + 3, "cos", 3) == 0)
-					return Item(string, 90, 6, 9);
-				else if (strncmp(string + 3, "tan", 3) == 0)
-					return Item(string, 90, 6, 10);
-			}
+	}
+	if (alphaLength >= 5) {
+		if (substreq(string, "floor", 5))
+			return Item(string, 90, 5, 23);
+		else if (substreq(string, "round", 5))
+			return Item(string, 90, 5, 21);
+	}
+	if (alphaLength >= 4) {
+		if (string[0] == 'a') {
+			if (substreq(string + 1, "sin", 3))
+				return Item(string, 90, 4, 8);
+			else if (substreq(string + 1, "cos", 3))
+				return Item(string, 90, 4, 9);
+			else if (substreq(string + 1, "tan", 3))
+				return Item(string, 90, 4, 10);
 		}
-		if (size >= 5) {
-			if (strncmp(string, "floor", 5) == 0)
-				return Item(string, 90, 5, 23);
-			else if (strncmp(string, "round", 5) == 0)
-				return Item(string, 90, 5, 21);
-		}
-		if (size >= 4) {
-			if (string[0] == 'a') {
-				if (strncmp(string + 1, "sin", 3) == 0)
-					return Item(string, 90, 4, 8);
-				else if (strncmp(string + 1, "cos", 3) == 0)
-					return Item(string, 90, 4, 9);
-				else if (strncmp(string + 1, "tan", 3) == 0)
-					return Item(string, 90, 4, 10);
-			}
-			else if (strncmp(string, "ceil", 3) == 0)
-				return Item(string, 90, 4, 22);
-		}
-		if (size >= 3) {
-			if (strncmp(string, "e_0", 3) == 0)
-				return Item(string, -1, 3, -5);
-			else if (strncmp(string, "sin", 3) == 0)
-				return Item(string, 90, 3, 11);
-			else if (strncmp(string, "cos", 3) == 0)
-				return Item(string, 90, 3, 12);
-			else if (strncmp(string, "tan", 3) == 0)
-				return Item(string, 90, 3, 13);
-			else if (strncmp(string, "csc", 3) == 0)
-				return Item(string, 90, 3, 14);
-			else if (strncmp(string, "sec", 3) == 0)
-				return Item(string, 90, 3, 15);
-			else if (strncmp(string, "cot", 3) == 0)
-				return Item(string, 90, 3, 16);
-			else if (strncmp(string, "log", 3) == 0)
-				return Item(string, 90, 3, 17);
-			else if (strncmp(string, "abs", 3) == 0)
-				return Item(string, 90, 3, 19);
-			else if (strncmp(string, "max", 3) == 0)
-				return Item(string, 90, 3, 31);
-			else if (strncmp(string, "min", 3) == 0)
-				return Item(string, 90, 3, 32);
-			else if (strncmp(string, "mod", 3) == 0)
-				return Item(string, 90, 3, 33);
-			else if (strncmp(string, "lcm", 3) == 0)
-				return Item(string, 90, 3, 34);
-			else if (strncmp(string, "gcd", 3) == 0)
-				return Item(string, 90, 3, 35);
-			else if (strncmp(string, "m_p", 3) == 0)
-				return Item(string, -1, 3, -7);
-			else if (strncmp(string, "m_n", 3) == 0)
-				return Item(string, -1, 3, -8);
-			else if (strncmp(string, "m_e", 3) == 0)
-				return Item(string, -1, 3, -9);
-			else if (strncmp(string, "q_e", 3) == 0)
-				return Item(string, -1, 3, -10);
-		}
-		if (size >= 2) {
-			if (strncmp(string, "pi", 2) == 0)
-				return Item(string, -1, 2, -4);
-			else if (strncmp(string, "e0", 2) == 0)
-				return Item(string, -1, 2, -5);
-			else if (strncmp(string, "ln", 2) == 0)
-				return Item(string, 90, 2, 18);
-		}
-;		if (size >= 1) {
-			if (string[0] == 'e')
-				return Item(string, -1, 1, -3);
-			else if (string[0] == 'k')
-				return Item(string, -1, 1, -6);
-			else if (string[0] == 'c')
-				return Item(string, -1, 1, -11);
-			else if (string[0] == 'g')
-				return Item(string, -1, 1, -13);
-		}
-	} else if (string[0] >= 'A' && string[0] <= 'Z') {
-		if (size >= 1) {
-			if (string[0] == 'G')
-				return Item(string, -1, 1, -12);
+		else if (substreq(string, "ceil", 3))
+			return Item(string, 90, 4, 22);
+	}
+	if (alphaLength >= 3) {
+		if (substreq(string, "e_0", 3))
+			return Item(string, -1, 3, -5);
+		else if (substreq(string, "sin", 3))
+			return Item(string, 90, 3, 11);
+		else if (substreq(string, "cos", 3))
+			return Item(string, 90, 3, 12);
+		else if (substreq(string, "tan", 3))
+			return Item(string, 90, 3, 13);
+		else if (substreq(string, "csc", 3))
+			return Item(string, 90, 3, 14);
+		else if (substreq(string, "sec", 3))
+			return Item(string, 90, 3, 15);
+		else if (substreq(string, "cot", 3))
+			return Item(string, 90, 3, 16);
+		else if (substreq(string, "log", 3))
+			return Item(string, 90, 3, 17);
+		else if (substreq(string, "abs", 3))
+			return Item(string, 90, 3, 19);
+		else if (substreq(string, "max", 3))
+			return Item(string, 90, 3, 31);
+		else if (substreq(string, "min", 3))
+			return Item(string, 90, 3, 32);
+		else if (substreq(string, "mod", 3))
+			return Item(string, 90, 3, 33);
+		else if (substreq(string, "lcm", 3))
+			return Item(string, 90, 3, 34);
+		else if (substreq(string, "gcd", 3))
+			return Item(string, 90, 3, 35);
+		else if (substreq(string, "m_p", 3))
+			return Item(string, -1, 3, -7);
+		else if (substreq(string, "m_n", 3))
+			return Item(string, -1, 3, -8);
+		else if (substreq(string, "m_e", 3))
+			return Item(string, -1, 3, -9);
+		else if (substreq(string, "q_e", 3))
+			return Item(string, -1, 3, -10);
+	}
+	if (alphaLength >= 2) {
+		if (substreq(string, "pi", 2))
+			return Item(string, -1, 2, -4);
+		else if (substreq(string, "e0", 2))
+			return Item(string, -1, 2, -5);
+		else if (substreq(string, "ln", 2))
+			return Item(string, 90, 2, 18);
+	}
+	if (alphaLength >= 1) {
+		switch (string[0]) {
+		case 'e':
+			return Item(string, -1, 1, -3);
+		case 'k':
+			return Item(string, -1, 1, -6);
+		case 'c':
+			return Item(string, -1, 1, -11);
+		case 'g':
+			return Item(string, -1, 1, -13);
 		}
 	}
 	size_t i = 0;
-	while (i != size && ((string[i] >= '0' && string[i] <= '9') || string[i] == '.' || (i != 0 && (string[i] == 'e' || (string[i] == '-' && string[i-1] == 'e'))))) {
+	while (i != size && ((string[i] >= '0' && string[i] <= '9') || string[i] == '.' || (i != 0 && ((string[i] == 'e' && i+1 != size && (string[i+1] == '-' || (string[i+1] >= '0' && string[i+1] <= '9'))) || (string[i] == '-' && string[i - 1] == 'e'))))) {
 		i++;
 	}
-	return i == 0 ? Item(string, -1, 1, -2) : Item(string, -1, i, -1);
+	return i == 0 ? Item(string, -1, alphaLength, -2) : Item(string, -1, i, -1);
 }
 
 MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
@@ -142,7 +143,8 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 	std::stack<Item> stack;
 	std::queue<Item> queue;
 
-	Item lastToken = Item("(", 0, 1, 0);
+	char lastToken = '(';
+	char lastTokenPrecedence = 0;
 
 	size_t i = 0;
 	while (i != size) { // Tokenize string, iterate through all tokens
@@ -150,10 +152,11 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			i++;
 			continue;
 		}
-		const Item token = getNextOperator(string + i, size - i);
+		const char* tokenStart = string + i;
+		const Item token = getNextOperator(tokenStart, size - i);
 
 		/* Allow implicit multiplication*/
-		if ((lastToken.ptr[0] == ')' || (lastToken.ptr[0] == '|' && !openAbsolute) || lastToken.precedence < 0)
+		if ((lastToken == ')' || (lastToken == '|' && !openAbsolute) || lastTokenPrecedence < 0)
 			&& (token.ptr[0] == '(' || (token.ptr[0] == '|' && !openAbsolute) || token.precedence < 0 || token.precedence == 90)) {
 			while ((!stack.empty() && stack.top().ptr[0] != '(' && stack.top().ptr[0] != '|')
 				&& (stack.top().precedence >= 2)) {
@@ -164,7 +167,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 		}
 		
 		/* Allow negative starting numbers */
-		if (lastToken.ptr[0] == '(' || (lastToken.ptr[0] == '|' && openAbsolute) || lastToken.ptr[0] == '=') {
+		if (lastToken == '(' || (lastToken == '|' && openAbsolute) || (lastTokenPrecedence > 0 && lastTokenPrecedence != 90)) {
 			if (token.id == 2) {
 				queue.push(Item("-1", -1, 2, -1));
 				stack.push(Item("*", 2, 1, 3));
@@ -228,7 +231,8 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			stack.pop();
 		}
 		i += token.size;
-		lastToken = token;
+		lastToken = token.ptr[0];
+		lastTokenPrecedence = token.precedence;
 	}
 
 	// Move whatever remains in the stack to the queue
