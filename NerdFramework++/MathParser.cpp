@@ -2,6 +2,7 @@
 #include <queue>
 #include "MathParser.h"
 #include "MathNode.h"
+#include <iostream>
 
 MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	switch (string[0]) {
@@ -11,23 +12,23 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	case '|':
 		return Item(string, 0, 1, 0);
 	case '+':
-		return Item(string, 1, 1, 1);
+		return Item(string, 2, 1, 1);
 	case '-':
-		return Item(string, 1, 1, 2);
+		return Item(string, 2, 1, 2);
 	case '*':
 	case '×':
-		return Item(string, 2, 1, 3);
+		return Item(string, 3, 1, 3);
 	case '/':
 	case '÷':
-		return Item(string, 2, 1, 4);
+		return Item(string, 3, 1, 4);
 	case '%':
-		return Item(string, 2, 1, 5);
+		return Item(string, 3, 1, 5);
 	case '^':
-		return Item(string, 3, 1, 6);
+		return Item(string, 4, 1, 6);
 	case '!':
 		return Item(string, 90, 1, 20);
 	case '=':
-		return Item(string, 99, 1, 99);
+		return Item(string, 1, 1, 99);
 	case 'π':
 		return Item(string, -1, 1, -4);
 	}
@@ -101,8 +102,6 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 				return Item(string, -1, 3, -9);
 			else if (strncmp(string, "q_e", 3) == 0)
 				return Item(string, -1, 3, -10);
-			else if (strncmp(string, "c", 3) == 0)
-				return Item(string, -1, 3, -11);
 		}
 		if (size >= 2) {
 			if (strncmp(string, "pi", 2) == 0)
@@ -112,15 +111,21 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			else if (strncmp(string, "ln", 2) == 0)
 				return Item(string, 90, 2, 18);
 		}
-		if (size >= 1) {
+		std::cout << size << std::endl;
+;		if (size >= 1) {
 			if (string[0] == 'e')
 				return Item(string, -1, 1, -3);
 			else if (string[0] == 'k')
 				return Item(string, -1, 1, -6);
-			else if (string[0] == 'G')
-				return Item(string, -1, 1, -12);
+			else if (string[0] == 'c')
+				return Item(string, -1, 1, -11);
 			else if (string[0] == 'g')
 				return Item(string, -1, 1, -13);
+		}
+	} else if (string[0] >= 'A' && string[0] <= 'Z') {
+		if (size >= 1) {
+			if (string[0] == 'G')
+				return Item(string, -1, 1, -12);
 		}
 	}
 	size_t i = 0;
@@ -132,13 +137,14 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 
 MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 	
+	/* Token flags */
+	bool openAbsolute = false;
+
 	/* Transform string to postfix notation, using Shunting-Yard Algorithm */
 	std::stack<Item> stack;
 	std::queue<Item> queue;
 
-	bool openAbsolute = false;
-	bool prevLinkable = false;
-	bool beginning = true;
+	Item lastToken = Item("(", 0, 1, 0);
 
 	size_t i = 0;
 	while (i != size) { // Tokenize string, iterate through all tokens
@@ -146,27 +152,21 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			i++;
 			continue;
 		}
-		Item token = getNextOperator(string + i, size - i);
+		const Item token = getNextOperator(string + i, size - i);
 
-		/* Token is implicitly linkable by multiplication */
-		if (((token.precedence < 0 || token.precedence == 90) && (stack.empty() || stack.top().precedence != 90))) {
-			if (prevLinkable) { // Last token was a number too
-				/* Link them together with multiplication (Create and add new multiply token) */
-				while ((!stack.empty() && stack.top().ptr[0] != '(' && stack.top().ptr[0] != '|')
-					&& (stack.top().precedence >= 2)) {
-					queue.push(stack.top());
-					stack.pop();
-				}
-				stack.push(Item("*", 2, 1, 3));
+		/* Allow implicit multiplication*/
+		if ((lastToken.ptr[0] == ')' || (lastToken.ptr[0] == '|' && !openAbsolute) || lastToken.precedence < 0)
+			&& (token.ptr[0] == '(' || (token.ptr[0] == '|' && !openAbsolute) || token.precedence < 0 || token.precedence == 90)) {
+			while ((!stack.empty() && stack.top().ptr[0] != '(' && stack.top().ptr[0] != '|')
+				&& (stack.top().precedence >= 2)) {
+				queue.push(stack.top());
+				stack.pop();
 			}
-			if (token.precedence != 90)
-				prevLinkable = true; // Set linkable flag
-		} else if (token.ptr[0] != '(' && token.ptr[0] != '|' && !beginning) // Token is not implicity linkable
-			prevLinkable = false; // Unset linkable flag
+			stack.push(Item("*", 2, 1, 3));
+		}
 		
 		/* Allow negative starting numbers */
-		if (beginning) {
-			beginning = false;
+		if (lastToken.ptr[0] == '(' || (lastToken.ptr[0] == '|' && openAbsolute)) {
 			if (token.id == 2) {
 				queue.push(Item("-1", -1, 2, -1));
 				while ((!stack.empty() && stack.top().ptr[0] != '(' && stack.top().ptr[0] != '|')
@@ -180,16 +180,14 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			}
 		}
 
-		if (token.precedence < 0) // Token is a number
+		if (token.precedence < 0) { // Token is a number
 			queue.push(token); // Push number to queue
-		else if (token.precedence == 90 || token.ptr[0] == '(') { // Token is a function or a left-parentheses
+		} else if (token.precedence == 90 || token.ptr[0] == '(') { // Token is a function or a left-parentheses
 			stack.push(token); // Push to stack
-			beginning = true;
 		} else if (token.ptr[0] == '|' && !openAbsolute) { // Token is an open-modulus bar
 			openAbsolute = true; // Set flag
 			stack.push(Item("abs", 90, 3, 19)); // Push modulus function to stack
 			stack.push(token); // Push bar to stack
-			beginning = true;
 		} else if (token.precedence > 0) { // Token is an operator
 			// While top of stack exists and isn't a left-parentheses, and
 			//   the top of the stack has a higher precedence than the current token, or
@@ -202,7 +200,6 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				stack.pop();
 			}
 			stack.push(token);
-			beginning = true;
 		} else if (token.ptr[0] == ')' || token.ptr[0] == ',') { // Token is a right-parentheses or argument delimiter (comma)
 			// Disable openAbsolute flag if enabled
 			openAbsolute = false;
@@ -221,8 +218,6 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 				queue.push(stack.top());
 				stack.pop();
 			}
-			if (token.ptr[0] == ')')
-				prevLinkable = true;
 		} else if (token.ptr[0] == '|') { // Token is a close-modulus bar
 			// Disable openAbsolute flag
 			openAbsolute = false;
@@ -240,6 +235,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			stack.pop();
 		}
 		i += token.size;
+		lastToken = token;
 	}
 
 	// Move whatever remains in the stack to the queue
@@ -256,34 +252,48 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 	while (!queue.empty()) {
 		char* ptr_end = (char*)queue.front().ptr + queue.front().size - 1;
 		if (queue.front().precedence < 0) { // Token is a variable or number
-			if (queue.front().id == -1) // Token is a number
+			switch (queue.front().id) {
+			case -1: // Token is a number
 				treeStack.push(new ValueNode(std::strtod(queue.front().ptr, &ptr_end))); // Parse and push to stack
+				break;
 			/* Token is a constant */
-			else if (queue.front().id == -3)
+			case -3:
 				treeStack.push(new E_Node());
-			else if (queue.front().id == -4)
+				break;
+			case -4:
 				treeStack.push(new PI_Node());
-			else if (queue.front().id == -5)
+				break;
+			case -5:
 				treeStack.push(new EPSILON_NAUGHT_Node());
-			else if (queue.front().id == -6)
+				break;
+			case -6:
 				treeStack.push(new COULOUMB_CONSTANT_Node());
-			else if (queue.front().id == -7)
+				break;
+			case -7:
 				treeStack.push(new PROTON_MASS_Node());
-			else if (queue.front().id == -8)
+				break;
+			case -8:
 				treeStack.push(new NEUTRON_MASS_Node());
-			else if (queue.front().id == -9)
+				break;
+			case -9:
 				treeStack.push(new ELECTRON_MASS_Node());
-			else if (queue.front().id == -10)
+				break;
+			case -10:
 				treeStack.push(new ELECTRON_CHARGE_NODE());
-			else if (queue.front().id == -11)
+				break;
+			case -11:
 				treeStack.push(new LIGHT_SPEED_Node());
-			else if (queue.front().id == -12)
+				break;
+			case -12:
 				treeStack.push(new GRAVITATIONAL_CONSTANT_Node());
-			else if (queue.front().id == -13)
+				break;
+			case -13:
 				treeStack.push(new GRAVITY_Node());
-
-			else // Token is a variable
+				break;
+			default: // Token is a variable
 				treeStack.push(new VariableNode(std::string(queue.front().ptr, queue.front().size)));
+				break;
+			}
 		} else { // Token is an operator or function
 			if (queue.front().precedence == 90 && queue.front().id <= 30) { // Token is a unary function
 				if (treeStack.empty())

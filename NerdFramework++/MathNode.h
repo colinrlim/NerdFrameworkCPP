@@ -93,6 +93,10 @@ struct VariableNode : EndNode {
 struct EqualsNode : OperatorNode {
 	using OperatorNode::OperatorNode;
 
+	double getValue() {
+		return std::abs(rhs->getValue() - lhs->getValue()) < 0.000001;
+	}
+
 };
 struct GroupNode : ContainerNode {
 	using ContainerNode::ContainerNode;
