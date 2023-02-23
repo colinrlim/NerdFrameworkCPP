@@ -169,11 +169,6 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 		if (lastToken.ptr[0] == '(' || (lastToken.ptr[0] == '|' && openAbsolute)) {
 			if (token.id == 2) {
 				queue.push(Item("-1", -1, 2, -1));
-				while ((!stack.empty() && stack.top().ptr[0] != '(' && stack.top().ptr[0] != '|')
-					&& (stack.top().precedence >= 2)) {
-					queue.push(stack.top());
-					stack.pop();
-				}
 				stack.push(Item("*", 2, 1, 3));
 				i += token.size;
 				continue;
