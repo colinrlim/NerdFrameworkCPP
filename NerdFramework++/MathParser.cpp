@@ -2,7 +2,6 @@
 #include <queue>
 #include "MathParser.h"
 #include "MathNode.h"
-#include <iostream>
 
 MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	switch (string[0]) {
@@ -111,7 +110,6 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			else if (strncmp(string, "ln", 2) == 0)
 				return Item(string, 90, 2, 18);
 		}
-		std::cout << size << std::endl;
 ;		if (size >= 1) {
 			if (string[0] == 'e')
 				return Item(string, -1, 1, -3);
