@@ -4,6 +4,12 @@
 #include "MathNode.h"
 
 MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
+	if (size >= 2) {
+		if (substreq(string, "//", 2))
+			return Item(string, 3, 2, 7);
+		if (substreq(string, "**", 2))
+			return Item(string, 4, 2, 6);
+	}
 	switch (string[0]) {
 	case '(':
 	case ')':
@@ -34,7 +40,7 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 		return Item(string, -1, 1, -12);
 	}
 	int alphaLength = 0;
-	while (string[alphaLength] >= '_' && string[alphaLength] <= 'z') {
+	while (string[alphaLength] >= '_' && string[alphaLength] <= 'z' || string[alphaLength] >= '0' && string[alphaLength] <= '9') {
 		alphaLength++;
 	}
 	if (alphaLength >= 7) {
@@ -106,12 +112,16 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 			return Item(string, -1, 3, -9);
 		else if (substreq(string, "q_e", 3))
 			return Item(string, -1, 3, -10);
+		else if (substreq(string, "m_0", 3))
+			return Item(string, -1, 3, -14);
 	}
 	if (alphaLength >= 2) {
 		if (substreq(string, "pi", 2))
 			return Item(string, -1, 2, -4);
 		else if (substreq(string, "e0", 2))
 			return Item(string, -1, 2, -5);
+		else if (substreq(string, "m0", 2))
+			return Item(string, -1, 2, -14);
 		else if (substreq(string, "ln", 2))
 			return Item(string, 90, 2, 18);
 	}
@@ -131,7 +141,11 @@ MathParser::Item MathParser::getNextOperator(const char* string, size_t size) {
 	while (i != size && ((string[i] >= '0' && string[i] <= '9') || string[i] == '.' || (i != 0 && ((string[i] == 'e' && i+1 != size && (string[i+1] == '-' || (string[i+1] >= '0' && string[i+1] <= '9'))) || (string[i] == '-' && string[i - 1] == 'e'))))) {
 		i++;
 	}
-	return i == 0 ? Item(string, -1, alphaLength, -2) : Item(string, -1, i, -1);
+	if (i > 0)
+		return Item(string, -1, i, -1);
+	if (alphaLength > 2 && string[1] == '_')
+		return Item(string, -1, alphaLength, -2);
+	return Item(string, -1, 1, -2);
 }
 
 MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
@@ -170,7 +184,7 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 		if (lastToken == '(' || (lastToken == '|' && openAbsolute) || (lastTokenPrecedence > 0 && lastTokenPrecedence != 90)) {
 			if (token.id == 2) {
 				queue.push(Item("-1", -1, 2, -1));
-				stack.push(Item("*", 2, 1, 3));
+				stack.push(Item("*", 80, 1, 3));
 				i += token.size;
 				continue;
 			}
@@ -287,6 +301,9 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 			case -13:
 				treeStack.push(new GRAVITY_Node());
 				break;
+			case -14:
+				treeStack.push(new MU_NAUGHT_Node());
+				break;
 			default: // Token is a variable
 				treeStack.push(new VariableNode(std::string(queue.front().ptr, queue.front().size)));
 				break;
@@ -378,6 +395,9 @@ MathNode* MathParser::toExpressionTree(const char* string, size_t size) {
 					break;
 				case 6:
 					treeStack.push(new ExponentNode(lhs, rhs));
+					break;
+				case 7:
+					treeStack.push(new FloorDivideNode(lhs, rhs));
 					break;
 				case 99:
 					treeStack.push(new EqualsNode(lhs, rhs));

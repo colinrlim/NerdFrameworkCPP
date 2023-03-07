@@ -2,25 +2,38 @@
 
 #include <functional>
 #include <numeric>
+#include <string>
 #include <cmath>
 #include "VariableManager.h"
 
+#undef min
+#undef max
+
 struct MathNode {
-	struct UnknownVariable {
-		const char* name;
+	struct Term {
+		std::map<std::string, double> variables;
 		double coefficient;
-		double power;
-		UnknownVariable(const char* name, double coefficient = 1.0, double power = 1.0) :
-			name(name),
-			coefficient(coefficient),
-			power(power)
+
+		Term(std::map<std::string, double> variables, double coefficient = 1.0) :
+			variables(variables),
+			coefficient(coefficient)
 		{ }
+
+		static bool areLikeTerms(Term lhs, Term rhs) {
+			if (lhs.variables.size() != rhs.variables.size())
+				return false;
+			for (const auto& element : lhs.variables) {
+				if (rhs.variables[element.first] != element.second)
+					return false;
+			}
+			return true;
+		}
 	};
 
 	virtual ~MathNode() { };
 
 	virtual double getValue() { return 0.0; }
-	virtual std::vector<UnknownVariable> getUnknowns() { return { }; }
+	virtual std::vector<Term> getExpanded() { return { }; }
 	virtual char* toLaTeX() { return nullptr; }
 
 	virtual void traverse(std::function<void(MathNode*)> func) { }
@@ -66,11 +79,6 @@ struct OperatorNode : MathNode {
 	}
 };
 
-struct UnparsedNode : EndNode {
-	const char* value;
-
-	UnparsedNode(const char* value) : value(value) { }
-};
 struct ValueNode : EndNode {
 	double value;
 
@@ -78,6 +86,9 @@ struct ValueNode : EndNode {
 
 	double getValue() {
 		return value;
+	}
+	std::vector<Term> getExpanded() {
+		return { Term({ }, value) };
 	}
 };
 struct VariableNode : EndNode {
@@ -88,6 +99,9 @@ struct VariableNode : EndNode {
 	double getValue() {
 		return 0;// VariableManager::getInstance().getVariable(name);
 	}
+	std::vector<Term> getExpanded() {
+		return { Term({ {name, 1.0} }, 1.0) };
+	}
 	void appendUnknowns(std::vector<std::string>& unknowns) { }
 };
 struct EqualsNode : OperatorNode {
@@ -96,7 +110,6 @@ struct EqualsNode : OperatorNode {
 	double getValue() {
 		return std::abs(rhs->getValue() - lhs->getValue()) < 0.000001;
 	}
-
 };
 struct GroupNode : ContainerNode {
 	using ContainerNode::ContainerNode;
@@ -131,6 +144,13 @@ struct DivideNode : OperatorNode {
 
 	double getValue() {
 		return lhs->getValue() / rhs->getValue();
+	}
+};
+struct FloorDivideNode : OperatorNode {
+	using OperatorNode::OperatorNode;
+
+	double getValue() {
+		return floor(lhs->getValue() / rhs->getValue());
 	}
 };
 struct ModuloNode : OperatorNode {
@@ -219,6 +239,11 @@ struct GRAVITATIONAL_CONSTANT_Node : EndNode {
 struct GRAVITY_Node : EndNode {
 	double getValue() {
 		return 9.80665;
+	}
+};
+struct MU_NAUGHT_Node : EndNode {
+	double getValue() {
+		return 1.25663706e-6;
 	}
 };
 
