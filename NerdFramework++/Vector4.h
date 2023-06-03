@@ -12,6 +12,7 @@ struct Vector4 {
 	Vector4(double w, double x, double y, double z);
 	Vector4(Vector3 rhs);
 
+	double shrinkageFactor() const;
 	double magnitude() const;
 	Vector4 normalized() const;
 

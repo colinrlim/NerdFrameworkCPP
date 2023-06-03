@@ -388,6 +388,24 @@
     <Filter Include="Demos\MathBuddy">
       <UniqueIdentifier>{f8985955-4754-4ebb-b778-0af58bf6fa56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\2D\Vector2p">
+      <UniqueIdentifier>{cae26535-16a3-4bd1-a4d9-8ed00c0ae37b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\GPURenderer">
+      <UniqueIdentifier>{e2ea3a45-b872-4bbc-918a-b4daf43d2edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Graphics\CPURenderer">
+      <UniqueIdentifier>{7763dbdf-13e9-42ce-8d65-a4e7fd51ebe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Matrix">
+      <UniqueIdentifier>{023856a4-9162-45f2-ba93-d420f15cf560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\2D\BezierCurve2">
+      <UniqueIdentifier>{ba5cd65c-b3e7-44b5-a40f-19e773ce32ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\3D\BezierCurve3">
+      <UniqueIdentifier>{2e32b2aa-2f56-45bb-8350-f1b2a5821eca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h">
@@ -669,14 +687,20 @@
     <ClInclude Include="PaletteParticleBatcher.h">
       <Filter>Interface2D\PaletteStamper\PaletteBatcher\PaletteParticleBatcher</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="MathParser.h">
       <Filter>Parsers\MathParser</Filter>
     </ClInclude>
     <ClInclude Include="ignore\calculator.h">
       <Filter>Demos\MathBuddy</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2p.h">
+      <Filter>Math\2D\Vector2p</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierCurve2.h">
+      <Filter>Math\2D\BezierCurve2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -919,6 +943,12 @@
     </ClCompile>
     <ClCompile Include="ignore\calculator.cpp">
       <Filter>Demos\MathBuddy</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2p.cpp">
+      <Filter>Math\2D\Vector2p</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierCurve2.cpp">
+      <Filter>Math\2D\BezierCurve2</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

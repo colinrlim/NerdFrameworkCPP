@@ -25,6 +25,7 @@ struct Vector3
 	static const Vector3 yAxis;
 	static const Vector3 zAxis;
 
+	double shrinkageFactor() const;
 	double magnitude() const;
 	Vector3 normalized() const;
 	Vector3 normalizedCubic() const;

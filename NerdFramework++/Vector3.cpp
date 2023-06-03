@@ -36,6 +36,9 @@ const Vector3 Vector3::xAxis(1.0, 0.0, 0.0);
 const Vector3 Vector3::yAxis(0.0, 1.0, 0.0);
 const Vector3 Vector3::zAxis(0.0, 0.0, 1.0);
 
+double Vector3::shrinkageFactor() const {
+    return 1.0 - 1.0 / (x * x + y * y + z * z);
+}
 double Vector3::magnitude() const {
 
     /* a⋅b = |a||b|cos(theta)

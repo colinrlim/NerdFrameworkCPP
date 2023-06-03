@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimationStamper.h" />
+    <ClInclude Include="BezierCurve2.h" />
     <ClInclude Include="BinaryGrid2.h" />
     <ClInclude Include="BoundingShape3.h" />
     <ClInclude Include="Box3.h" />
@@ -243,6 +244,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector2i.h" />
+    <ClInclude Include="Vector2p.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector3s.h" />
     <ClInclude Include="Vector4.h" />
@@ -250,6 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationStamper.cpp" />
+    <ClCompile Include="BezierCurve2.cpp" />
     <ClCompile Include="BinaryGrid2.cpp" />
     <ClCompile Include="BoundingShape3.cpp" />
     <ClCompile Include="Box3.cpp" />
@@ -324,6 +327,7 @@
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector2i.cpp" />
+    <ClCompile Include="Vector2p.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vector3s.cpp" />
     <ClCompile Include="Vector4.cpp" />

@@ -14,6 +14,9 @@ Vector4::Vector4(Vector3 rhs) :
 	z(rhs.z)
 { }
 
+double Vector4::shrinkageFactor() const {
+	return 1.0 - 1.0 / (w * w + x * x + y * y + z * z);
+}
 double Vector4::magnitude() const {
 	return Math::sqrt(w*w + x*x + y*y + z*z);
 }
